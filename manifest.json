@@ -1,0 +1,15 @@
+{
+	"name": "Columbia Eating Disorders Assessment",
+	"description": "Desktop deployment",
+	"version": "0.1",
+	"app": {
+		"background": {
+			"scripts": ["background.js"]
+		}
+	},
+	"sandbox":{
+		"pages":[
+			"sdk/development.js"
+		]
+	}
+}

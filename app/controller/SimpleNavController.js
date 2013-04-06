@@ -1,0 +1,162 @@
+Ext.define('ceda.controller.SimpleNavController', {
+	extend:'Ext.app.Controller',
+	config: {
+		assessment: true,
+		savedvalues: {},
+		questionstack: true,
+		refs: {
+			view: 'view',
+			bar: '#topbar',
+			mainpanel: '#mainpanel',
+			startbttn: 'idetail #start',
+			answerbttn: 'qview #answerarea #aview',
+			backbutton: '#topbar #backbutton',
+		},
+		control:{
+			view:{
+				initialize: 'initView'
+			},
+			mainpanel:{
+				activate: 'showmain'
+			},
+			startbttn:{
+				tap: 'startTest'
+			},
+			answerbttn:{
+				itemtap: 'answerQuestion'
+			},
+			backbutton:{
+				tap: 'backup'
+			}
+		}
+	},
+	showmain: function(){
+		this.getBackbutton().hide();
+	},
+	backup: function(){
+		this.questionstack.pop();
+		var question = this.questionstack.pop();
+		this.viewQuestion(question, true);
+	},
+	
+	initView: function(){	
+		var istore = Ext.getStore('instrumentStore');
+		var instrument = istore.findRecord('id', 1);
+		var details = Ext.widget('idetail');
+		this.assessment = Ext.create('ceda.model.Assessment', {triggers: {}});
+		this.questionstack = new Array();
+		this.savedvalues = new Object();
+		details.setRecord(instrument);
+		this.getBar().setTitle(instrument.get("name"));
+		this.getMainpanel().add(details);
+	},
+		
+	startTest: function(one, two){
+		var instrument = one.getRecord();
+		var qstore = Ext.getStore('questionStore');
+		var question = qstore.findRecord('initial', true);
+		this.viewQuestion(question);
+	},
+	
+	answerQuestion: function(list, index, item, record){
+		var global_triggers = this.assessment.get('triggers');
+		var answer_triggers = record.get('triggers');
+
+		for(var trig in answer_triggers){
+			global_triggers[trig] = answer_triggers[trig];
+		}
+		this.assessment.set('triggers', global_triggers);
+		var next = this.findNextQuestion(record);
+
+		if(next != undefined){
+			this.viewQuestion(next);
+		}
+		else{
+			this.viewOutput();			
+		}
+	},
+
+	viewOutput: function(){
+		this.captureCapturables();
+		var oview = Ext.widget('oview');
+		oview.setCollectedInfo(this.savedvalues);
+		this.questionstack.push({});
+		this.getMainpanel().animateActiveItem(oview, {type:'slide', direction: 'left'});			
+	},
+
+	viewQuestion: function(question, back){
+		if(this.questionstack.length == 0){
+			this.getBackbutton().hide();
+		}
+		else{
+			this.getBackbutton().show();
+		}
+		this.questionstack.push(question);
+
+		var qview = Ext.widget('qview');
+		qview.setRecord(question);
+		if(back){
+			this.getMainpanel().animateActiveItem(qview, {type: 'slide', direction: 'right'});
+		}
+		else{
+			this.getMainpanel().animateActiveItem(qview, {type: 'slide', direction: 'left'});
+		}
+		
+
+	},
+	
+	findNextQuestion: function(answer){
+		var question = answer.getQuestion();
+		var rules = question.get('rules');
+		for(var index in rules){
+			var rule = rules[index];
+			var global = this.assessment.get('triggers');
+			if( eval(rule.expression) ){
+				if(rule.diagnosis){
+					if(!this.savedvalues.hasOwnProperty('Diagnosis')){
+						this.savedvalues['Diagnosis'] = {};
+					}
+					this.savedvalues['Diagnosis'][rule.diagnosisname] = " ";
+					var global_triggers = this.assessment.get('triggers');
+					global_triggers[rule.trigger] = true;
+					
+				}
+				if(rule.endifdiagnosis){
+					if(this.savedvalues.hasOwnProperty('Diagnosis')){
+						return undefined;
+					}
+				}
+				var target = rule.target;
+				var qstore = Ext.getStore('questionStore');
+				var question = qstore.findRecord('id', target);
+				if(target == 'none'){
+					return undefined
+				}
+				return qstore.findRecord('id', target);
+				
+			}
+		}
+		
+		return undefined;
+	},
+	
+	captureCapturables: function(){
+		var inputs = Ext.query('input');
+		
+		for(i in inputs){
+			var input = inputs[i];
+			if(input.value){
+				var section_name = input.name.split(':');
+				var section = section_name[0];
+				section = section.replace("_", " ");
+				var name = section_name[1];
+				name = name.replace("_", " ");
+				var value = input.value;
+				if(! this.savedvalues.hasOwnProperty(section)){
+					this.savedvalues[section] = {};
+				}
+				this.savedvalues[section][name] = value;
+			}
+		}
+	}
+})
