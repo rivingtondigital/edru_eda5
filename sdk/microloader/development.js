@@ -51,7 +51,7 @@ If you are unsure which license is appropriate for your use, please contact the 
     for (i = 0,ln = scripts.length; i < ln; i++) {
         path = scripts[i];
 
-        if (typeof path != 'string') {
+        if (typeof path != 'string'){
             path = path.path;
         }
 

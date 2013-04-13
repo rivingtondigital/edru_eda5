@@ -4,6 +4,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		assessment: true,
 		savedvalues: {},
 		questionstack: true,
+		qview: true,
 		refs: {
 			view: 'view',
 			bar: '#topbar',
@@ -46,6 +47,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.assessment = Ext.create('ceda.model.Assessment', {triggers: {}});
 		this.questionstack = new Array();
 		this.savedvalues = new Object();
+		this.qview = Ext.widget('qview');
 		details.setRecord(instrument);
 		this.getBar().setTitle(instrument.get("name"));
 		this.getMainpanel().add(details);
@@ -96,16 +98,15 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 		this.questionstack.push(question);
 
-		var qview = Ext.widget('qview');
-		qview.setRecord(question);
+		//var qview = Ext.widget('qview');
+		this.qview.setRecord(question);
+		this.getMainpanel().remove(true, false);
 		if(back){
-			this.getMainpanel().animateActiveItem(qview, {type: 'slide', direction: 'right'});
+			this.getMainpanel().animateActiveItem(this.qview, {type: 'slide', direction: 'right'});
 		}
 		else{
-			this.getMainpanel().animateActiveItem(qview, {type: 'slide', direction: 'left'});
+			this.getMainpanel().animateActiveItem(this.qview, {type: 'slide', direction: 'left'});
 		}
-		
-
 	},
 	
 	findNextQuestion: function(answer){

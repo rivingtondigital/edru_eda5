@@ -35,7 +35,7 @@ Ext.define('ceda.view.QuestionView', {
 				layout: {
 					type: 'vbox'
 				},
-				items: [
+				items:[
 					{
 						html: '<div class="sectiondiv"><div class="tabheader">Answers: </div><br><br>'
 					},
@@ -65,7 +65,11 @@ Ext.define('ceda.view.QuestionView', {
 		this.getComponent('header').setRecord(question);
 		this.getComponent('probe').setRecord(question);
 		this.getComponent('symptom').setRecord(question);
-		this.getComponent('answerarea').setStore(question.getAnswers());
+
+		var area = this.getComponent('answerarea');
+		area.getComponent('aview').setStore(question.getAnswers());
+		//this.getComponent('answerarea').setStore(question.getAnswers());
+		//this.getComponent('aview').setStore(question.getAnswers());
 		//this.getComponent('answerarea').setStore(question.answers);
 	}
 });
