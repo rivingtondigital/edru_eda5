@@ -12,6 +12,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			startbttn: 'idetail #start',
 			answerbttn: 'qview #answerarea #aview',
 			backbutton: '#topbar #backbutton',
+			restartbutton: '#topbar #restartbutton'
 		},
 		control:{
 			view:{
@@ -28,8 +29,14 @@ Ext.define('ceda.controller.SimpleNavController', {
 			},
 			backbutton:{
 				tap: 'backup'
+			},
+			restartbutton:{
+				tap: 'restart'
 			}
 		}
+	},
+	restart: function(){
+		location.reload();
 	},
 	showmain: function(){
 		this.getBackbutton().hide();
@@ -61,6 +68,13 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 	
 	answerQuestion: function(list, index, item, record){
+		mustsaves = Ext.query('input[id^="save"]');
+		for (key in mustsaves){
+			if(mustsaves[key].value == ""){
+				alert("Inputs on this page must not be left blank");
+				return;
+			}
+		}
 		var global_triggers = this.assessment.get('triggers');
 		var answer_triggers = record.get('triggers');
 

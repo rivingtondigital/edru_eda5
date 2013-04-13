@@ -12,19 +12,10 @@ Ext.define('ceda.store.QuestionStore', {
 				instrument_id: 1,
 				sectionlabel: 'Introduction',
 				shortname: 'BMI',
-				interviewprobe: '1. What are your current height and weight? (Measure if possible)',
-				symptom: [
+				interviewprobe: [
 							[
-							"BMI",
-							"In what range is individual’s",
-								"",                       
-								"•	Underweight = <18.5",
-								"•	Normal weight = 18.5–24.9",
-								"•	Overweight = 25–29.9",
-								"•	Obesity = ≥ 30 ",
-								"",
-							].join('<br>'),
-							[
+								'1. What are your current height and weight? (Measure if possible)',
+								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
 								'<td><span>Weight in lbs: <span></td>',
@@ -38,6 +29,19 @@ Ext.define('ceda.store.QuestionStore', {
 								'</tr>',
 								'</table>'
 							].join('')
+				
+				],
+				symptom: [
+							[
+							"BMI",
+							"In what range is individual’s",
+								"",                       
+								"•	Underweight = <18.5",
+								"•	Normal weight = 18.5–24.9",
+								"•	Overweight = 25–29.9",
+								"•	Obesity = ≥ 30 ",
+								"",
+							].join('<br>'),
 				].join('<br>'),
 				rules: [
 					{
