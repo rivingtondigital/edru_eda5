@@ -99,8 +99,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.questionstack.push(question);
 
 		//var qview = Ext.widget('qview');
+		this.getMainpanel().remove(this.qview);
+		this.qview = Ext.widget('qview');
 		this.qview.setRecord(question);
-		this.getMainpanel().remove(true, false);
 		if(back){
 			this.getMainpanel().animateActiveItem(this.qview, {type: 'slide', direction: 'right'});
 		}
