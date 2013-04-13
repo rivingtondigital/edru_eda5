@@ -68,12 +68,18 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 	
 	answerQuestion: function(list, index, item, record){
+		/*
 		mustsaves = Ext.query('input[id^="save"]');
 		for (key in mustsaves){
 			if(mustsaves[key].value == ""){
 				alert("Inputs on this page must not be left blank");
 				return;
 			}
+		}
+		*/
+		if(! this.captureCapturables()){
+			alert("Complete all inputs on this page.");
+			return;
 		}
 		var global_triggers = this.assessment.get('triggers');
 		var answer_triggers = record.get('triggers');
@@ -96,7 +102,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	viewOutput: function(){
-		this.captureCapturables();
+		//this.captureCapturables();
 		var oview = Ext.widget('oview');
 		oview.setCollectedInfo(this.savedvalues);
 		this.questionstack.push({});
@@ -154,8 +160,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 	
 	captureCapturables: function(){
-		var inputs = Ext.query('input');
-		
+		var inputs = Ext.query('input[id^="save"]');
+		var ret = true;	
 		for(i in inputs){
 			var input = inputs[i];
 			if(input.value){
@@ -170,6 +176,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 				}
 				this.savedvalues[section][name] = value;
 			}
+			else{
+				ret = false;
+			}
 		}
+		return ret;
 	}
 })

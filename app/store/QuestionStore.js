@@ -81,6 +81,7 @@ Ext.define('ceda.store.QuestionStore', {
 						diagnosis: true,
 						expression: '!global.eatingdisturbance && !global.aberranteating',
 						diagnosisname: 'None',
+						endifdiagnosis: true,
 						target: 'finish'
 					}
 				]
