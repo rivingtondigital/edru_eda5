@@ -68,9 +68,6 @@ Ext.define('ceda.view.QuestionView', {
 
 		var area = this.getComponent('answerarea');
 		area.getComponent('aview').setStore(question.getAnswers());
-		//this.getComponent('answerarea').setStore(question.getAnswers());
-		//this.getComponent('aview').setStore(question.getAnswers());
-		//this.getComponent('answerarea').setStore(question.answers);
 	}
 });
 

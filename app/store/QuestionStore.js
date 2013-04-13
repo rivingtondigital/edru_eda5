@@ -1188,7 +1188,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 				{
-					target: 23,
+					target: 24,
 					expression: 'true'	
 				}
 				]
@@ -1207,7 +1207,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 				{
-					target: 23,
+					target: 25,
 					expression: 'true'	
 				}
 				]
@@ -1226,7 +1226,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 				{
-					target: 23,
+					target: 26,
 					expression: 'true'	
 				}
 				]
@@ -1247,8 +1247,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 				{
-					target: 23,
-					expression: 'true'	
+					target: 'finish'
 				}
 				]
 			},			
