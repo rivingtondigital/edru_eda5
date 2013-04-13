@@ -707,6 +707,31 @@ Ext.define('ceda.store.AnswerStore', {
 				triggers:{
 					nonfood_culturally_sanctioned: false
 				}
+			},
+			{
+				id:85,
+				question_id: 22,
+				description: 'view next'
+			},
+			{
+				id:86,
+				question_id: 23,
+				description: 'view next'
+			},
+			{
+				id:87,
+				question_id: 24,
+				description: 'view next'
+			},
+			{
+				id:88,
+				question_id: 25,
+				description: 'view next'
+			},
+			{
+				id:89,
+				question_id: 26,
+				description: 'view next'
 			}
 		]
 	}
