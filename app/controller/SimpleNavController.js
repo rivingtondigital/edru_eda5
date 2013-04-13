@@ -67,12 +67,15 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 		this.assessment.set('triggers', global_triggers);
 		var next = this.findNextQuestion(record);
-
-		if(next != undefined){
+		
+		if(next == 'finish'){
+			this.viewOutput();
+		}
+		else if(next != undefined){
 			this.viewQuestion(next);
 		}
 		else{
-			this.viewOutput();			
+			this.viewQuestion();
 		}
 	},
 
@@ -119,24 +122,18 @@ Ext.define('ceda.controller.SimpleNavController', {
 					this.savedvalues['Diagnosis'][rule.diagnosisname] = " ";
 					var global_triggers = this.assessment.get('triggers');
 					global_triggers[rule.trigger] = true;
-					
 				}
 				if(rule.endifdiagnosis){
 					if(this.savedvalues.hasOwnProperty('Diagnosis')){
-						return undefined;
+						return 'finish';
 					}
 				}
 				var target = rule.target;
 				var qstore = Ext.getStore('questionStore');
 				var question = qstore.findRecord('id', target);
-				if(target == 'none'){
-					return undefined
-				}
 				return qstore.findRecord('id', target);
-				
 			}
 		}
-		
 		return undefined;
 	},
 	

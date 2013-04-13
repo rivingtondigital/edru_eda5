@@ -77,7 +77,7 @@ Ext.define('ceda.store.QuestionStore', {
 						diagnosis: true,
 						expression: '!global.eatingdisturbance && !global.aberranteating',
 						diagnosisname: 'None',
-						target: 'none'
+						target: 'finish'
 					}
 				]
 			},
@@ -91,10 +91,11 @@ Ext.define('ceda.store.QuestionStore', {
 						'4. In the past three months, have you or others recently been concerned that your weight is significantly low?',
 						'',
 						'If no: Have you lost a significant amount of weight recently?',
-						'',
-						'When: <input id="saveLostWhen" name="Severe_Lose:When" type="text"></input>', 
-						'Weight: <input id="saveLostWeight" name="Severe_Lose:Weight_Lost" type="text"></input>',
-						'BMI: <input id="saveBMI" name="Severe_Lose:BMI" type="text"></input>'
+						'<table>',
+						'<tr><td>When:</td> <td><input id="saveLostWhen" name="Severe_Lose:When" type="text"></input></td></tr>', 
+						'<tr><td>Weight:</td> <td><input id="saveLostWeight" name="Severe_Lose:Weight_Lost" type="text"></input></td></tr>',
+						'<tr><td>BMI:</td> <td><input id="saveBMI" name="Severe_Lose:BMI" type="text"></input></td></tr>',
+						'</table>'
 						].join("<br>"),
 
 				symptom: 'Is individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)? For adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
@@ -120,7 +121,7 @@ Ext.define('ceda.store.QuestionStore', {
 						'5a. Are you afraid of', 
       					'gaining weight?', 
 						'',
-						'If no: Are you worried that if you start to gain weight, you will continue to gain weight and will become fat?'
+						'If no: Are you worried that if you start to gain weight, you will continue to gain weight and will become fat?',
 						].join("<br>"),
 
 				symptom: 'Is there an intense, irrational fear of weight gain or of becoming fat?',
@@ -145,11 +146,11 @@ Ext.define('ceda.store.QuestionStore', {
 					'Do you vomit or use any types of pills (diuretics, laxatives)?',
 					'',
 					'Do you do anything else that might make it hard for you to gain or maintain weight?',
+					'',
+					'[Once any interfering behavior is endorsed, mark YES and proceed.]',
 				].join("<br>"),
 				symptom:[
 					'Are persistent behaviors [e.g., dietary restriction, excessive exercise, purging, fasting] interfering with weight gain?',
-					'',
-					'[Once any interfering behavior is endorsed, mark YES and proceed.]',
 					'',
 					'',
 					'Other clinically significant behavior that interferes with weight gain might include, for example, spitting out food or inappropriate stimulant use.'
@@ -405,7 +406,7 @@ Ext.define('ceda.store.QuestionStore', {
 						'<table>',
 						'<tr><td>Type of Exercise</td></tr>',
 						'<tr><td><input id="saveExerciseType" name="Exercise:Type"></td></tr>',
-						'<tr><td>Quantity</td></tr>',
+						'<tr><td>Duration</td></tr>',
 						'<tr><td><input id="saveExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
 						'</table>',
 						
@@ -417,6 +418,10 @@ Ext.define('ceda.store.QuestionStore', {
 					'Indicators of excessive exercise include exercising despite illness or injury, exercising to an extent that it interferes with daily responsibilities (e.g., being late for work or school), or feeling highly distressed when unable to exercise.'
 				].join("<br/>"),
 				rules:[
+					{
+						target: 7.07,
+						expression: 'global.in_behaviors || global.in_exercise'
+					},
 					{
 						diagnosis: true,
 						expression: '(global.an) && (!global.lacks_control && !global.in_behaviors)',
@@ -440,14 +445,10 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						diagnosis: true,
-						expression: '(global.an) && (global.in_behaviors) && (global.binge_frequency_weeks || global.binge_frequency_months)',
+						expression: '(global.an) && (global.in_behaviors) && (global.in_frequency_weeks || global.in_frequency_months)',
 						trigger: 'an-bps',
 						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
-					},
-					{
-						target: 7.07,
-						expression: 'global.inappropriate_behaviors || global.inappropriate_exercise'
 					},
 					{
 						target: 11,
@@ -466,10 +467,9 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						target: 9, 
-						expression: '(!global.an) && (global.lacks_control) && (global.binge_frequency_weeks && global.obe) && (! global.in_behaviors && global.in_exercise)',
+						expression: '(!global.an) && (global.lacks_control) && (global.binge_frequency_weeks && global.obe) && (!global.in_behaviors && !global.in_exercise)',
 						trigger: 'binge'
-					},
-					
+					}
 				]
 			},
 			{
@@ -525,7 +525,7 @@ Ext.define('ceda.store.QuestionStore', {
 					].join("<br/>"),
 					[
 						'<table>',
-						'<tr><td>Average weekly frequency over past 3 months</td></tr>',
+						'<tr><td colspan="2">Average weekly frequency over past 3 months</td></tr>',
 						'<tr><td>Vomiting:</td><td><input id="saveVomitFrequency" name="Vomitting:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Laxatives:</td><td><input id="saveLaxativesFrequency" name="Laxatives:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Diuretics:</td><td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_week" size="3"></td></tr>',
@@ -540,7 +540,7 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 7.10,
-						epression: 'true'
+						expression: 'true'
 					}
 				]
 			},
@@ -557,54 +557,54 @@ Ext.define('ceda.store.QuestionStore', {
 					'Has inappropriate behavior recurred, at least once a month, on average, for the last 3 months?'
 				].join("<br/>"),
 				rules:[
-					{
+				{
 						diagnosis: true,
 						expression: '(global.an) && (!global.lacks_control && !global.in_behaviors)',
 						trigger: 'an-rs',
-						diagnosisname: 'Anorexia Nervosa - Restricting Subtype',
+						diagnosisname: 'Restricting Subtype',
 						target: 18
-					},
-					{
+				},
+				{
 						diagnosis: true,
 						expression: '(global.an) && (!global.obe && !global.in_behaviors)',
 						trigger: 'an-rs',
-						diagnosisname: 'Anorexia Nervosa - Restricting Subtype',
+						diagnosisname: 'Restricting Subtype',
 						target: 18
-					},
-					{
+				},
+				{
 						diagnosis: true,
 						expression: '(global.an) && (global.lacks_control && global.obe) && (global.binge_frequency_weeks || global.binge_frequency_months)',
 						trigger: 'an-bps',
-						diagnosisname: 'Anorexia Nervosa - Binge-Purge Subtype',
+						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
-					},
-					{
+				},
+				{
 						diagnosis: true,
-						expression: '(global.an) && (global.in_behaviors) && (global.binge_frequency_weeks || global.binge_frequency_months)',
+						expression: '(global.an) && (global.in_behaviors) && (global.in_frequency_weeks || global.in_frequency_months)',
 						trigger: 'an-bps',
-						diagnosisname: 'Anorexia Nervosa - Binge-Purge Subtype',
+						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
-					},
-					{
+				},
+				{
 						target: 11,
 						expression: '(!global.an) && (!global.lacks_control)',
 						trigger: 'arfid'
-					},
-					{
+				},
+				{
 						target: 11,
 						expression: '(!global.an) && (!global.obe) && (!global.binge_frequency_weeks || !global.binge_frequency_months)',
 						trigger: 'arfid'
-					},
-					{
+				},
+				{
 						target: 8, 
 						expression: '(!global.an) && (global.lacks_control) && (global.binge_frequency_weeks && global.obe) && (global.in_behaviors || global.in_exercise) && (global.in_compensate && global.in_frequency_weeks)',
-						trigger: 'bn',
-					},
-					{
+						trigger: 'bn'
+				},
+				{
 						target: 9, 
-						expression: '(!global.an) && (global.lacks_control) && (global.binge_frequency_weeks && global.obe) && (! global.in_behaviors && global.in_exercise)',
+						expression: '(!global.an) && (global.lacks_control) && (global.binge_frequency_weeks && global.obe) && (!global.in_behaviors && !global.in_exercise)',
 						trigger: 'binge'
-					}
+				}
 				]
 			},
 			{
@@ -1093,10 +1093,8 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: 'global.nonfood_persistent'
 					},
 					{
-						diagnosis:true,
-						expression: '! global.nonfood_persistent',
-						endifdiagnosis: true,
-						target: 22
+						target: 22,
+						expression: '! global.nonfood_persistent'
 					}
 
 				]
@@ -1146,13 +1144,11 @@ Ext.define('ceda.store.QuestionStore', {
 						diagnosis: true,
 						diagnosisname: 'PICA',
 						expression: 'global.nonfood_culturally_sanctioned',
-						target: 'none'
+						endifdiagnosis: true
 					},
 					{
-						diagnosis:true,
+						target: 22,
 						expression: '! global.nonfood_culturally_sanctioned',
-						endifdiagnosis: true,
-						target: 22
 					}
 			
 				]
@@ -1172,7 +1168,10 @@ Ext.define('ceda.store.QuestionStore', {
 					'',
 				].join("<br/>"),
 				rules:[
-				
+				{
+					target: 23,
+					expression: 'true'	
+				}
 				]
 			},
 			{
@@ -1188,7 +1187,10 @@ Ext.define('ceda.store.QuestionStore', {
 					'',
 				].join("<br/>"),
 				rules:[
-				
+				{
+					target: 23,
+					expression: 'true'	
+				}
 				]
 			},																				
 			{
@@ -1204,7 +1206,10 @@ Ext.define('ceda.store.QuestionStore', {
 					'',
 				].join("<br/>"),
 				rules:[
-				
+				{
+					target: 23,
+					expression: 'true'	
+				}
 				]
 			},			
 			{
@@ -1220,7 +1225,10 @@ Ext.define('ceda.store.QuestionStore', {
 					'',
 				].join("<br/>"),
 				rules:[
-				
+				{
+					target: 23,
+					expression: 'true'	
+				}
 				]
 			},			
 			{
@@ -1238,7 +1246,10 @@ Ext.define('ceda.store.QuestionStore', {
 					'',
 				].join("<br/>"),
 				rules:[
-				
+				{
+					target: 23,
+					expression: 'true'	
+				}
 				]
 			},			
 			

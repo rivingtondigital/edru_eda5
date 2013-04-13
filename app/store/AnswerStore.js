@@ -17,7 +17,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id: 2,
 				question_id: 1,
-				description: 'normal Weight',
+				description: 'Normal Weight',
 				triggers:{
 					underweight: false,
 					overweight: false,
@@ -27,16 +27,6 @@ Ext.define('ceda.store.AnswerStore', {
 			},
 			{
 				id: 3,
-				question_id: 1,
-				description: 'Normal Weight <br>w/ problem behavior',
-				triggers:{
-					underweight: false,
-					overweight: false,
-					normalbehavior: false
-				}
-			},
-			{
-				id: 3.1,
 				question_id: 1,
 				description: 'Overweight',
 				triggers:{
