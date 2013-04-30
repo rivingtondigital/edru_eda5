@@ -330,11 +330,11 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 7.05,
-						expression: 'global.frequency_weeks'
+						expression: 'global.binge_frequency_weeks'
 					},
 					{
 						target: 7.04,
-						expression: '!global.frequency_weeks'
+						expression: '!global.binge_frequency_weeks'
 					}
 				]
 			},
@@ -371,16 +371,16 @@ Ext.define('ceda.store.QuestionStore', {
 					[
 						'<table>',
 						'<tr><td>Name of Laxative</td></tr>',
-						'<tr><td><input id="saveLaxativeName" name="Laxatives:Name"></td></tr>',
+						'<tr><td><input id="optionalLaxativeName" name="Laxatives:Name"></td></tr>',
 						'<tr><td>Quantity</td></tr>',
-						'<tr><td><input id="saveLaxativeName" name="Laxatives:Quantity" size="3"></td></tr>',
+						'<tr><td><input id="optionalLaxativeName" name="Laxatives:Quantity" size="3"></td></tr>',
 						'</table>',
 						'<br/>',
 						'<table>',
 						'<tr><td>Name of Diuretics</td></tr>',
-						'<tr><td><input id="saveDiureticsName" name="Diuretics:Name"></td></tr>',
+						'<tr><td><input id="optionalDiureticsName" name="Diuretics:Name"></td></tr>',
 						'<tr><td>Quantity</td></tr>',
-						'<tr><td><input id="saveDiureticsName" name="Diuretics:Quantity" size="3"></td></tr>',
+						'<tr><td><input id="optionalDiureticsName" name="Diuretics:Quantity" size="3"></td></tr>',
 						'</table>',
 					].join("")
 				].join("<br/>"),
@@ -410,9 +410,9 @@ Ext.define('ceda.store.QuestionStore', {
 					[
 						'<table>',
 						'<tr><td>Type of Exercise</td></tr>',
-						'<tr><td><input id="saveExerciseType" name="Exercise:Type"></td></tr>',
+						'<tr><td><input id="optionalExerciseType" name="Exercise:Type"></td></tr>',
 						'<tr><td>Duration</td></tr>',
-						'<tr><td><input id="saveExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
+						'<tr><td><input id="optionalExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
 						'</table>',
 						
 					].join(" ")
@@ -427,54 +427,46 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 7.07,
 						expression: 'global.in_behaviors || global.in_exercise'
 					},
-					{
+		 			{
 						diagnosis: true,
-						expression: '(global.an) && (!global.lacks_control && !global.in_behaviors)',
+						expression: '(global.an) && (!global.binge_frequency_months && !global.in_frequency_months)',
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
 						target: 18
 					},
 					{
 						diagnosis: true,
-						expression: '(global.an) && (!global.obe && !global.in_behaviors)',
-						trigger: 'an-rs',
-						diagnosisname: 'Restricting Subtype',
-						target: 18
-					},
-					{
-						diagnosis: true,
-						expression: '(global.an) && (global.lacks_control && global.obe) && (global.binge_frequency_weeks || global.binge_frequency_months)',
+						expression: '(global.an) && (global.binge_frequency_months || global.in_frequency_months)',
 						trigger: 'an-bps',
 						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
 					},
 					{
-						diagnosis: true,
-						expression: '(global.an) && (global.in_behaviors) && (global.in_frequency_weeks || global.in_frequency_months)',
-						trigger: 'an-bps',
-						diagnosisname: 'Binge-Purge Subtype',
-						target: 18
+						expression: [
+							'(!global.an && !global.lacks_control && global.binge_frequency_weeks) && ',
+							'(global.in_behavior || global.in_excercise) && ',
+							'(global.in_compensate && in_frequency_weeks)'
+						].join(''),
+						target: 8,
+						trigger: 'bn'
 					},
 					{
-						target: 11,
-						expression: '(!global.an) && (!global.lacks_control)',
+						expression: [
+							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(! global.in_behavior && !global.in_exercise)'	
+						].join(''),
+						trigger: 'binge',
+						target: 9
+					},
+					{
+						expression: [
+							'(!global.an) && (!global.lacks_control) && ',
+					 		'(global.binge_frequency_months && global.obe)'
+							].join(''),
+						target: 11, 
 						trigger: 'arfid'
-					},
-					{
-						target: 11,
-						expression: '(!global.an) && (!global.obe) && (!global.binge_frequency_weeks || !global.binge_frequency_months)',
-						trigger: 'arfid'
-					},
-					{
-						target: 8, 
-						expression: '(!global.an) && (global.lacks_control) && (global.binge_frequency_weeks && global.obe) && (global.in_behaviors || global.in_exercise) && (global.in_compensate && global.in_frequency_weeks)',
-						trigger: 'bn',
-					},
-					{
-						target: 9, 
-						expression: '(!global.an) && (global.lacks_control) && (global.binge_frequency_weeks && global.obe) && (!global.in_behaviors && !global.in_exercise)',
-						trigger: 'binge'
 					}
+
 				]
 			},
 			{
@@ -545,7 +537,46 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 7.10,
-						expression: 'true'
+						expression: 'false'
+					},
+					{
+						diagnosis: true,
+						expression: '(global.an) && (!global.binge_frequency_months && !global.in_frequency_months)',
+						trigger: 'an-rs',
+						diagnosisname: 'Restricting Subtype',
+						target: 18
+					},
+					{
+						diagnosis: true,
+						expression: '(global.an) && (global.binge_frequency_months || global.in_frequency_months)',
+						trigger: 'an-bs',
+						diagnosisname: 'Binge-Purge Subtype',
+						target: 18
+					},
+					{
+						expression: [
+							'(!global.an && !global.lacks_control && global.binge_frequency_weeks) && ',
+							'(global.in_behavior || global.in_excercise) && ',
+							'(global.in_compensate && in_frequency_weeks)'
+						].join(''),
+						target: 8,
+						trigger: 'bn'
+					},
+					{
+						expression: [
+							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(! global.in_behavior && !global.in_exercise)'	
+						].join(''),
+						trigger: 'binge',
+						target: 9
+					},
+					{
+						expression: [
+							'(!global.an) && (!global.lacks_control) && ',
+					 		'(global.binge_frequency_months && global.obe) '
+							].join(''),
+						target: 11, 
+						trigger: 'arfid'
 					}
 				]
 			},
@@ -562,54 +593,45 @@ Ext.define('ceda.store.QuestionStore', {
 					'Has inappropriate behavior recurred, at least once a month, on average, for the last 3 months?'
 				].join("<br/>"),
 				rules:[
-				{
+					{
 						diagnosis: true,
-						expression: '(global.an) && (!global.lacks_control && !global.in_behaviors)',
+						expression: '(global.an) && (!global.binge_frequency_months && !global.in_frequency_months)',
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
 						target: 18
-				},
-				{
+					},
+					{
 						diagnosis: true,
-						expression: '(global.an) && (!global.obe && !global.in_behaviors)',
-						trigger: 'an-rs',
-						diagnosisname: 'Restricting Subtype',
-						target: 18
-				},
-				{
-						diagnosis: true,
-						expression: '(global.an) && (global.lacks_control && global.obe) && (global.binge_frequency_weeks || global.binge_frequency_months)',
-						trigger: 'an-bps',
+						expression: '(global.an) && (global.binge_frequency_months || global.in_frequency_months)',
+						trigger: 'an-bs',
 						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
-				},
-				{
-						diagnosis: true,
-						expression: '(global.an) && (global.in_behaviors) && (global.in_frequency_weeks || global.in_frequency_months)',
-						trigger: 'an-bps',
-						diagnosisname: 'Binge-Purge Subtype',
-						target: 18
-				},
-				{
-						target: 11,
-						expression: '(!global.an) && (!global.lacks_control)',
-						trigger: 'arfid'
-				},
-				{
-						target: 11,
-						expression: '(!global.an) && (!global.obe) && (!global.binge_frequency_weeks || !global.binge_frequency_months)',
-						trigger: 'arfid'
-				},
-				{
-						target: 8, 
-						expression: '(!global.an) && (global.lacks_control) && (global.binge_frequency_weeks && global.obe) && (global.in_behaviors || global.in_exercise) && (global.in_compensate && global.in_frequency_weeks)',
+					},
+					{
+						expression: [
+							'(!global.an && !global.lacks_control && global.binge_frequency_weeks) && ',
+							'(global.in_behavior || global.in_excercise) && ',
+							'(global.in_compensate && in_frequency_weeks)'
+						].join(''),
+						target: 8,
 						trigger: 'bn'
-				},
-				{
-						target: 9, 
-						expression: '(!global.an) && (global.lacks_control) && (global.binge_frequency_weeks && global.obe) && (!global.in_behaviors && !global.in_exercise)',
-						trigger: 'binge'
-				}
+					},
+					{
+						expression: [
+							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(! global.in_behavior && !global.in_exercise)'	
+						].join(''),
+						trigger: 'binge',
+						target: 9
+					},
+					{
+						expression: [
+							'(!global.an) && (!global.lacks_control) && ',
+					 		'(global.binge_frequency_months && global.obe)'
+							].join(''),
+						target: 11, 
+						trigger: 'arfid'
+					}
 				]
 			},
 			{

@@ -226,6 +226,7 @@ Ext.define('ceda.store.AnswerStore', {
 				description: '&#8805; 1 episode/week',
 				triggers:{
 					binge_frequency_weeks: true,
+					binge_frequency_months: true
 				}
 			},			
 			{
@@ -321,7 +322,8 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.09,
 				description: 'yes',
 				triggers:{
-					in_frequency_weeks: true
+					in_frequency_weeks: true,
+					in_frequency_months: true
 				}
 			},
 			{
