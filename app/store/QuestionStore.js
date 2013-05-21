@@ -14,7 +14,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname: 'BMI',
 				interviewprobe: [
 							[
-								'1. What are your current height and weight? (Measure if possible)',
+								'1. What are your CURRENT height and weight? (Measure if possible)',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
