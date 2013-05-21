@@ -13,11 +13,7 @@ Ext.define('ceda.store.InstrumentStore', {
 				id: 1, 
 				name: 'EDA 5',
 				description: [
-<<<<<<< HEAD
-								'<p>Test Me 2! This interview is designed to assist in the assessment of a feeding ',
-=======
-								'<p>Test Me 10! This interview is designed to assist in the assessment of a feeding ',
->>>>>>> 406ed9f3e7d68752e8d143f0c4a16df2649409a0
+								'<p>This interview is designed to assist in the assessment of a feeding ',
 								'or eating disorder or related conditions in adults according to the DSM-5 ', 
 								'criteria. It is meant to be used by individuals with familiarity with and ', 
 								'training in assessment of eating disorders.</p>',
