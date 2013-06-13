@@ -7,7 +7,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id: 1,
 				question_id: 1,
-				description: 'Under-Weight',
+				description: 'Underweight',
 				triggers:{
 					underweight: true,
 					overweight: false,
@@ -28,7 +28,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id: 3,
 				question_id: 1,
-				description: 'Overweight',
+				description: 'Overweight or Obese',
 				triggers:{
 					underweight: false,
 					overweight: true,
@@ -80,7 +80,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:9,
 				question_id: 4,
-				description: 'significant weight<br>loss w/o low weight',
+				description: 'Yes: significant weight loss<br>but not low weight',
 				triggers:{
 					lowweight: false,
 					weightloss_normalweight: true,
@@ -90,7 +90,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:10,
 				question_id: 4,
-				description: 'no weight loss<br>or low weight',
+				description: 'No: no weight loss',
 				triggers:{
 					lowweight: false,
 					weightloss_normalweight: false,

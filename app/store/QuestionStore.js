@@ -14,7 +14,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname: 'BMI',
 				interviewprobe: [
 							[
-								'1. What are your CURRENT height and weight? (Measure if possible)',
+								'1. What are your current height and weight? (Measure if possible)',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
@@ -24,7 +24,7 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><span>Height in inches: <span></td>',
 								'<td><input type="text" size=2 id="saveHeight" name="BMI:Height" onChange="calculateBmi()"></input></td>',
 								'</tr><tr>',
-								'<td><span>BMI</span></td>',
+								'<td><span>BMI (kg/m2)</span></td>',
 								'<td><input type="text" size=2 disabled="true" name="BMI:BMI" id="saveBmi"></input></td>',
 								'</tr>',
 								'</table>'
@@ -33,13 +33,12 @@ Ext.define('ceda.store.QuestionStore', {
 				],
 				symptom: [
 							[
-							"BMI",
-							"In what range is individual’s",
+							"BMI range:",
 								"",                       
-								"•	Underweight = <18.5",
+								"•	Underweight ≤ 18.5",
 								"•	Normal weight = 18.5–24.9",
 								"•	Overweight = 25–29.9",
-								"•	Obesity = ≥ 30 ",
+								"•	Obesity ≥ 30 ",
 								"",
 							].join('<br>'),
 				].join('<br>'),
@@ -55,7 +54,7 @@ Ext.define('ceda.store.QuestionStore', {
 				instrument_id: 1,
 				sectionlabel: 'Introduction',
 				shortname: 'Eating Disturbance',
-				interviewprobe: '2. Are you having any problems with your eating? For example, is it hard for you to maintain your weight or alter your diet (e.g., eat certain types of food, eat at particular times of day)? Do other people feel you have a problem in these areas?',
+				interviewprobe: '2. Are you having any problems with your eating? For example, is it hard for you to maintain your weight or alter your diet (e.g., eat certain types of food, eat at particular times of day)?<br><br>Do other people feel you have a problem in these areas?',
 				symptom: 'Is there a disturbance in eating or eating related behavior?',
 				rules: [
 					{
@@ -93,7 +92,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'low weight',
 				interviewprobe: [
-						'4. In the past three months, have you or others recently been concerned that your weight is significantly low?',
+						'4. In the past three months, have you or others been concerned that your weight is significantly low?',
 						'',
 						'If no: Have you lost a significant amount of weight recently?',
 						'<table>',
@@ -123,8 +122,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'fear of weight gain',
 				interviewprobe: [
-						'5a. Are you afraid of', 
-      					'gaining weight?', 
+						'5a. Are you afraid of gaining weight?', 
 						'',
 						'If no: Are you worried that if you start to gain weight, you will continue to gain weight and will become fat?',
 						].join("<br>"),
@@ -144,21 +142,22 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'interfering with weight gain',
 				interviewprobe: [
-					'5b. Do you try to cut back on calories or amounts or types of food? What do you try to do?',
+					'5b. [Once any of the interfering behaviors below is endorsed, press YES and proceed.]',
+					'',
+					'Do you try to cut back on calories or amounts or types of food? What do you try to do?',
 					'',
 					'Do you exercise? What do you do and how often?',
 					'',
-					'Do you vomit or use any types of pills (diuretics, laxatives)?',
+					'Do you vomit or use any types of pills (diet pills, diuretics, laxatives)?',
 					'',
 					'Do you do anything else that might make it hard for you to gain or maintain weight?',
 					'',
-					'[Once any interfering behavior is endorsed, mark YES and proceed.]',
 				].join("<br>"),
 				symptom:[
 					'Are persistent behaviors [e.g., dietary restriction, excessive exercise, purging, fasting] interfering with weight gain?',
 					'',
 					'',
-					'Other clinically significant behavior that interferes with weight gain might include, for example, spitting out food or inappropriate stimulant use.'
+					'Other clinically significant behavior that interferes with weight gain might include spitting out food or inappropriate stimulant use.'
 				].join("<br>"),
 				rules:[
 					{
@@ -184,7 +183,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br>"),
 				symptom:[
 					'Is the individual’s body image distorted ',
-					'[e.g., description of feeling he/she appears fat despite being at a markedly low weight]?'
+					'[e.g., description of feeling he/she appears fat despite being at a low weight]?'
 				].join("<br>"),
 				rules:[
 					{
@@ -202,7 +201,7 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					'6b. Does your weight or your body shape impact how you feel about yourself?', 
 					'',
-					'For example, if you were to have a day where you did not like the number on the scale, or you did not like the way your clothes fit, or you were uncomfortable with how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please describe this for me.'
+					'For example, if you were to have a day when you did not like the number on the scale, or the way your clothes fit, or how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please tell me a little about this.'
 				].join("<br>"),
 				symptom: 'Does body shape or weight exert undue influence on sense of self-worth or on self-evaluation?',
 				rules:[
@@ -249,9 +248,9 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Binge Eating & Compensatory Behaviors',
 				shortname: 'lack of control',
 				interviewprobe:[
-					'7a. In the past few months, have you had times when you felt a sense of loss of control over eating…or times when you felt that you could not stop eating or control what or how much you were eating?',
+					'7a. In the past few months, were there times when you felt a sense of loss of control over eating…or times when you felt that you could not stop eating or control what or how much you were eating?',
 					'<br/>',
-					'If no: Have there been any instances in the past few months when you felt you could not have prevented an episode of eating from occurring? Or, that you could not have stopped eating once you had started? '
+					'If no: Have there been times when you felt you could not prevent yourself from eating? '
 				].join("<br>"),
 				symptom:[
 					'Has the individual experienced a lack of control while eating?'
@@ -404,7 +403,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7f. Do you exercise? What type and how frequently?',
+						'7f. Do you exercise? What type of exercise do you do and for how long?',
 						'<br/>'
 					].join("<br/>"),
 					[
