@@ -39,8 +39,8 @@ Ext.define('ceda.store.QuestionStore', {
 								"•	Normal weight = 18.5–24.9",
 								"•	Overweight = 25–29.9",
 								"•	Obesity ≥ 30 ",
-								"",
-							].join('<br>'),
+								""
+							].join('<br>')
 				].join('<br>'),
 				rules: [
 					{
@@ -258,11 +258,11 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target:	7.02,
-						expression: 'global.lack_control'
+						expression: 'global.lacks_control'
 					},
 					{
 						target: 7.05,
-						expression: '!global.lack_control'
+						expression: '!global.lacks_control'
 					}
 				]
 			},
@@ -380,7 +380,7 @@ Ext.define('ceda.store.QuestionStore', {
 						'<tr><td><input id="optionalDiureticsName" name="Diuretics:Name"></td></tr>',
 						'<tr><td>Quantity</td></tr>',
 						'<tr><td><input id="optionalDiureticsName" name="Diuretics:Quantity" size="3"></td></tr>',
-						'</table>',
+						'</table>'
 					].join("")
 				].join("<br/>"),
 				symptom:[
@@ -412,8 +412,7 @@ Ext.define('ceda.store.QuestionStore', {
 						'<tr><td><input id="optionalExerciseType" name="Exercise:Type"></td></tr>',
 						'<tr><td>Duration</td></tr>',
 						'<tr><td><input id="optionalExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
-						'</table>',
-						
+						'</table>'
 					].join(" ")
 				].join("<br/>"),
 				symptom:[
@@ -426,7 +425,7 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 7.07,
 						expression: 'global.in_behaviors || global.in_exercise'
 					},
-		 			{
+					{
 						diagnosis: true,
 						expression: '(global.an) && (!global.binge_frequency_months && !global.in_frequency_months)',
 						trigger: 'an-rs',
@@ -442,7 +441,7 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						expression: [
-							'(!global.an && !global.lacks_control && global.binge_frequency_weeks) && ',
+							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
 							'(global.in_behavior || global.in_excercise) && ',
 							'(global.in_compensate && in_frequency_weeks)'
 						].join(''),
@@ -460,7 +459,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-					 		'(global.binge_frequency_months && global.obe)'
+							'(global.binge_frequency_months && global.obe)'
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'
@@ -554,9 +553,9 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						expression: [
-							'(!global.an && !global.lacks_control && global.binge_frequency_weeks) && ',
-							'(global.in_behavior || global.in_excercise) && ',
-							'(global.in_compensate && in_frequency_weeks)'
+							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(global.in_behaviors || global.in_excercise) && ',
+							'(global.in_compensate && global.in_frequency_weeks)'
 						].join(''),
 						target: 8,
 						trigger: 'bn'
@@ -564,7 +563,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
-							'(! global.in_behavior && !global.in_exercise)'	
+							'(! global.in_behaviors && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
 						target: 9
@@ -572,7 +571,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-					 		'(global.binge_frequency_months && global.obe) '
+							'(global.binge_frequency_months && global.obe) '
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'
@@ -626,7 +625,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-					 		'(global.binge_frequency_months && global.obe)'
+							'(global.binge_frequency_months && global.obe)'
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'
@@ -1094,7 +1093,6 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: 'global.nonfood_age_appropriate'
 					},
 					{
-						diagnosis:true,
 						expression: '! global.nonfood_age_appropriate',
 						endifdiagnosis: true,
 						target: 22
@@ -1120,7 +1118,8 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						target: 22,
-						expression: '! global.nonfood_persistent'
+						expression: '! global.nonfood_persistent',
+						endifdiagnosis: true
 					}
 
 				]
@@ -1139,14 +1138,13 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 21,
-						expression: 'global.nonfood_culturally_sanctioned'
+						target: 22,
+						expression: 'global.nonfood_culturally_sanctioned',
+						endifdiagnosis:true
 					},
 					{
-						diagnosis:true,
-						expression: '! global.nonfood_culturally_sanctioned',
-						endifdiagnosis: true,
-						target: 22
+						target: 21,
+						expression: '!global.nonfood_culturally_sanctioned'
 					}
 				
 				]
@@ -1169,12 +1167,12 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						diagnosis: true,
 						diagnosisname: 'PICA',
-						expression: 'global.nonfood_culturally_sanctioned',
+						expression: 'global.nonfood_needs_clinical',
 						endifdiagnosis: true
 					},
 					{
 						target: 22,
-						expression: '! global.nonfood_culturally_sanctioned',
+						expression: '! global.nonfood_needs_clinical'
 					}
 			
 				]
@@ -1208,9 +1206,9 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'23. The criteria for this condition are identical to those for bulimia nervosa, except that the frequency of binge eating and inappropriate compensatory behavior is less than once a week and/or the duration of the behavior is less than 3 months.'
- 				].join("<br/>"),
+				].join("<br/>"),
 				symptom:[
-					'',
+					''
 				].join("<br/>"),
 				rules:[
 				{
@@ -1227,7 +1225,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'24. The criteria for this condition are very similar to those for bulimia nervosa, except that the individual does not engage in the recurrent binge eating. Individuals with purging disorder consume an amount of food that is not objectively large, but engage in inappropriate behavior after eating.'
- 				].join("<br/>"),
+				].join("<br/>"),
 				symptom:[
 					'',
 				].join("<br/>"),
@@ -1246,7 +1244,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'25. The criteria for this condition are identical to those for binge eating disorder, except that the frequency of binge eating is less than once a week and/or the duration of the behavior is less than 3 months.'
- 				].join("<br/>"),
+				].join("<br/>"),
 				symptom:[
 					'',
 				].join("<br/>"),
@@ -1267,7 +1265,7 @@ Ext.define('ceda.store.QuestionStore', {
 					'26. This condition may be assigned to an individual who exhibits a daily pattern of eating with significantly increased intake in the evening and/or nighttime. Eating episodes must not be better accounted for by existing social norms (e.g., college dorm) or occur solely in the context of disturbances in sleep necessitated by responsibilities (e.g., during night-shift work, nursing a baby).', 
 					'<br/>',
 					'For more information, see criteria published in Int J Eat Disord 2010;43:241-7.'
- 				].join("<br/>"),
+				].join("<br/>"),
 				symptom:[
 					'',
 				].join("<br/>"),

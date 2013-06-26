@@ -182,7 +182,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.01,
 				description: 'yes',
 				triggers:{
-					lack_control: true
+					lacks_control: true
 				}
 			},
 			{
@@ -190,7 +190,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.01,
 				description: 'no',
 				triggers:{
-					lack_control: false
+					lacks_control: false
 				}
 			},
 			{
@@ -371,7 +371,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 9,
 				description: 'Next',
 				triggers:{
-					
+					next: true
 				}
 			},
 			{
@@ -699,7 +699,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 21,
 				description: 'yes',
 				triggers:{
-					nonfood_culturally_sanctioned: true
+					nonfood_needs_clinical: true
 				}
 			},
 			{
@@ -707,7 +707,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 21,
 				description: 'no',
 				triggers:{
-					nonfood_culturally_sanctioned: false
+					nonfood_needs_clinical: false
 				}
 			},
 			{

@@ -52,8 +52,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var instrument = istore.findRecord('id', 1);
 		var details = Ext.widget('idetail');
 		this.assessment = Ext.create('ceda.model.Assessment', {triggers: {}});
-		this.questionstack = new Array();
-		this.savedvalues = new Object();
+		this.questionstack = [];
+		this.savedvalues = {};
 		this.qview = Ext.widget('qview');
 		details.setRecord(instrument);
 		this.getBar().setTitle(instrument.get("name"));
@@ -93,11 +93,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 		if(next == 'finish'){
 			this.viewOutput();
 		}
-		else if(next != undefined){
+		else if(next !== undefined){
 			this.viewQuestion(next);
 		}
 		else{
-			this.viewQuestion();
+			alert('No rules matched. No next question.');
+			//this.viewQuestion();
 		}
 	},
 
@@ -110,7 +111,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	viewQuestion: function(question, back){
-		if(this.questionstack.length == 0){
+		if(this.questionstack.length === 0){
 			this.getBackbutton().hide();
 		}
 		else{
@@ -144,7 +145,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 					this.savedvalues['Diagnosis'][rule.diagnosisname] = " ";
 					var global_triggers = this.assessment.get('triggers');
 					global_triggers[rule.trigger] = true;
-					alert("Critera for " + rule.diagnosisname + " met")
+					alert("Critera for " + rule.diagnosisname + " met");
 				}
 				if(rule.endifdiagnosis){
 					if(this.savedvalues.hasOwnProperty('Diagnosis')){
@@ -153,7 +154,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 				}
 				var target = rule.target;
 				var qstore = Ext.getStore('questionStore');
-				var question = qstore.findRecord('id', target);
+				//var question = qstore.findRecord('id', target);
 				return qstore.findRecord('id', target);
 			}
 		}
@@ -163,14 +164,14 @@ Ext.define('ceda.controller.SimpleNavController', {
 	captureCapturables: function(){
 		var inputs = Ext.query('input[id^="save"]');
 		var ret = true;	
-		for(i in inputs){
-			var input = inputs[i];
+		for(key in inputs){
+			var input = inputs[key];
 			if(input.value){
 				var section_name = input.name.split(':');
 				var section = section_name[0];
-				section = section.replace("_", " ");
+				section = section.replace(/_/g, " ");
 				var name = section_name[1];
-				name = name.replace("_", " ");
+				name = name.replace(/_/g, " ");
 				var value = input.value;
 				if(! this.savedvalues.hasOwnProperty(section)){
 					this.savedvalues[section] = {};
@@ -182,14 +183,14 @@ Ext.define('ceda.controller.SimpleNavController', {
 			}
 		}
 		var optionals = Ext.query('input[id^="optional"]');
-		for(i in optionals){
-			var input = optionals[i];
+		for(key in optionals){
+			var input = optionals[key];
 			if(input.value){
 				var section_name = input.name.split(':');
 				var section = section_name[0];
-				section = section.replace("_", " ");
+				section = section.replace(/_/g, " ");
 				var name = section_name[1];
-				name = name.replace(/_/g, " ")
+				name = name.replace(/_/g, " ");
 				var value = input.value;
 				if(! this.savedvalues.hasOwnProperty(section)){
 					this.savedvalues[section] = {};
