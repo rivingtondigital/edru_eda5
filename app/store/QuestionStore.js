@@ -273,70 +273,199 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Binge Eating & Compensatory Behaviors',
 				shortname: 'Example of loss of control',
 				interviewprobe:[
-					'7b. Can you give me an example of what you typically ate when you felt this sense of loss of control? And the context?',
+					'7b. Were there times in the last three months when you felt out of control and consumed what was clearly a large amount of food?',
+					'Can you give me an example of what you typically ate? And the context?',
 					'<br/>',
-					'If first episode described is only subjectively large, inquire about larger episodes: Have you had any episodes in which you have eaten a larger amount of food, an amount of food that is definitely larger than most people would eat in a similar period of time or circumstance, and felt a loss of control?',
-					'<br/>',
-					'If first episode described is clearly large, inquire about smaller episodes: Have you had any episodes in which you have eaten smaller amounts of food, similar to (or less than) what most people would eat in a similar period of time or under similar circumstances, and felt a loss of control?'
 				].join("<br/>"),
 				symptom:[
 					'Objective Binge Episode (OBE): Has the individual eaten an objectively large amount of food in a discrete period of time, while experiencing a loss of control?',
 					'<br>',
-					'Subjective Binge Episode (SBE): Has the individual experienced a loss of control over eating, while eating a normal, typical, or small amount of food?',
-					'<br/>',
-					'NOTE: It may be useful to ask about the most recent episode of loss of control eating, determine episode size, and then inquire about typicality.'
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.03,
-						expression: 'global.obe || global.sbe'
+						target: 7.0201,
+						expression: 'global.obe'
 					},
 					{
-						target: 7.05,
-						expression: '!global.obe && !global.sbe'
+						target: 7.0210,
+						expression: '!global.obe'
 					}
 				]
 			},
 			{
-				id:7.03,
+				id:7.0201,
 				initial:false,
 				instrument_id:1,
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					[
-						'7c. If OBE described in 7b: In the past week, how many times have you had an eating episode like what you have just described, when you ate a large amount of food and felt a lack of control? [If denied in past week, ask about past month.]',
-						'<br/>',
-						'Is this consistent with how frequently the behaviors have occurred for the past 3 months? If no, how was frequency of episodes different?',
-						'<br/>',
-						'If SBE described in 7b: In the past week, how many times have you had an eating episode like what you have just described, when you ate a smaller or more common amount of food and felt a lack of control? [If denied in past week, ask about past month.]',
-						'<br/>',
-						'Is this consistent with how frequently the behaviors have occurred for the past 3 months? If no, how was frequency of episodes different?',
-						'<br/>'
-					].join("<br/>"),
-					[
-						'<table>',
-						'<tr><td>Average # of OBE\'s per week for the last 3 months</td></tr>',
-						'<tr><td><input id="saveOBEWeek" name="Binge_Behavior:Average_OBEs_per_week_in_the_past_3_months" type="text" size="3"></td></tr>',
-						'<tr><td>Average # of SBE\'s per week for the last 3 months</label></td></tr>',
-						'<tr><td><input id="saveOBEWeek" name="Binge_Behavior:Average_SBEs_per_week_in_the_past_3_months" type="text" size="3"/></td></tr>',
-						'</table>'
-					].join(" ")
+					'7b.11. How many times in the last week have you had an eating episode like what you have just described, when you ate a large amount of food and felt a lack of control?',
+					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
+					'<br/>',
 				].join("<br/>"),
 				symptom:[
-					'Has binge eating recurred, at least once a week, on average, for the last 3 months?'
+					'Has objective binge eating occurred at least once a week, on average, for the last 3 months?'
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.05,
+						target: 7.0203,
 						expression: 'global.binge_frequency_weeks'
 					},
 					{
-						target: 7.04,
+						target: 7.0202,
 						expression: '!global.binge_frequency_weeks'
 					}
 				]
 			},
+			{
+				id:7.0202,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.12. How many times in the last month have you had an eating episode when you ate a large amount of food and felt a lack of control?',
+					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Has objective binge eating occurred at least once a month, on average, for the last 3 months?'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0203,
+						expression: 'global.binge_frequency_months'
+					},
+					{
+						target: 7.0210,
+						expression: '!global.binge_frequency_months'
+					}
+				]
+			},
+{
+				id:7.0203,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.21. Enter average number of objective binge episodes per week over the last 3 months.',
+					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
+					'***** TEXT BOX TO ALLOW DATA ENTRY *****',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Enter weekly frequency of objective binge episodes (OBEs).'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0210,
+						expression: true
+					}
+				]
+			},
+// Next section evaluates frequency of SBEs
+			{
+				id:7.0210,
+				initial:false,
+				instrument_id:1,
+				sectionlabel: 'Binge Eating & Compensatory Behaviors',
+				shortname: 'Example of loss of control: SBE',
+				interviewprobe:[
+					'7b. Were there times in the last three months when you felt out of control but consumed no more than what others would judge to be a small or normal amount of food?',
+					'<br/>',
+					'Can you give me an example of what you typically ate? And the context?',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Subjective Binge Episode (SBE): Has the individual eaten a subjectively large amount of food in a discrete period of time, while experiencing a loss of control?',
+					'<br>',
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0211,
+						expression: 'global.sbe'
+					},
+					{
+						target: 7.05,
+						expression: '!global.sbe'
+					}
+				]
+			},
+			{
+				id:7.0211,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.11. How many times in the last week have you had an eating episode like what you have just described, when you ate a small or normal amount of food and felt a lack of control?',
+					'Is this consistent with how frequently this behavior have occurred for the past 3 months? If no, how was frequency of episodes different?',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Has subjective binge eating occurred at least once a week, on average, for the last 3 months?'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0213,
+						expression: 'global.sbe_frequency_weeks'
+					},
+					{
+						target: 7.0212,
+						expression: '!global.sbe_frequency_weeks'
+					}
+				]
+			},
+			{
+				id:7.0212,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.12. How many times in the last month have you had an eating episode when you ate a small or normal amount of food but felt a lack of control?',
+					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Has subjective binge eating occurred at least once a month, on average, for the last 3 months?'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0213,
+						expression: 'global.sbe_frequency_months'
+					},
+					{
+						target: 7.05,
+						expression: '!global.sbe_frequency_months'
+					}
+				]
+			},
+			{
+				id:7.0213,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.21. Enter average number of subjective binge episodes per week over the last 3 months.',
+					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
+					'***** TEXT BOX TO ALLOW DATA ENTRY *****',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Enter weekly frequency of objective binge episodes (OBEs).'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.05,
+						expression: true
+					}
+				]
+			},
+// End of section evaluating SBEs
+// Some old stuff follows	
 			{
 				id:7.04,
 				initial:false,
@@ -356,6 +485,7 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+// Next section evaulates purging
 			{
 				id:7.05,
 				initial:false,
@@ -459,7 +589,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-							'(global.binge_frequency_months && global.obe)'
+							'(!global.binge_frequency_months && !global.obe)' // !s added by BTW 6/28/13
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'
@@ -640,8 +770,8 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'8. Does your weight or your body shape impact how you feel about yourself?', 
-					'<br/>',
-					'For example, if you were to have a day where you did not like the number on the scale, or you did not like the way your clothes fit, or you were uncomfortable with how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please describe this for me.'
+					'',
+					'For example, if you were to have a day when you did not like the number on the scale, or the way your clothes fit, or how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please tell me a little about this.'
 				].join("<br/>"),
 				symptom:[
 					'Does body shape or weight exert undue influence on sense of self-worth or on self-evaluation?'
@@ -901,7 +1031,9 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Avoidant-Restrictive Food Intake Disorder(ARFID)',
 				shortname:'none',
 				interviewprobe:[
-					'11d. Can you describe any eating restrictions you have? Has trouble eating enough or these particular eating restrictions made it difficult for you socially? How so? Eating out at restaurants with others? Eating with family? ',
+					'11d. Can you describe any eating restrictions you have? Has trouble eating enough or these particular eating restrictions made it difficult for you socially? How so?',
+					'<br/>',
+					'If unclear: Do you have problems eating out at restaurants with others? Eating with family? ',
 					'<br/>',
 					'If no: Have you avoided any social situations because of difficulty with eating?',
 					'<br/>',
@@ -930,7 +1062,7 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					'12. Are these problems because you have not been able to obtain or pay for enough food?',
 					'<br/>',
-					'If no: Are they related to a particular cultural or religious practice? How so? How do your restrictions compare to others within your identified group?'
+					'If no: Are they related to a particular cultural or religious practice? How do your restrictions compare to others within your identified group?'
 				].join("<br/>"),
 				symptom:[
 					'Is there an alternate explanation to account for eating or feeding disturbance (e.g., lack or resources, culturally sanctioned practice, general medical condition)?'
@@ -949,19 +1081,19 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Avoidant-Restrictive Food Intake Disorder(ARFID)',
 				shortname:'none',
 				interviewprobe:[
-					'13. Have you been diagnosed with a medical condition or another mental disorder that may be associated with your difficulty eating enough or dietary restriction? Or, are the dietary restrictions related to a medical condition or as prescribed by a clinician as treatment for a medical condition?'
+					'13. Have you been diagnosed with a medical condition or an emotional problem that may be associated with your difficulty eating enough? Or, are the dietary restrictions due to a medical condition or prescribed by a clinician?'
 				].join("<br/>"),
 				symptom:[
 					'Is an associated medical condition or mental disorder (e.g., Crohn’s disease, mental retardation, pervasive developmental disorder) present that might better account for eating restrictions or weight loss?'
 				].join("<br/>"),
 				rules:[
 					{
-						target: 14,
-						expression: 'global.avoidant_alt_explaination || global.avoidant_alt_condition'	
+						target: 15,	// changed from 14 to 15; BTW 6/28/13
+						expression: 'global.avoidant_alt_explanation || global.avoidant_alt_condition'	
 					},
 					{
-						target: 15,
-						expression: '!global.avoidant_alt_explaination || !global.avoidant_alt_condition'
+						target: 14, // changed from 15 to 14; BTW 6/28/13
+						expression: '!global.avoidant_alt_explanation && !global.avoidant_alt_condition'	// || changed to &&; BTW 6/28/13
 					}
 				]
 			},
@@ -1039,11 +1171,11 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 18,
-						expression: 'global.regurge_alt_explaination'
+						expression: 'global.regurge_alt_explanation'
 					},
 					{
 						target: 17,
-						expression: '! global.regurge_alt_explaination'
+						expression: '! global.regurge_alt_explanation'
 					}
 				]
 			},
