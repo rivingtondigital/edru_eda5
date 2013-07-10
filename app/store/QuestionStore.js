@@ -584,7 +584,7 @@ Ext.define('ceda.store.QuestionStore', {
 							'(! global.in_behavior && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
-						target: 9
+						target: 9.1 // changed from 9
 					},
 					{
 						expression: [
@@ -696,7 +696,7 @@ Ext.define('ceda.store.QuestionStore', {
 							'(! global.in_behaviors && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
-						target: 9
+						target: 9.1	// changed from 9 
 					},
 					{
 						expression: [
@@ -750,7 +750,7 @@ Ext.define('ceda.store.QuestionStore', {
 							'(! global.in_behavior && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
-						target: 9
+						target: 9.1 //	Changed from 9, to skip question 9
 					},
 					{
 						expression: [
@@ -791,14 +791,14 @@ Ext.define('ceda.store.QuestionStore', {
 						
 				]
 			},
-			{
+			{	// This is now skipped over
 				id:9,
 				initial:false,
 				instrument_id:1,
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'9. Keeping in mind the type of episode you just described, when you ate a large amount of food and feel that loss of control….'
+					'9. Keeping in mind the type of episode you just described, when you ate a large amount of food and feel that loss of control…'
 				].join("<br/>"),
 				symptom:[
 
@@ -817,6 +817,8 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
+					'Keeping in mind the type of episode you just described, when you ate a large amount of food and feel that loss of control…',
+					'<br/>',
 					'9a. …did you eat faster than usual?'
 				].join("<br/>"),
 				symptom:[
@@ -837,7 +839,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'9b. … did you eat until you feel uncomfortably full?'
+					'9b. … did you eat until you felt uncomfortably full?'
 				].join("<br/>"),
 				symptom:[
 					'Eating until uncomfortably full?'
@@ -856,7 +858,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'9c. … did you eat large amounts of food when you are not hungry?'
+					'9c. … did you eat large amounts of food when you were not hungry?'
 				].join("<br/>"),
 				symptom:[
 					'Eating in the absence of hunger?'
@@ -876,7 +878,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'9d. … did you eat alone because you feel embarrassed by how much you are eating? Or because you do not want to be seen eating in this way?'
+					'9d. … did you eat alone because you felt embarrassed by how much you are eating? Or because you did not want to be seen eating in this way?'
 				].join("<br/>"),
 				symptom:[
 					'Avoiding eating near others due to shame or embarrassment?'
@@ -926,16 +928,15 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{	
-						target: 11,
 						diagnosis: true,
+						expression: 'global.binge_distress',
+						trigger: 'bn',
 						diagnosisname: 'Binge Eating Disorder',
-						expression: 'binge_distress',
-						trigger: 'bn'
-							
+						target: 11
 					},
 					{
 						target: 11,
-						expression: '! binge_distress'
+						expression: '! global.binge_distress'
 					}
 				]
 			},
@@ -1163,10 +1164,10 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Rumination Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'16. Have you been diagnosed with a medical condition (e.g., gastrointestinal problem such as esophageal reflux) that may account for this behavior?'
+					'16. Have you been diagnosed with a medical condition (e.g., gastrointestinal problem such as esophageal reflux) or an emotional problem that may be associated with this eating behavior (re-chewing, etc.)?'
 				].join("<br/>"),
 				symptom:[
-					'Is an associated medical condition present that might better account for the repeated regurgitation of food?'
+					'Is an associated medical condition or mental disorder present that might better account for the repeated regurgitation of food?'
 				].join("<br/>"),
 				rules:[
 					{
@@ -1186,23 +1187,23 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Rumination Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'17. Have you been diagnosed with another mental disorder? If yes, have you been to see a specialist (e.g., nutritionist, psychotherapist) specifically for help with this regurgitation problem?',
+					'17. Have you been to see a specialist (e.g., nutritionist, psychotherapist) specifically for help with this regurgitation problem?',
 					'<br/>',
-					'If no: How severely do you feel this problem impact you? In what ways?'
+					'If no: How severely does the problem affect you? In what ways?'
 				].join("<br/>"),
 				symptom:[
-					'Has the disturbance in eating behavior been sufficiently severe to warrant independent clinical attention?'
+					'Is the disturbance in eating behavior sufficiently severe to warrant clinical attention in addition to that for the psychiatric problem?'
 				].join("<br/>"),
 				rules:[
 					{
 						diagnosis: true,
 						diagnosisname: 'Rumination Disorder',
-						target: 18,
+						target: 19,	// changed from 18 to skip over question re age-appropriateness of pica
 						trigger: 'rd',
 						expression: 'global.regurge_independent_clinical'
 					},
 					{
-						target: 18,
+						target: 19,	// as above
 						expression: 'true'
 					}
 				]
@@ -1263,7 +1264,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'PICA',
 				shortname:'none',
 				interviewprobe:[
-					'20. Is the eating behavior you’ve described related to a particular cultural or religious practice? How so? Is this similar or different to others within your identified group?'
+					'20. Is the eating behavior you’ve described related to a particular cultural or religious practice? How is it  similar or different compared to others within your identified group?'
 				].join("<br/>"),
 				symptom:[
 					'Is eating behavior a culturally sanctioned practice?'
@@ -1288,9 +1289,9 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'PICA',
 				shortname:'none',
 				interviewprobe:[
-					'21. Have you been diagnosed with another mental disorder? If yes, have you been to see a specialist (e.g., nutritionist, psychotherapist) specifically for help with this eating behavior?',
+					'21. Have you been to see a specialist (e.g., nutritionist, psychotherapist) specifically for help with this eating  problem?',
 					'<br/>',
-					'If no: How severely do you feel this behavior impacts you? In what ways?' 
+					'If no: How severely does the problem affect you? In what ways?' 
 				].join("<br/>"),
 				symptom:[
 					'Is the disturbance in eating behavior sufficiently severe to warrant independent clinical attention?'
