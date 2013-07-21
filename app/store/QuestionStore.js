@@ -11,38 +11,27 @@ Ext.define('ceda.store.QuestionStore', {
 				initial: true,
 				instrument_id: 1,
 				sectionlabel: 'Introduction',
-				shortname: 'BMI',
+				shortname: 'ID',
 				interviewprobe: [
 							[
-								'1. What are your CURRENT height and weight? (Measure if possible)',
+								'1. Enter date and codes for interviewee and interviewer. ',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
-								'<td><span>Weight in lbs: <span></td>',
-								'<td><input type="text" size=2 id="saveWeight" name="BMI:Weight" onChange="calculateBmi()"></input></td>',
+								'<td><span>Date of interview: <span></td>',
+								'<td><input id="saveInterviewDate" name="Interview:Date" type="text"></input></td>',
 								'</tr><tr>',
-								'<td><span>Height in inches: <span></td>',
-								'<td><input type="text" size=2 id="saveHeight" name="BMI:Height" onChange="calculateBmi()"></input></td>',
+								'<td><span>ID of person interviewed: <span></td>',
+								'<td><input id="saveSubjectID" name="Interview:SubjectID" type="text"></input></td>',
 								'</tr><tr>',
-								'<td><span>BMI</span></td>',
-								'<td><input type="text" size=2 disabled="true" name="BMI:BMI" id="saveBmi"></input></td>',
+								'<td><span>ID of interviewer</span></td>',
+								'<td><input id="saveInterviewerID" name="Interview:InterviewerID" type="text"></input></td>',
 								'</tr>',
 								'</table>'
 							].join('')
 				
 				],
-				symptom: [
-							[
-							"BMI",
-							"In what range is individual’s",
-								"",                       
-								"•	Underweight = <18.5",
-								"•	Normal weight = 18.5–24.9",
-								"•	Overweight = 25–29.9",
-								"•	Obesity = ≥ 30 ",
-								"",
-							].join('<br>'),
-				].join('<br>'),
+				symptom: 'To begin, please enter information.',
 				rules: [
 					{
 						target: 2,
@@ -55,7 +44,7 @@ Ext.define('ceda.store.QuestionStore', {
 				instrument_id: 1,
 				sectionlabel: 'Introduction',
 				shortname: 'Eating Disturbance',
-				interviewprobe: '2. Are you having any problems with your eating? For example, is it hard for you to maintain your weight or alter your diet (e.g., eat certain types of food, eat at particular times of day)? Do other people feel you have a problem in these areas?',
+				interviewprobe: '2. Are you having any problems with your eating? For example, is it hard for you to maintain your weight or alter your diet (e.g., eat certain types of food, eat at particular times of day)?<br><br>Do other people feel you have a problem in these areas?',
 				symptom: 'Is there a disturbance in eating or eating related behavior?',
 				rules: [
 					{
@@ -74,7 +63,7 @@ Ext.define('ceda.store.QuestionStore', {
 				symptom: 'Is an aberrant eating pattern present (e.g., fasting, severely restricted intake, avoidance of certain foods, textures, binge eating episodes, purging)?',
 				rules: [ 
 					{
-						target: 4,
+						target: 3.01,
 						expression: 'global.eatingdisturbance || global.aberranteating'
 					},
 					{
@@ -86,6 +75,51 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+//
+// Calculation of BMI. Was originally question 1
+//
+			{	id: 3.01,
+				initial: false,
+				instrument_id: 1,
+				sectionlabel: 'BMI calculation',
+				shortname: 'BMI',
+				interviewprobe: [
+							[
+								'3.01 What are your current height and weight? (Measure if possible)',
+								'<br/><br/>',
+								'<table border=1 spacing=1 padding=2>',
+								'<tr>',
+								'<td><span>Weight in lbs: <span></td>',
+								'<td><input type="text" size=2 id="saveWeight" name="BMI:Weight" onChange="calculateBmi()"></input></td>',
+								'</tr><tr>',
+								'<td><span>Height in inches: <span></td>',
+								'<td><input type="text" size=2 id="saveHeight" name="BMI:Height" onChange="calculateBmi()"></input></td>',
+								'</tr><tr>',
+								'<td><span>BMI (kg/m2)</span></td>',
+								'<td><input type="text" size=2 disabled="true" name="BMI:BMI" id="saveBmi"></input></td>',
+								'</tr>',
+								'</table>'
+							].join('')
+				
+				],
+				symptom: [
+							[
+							"BMI range (adults):",
+								"",                       
+								"•	Underweight ≤ 18.5",
+								"•	Normal weight = 18.5–24.9",
+								"•	Overweight = 25–29.9",
+								"•	Obesity ≥ 30 ",
+								""
+							].join('<br>')
+				].join('<br>'),
+				rules: [
+					{
+						target: 4,
+						expression: 'true'
+					}
+				]
+			},
 			{
 				id:4,
 				initial: false,
@@ -93,29 +127,64 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'low weight',
 				interviewprobe: [
-						'4. In the past three months, have you or others recently been concerned that your weight is significantly low?',
-						'',
-						'If no: Have you lost a significant amount of weight recently?',
-						'<table>',
-						'<tr><td>When:</td> <td><input id="saveLostWhen" name="Severe_Lose:When" type="text"></input></td></tr>', 
-						'<tr><td>Weight:</td> <td><input id="saveLostWeight" name="Severe_Lose:Weight_Lost" type="text"></input></td></tr>',
-						'<tr><td>BMI:</td> <td><input id="saveBMI" name="Severe_Lose:BMI" type="text"></input></td></tr>',
-						'</table>'
+						'4. Are you or others been concerned that your current weight is significantly low?'
 						].join("<br>"),
 
 				symptom: 'Is individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)? For adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
 				rules: [
 					{
 						target: 5.1,
-						expression: 'global.lowweight || global.weightloss_normalweight'
+						expression: 'global.lowweight'
 					},
 					{
-						target: 7.01,
-						expression: 'global.noweightloss_normalweight'
+						target: 4.06,
+						expression: '!global.lowweight'
 					}
 					
 				]
 			},
+// 
+// Next question deals with recent low weight
+// 
+			{
+				id:4.06,
+				initial: false,
+				instrument_id: 1,
+				sectionlabel: 'Anorexia Nervosa',
+				shortname: 'recent low weight',
+				interviewprobe: [
+						[
+						'4.06 What was your lowest weight in the last three months? (If currently at lowest, please re-enter information.)',
+						'<br/><br/>',
+						'<table border=1 spacing=1 padding=2>',
+						'<tr>',
+						'<td><span>Weight in lbs: <span></td>',
+						'<td><input type="text" size=2 id="saveRecentWeight" name="BMI:RecentWeight" onChange="calculateRecentLowBMI()"></input></td>',
+						'</tr><tr>',
+						'<td><span>Height in inches: <span></td>',
+						'<td><input type="text" size=2 id="saveRecentHeight" name="BMI:RecentHeight" onChange="calculateRecentLowBMI()"></input></td>',
+						'</tr><tr>',
+						'<td><span>Lowest BMI (kg/m2)</span></td>',
+						'<td><input type="text" size=2 disabled="true" name="BMI:RecentLowBMI" id="saveRecentLowBMI"></input></td>',
+						'</tr>',
+						'</table>'
+						].join("<br>"),
+				],
+				symptom: 'In the last 3 months, was individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)? For adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
+				rules: [
+					{
+						target: 5.1,
+						expression: 'global.recentlowweight'
+					},
+					{
+						target: 7.01,
+						expression: '!global.recentlowweight'
+					}
+					
+				]
+			},
+
+
 			{
 				id:5.1,
 				initial: false,
@@ -123,10 +192,9 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'fear of weight gain',
 				interviewprobe: [
-						'5a. Are you afraid of', 
-      					'gaining weight?', 
+						'5a. Are you afraid of gaining weight?', 
 						'',
-						'If no: Are you worried that if you start to gain weight, you will continue to gain weight and will become fat?',
+						'If no: Are you worried that if you start to gain weight, you will continue to gain weight and will become fat?'
 						].join("<br>"),
 
 				symptom: 'Is there an intense, irrational fear of weight gain or of becoming fat?',
@@ -144,21 +212,22 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'interfering with weight gain',
 				interviewprobe: [
-					'5b. Do you try to cut back on calories or amounts or types of food? What do you try to do?',
+					'5b. [Once any of the interfering behaviors below is endorsed, press YES and proceed.]',
+					'',
+					'Do you try to cut back on calories or amounts or types of food? What do you try to do?',
 					'',
 					'Do you exercise? What do you do and how often?',
 					'',
-					'Do you vomit or use any types of pills (diuretics, laxatives)?',
+					'Do you vomit or use any types of pills (diet pills, diuretics, laxatives)?',
 					'',
 					'Do you do anything else that might make it hard for you to gain or maintain weight?',
 					'',
-					'[Once any interfering behavior is endorsed, mark YES and proceed.]',
 				].join("<br>"),
 				symptom:[
 					'Are persistent behaviors [e.g., dietary restriction, excessive exercise, purging, fasting] interfering with weight gain?',
 					'',
 					'',
-					'Other clinically significant behavior that interferes with weight gain might include, for example, spitting out food or inappropriate stimulant use.'
+					'Other clinically significant behavior that interferes with weight gain might include spitting out food or inappropriate stimulant use.'
 				].join("<br>"),
 				rules:[
 					{
@@ -184,7 +253,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br>"),
 				symptom:[
 					'Is the individual’s body image distorted ',
-					'[e.g., description of feeling he/she appears fat despite being at a markedly low weight]?'
+					'[e.g., description of feeling he/she appears fat despite being at a low weight]?'
 				].join("<br>"),
 				rules:[
 					{
@@ -202,7 +271,7 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					'6b. Does your weight or your body shape impact how you feel about yourself?', 
 					'',
-					'For example, if you were to have a day where you did not like the number on the scale, or you did not like the way your clothes fit, or you were uncomfortable with how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please describe this for me.'
+					'For example, if you were to have a day when you did not like the number on the scale, or the way your clothes fit, or how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please tell me a little about this.'
 				].join("<br>"),
 				symptom: 'Does body shape or weight exert undue influence on sense of self-worth or on self-evaluation?',
 				rules:[
@@ -249,9 +318,9 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Binge Eating & Compensatory Behaviors',
 				shortname: 'lack of control',
 				interviewprobe:[
-					'7a. In the past few months, have you had times when you felt a sense of loss of control over eating…or times when you felt that you could not stop eating or control what or how much you were eating?',
+					'7a. In the past few months, were there times when you felt a sense of loss of control over eating…or times when you felt that you could not stop eating or control what or how much you were eating?',
 					'<br/>',
-					'If no: Have there been any instances in the past few months when you felt you could not have prevented an episode of eating from occurring? Or, that you could not have stopped eating once you had started? '
+					'If no: Have there been times when you felt you could not prevent yourself from eating? '
 				].join("<br>"),
 				symptom:[
 					'Has the individual experienced a lack of control while eating?'
@@ -259,11 +328,11 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target:	7.02,
-						expression: 'global.lack_control'
+						expression: 'global.lacks_control'
 					},
 					{
 						target: 7.05,
-						expression: '!global.lack_control'
+						expression: '!global.lacks_control'
 					}
 				]
 			},
@@ -274,70 +343,199 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Binge Eating & Compensatory Behaviors',
 				shortname: 'Example of loss of control',
 				interviewprobe:[
-					'7b. Can you give me an example of what you typically ate when you felt this sense of loss of control? And the context?',
+					'7b. Were there times in the last three months when you felt out of control and consumed what was clearly a large amount of food?',
+					'Can you give me an example of what you typically ate? And the context?',
 					'<br/>',
-					'If first episode described is only subjectively large, inquire about larger episodes: Have you had any episodes in which you have eaten a larger amount of food, an amount of food that is definitely larger than most people would eat in a similar period of time or circumstance, and felt a loss of control?',
-					'<br/>',
-					'If first episode described is clearly large, inquire about smaller episodes: Have you had any episodes in which you have eaten smaller amounts of food, similar to (or less than) what most people would eat in a similar period of time or under similar circumstances, and felt a loss of control?'
 				].join("<br/>"),
 				symptom:[
 					'Objective Binge Episode (OBE): Has the individual eaten an objectively large amount of food in a discrete period of time, while experiencing a loss of control?',
 					'<br>',
-					'Subjective Binge Episode (SBE): Has the individual experienced a loss of control over eating, while eating a normal, typical, or small amount of food?',
-					'<br/>',
-					'NOTE: It may be useful to ask about the most recent episode of loss of control eating, determine episode size, and then inquire about typicality.'
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.03,
-						expression: 'global.obe || global.sbe'
+						target: 7.0201,
+						expression: 'global.obe'
 					},
 					{
-						target: 7.05,
-						expression: '!global.obe && !global.sbe'
+						target: 7.0210,
+						expression: '!global.obe'
 					}
 				]
 			},
 			{
-				id:7.03,
+				id:7.0201,
 				initial:false,
 				instrument_id:1,
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					[
-						'7c. If OBE described in 7b: In the past week, how many times have you had an eating episode like what you have just described, when you ate a large amount of food and felt a lack of control? [If denied in past week, ask about past month.]',
-						'<br/>',
-						'Is this consistent with how frequently the behaviors have occurred for the past 3 months? If no, how was frequency of episodes different?',
-						'<br/>',
-						'If SBE described in 7b: In the past week, how many times have you had an eating episode like what you have just described, when you ate a smaller or more common amount of food and felt a lack of control? [If denied in past week, ask about past month.]',
-						'<br/>',
-						'Is this consistent with how frequently the behaviors have occurred for the past 3 months? If no, how was frequency of episodes different?',
-						'<br/>'
-					].join("<br/>"),
-					[
-						'<table>',
-						'<tr><td>Average # of OBE\'s per week for the last 3 months</td></tr>',
-						'<tr><td><input id="saveOBEWeek" name="Binge_Behavior:Average_OBEs_per_week_in_the_past_3_months" type="text" size="3"></td></tr>',
-						'<tr><td>Average # of SBE\'s per week for the last 3 months</label></td></tr>',
-						'<tr><td><input id="saveOBEWeek" name="Binge_Behavior:Average_SBEs_per_week_in_the_past_3_months" type="text" size="3"/></td></tr>',
-						'</table>'
-					].join(" ")
+					'7b.11. How many times in the last week have you had an eating episode like what you have just described, when you ate a large amount of food and felt a lack of control?',
+					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
+					'<br/>',
 				].join("<br/>"),
 				symptom:[
-					'Has binge eating recurred, at least once a week, on average, for the last 3 months?'
+					'Has objective binge eating occurred at least once a week, on average, for the last 3 months?'
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.05,
+						target: 7.0203,
 						expression: 'global.binge_frequency_weeks'
 					},
 					{
-						target: 7.04,
+						target: 7.0202,
 						expression: '!global.binge_frequency_weeks'
 					}
 				]
 			},
+			{
+				id:7.0202,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.12. How many times in the last month have you had an eating episode when you ate a large amount of food and felt a lack of control?',
+					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Has objective binge eating occurred at least once a month, on average, for the last 3 months?'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0203,
+						expression: 'global.binge_frequency_months'
+					},
+					{
+						target: 7.0210,
+						expression: '!global.binge_frequency_months'
+					}
+				]
+			},
+{
+				id:7.0203,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.21. Enter average number of objective binge episodes per week over the last 3 months.',
+					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
+					'***** TEXT BOX TO ALLOW DATA ENTRY *****',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Enter weekly frequency of objective binge episodes (OBEs).'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0210,
+						expression: true
+					}
+				]
+			},
+// Next section evaluates frequency of SBEs
+			{
+				id:7.0210,
+				initial:false,
+				instrument_id:1,
+				sectionlabel: 'Binge Eating & Compensatory Behaviors',
+				shortname: 'Example of loss of control: SBE',
+				interviewprobe:[
+					'7b. Were there times in the last three months when you felt out of control but consumed no more than what others would judge to be a small or normal amount of food?',
+					'<br/>',
+					'Can you give me an example of what you typically ate? And the context?',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Subjective Binge Episode (SBE): Has the individual eaten a subjectively large amount of food in a discrete period of time, while experiencing a loss of control?',
+					'<br>',
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0211,
+						expression: 'global.sbe'
+					},
+					{
+						target: 7.05,
+						expression: '!global.sbe'
+					}
+				]
+			},
+			{
+				id:7.0211,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.11. How many times in the last week have you had an eating episode like what you have just described, when you ate a small or normal amount of food and felt a lack of control?',
+					'Is this consistent with how frequently this behavior have occurred for the past 3 months? If no, how was frequency of episodes different?',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Has subjective binge eating occurred at least once a week, on average, for the last 3 months?'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0213,
+						expression: 'global.sbe_frequency_weeks'
+					},
+					{
+						target: 7.0212,
+						expression: '!global.sbe_frequency_weeks'
+					}
+				]
+			},
+			{
+				id:7.0212,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.12. How many times in the last month have you had an eating episode when you ate a small or normal amount of food but felt a lack of control?',
+					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Has subjective binge eating occurred at least once a month, on average, for the last 3 months?'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0213,
+						expression: 'global.sbe_frequency_months'
+					},
+					{
+						target: 7.05,
+						expression: '!global.sbe_frequency_months'
+					}
+				]
+			},
+			{
+				id:7.0213,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					'7b.21. Enter average number of subjective binge episodes per week over the last 3 months.',
+					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
+					'***** TEXT BOX TO ALLOW DATA ENTRY *****',
+					'<br/>',
+				].join("<br/>"),
+				symptom:[
+					'Enter weekly frequency of objective binge episodes (OBEs).'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.05,
+						expression: true
+					}
+				]
+			},
+// End of section evaluating SBEs
+// Some old stuff follows	
 			{
 				id:7.04,
 				initial:false,
@@ -357,6 +555,7 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+// Next section evaulates purging
 			{
 				id:7.05,
 				initial:false,
@@ -381,7 +580,7 @@ Ext.define('ceda.store.QuestionStore', {
 						'<tr><td><input id="optionalDiureticsName" name="Diuretics:Name"></td></tr>',
 						'<tr><td>Quantity</td></tr>',
 						'<tr><td><input id="optionalDiureticsName" name="Diuretics:Quantity" size="3"></td></tr>',
-						'</table>',
+						'</table>'
 					].join("")
 				].join("<br/>"),
 				symptom:[
@@ -404,7 +603,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7f. Do you exercise? What type and how frequently?',
+						'7f. Do you exercise? What type of exercise do you do and for how long?',
 						'<br/>'
 					].join("<br/>"),
 					[
@@ -413,8 +612,7 @@ Ext.define('ceda.store.QuestionStore', {
 						'<tr><td><input id="optionalExerciseType" name="Exercise:Type"></td></tr>',
 						'<tr><td>Duration</td></tr>',
 						'<tr><td><input id="optionalExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
-						'</table>',
-						
+						'</table>'
 					].join(" ")
 				].join("<br/>"),
 				symptom:[
@@ -427,7 +625,7 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 7.07,
 						expression: 'global.in_behaviors || global.in_exercise'
 					},
-		 			{
+					{
 						diagnosis: true,
 						expression: '(global.an) && (!global.binge_frequency_months && !global.in_frequency_months)',
 						trigger: 'an-rs',
@@ -443,7 +641,7 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						expression: [
-							'(!global.an && !global.lacks_control && global.binge_frequency_weeks) && ',
+							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
 							'(global.in_behavior || global.in_excercise) && ',
 							'(global.in_compensate && in_frequency_weeks)'
 						].join(''),
@@ -456,12 +654,12 @@ Ext.define('ceda.store.QuestionStore', {
 							'(! global.in_behavior && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
-						target: 9
+						target: 9.1 // changed from 9
 					},
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-					 		'(global.binge_frequency_months && global.obe)'
+							'(!global.binge_frequency_months && !global.obe)' // !s added by BTW 6/28/13
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'
@@ -555,9 +753,9 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						expression: [
-							'(!global.an && !global.lacks_control && global.binge_frequency_weeks) && ',
-							'(global.in_behavior || global.in_excercise) && ',
-							'(global.in_compensate && in_frequency_weeks)'
+							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(global.in_behaviors || global.in_excercise) && ',
+							'(global.in_compensate && global.in_frequency_weeks)'
 						].join(''),
 						target: 8,
 						trigger: 'bn'
@@ -565,15 +763,15 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
-							'(! global.in_behavior && !global.in_exercise)'	
+							'(! global.in_behaviors && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
-						target: 9
+						target: 9.1	// changed from 9 
 					},
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-					 		'(global.binge_frequency_months && global.obe) '
+							'(global.binge_frequency_months && global.obe) '
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'
@@ -622,12 +820,12 @@ Ext.define('ceda.store.QuestionStore', {
 							'(! global.in_behavior && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
-						target: 9
+						target: 9.1 //	Changed from 9, to skip question 9
 					},
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-					 		'(global.binge_frequency_months && global.obe)'
+							'(global.binge_frequency_months && global.obe)'
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'
@@ -642,8 +840,8 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'8. Does your weight or your body shape impact how you feel about yourself?', 
-					'<br/>',
-					'For example, if you were to have a day where you did not like the number on the scale, or you did not like the way your clothes fit, or you were uncomfortable with how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please describe this for me.'
+					'',
+					'For example, if you were to have a day when you did not like the number on the scale, or the way your clothes fit, or how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please tell me a little about this.'
 				].join("<br/>"),
 				symptom:[
 					'Does body shape or weight exert undue influence on sense of self-worth or on self-evaluation?'
@@ -663,14 +861,14 @@ Ext.define('ceda.store.QuestionStore', {
 						
 				]
 			},
-			{
+			{	// This is now skipped over
 				id:9,
 				initial:false,
 				instrument_id:1,
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'9. Keeping in mind the type of episode you just described, when you ate a large amount of food and feel that loss of control….'
+					'9. Keeping in mind the type of episode you just described, when you ate a large amount of food and feel that loss of control…'
 				].join("<br/>"),
 				symptom:[
 
@@ -689,6 +887,8 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
+					'Keeping in mind the type of episode you just described, when you ate a large amount of food and feel that loss of control…',
+					'<br/>',
 					'9a. …did you eat faster than usual?'
 				].join("<br/>"),
 				symptom:[
@@ -709,7 +909,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'9b. … did you eat until you feel uncomfortably full?'
+					'9b. … did you eat until you felt uncomfortably full?'
 				].join("<br/>"),
 				symptom:[
 					'Eating until uncomfortably full?'
@@ -728,7 +928,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'9c. … did you eat large amounts of food when you are not hungry?'
+					'9c. … did you eat large amounts of food when you were not hungry?'
 				].join("<br/>"),
 				symptom:[
 					'Eating in the absence of hunger?'
@@ -748,7 +948,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'9d. … did you eat alone because you feel embarrassed by how much you are eating? Or because you do not want to be seen eating in this way?'
+					'9d. … did you eat alone because you felt embarrassed by how much you are eating? Or because you did not want to be seen eating in this way?'
 				].join("<br/>"),
 				symptom:[
 					'Avoiding eating near others due to shame or embarrassment?'
@@ -798,16 +998,15 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{	
-						target: 11,
 						diagnosis: true,
+						expression: 'global.binge_distress',
+						trigger: 'bn',
 						diagnosisname: 'Binge Eating Disorder',
-						expression: 'binge_distress',
-						trigger: 'bn'
-							
+						target: 11
 					},
 					{
 						target: 11,
-						expression: '! binge_distress'
+						expression: '! global.binge_distress'
 					}
 				]
 			},
@@ -903,7 +1102,9 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Avoidant-Restrictive Food Intake Disorder(ARFID)',
 				shortname:'none',
 				interviewprobe:[
-					'11d. Can you describe any eating restrictions you have? Has trouble eating enough or these particular eating restrictions made it difficult for you socially? How so? Eating out at restaurants with others? Eating with family? ',
+					'11d. Can you describe any eating restrictions you have? Has trouble eating enough or these particular eating restrictions made it difficult for you socially? How so?',
+					'<br/>',
+					'If unclear: Do you have problems eating out at restaurants with others? Eating with family? ',
 					'<br/>',
 					'If no: Have you avoided any social situations because of difficulty with eating?',
 					'<br/>',
@@ -932,7 +1133,7 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					'12. Are these problems because you have not been able to obtain or pay for enough food?',
 					'<br/>',
-					'If no: Are they related to a particular cultural or religious practice? How so? How do your restrictions compare to others within your identified group?'
+					'If no: Are they related to a particular cultural or religious practice? How do your restrictions compare to others within your identified group?'
 				].join("<br/>"),
 				symptom:[
 					'Is there an alternate explanation to account for eating or feeding disturbance (e.g., lack or resources, culturally sanctioned practice, general medical condition)?'
@@ -951,19 +1152,19 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Avoidant-Restrictive Food Intake Disorder(ARFID)',
 				shortname:'none',
 				interviewprobe:[
-					'13. Have you been diagnosed with a medical condition or another mental disorder that may be associated with your difficulty eating enough or dietary restriction? Or, are the dietary restrictions related to a medical condition or as prescribed by a clinician as treatment for a medical condition?'
+					'13. Have you been diagnosed with a medical condition or an emotional problem that may be associated with your difficulty eating enough? Or, are the dietary restrictions due to a medical condition or prescribed by a clinician?'
 				].join("<br/>"),
 				symptom:[
 					'Is an associated medical condition or mental disorder (e.g., Crohn’s disease, mental retardation, pervasive developmental disorder) present that might better account for eating restrictions or weight loss?'
 				].join("<br/>"),
 				rules:[
 					{
-						target: 14,
-						expression: 'global.avoidant_alt_explaination || global.avoidant_alt_condition'	
+						target: 15,	// changed from 14 to 15; BTW 6/28/13
+						expression: 'global.avoidant_alt_explanation || global.avoidant_alt_condition'	
 					},
 					{
-						target: 15,
-						expression: '!global.avoidant_alt_explaination || !global.avoidant_alt_condition'
+						target: 14, // changed from 15 to 14; BTW 6/28/13
+						expression: '!global.avoidant_alt_explanation && !global.avoidant_alt_condition'	// || changed to &&; BTW 6/28/13
 					}
 				]
 			},
@@ -1033,19 +1234,19 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Rumination Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'16. Have you been diagnosed with a medical condition (e.g., gastrointestinal problem such as esophageal reflux) that may account for this behavior?'
+					'16. Have you been diagnosed with a medical condition (e.g., gastrointestinal problem such as esophageal reflux) or an emotional problem that may be associated with this eating behavior (re-chewing, etc.)?'
 				].join("<br/>"),
 				symptom:[
-					'Is an associated medical condition present that might better account for the repeated regurgitation of food?'
+					'Is an associated medical condition or mental disorder present that might better account for the repeated regurgitation of food?'
 				].join("<br/>"),
 				rules:[
 					{
 						target: 18,
-						expression: 'global.regurge_alt_explaination'
+						expression: 'global.regurge_alt_explanation'
 					},
 					{
 						target: 17,
-						expression: '! global.regurge_alt_explaination'
+						expression: '! global.regurge_alt_explanation'
 					}
 				]
 			},
@@ -1056,23 +1257,23 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Rumination Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'17. Have you been diagnosed with another mental disorder? If yes, have you been to see a specialist (e.g., nutritionist, psychotherapist) specifically for help with this regurgitation problem?',
+					'17. Have you been to see a specialist (e.g., nutritionist, psychotherapist) specifically for help with this regurgitation problem?',
 					'<br/>',
-					'If no: How severely do you feel this problem impact you? In what ways?'
+					'If no: How severely does the problem affect you? In what ways?'
 				].join("<br/>"),
 				symptom:[
-					'Has the disturbance in eating behavior been sufficiently severe to warrant independent clinical attention?'
+					'Is the disturbance in eating behavior sufficiently severe to warrant clinical attention in addition to that for the psychiatric problem?'
 				].join("<br/>"),
 				rules:[
 					{
 						diagnosis: true,
 						diagnosisname: 'Rumination Disorder',
-						target: 18,
+						target: 19,	// changed from 18 to skip over question re age-appropriateness of pica
 						trigger: 'rd',
 						expression: 'global.regurge_independent_clinical'
 					},
 					{
-						target: 18,
+						target: 19,	// as above
 						expression: 'true'
 					}
 				]
@@ -1095,7 +1296,6 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: 'global.nonfood_age_appropriate'
 					},
 					{
-						diagnosis:true,
 						expression: '! global.nonfood_age_appropriate',
 						endifdiagnosis: true,
 						target: 22
@@ -1121,7 +1321,8 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						target: 22,
-						expression: '! global.nonfood_persistent'
+						expression: '! global.nonfood_persistent',
+						endifdiagnosis: true
 					}
 
 				]
@@ -1133,21 +1334,20 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'PICA',
 				shortname:'none',
 				interviewprobe:[
-					'20. Is the eating behavior you’ve described related to a particular cultural or religious practice? How so? Is this similar or different to others within your identified group?'
+					'20. Is the eating behavior you’ve described related to a particular cultural or religious practice? How is it  similar or different compared to others within your identified group?'
 				].join("<br/>"),
 				symptom:[
 					'Is eating behavior a culturally sanctioned practice?'
 				].join("<br/>"),
 				rules:[
 					{
-						target: 21,
-						expression: 'global.nonfood_culturally_sanctioned'
+						target: 22,
+						expression: 'global.nonfood_culturally_sanctioned',
+						endifdiagnosis:true
 					},
 					{
-						diagnosis:true,
-						expression: '! global.nonfood_culturally_sanctioned',
-						endifdiagnosis: true,
-						target: 22
+						target: 21,
+						expression: '!global.nonfood_culturally_sanctioned'
 					}
 				
 				]
@@ -1159,9 +1359,9 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'PICA',
 				shortname:'none',
 				interviewprobe:[
-					'21. Have you been diagnosed with another mental disorder? If yes, have you been to see a specialist (e.g., nutritionist, psychotherapist) specifically for help with this eating behavior?',
+					'21. Have you been to see a specialist (e.g., nutritionist, psychotherapist) specifically for help with this eating  problem?',
 					'<br/>',
-					'If no: How severely do you feel this behavior impacts you? In what ways?' 
+					'If no: How severely does the problem affect you? In what ways?' 
 				].join("<br/>"),
 				symptom:[
 					'Is the disturbance in eating behavior sufficiently severe to warrant independent clinical attention?'
@@ -1170,12 +1370,12 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						diagnosis: true,
 						diagnosisname: 'PICA',
-						expression: 'global.nonfood_culturally_sanctioned',
+						expression: 'global.nonfood_needs_clinical',
 						endifdiagnosis: true
 					},
 					{
 						target: 22,
-						expression: '! global.nonfood_culturally_sanctioned',
+						expression: '! global.nonfood_needs_clinical'
 					}
 			
 				]
@@ -1209,9 +1409,9 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'23. The criteria for this condition are identical to those for bulimia nervosa, except that the frequency of binge eating and inappropriate compensatory behavior is less than once a week and/or the duration of the behavior is less than 3 months.'
- 				].join("<br/>"),
+				].join("<br/>"),
 				symptom:[
-					'',
+					''
 				].join("<br/>"),
 				rules:[
 				{
@@ -1228,7 +1428,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'24. The criteria for this condition are very similar to those for bulimia nervosa, except that the individual does not engage in the recurrent binge eating. Individuals with purging disorder consume an amount of food that is not objectively large, but engage in inappropriate behavior after eating.'
- 				].join("<br/>"),
+				].join("<br/>"),
 				symptom:[
 					'',
 				].join("<br/>"),
@@ -1247,7 +1447,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'25. The criteria for this condition are identical to those for binge eating disorder, except that the frequency of binge eating is less than once a week and/or the duration of the behavior is less than 3 months.'
- 				].join("<br/>"),
+				].join("<br/>"),
 				symptom:[
 					'',
 				].join("<br/>"),
@@ -1268,7 +1468,7 @@ Ext.define('ceda.store.QuestionStore', {
 					'26. This condition may be assigned to an individual who exhibits a daily pattern of eating with significantly increased intake in the evening and/or nighttime. Eating episodes must not be better accounted for by existing social norms (e.g., college dorm) or occur solely in the context of disturbances in sleep necessitated by responsibilities (e.g., during night-shift work, nursing a baby).', 
 					'<br/>',
 					'For more information, see criteria published in Int J Eat Disord 2010;43:241-7.'
- 				].join("<br/>"),
+				].join("<br/>"),
 				symptom:[
 					'',
 				].join("<br/>"),
@@ -1292,5 +1492,12 @@ var calculateBmi  = new Function(
 				'var height = parseFloat(document.getElementById("saveHeight").value); ',
 				'console.debug("this is called");',
 				'document.getElementById("saveBmi").value = (weight/(height*height)) * 703; '].join("\n")
+			);
+
+var calculateRecentLowBMI  = new Function(
+				['var weight = parseFloat(document.getElementById("saveRecentWeight").value);',
+				'var height = parseFloat(document.getElementById("saveRecentHeight").value); ',
+				'console.debug("this is called");',
+				'document.getElementById("saveRecentLowBMI").value = (weight/(height*height)) * 703; '].join("\n")
 			);
 

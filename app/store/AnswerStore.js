@@ -5,34 +5,42 @@ Ext.define('ceda.store.AnswerStore', {
 		model: 'ceda.model.Answer',
 		data: [
 			{
-				id: 1,
+				id: 1.01,
 				question_id: 1,
-				description: 'Under-Weight',
+				description: 'Proceed',
 				triggers:{
-					underweight: true,
-					overweight: false,
-					normalbehavior: false
+					Entered: true
 				}
 			},
 			{
-				id: 2,
-				question_id: 1,
+				id: 3.011,
+				question_id: 3.01,
+				description: 'Underweight',
+				triggers:{
+					underweight: true,
+					overweight: false,
+					normalweight: false
+				}
+			},
+			{
+				id: 3.012,
+				question_id: 3.01,
 				description: 'Normal Weight',
 				triggers:{
 					underweight: false,
 					overweight: false,
-					normalbehavior: true
+					normalweight: true
 				}
 				
 			},
 			{
-				id: 3,
-				question_id: 1,
-				description: 'Overweight',
+				id: 3.013,
+				question_id: 3.01,
+				description: 'Overweight or Obese',
 				triggers:{
 					underweight: false,
 					overweight: true,
-					normalbehavior: false
+					normalweight: false
 				}
 			},
 			{
@@ -70,31 +78,33 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:8,
 				question_id: 4,
-				description: 'Low Weight',
+				description: 'yes',
 				triggers:{
-					lowweight: true,
-					weightloss_normalweight: false,
-					noweightloss_normalweight: false,
+					lowweight: true
 				}
 			},
 			{
 				id:9,
 				question_id: 4,
-				description: 'significant weight<br>loss w/o low weight',
+				description: 'no',
 				triggers:{
-					lowweight: false,
-					weightloss_normalweight: true,
-					noweightloss_normalweight: false,
+					lowweight: false
 				}
 			},
 			{
-				id:10,
-				question_id: 4,
-				description: 'no weight loss<br>or low weight',
+				id:10.01,
+				question_id: 4.06,
+				description: 'yes',
 				triggers:{
-					lowweight: false,
-					weightloss_normalweight: false,
-					noweightloss_normalweight: true,
+					recentlowweight: true
+				}
+			},
+			{
+				id:10.02,
+				question_id: 4.06,
+				description: 'no',
+				triggers:{
+					recentlowweight: false
 				}
 			},
 			{
@@ -182,7 +192,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.01,
 				description: 'yes',
 				triggers:{
-					lack_control: true
+					lacks_control: true
 				}
 			},
 			{
@@ -190,36 +200,126 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.01,
 				description: 'no',
 				triggers:{
-					lack_control: false
+					lacks_control: false
 				}
 			},
 			{
 				id:23,
 				question_id: 7.02,
-				description: 'SBE',
+				description: 'Yes',
 				triggers:{
-					obe: false,
-					sbe: true
+					obe: true
 				}
 			},
 			{
 				id:24,
 				question_id: 7.02,
-				description: 'OBE',
+				description: 'No',
 				triggers:{
-					obe: true,
+					obe: false
+				}
+			},
+			{
+				id:251,
+				question_id: 7.0201,
+				description: 'Yes',
+				triggers:{
+					binge_frequency_weeks: true
+				}
+			},	
+			{
+				id:252,
+				question_id: 7.0201,
+				description: 'No',
+				triggers:{
+					binge_frequency_weeks: false
+				}
+			},	
+			{
+				id:253,
+				question_id: 7.0202,
+				description: 'Yes',
+				triggers:{
+					binge_frequency_months: true
+				}
+			},	
+			{
+				id:254,
+				question_id: 7.0202,
+				description: 'No',
+				triggers:{
+					binge_frequency_months: false
+				}
+			},	
+			{
+				id:255,
+				question_id: 7.0203,
+				description: 'Done',
+				triggers:{
+
+				}
+			},	
+//
+// Next section contains answers to questions re SBEs
+//
+			{
+				id:260,
+				question_id: 7.0210,
+				description: 'Yes',
+				triggers:{
+					sbe: true
+				}
+			},
+			{
+				id:261,
+				question_id: 7.0210,
+				description: 'No',
+				triggers:{
 					sbe: false
 				}
 			},
 			{
-				id:25,
-				question_id: 7.02,
-				description: 'Neither',
+				id:262,
+				question_id: 7.0211,
+				description: 'Yes',
 				triggers:{
-					obe: false,
-					sbe: false
+					sbe_frequency_weeks: true
 				}
 			},	
+			{
+				id:263,
+				question_id: 7.0211,
+				description: 'No',
+				triggers:{
+					sbe_frequency_weeks: false
+				}
+			},	
+			{
+				id:264,
+				question_id: 7.0212,
+				description: 'Yes',
+				triggers:{
+					sbe_frequency_months: true
+				}
+			},	
+			{
+				id:265,
+				question_id: 7.0212,
+				description: 'No',
+				triggers:{
+					sbe_frequency_months: false
+				}
+			},	
+			{
+				id:266,
+				question_id: 7.0213,
+				description: 'Done',
+				triggers:{
+
+				}
+			},	
+
+// old section follows
 			{
 				id:26,
 				question_id: 7.03,
@@ -253,7 +353,9 @@ Ext.define('ceda.store.AnswerStore', {
 					binge_frequency_months: false
 				}
 			},
-			{
+// End of old binge eating section
+
+{
 				id:32,
 				question_id: 7.05,
 				description: 'yes',
@@ -371,7 +473,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 9,
 				description: 'Next',
 				triggers:{
-					
+					next: true
 				}
 			},
 			{
@@ -555,7 +657,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 12,
 				description: 'yes',
 				triggers:{
-					avoidant_alt_explaination: true
+					avoidant_alt_explanation: true
 				}
 			},
 			{
@@ -563,7 +665,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 12,
 				description: 'no',
 				triggers:{
-					avoidant_alt_explaination: false
+					avoidant_alt_explanation: false
 				}
 			},
 			{
@@ -619,7 +721,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 16,
 				description: 'yes',
 				triggers:{
-					regurge_alt_explaination: true
+					regurge_alt_explanation: true
 				}
 			},
 			{
@@ -627,7 +729,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 16,
 				description: 'no',
 				triggers:{
-					regurge_alt_explaination: false
+					regurge_alt_explanation: false
 				}
 			},
 			{
@@ -699,7 +801,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 21,
 				description: 'yes',
 				triggers:{
-					nonfood_culturally_sanctioned: true
+					nonfood_needs_clinical: true
 				}
 			},
 			{
@@ -707,7 +809,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 21,
 				description: 'no',
 				triggers:{
-					nonfood_culturally_sanctioned: false
+					nonfood_needs_clinical: false
 				}
 			},
 			{

@@ -20,15 +20,18 @@ Ext.define('ceda.store.InstrumentStore', {
 								'<p>The questions in the checklist closely mirror the criteria, but are worded to ',
 								'aid the assesment process. In answering all questions, clinical judgement must be ',
 								'exercised. It is appropriate to utilize whatever clinical information is available, ',
-								'including the individual\'s answers to questions, the clinician\'s observations ',
-								'of the individual and ancillary sources of information such as other treatment ',
-								'close family members, or relevant people within the individual\'s community ',
+								'including the individual\'s answers, the clinician\'s observations, ',
+								'and ancillary sources of information (e.g., treatment providers, ',
+								'family members). ',
 								'Assesors are strongly advised to obtain objective information (i.e. clinician-',
-								'measured height and weight) wherever possible.</p>',
-								'<p>The questions are posed to assess a current problem, not a problem that may ',
-								'have existed in the past. Clinicians are advised to begin by using the probes ',
-								'provided. Follow-up questions should be used on the basis of clinical judgment ',
-								'to clarify ambiguous responses.</p>'].join(" ")
+								'measured height and weight).</p>',
+								'<p>Clinicians are advised to begin by using the probes ',
+								'provided. Follow-up questions should be based on clinical judgment ',
+								'to clarify ambiguous responses.</p>',
+								'<p></p> ',
+								'<p></p> ',
+								'<p><em>(Copyright(c) 2013. American Psychiatric Association. ',
+								'All rights reserved.)</em></p>'].join(" ")
 			}
 		]
 	}
