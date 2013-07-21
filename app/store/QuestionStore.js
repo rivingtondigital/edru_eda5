@@ -24,7 +24,7 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><span>ID of person interviewed: <span></td>',
 								'<td><input id="saveSubjectID" name="Interview:SubjectID" type="text"></input></td>',
 								'</tr><tr>',
-								'<td><span>ID of interviewer</span></td>',
+								'<td><span>ID of interviewer:</span></td>',
 								'<td><input id="saveInterviewerID" name="Interview:InterviewerID" type="text"></input></td>',
 								'</tr>',
 								'</table>'
@@ -1285,7 +1285,14 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'PICA',
 				shortname:'none',
 				interviewprobe:[
-					'18. Note individual’s age:'
+					'18. Note individual’s age:',
+						'<br/><br/>',
+						'<table border=1 spacing=1 padding=2>',
+						'<tr>',
+						'<td><span>Age in years: <span></td>',
+						'<td><input type="text" size=2 id="saveAge" name="PICA:Age"></input></td>',
+						'</tr>',
+						'</table>'
 				].join("<br/>"),
 				symptom:[
 					'Is the eating of non-nutritive substance (e.g, dirt) inappropriate for developmental stage/age?'
