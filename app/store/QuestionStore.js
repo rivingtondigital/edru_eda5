@@ -11,37 +11,27 @@ Ext.define('ceda.store.QuestionStore', {
 				initial: true,
 				instrument_id: 1,
 				sectionlabel: 'Introduction',
-				shortname: 'BMI',
+				shortname: 'ID',
 				interviewprobe: [
 							[
-								'1. What are your current height and weight? (Measure if possible)',
+								'1. Enter date and codes for interviewee and interviewer. ',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
-								'<td><span>Weight in lbs: <span></td>',
-								'<td><input type="text" size=2 id="saveWeight" name="BMI:Weight" onChange="calculateBmi()"></input></td>',
+								'<td><span>Date of interview: <span></td>',
+								'<td><input id="saveInterviewDate" name="Interview:Date" type="text"></input></td>',
 								'</tr><tr>',
-								'<td><span>Height in inches: <span></td>',
-								'<td><input type="text" size=2 id="saveHeight" name="BMI:Height" onChange="calculateBmi()"></input></td>',
+								'<td><span>ID of person interviewed: <span></td>',
+								'<td><input id="saveSubjectID" name="Interview:SubjectID" type="text"></input></td>',
 								'</tr><tr>',
-								'<td><span>BMI (kg/m2)</span></td>',
-								'<td><input type="text" size=2 disabled="true" name="BMI:BMI" id="saveBmi"></input></td>',
+								'<td><span>ID of interviewer</span></td>',
+								'<td><input id="saveInterviewerID" name="Interview:InterviewerID" type="text"></input></td>',
 								'</tr>',
 								'</table>'
 							].join('')
 				
 				],
-				symptom: [
-							[
-							"BMI range:",
-								"",                       
-								"•	Underweight ≤ 18.5",
-								"•	Normal weight = 18.5–24.9",
-								"•	Overweight = 25–29.9",
-								"•	Obesity ≥ 30 ",
-								""
-							].join('<br>')
-				].join('<br>'),
+				symptom: 'To begin, please enter information.',
 				rules: [
 					{
 						target: 2,
@@ -73,7 +63,7 @@ Ext.define('ceda.store.QuestionStore', {
 				symptom: 'Is an aberrant eating pattern present (e.g., fasting, severely restricted intake, avoidance of certain foods, textures, binge eating episodes, purging)?',
 				rules: [ 
 					{
-						target: 4,
+						target: 3.01,
 						expression: 'global.eatingdisturbance || global.aberranteating'
 					},
 					{
@@ -85,6 +75,51 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+//
+// Calculation of BMI. Was originally question 1
+//
+			{	id: 3.01,
+				initial: false,
+				instrument_id: 1,
+				sectionlabel: 'BMI calculation',
+				shortname: 'BMI',
+				interviewprobe: [
+							[
+								'3.01 What are your current height and weight? (Measure if possible)',
+								'<br/><br/>',
+								'<table border=1 spacing=1 padding=2>',
+								'<tr>',
+								'<td><span>Weight in lbs: <span></td>',
+								'<td><input type="text" size=2 id="saveWeight" name="BMI:Weight" onChange="calculateBmi()"></input></td>',
+								'</tr><tr>',
+								'<td><span>Height in inches: <span></td>',
+								'<td><input type="text" size=2 id="saveHeight" name="BMI:Height" onChange="calculateBmi()"></input></td>',
+								'</tr><tr>',
+								'<td><span>BMI (kg/m2)</span></td>',
+								'<td><input type="text" size=2 disabled="true" name="BMI:BMI" id="saveBmi"></input></td>',
+								'</tr>',
+								'</table>'
+							].join('')
+				
+				],
+				symptom: [
+							[
+							"BMI range (adults):",
+								"",                       
+								"•	Underweight ≤ 18.5",
+								"•	Normal weight = 18.5–24.9",
+								"•	Overweight = 25–29.9",
+								"•	Obesity ≥ 30 ",
+								""
+							].join('<br>')
+				].join('<br>'),
+				rules: [
+					{
+						target: 4,
+						expression: 'true'
+					}
+				]
+			},
 			{
 				id:4,
 				initial: false,
@@ -92,29 +127,64 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'low weight',
 				interviewprobe: [
-						'4. In the past three months, have you or others been concerned that your weight is significantly low?',
-						'',
-						'If no: Have you lost a significant amount of weight recently?',
-						'<table>',
-						'<tr><td>When:</td> <td><input id="saveLostWhen" name="Severe_Lose:When" type="text"></input></td></tr>', 
-						'<tr><td>Weight:</td> <td><input id="saveLostWeight" name="Severe_Lose:Weight_Lost" type="text"></input></td></tr>',
-						'<tr><td>BMI:</td> <td><input id="saveBMI" name="Severe_Lose:BMI" type="text"></input></td></tr>',
-						'</table>'
+						'4. Are you or others been concerned that your current weight is significantly low?'
 						].join("<br>"),
 
 				symptom: 'Is individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)? For adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
 				rules: [
 					{
 						target: 5.1,
-						expression: 'global.lowweight || global.weightloss_normalweight'
+						expression: 'global.lowweight'
 					},
 					{
-						target: 7.01,
-						expression: 'global.noweightloss_normalweight'
+						target: 4.06,
+						expression: '!global.lowweight'
 					}
 					
 				]
 			},
+// 
+// Next question deals with recent low weight
+// 
+			{
+				id:4.06,
+				initial: false,
+				instrument_id: 1,
+				sectionlabel: 'Anorexia Nervosa',
+				shortname: 'recent low weight',
+				interviewprobe: [
+						[
+						'4.06 What was your lowest weight in the last three months? (If currently at lowest, please re-enter information.)',
+						'<br/><br/>',
+						'<table border=1 spacing=1 padding=2>',
+						'<tr>',
+						'<td><span>Weight in lbs: <span></td>',
+						'<td><input type="text" size=2 id="saveRecentWeight" name="BMI:RecentWeight" onChange="calculateRecentLowBMI()"></input></td>',
+						'</tr><tr>',
+						'<td><span>Height in inches: <span></td>',
+						'<td><input type="text" size=2 id="saveRecentHeight" name="BMI:RecentHeight" onChange="calculateRecentLowBMI()"></input></td>',
+						'</tr><tr>',
+						'<td><span>Lowest BMI (kg/m2)</span></td>',
+						'<td><input type="text" size=2 disabled="true" name="BMI:RecentLowBMI" id="saveRecentLowBMI"></input></td>',
+						'</tr>',
+						'</table>'
+						].join("<br>"),
+				],
+				symptom: 'In the last 3 months, was individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)? For adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
+				rules: [
+					{
+						target: 5.1,
+						expression: 'global.recentlowweight'
+					},
+					{
+						target: 7.01,
+						expression: '!global.recentlowweight'
+					}
+					
+				]
+			},
+
+
 			{
 				id:5.1,
 				initial: false,
@@ -124,7 +194,7 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe: [
 						'5a. Are you afraid of gaining weight?', 
 						'',
-						'If no: Are you worried that if you start to gain weight, you will continue to gain weight and will become fat?',
+						'If no: Are you worried that if you start to gain weight, you will continue to gain weight and will become fat?'
 						].join("<br>"),
 
 				symptom: 'Is there an intense, irrational fear of weight gain or of becoming fat?',
@@ -1422,5 +1492,12 @@ var calculateBmi  = new Function(
 				'var height = parseFloat(document.getElementById("saveHeight").value); ',
 				'console.debug("this is called");',
 				'document.getElementById("saveBmi").value = (weight/(height*height)) * 703; '].join("\n")
+			);
+
+var calculateRecentLowBMI  = new Function(
+				['var weight = parseFloat(document.getElementById("saveRecentWeight").value);',
+				'var height = parseFloat(document.getElementById("saveRecentHeight").value); ',
+				'console.debug("this is called");',
+				'document.getElementById("saveRecentLowBMI").value = (weight/(height*height)) * 703; '].join("\n")
 			);
 

@@ -5,34 +5,42 @@ Ext.define('ceda.store.AnswerStore', {
 		model: 'ceda.model.Answer',
 		data: [
 			{
-				id: 1,
+				id: 1.01,
 				question_id: 1,
+				description: 'Proceed',
+				triggers:{
+					Entered: true
+				}
+			},
+			{
+				id: 3.011,
+				question_id: 3.01,
 				description: 'Underweight',
 				triggers:{
 					underweight: true,
 					overweight: false,
-					normalbehavior: false
+					normalweight: false
 				}
 			},
 			{
-				id: 2,
-				question_id: 1,
+				id: 3.012,
+				question_id: 3.01,
 				description: 'Normal Weight',
 				triggers:{
 					underweight: false,
 					overweight: false,
-					normalbehavior: true
+					normalweight: true
 				}
 				
 			},
 			{
-				id: 3,
-				question_id: 1,
+				id: 3.013,
+				question_id: 3.01,
 				description: 'Overweight or Obese',
 				triggers:{
 					underweight: false,
 					overweight: true,
-					normalbehavior: false
+					normalweight: false
 				}
 			},
 			{
@@ -70,31 +78,33 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:8,
 				question_id: 4,
-				description: 'Low Weight',
+				description: 'yes',
 				triggers:{
-					lowweight: true,
-					weightloss_normalweight: false,
-					noweightloss_normalweight: false,
+					lowweight: true
 				}
 			},
 			{
 				id:9,
 				question_id: 4,
-				description: 'Yes: significant weight loss<br>but not low weight',
+				description: 'no',
 				triggers:{
-					lowweight: false,
-					weightloss_normalweight: true,
-					noweightloss_normalweight: false,
+					lowweight: false
 				}
 			},
 			{
-				id:10,
-				question_id: 4,
-				description: 'No: no weight loss',
+				id:10.01,
+				question_id: 4.06,
+				description: 'yes',
 				triggers:{
-					lowweight: false,
-					weightloss_normalweight: false,
-					noweightloss_normalweight: true,
+					recentlowweight: true
+				}
+			},
+			{
+				id:10.02,
+				question_id: 4.06,
+				description: 'no',
+				triggers:{
+					recentlowweight: false
 				}
 			},
 			{
