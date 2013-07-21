@@ -8,8 +8,8 @@ Ext.define('ceda.view.QuestionView', {
 		layout: 'auto',
 		fullscreen: true,
 		scrollable:{
-		    direction: 'vertical',
-		    directionLock: true
+		direction: 'vertical',
+		directionLock: true
 		},
 		items: [
 			{
@@ -22,13 +22,22 @@ Ext.define('ceda.view.QuestionView', {
 				]
 			},
 			{
+				itemId: 'symptom',
+				tpl: ['<div class="sectiondiv">',
+						'<div class="tabheader">Symptom:</div><br>',
+						'<div class="probearea">',
+							'<ul><li>{symptom}</li></ul>',
+						'</div>',
+					'</div>']
+			},
+			{
 				itemId:'probe',
 				tpl: ['<div class="sectiondiv">',
-						'<div class="tabheader">Question:</div><br>',
+						'<div class="tabheader">Probe:</div><br>',
 						'<div class="probearea">',
 							'<ul><li>{interviewprobe}</li></ul>',
 						'</div>',
-					  '</div>']
+					'</div>']
 			},
 			{
 				itemId: 'answerarea',
@@ -47,22 +56,12 @@ Ext.define('ceda.view.QuestionView', {
 				setStore: function(store){
 					this.getComponent('aview').setStore(store);
 				}
-			},
-			{
-				itemId: 'symptom',
-				tpl: ['<div class="sectiondiv">',
-						'<div class="tabheader">Symptom:</div><br>',
-						'<div class="probearea">',
-							'<ul><li>{symptom}</li></ul>',
-						'</div>',
-					  '</div>']
 			}
-			
 		]
 	},
 	
 	setRecord: function(question){
-		if(typeof this.getComponent('header') != 'undefined'){
+		if(typeof this.getComponent('header') !== 'undefined'){
 			this.getComponent('header').setRecord(question);
 			this.getComponent('probe').setRecord(question);
 			this.getComponent('symptom').setRecord(question);
