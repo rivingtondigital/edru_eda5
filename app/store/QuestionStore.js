@@ -449,7 +449,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Binge Eating & Compensatory Behaviors',
 				shortname: 'Example of loss of control: SBE',
 				interviewprobe:[
-					'7b. Were there times in the last three months when you felt out of control but consumed no more than what others would judge to be a small or normal amount of food?',
+					'7b.31 Were there times in the last three months when you felt out of control but consumed no more than what others would judge to be a small or normal amount of food?',
 					'<br/>',
 					'Can you give me an example of what you typically ate? And the context?',
 					'<br/>',
@@ -476,7 +476,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'7b.11. How many times in the last week have you had an eating episode like what you have just described, when you ate a small or normal amount of food and felt a lack of control?',
+					'7b.32. How many times in the last week have you had an eating episode like what you have just described, when you ate a small or normal amount of food and felt a lack of control?',
 					'Is this consistent with how frequently this behavior have occurred for the past 3 months? If no, how was frequency of episodes different?',
 					'<br/>',
 				].join("<br/>"),
@@ -501,7 +501,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'7b.12. How many times in the last month have you had an eating episode when you ate a small or normal amount of food but felt a lack of control?',
+					'7b.33. How many times in the last month have you had an eating episode when you ate a small or normal amount of food but felt a lack of control?',
 					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
 					'<br/>',
 				].join("<br/>"),
@@ -526,13 +526,21 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'7b.21. Enter average number of subjective binge episodes per week over the last 3 months.',
-					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
-					'***** TEXT BOX TO ALLOW DATA ENTRY *****',
-					'<br/>',
+						[
+						'7b.34. Enter average number of subjective binge episodes per week over the last 3 months.',
+						'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
+						'***** TEXT BOX TO ALLOW DATA ENTRY *****',
+							'<br/><br/>',
+							'<table border=1 spacing=1 padding=2>',
+							'<tr>',
+							'<td><span># of SBEs per week: <span></td>',
+							'<td><input id="saveSBEfreq" name="BingeEating:SBEs" type="text"></input></td>',
+							'</tr>',
+							'</table>'
+					]		
 				].join("<br/>"),
 				symptom:[
-					'Enter weekly frequency of objective binge episodes (OBEs).'
+					'Enter weekly frequency of subjective binge episodes (SBEs).'
 				].join("<br/>"),
 				rules:[
 					{
@@ -761,8 +769,8 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
-							'(global.in_behaviors || global.in_excercise) && ',
-							'(global.in_compensate && global.in_frequency_weeks)'
+							'(global.in_behaviors || global.in_exercise) && ',
+							'(global.in_compensate || global.in_weightloss)'
 						].join(''),
 						target: 8,
 						trigger: 'bn'
