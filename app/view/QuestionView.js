@@ -56,10 +56,25 @@ Ext.define('ceda.view.QuestionView', {
 				setStore: function(store){
 					this.getComponent('aview').setStore(store);
 				}
+			},
+			{
+				itemId: 'debugarea',
+				layout:{
+					type: 'vbox',
+				},
+				items:[
+					{
+						html: '<div class="sectiondiv"><div class="tabheader">Debug: </div><br><br>'
+					},
+					{
+						itemId: 'debugview',
+						xtype: 'debugview'
+					}
+				]
 			}
 		]
 	},
-	
+
 	setRecord: function(question){
 		if(typeof this.getComponent('header') !== 'undefined'){
 			this.getComponent('header').setRecord(question);

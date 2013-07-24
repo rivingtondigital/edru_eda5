@@ -11,20 +11,21 @@ Ext.application({
     	'QuestionView',
     	'AnswersView',
     	'AnswerItem',
-    	'OutputView'
+    	'OutputView',
+			'DebugView'
     ],
-    
+
     controllers:[
     	'SimpleNavController'
     ],
-    
+
     stores:[
     	'InstrumentStore',
     	'QuestionStore',
     	'RuleStore',
     	'AnswerStore'
     ],
-    
+
     models:[
     	'Instrument',
     	'Question',
