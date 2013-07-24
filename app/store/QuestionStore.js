@@ -412,17 +412,24 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
-{
+			{
 				id:7.0203,
 				initial:false,
 				instrument_id:1,
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'7b.21. Enter average number of objective binge episodes per week over the last 3 months.',
-					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
-					'***** TEXT BOX TO ALLOW DATA ENTRY *****',
-					'<br/>',
+						[	
+							'7b.21. Enter average number of objective binge episodes per week over the last 3 months.',
+							'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
+								'<br/><br/>',
+								'<table border=1 spacing=1 padding=2>',
+								'<tr>',
+								'<td><span># of OBEs per week: <span></td>',
+								'<td><input id="saveOBEfreq" name="BingeEating:OBEs" type="text"></input></td>',
+								'</tr>',
+								'</table>'
+					]
 				].join("<br/>"),
 				symptom:[
 					'Enter weekly frequency of objective binge episodes (OBEs).'

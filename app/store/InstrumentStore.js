@@ -21,7 +21,7 @@ Ext.define('ceda.store.InstrumentStore', {
 								'including the individual\'s answers, the clinician\'s observations, ',
 								'and ancillary sources of information (e.g., treatment providers, ',
 								'family members). ',
-								'Assesors are strongly advised to obtain objective information (i.e. clinician-',
+								'Assessors are strongly advised to obtain objective information (i.e. clinician-',
 								'measured height and weight).</p>',
 								'<p>Clinicians are advised to begin by using the probes ',
 								'provided. Follow-up questions should be based on clinical judgment ',

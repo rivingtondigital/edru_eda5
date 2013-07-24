@@ -254,7 +254,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:255,
 				question_id: 7.0203,
-				description: 'Done',
+				description: 'Proceed',
 				triggers:{
 
 				}
