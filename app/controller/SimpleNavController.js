@@ -3,6 +3,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	config: {
 		assessment: true,
 		savedvalues: {},
+		backedvalues: {},
 		questionstack: true,
 		qview: true,
 		refs: {
@@ -55,6 +56,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.assessment = Ext.create('ceda.model.Assessment', {triggers: {}});
 		this.questionstack = [];
 		this.savedvalues = {};
+		this.backedvalues = {};
 		this.qview = Ext.widget('qview');
 		details.setRecord(instrument);
 		this.getBar().setTitle(instrument.get("name"));
@@ -125,6 +127,13 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.getMainpanel().remove(this.qview);
 		this.qview = Ext.widget('qview');
 		this.qview.setRecord(question);
+		var inputs = Ext.query('input[id^="save"]');
+		for (key in inputs){
+			input = inputs[key];
+			if (this.backedvalues.hasOwnProperty(input.id)){
+				input.value = this.backedvalues[input.id];
+			}
+		}
 		console.info(this.debug);
 		if(debug){
 			var triggers = this.assessment.get('triggers');
@@ -181,6 +190,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		for(key in inputs){
 			var input = inputs[key];
 			if(input.value){
+				this.backedvalues[input.id] = input.value;
 				var section_name = input.name.split(':');
 				var section = section_name[0];
 				section = section.replace(/_/g, " ");
@@ -200,6 +210,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		for(key in optionals){
 			var input = optionals[key];
 			if(input.value){
+				this.backedvalues[input.id] = input.value;
 				var section_name = input.name.split(':');
 				var section = section_name[0];
 				section = section.replace(/_/g, " ");
