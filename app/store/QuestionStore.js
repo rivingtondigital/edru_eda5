@@ -24,6 +24,9 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><span>ID of person interviewed: <span></td>',
 								'<td><input id="saveSubjectID" name="Interview:SubjectID" type="text"></input></td>',
 								'</tr><tr>',
+								'<td><span>Subject&#39s Age: <span></td>',
+								'<td><input id="saveSubjectAge" name="Interview:SubjectAge" type="text"></input></td>',
+								'</tr><tr>',
 								'<td><span>ID of interviewer:</span></td>',
 								'<td><input id="saveInterviewerID" name="Interview:InterviewerID" type="text"></input></td>',
 								'</tr>',
@@ -115,11 +118,18 @@ Ext.define('ceda.store.QuestionStore', {
 				].join('<br>'),
 				rules: [
 					{
-						target: 4,
-						expression: 'true'
+						target: 5.1,
+						expression: 'global.underweight'
+					},
+					{
+						target: 4.06,
+						expression: 'global.normalweight || global.overweight'
 					}
 				]
 			},
+//
+// This question is now skipped
+//
 			{
 				id:4,
 				initial: false,
@@ -138,13 +148,13 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						target: 4.06,
-						expression: '!global.lowweight'
+						expression: 'global.lowweight'
 					}
 					
 				]
 			},
 // 
-// Next question deals with recent low weight
+// Next 2 questions deal with recent low weight
 // 
 			{
 				id:4.06,
@@ -153,27 +163,13 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'recent low weight',
 				interviewprobe: [
-						[
-						'4.06 What was your lowest weight in the last three months? (If currently at lowest, please re-enter information.)',
-						'<br/><br/>',
-						'<table border=1 spacing=1 padding=2>',
-						'<tr>',
-						'<td><span>Weight in lbs: <span></td>',
-						'<td><input type="text" size=2 id="saveRecentWeight" name="BMI:RecentWeight" onChange="calculateRecentLowBMI()"></input></td>',
-						'</tr><tr>',
-						'<td><span>Height in inches: <span></td>',
-						'<td><input type="text" size=2 id="saveRecentHeight" name="BMI:RecentHeight" onChange="calculateRecentLowBMI()"></input></td>',
-						'</tr><tr>',
-						'<td><span>Lowest BMI (kg/m2)</span></td>',
-						'<td><input type="text" size=2 disabled="true" name="BMI:RecentLowBMI" id="saveRecentLowBMI"></input></td>',
-						'</tr>',
-						'</table>'
-						].join("<br>"),
-				],
+						'4.06 What was your lowest weight in the last three months?'
+					].join("<br>"),
+
 				symptom: 'In the last 3 months, was individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)? For adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
 				rules: [
 					{
-						target: 5.1,
+						target: 4.07,
 						expression: 'global.recentlowweight'
 					},
 					{
@@ -183,8 +179,44 @@ Ext.define('ceda.store.QuestionStore', {
 					
 				]
 			},
+			{
+				id:4.07,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Recent Low Weight',
+				shortname:'none',
+				interviewprobe:[
+						[	
+							'4.07. Enter height and lowest weight in the last 3 months.',
+								'<br/><br/>',
+								'<table border=1 spacing=1 padding=2>',
+								'<tr>',
+								'<td><span>Weight in lbs: <span></td>',
+								'<td><input type="text" size=2 id="saveRecentWeight" name="BMI:RecentWeight" onChange="calculateRecentLowBMI()"></input></td>',
 
-
+								'</tr><tr>',
+								'<td><span>Height in inches: <span></td>',
+								'<td><input type="text" size=2 id="saveRecentHeight" name="BMI:RecentHeight" onChange="calculateRecentLowBMI()"></input></td>',
+								'</tr><tr>',
+								'<td><span>Lowest BMI (kg/m2): </span></td>',
+								'<td><input type="text" size=2 disabled="true" name="BMI:RecentLowBMI" id="saveRecentLowBMI"></input></td>',
+								'</tr>',
+								'</table>'
+					].join('')
+				],
+				symptom:[
+					'Enter height and lowest weight in the last 3 months.'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 5.1,
+						expression: true
+					}
+				]
+			},
+// 
+// End of 2 questions dealing with recent low weight
+// 
 			{
 				id:5.1,
 				initial: false,
@@ -344,12 +376,13 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname: 'Example of loss of control',
 				interviewprobe:[
 					'7b. Were there times in the last three months when you felt out of control and consumed what was clearly a large amount of food?',
-					'Can you give me an example of what you typically ate? And the context?',
 					'<br/>',
+					'Can you give me an example of what you typically ate? And the context?',
+					'<br/>'
 				].join("<br/>"),
 				symptom:[
 					'Objective Binge Episode (OBE): Has the individual eaten an objectively large amount of food in a discrete period of time, while experiencing a loss of control?',
-					'<br>',
+					'<br>'
 				].join("<br/>"),
 				rules:[
 					{
@@ -370,6 +403,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'7b.11. How many times in the last week have you had an eating episode like what you have just described, when you ate a large amount of food and felt a lack of control?',
+					'<br/>',
 					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
 					'<br/>',
 				].join("<br/>"),
@@ -379,11 +413,11 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 7.0203,
-						expression: 'global.binge_frequency_weeks'
+						expression: 'global.OBE_1perWK'
 					},
 					{
 						target: 7.0202,
-						expression: '!global.binge_frequency_weeks'
+						expression: '!global.OBE_1perWK'
 					}
 				]
 			},
@@ -404,11 +438,11 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 7.0203,
-						expression: 'global.binge_frequency_months'
+						expression: 'global.OBE_1perMON'
 					},
 					{
 						target: 7.0210,
-						expression: '!global.binge_frequency_months'
+						expression: '!global.OBE_1perMON'
 					}
 				]
 			},
@@ -429,8 +463,8 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><input id="saveOBEfreq" name="BingeEating:OBEs" type="text"></input></td>',
 								'</tr>',
 								'</table>'
-					]
-				].join("<br/>"),
+					].join('')
+				],
 				symptom:[
 					'Enter weekly frequency of objective binge episodes (OBEs).'
 				].join("<br/>"),
@@ -642,21 +676,21 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						diagnosis: true,
-						expression: '(global.an) && (!global.binge_frequency_months && !global.in_frequency_months)',
+						expression: '(global.an) && (!global.OBE_1perMON && !global.in_frequency_months)',
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
 						target: 18
 					},
 					{
 						diagnosis: true,
-						expression: '(global.an) && (global.binge_frequency_months || global.in_frequency_months)',
+						expression: '(global.an) && (global.OBE_1perMON || global.in_frequency_months)',
 						trigger: 'an-bps',
 						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
 					},
 					{
 						expression: [
-							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
 							'(global.in_behavior || global.in_excercise) && ',
 							'(global.in_compensate && in_frequency_weeks)'
 						].join(''),
@@ -665,7 +699,7 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						expression: [
-							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
 							'(! global.in_behavior && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
@@ -674,7 +708,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-							'(!global.binge_frequency_months && !global.obe)' // !s added by BTW 6/28/13
+							'(!global.OBE_1perMON && !global.obe)' // !s added by BTW 6/28/13
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'
@@ -754,21 +788,21 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						diagnosis: true,
-						expression: '(global.an) && (!global.binge_frequency_months && !global.in_frequency_months)',
+						expression: '(global.an) && (!global.OBE_1perMON && !global.in_frequency_months)',
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
 						target: 18
 					},
 					{
 						diagnosis: true,
-						expression: '(global.an) && (global.binge_frequency_months || global.in_frequency_months)',
+						expression: '(global.an) && (global.OBE_1perMON || global.in_frequency_months)',
 						trigger: 'an-bs',
 						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
 					},
 					{
 						expression: [
-							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
 							'(global.in_behaviors || global.in_exercise) && ',
 							'(global.in_compensate || global.in_weightloss)'
 						].join(''),
@@ -777,7 +811,7 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						expression: [
-							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
 							'(! global.in_behaviors && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
@@ -786,7 +820,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-							'(global.binge_frequency_months && global.obe) '
+							'(global.OBE_1perMON && global.obe) '
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'
@@ -808,21 +842,21 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						diagnosis: true,
-						expression: '(global.an) && (!global.binge_frequency_months && !global.in_frequency_months)',
+						expression: '(global.an) && (!global.OBE_1perMON && !global.in_frequency_months)',
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
 						target: 18
 					},
 					{
 						diagnosis: true,
-						expression: '(global.an) && (global.binge_frequency_months || global.in_frequency_months)',
+						expression: '(global.an) && (global.OBE_1perMON || global.in_frequency_months)',
 						trigger: 'an-bs',
 						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
 					},
 					{
 						expression: [
-							'(!global.an && !global.lacks_control && global.binge_frequency_weeks) && ',
+							'(!global.an && !global.lacks_control && global.OBE_1perWK) && ',
 							'(global.in_behavior || global.in_excercise) && ',
 							'(global.in_compensate && in_frequency_weeks)'
 						].join(''),
@@ -831,7 +865,7 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						expression: [
-							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
+							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
 							'(! global.in_behavior && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
@@ -840,7 +874,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
-							'(global.binge_frequency_months && global.obe)'
+							'(global.OBE_1perMON && global.obe)'
 							].join(''),
 						target: 11, 
 						trigger: 'arfid'

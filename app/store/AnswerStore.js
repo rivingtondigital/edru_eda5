@@ -94,7 +94,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:10.01,
 				question_id: 4.06,
-				description: 'yes',
+				description: 'Was significantly underweight in last 3 mons',
 				triggers:{
 					recentlowweight: true
 				}
@@ -102,9 +102,16 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:10.02,
 				question_id: 4.06,
-				description: 'no',
+				description: 'Was NOT significantly underweight in last 3 mons',
 				triggers:{
 					recentlowweight: false
+				}
+			},
+			{
+				id:10.03,
+				question_id: 4.07,
+				description: 'Proceed',
+				triggers: {
 				}
 			},
 			{
@@ -222,33 +229,34 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:251,
 				question_id: 7.0201,
-				description: 'Yes',
+				description: 'Yes: at least 1 OBE/week, on average',
 				triggers:{
-					binge_frequency_weeks: true
+					OBE_1perWK: true,
+					OBE_1perMON: true
 				}
 			},	
 			{
 				id:252,
 				question_id: 7.0201,
-				description: 'No',
+				description: 'No: less than 1 OBE/week, on average',
 				triggers:{
-					binge_frequency_weeks: false
+					OBE_1perWK: false
 				}
 			},	
 			{
 				id:253,
 				question_id: 7.0202,
-				description: 'Yes',
+				description: 'Yes: at least 1 OBE/MONTH, on average',
 				triggers:{
-					binge_frequency_months: true
+					OBE_1perMON: true
 				}
 			},	
 			{
 				id:254,
 				question_id: 7.0202,
-				description: 'No',
+				description: 'No: less than 1 OBE/MONTH, on average',
 				triggers:{
-					binge_frequency_months: false
+					OBE_1perMON: false
 				}
 			},	
 			{
@@ -326,7 +334,7 @@ Ext.define('ceda.store.AnswerStore', {
 				description: '&#8805; 1 episode/week',
 				triggers:{
 					binge_frequency_weeks: true,
-					binge_frequency_months: true
+					OBE_1perMON: true
 				}
 			},			
 			{
@@ -342,7 +350,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.04,
 				description: '&#8805; 1 episode/month',
 				triggers:{
-					binge_frequency_months: true
+					OBE_1perMON: true
 				}
 			},
 			{
@@ -350,7 +358,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.04,
 				description: 'no',
 				triggers:{
-					binge_frequency_months: false
+					OBE_1perMON: false
 				}
 			},
 // End of old binge eating section
