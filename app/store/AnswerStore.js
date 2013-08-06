@@ -289,7 +289,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:262,
 				question_id: 7.0211,
-				description: 'Yes',
+				description: 'Yes: at least 1 SBE/week, on average',
 				triggers:{
 					sbe_frequency_weeks: true
 				}
@@ -297,7 +297,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:263,
 				question_id: 7.0211,
-				description: 'No',
+				description: 'No: less than 1 SBE/week, on average',
 				triggers:{
 					sbe_frequency_weeks: false
 				}
@@ -430,7 +430,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:90,
 				question_id: 7.09,
-				description: 'yes',
+				description: 'Yes: at least once a week',
 				triggers:{
 					in_frequency_weeks: true,
 					in_frequency_months: true
@@ -439,7 +439,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:91,
 				question_id: 7.09,
-				description: 'no',
+				description: 'No: less than once a week',
 				triggers:{
 					in_frequency_weeks: false
 				}
@@ -804,6 +804,71 @@ Ext.define('ceda.store.AnswerStore', {
 					nonfood_culturally_sanctioned: false
 				}
 			},
+// 
+// The section below has the answers for the othe ED section
+//
+
+			{
+				id: 100,
+				question_id: 30,
+				description: 'Proceed to choose most appropriate diagnosis.',
+				triggers: {
+				}
+			},
+
+			{
+				id: 101,
+				question_id: 31,
+				description: 'Atypical Anorexia Nervosa',
+				triggers: {
+					atypicalAN: true
+				}
+			},
+			{
+				id: 102,
+				question_id: 31,
+				description: 'Subthreshold Bulimia Nervosa',
+				triggers: {
+					subthresholdBN: true
+				}
+			},
+			{
+				id: 103,
+				question_id: 31,
+				description: 'Subthreshold Binge Eating Disorder',
+				triggers: {
+					subthresholdBED: true
+				}
+			},
+			{
+				id: 104,
+				question_id: 31,
+				description: 'Purging Disorder',
+				triggers: {
+					purgingdisorder: true
+				}
+			},
+			{
+				id: 105,
+				question_id: 31,
+				description: 'Night Eating Syndrome',
+				triggers: {
+					NES: true
+				}
+			},
+			{
+				id: 106,
+				question_id: 31,
+				description: 'Other (unspecified) Eating Disorder',
+				triggers: {
+					otherED: true
+				}
+			},
+
+//
+// The section below contains the answers for the original other ED section
+// No longer used as of 8/5/13
+// 
 			{
 				id:83,
 				question_id: 21,
