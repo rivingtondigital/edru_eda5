@@ -363,12 +363,12 @@ Ext.define('ceda.store.AnswerStore', {
 			},
 // End of old binge eating section
 
-{
+			{
 				id:32,
 				question_id: 7.05,
 				description: 'yes',
 				triggers:{
-					in_behaviors: true
+					purging: true
 				}
 			},
 			{
@@ -376,7 +376,46 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.05,
 				description: 'no',
 				triggers:{
-					in_behaviors: false
+					purging: false
+				}
+			},
+			{
+				id:33.1,
+				question_id: 7.0501,
+				description: 'Yes: purging episodes at least 1x/WEEK',
+				triggers:{
+					purging1xWK: true
+				}
+			},
+			{
+				id:33.2,
+				question_id: 7.0501,
+				description: 'No: purging episodes less than 1x/WEEK',
+				triggers:{
+					purging1xWK: false
+				}
+			},
+			{
+				id:33.3,
+				question_id: 7.0502,
+				description: 'Yes: purging episodes at least 1x/MON',
+				triggers:{
+					purging1xMON: true
+				}
+			},
+			{
+				id:33.4,
+				question_id: 7.0502,
+				description: 'No: purging episodes less than 1x/MON',
+				triggers:{
+					purging1xMON: false
+				}
+			},
+			{
+				id:33.5,
+				question_id: 7.0505,
+				description: 'Proceed',
+				triggers:{
 				}
 			},
 			{
@@ -393,6 +432,45 @@ Ext.define('ceda.store.AnswerStore', {
 				description: 'no',
 				triggers:{
 					in_exercise: false
+				}
+			},
+			{
+				id:35.1,
+				question_id: 7.0601,
+				description: 'Yes: exercise episodes at least 1x/WEEK',
+				triggers:{
+					in_exercise1xWK: true
+				}
+			},
+			{
+				id:35.2,
+				question_id: 7.0601,
+				description: 'No: exercise episodes less than 1x/WEEK',
+				triggers:{
+					in_exercise1xWK: false
+				}
+			},
+			{
+				id:35.3,
+				question_id: 7.0602,
+				description: 'Yes: exercise episodes at least 1x/MON',
+				triggers:{
+					in_exercise1xMON: true
+				}
+			},
+			{
+				id:35.4,
+				question_id: 7.0602,
+				description: 'No: exercise episodes less than 1x/MON',
+				triggers:{
+					in_exercise1xMON: false
+				}
+			},
+			{
+				id:35.5,
+				question_id: 7.0605,
+				description: 'Proceed',
+				triggers:{
 				}
 			},
 			{

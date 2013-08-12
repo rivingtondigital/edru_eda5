@@ -30,7 +30,8 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><span>ID of interviewer:</span></td>',
 								'<td><input id="saveInterviewerID" name="Interview:InterviewerID" type="text"></input></td>',
 								'</tr>',
-								'</table>'
+								'</table>',
+								'<br/>'
 							].join('')
 				
 				],
@@ -193,7 +194,6 @@ Ext.define('ceda.store.QuestionStore', {
 								'<tr>',
 								'<td><span>Weight in lbs: <span></td>',
 								'<td><input type="text" size=2 id="saveRecentWeight" name="BMI:RecentWeight" onChange="calculateRecentLowBMI()"></input></td>',
-
 								'</tr><tr>',
 								'<td><span>Height in inches: <span></td>',
 								'<td><input type="text" size=2 id="saveRecentHeight" name="BMI:RecentHeight" onChange="calculateRecentLowBMI()"></input></td>',
@@ -333,7 +333,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						diagnosis: true,
 						expression: 'global.distorted_body_image || global.distorted_bi_influence || !global.understands_seriousness',
-						trigger: 'an',
+						trigger: 'an',	// Definition of an: low weight + distortedImage + bodyImageInfluence + noUnderstandingOfSeriousness
 						diagnosisname: 'Anorexia Nervosa',
 						target: 7.01
 					},
@@ -564,7 +564,6 @@ Ext.define('ceda.store.QuestionStore', {
 						[
 						'7b.34. Enter average number of subjective binge episodes per week over the last 3 months.',
 						'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
-						'***** TEXT BOX TO ALLOW DATA ENTRY *****',
 							'<br/><br/>',
 							'<table border=1 spacing=1 padding=2>',
 							'<tr>',
@@ -614,45 +613,265 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7e. Do you make yourself vomit, use laxatives, diuretics or other medications?',
+						'7e. Do you make yourself vomit, or overuse (misuse) laxatives, diuretics or other medications?',
 						'<br/>'
 					].join("<br/>"),
-					[
-						'<table>',
-						'<tr><td>Name of Laxative</td></tr>',
-						'<tr><td><input id="optionalLaxativeName" name="Laxatives:Name"></td></tr>',
-						'<tr><td>Quantity per Week</td></tr>',
-						'<tr><td><input id="optionalLaxativeName" name="Laxatives:Quantity" size="3"></td></tr>',
-						'</table>',
-						'<br/>',
-						'<table>',
-						'<tr><td>Name of Diuretics</td></tr>',
-						'<tr><td><input id="optionalDiureticsName" name="Diuretics:Name"></td></tr>',
-						'<tr><td>Quantity per Week</td></tr>',
-						'<tr><td><input id="optionalDiureticsName" name="Diuretics:Quantity" size="3"></td></tr>',
-						'</table>',
-						'<table>',
-						'<tr><td>Name of Other Medication</td></tr>',
-						'<tr><td><input id="optionalOtherMedName" name="OtherMed:Name"></td></tr>',
-						'<tr><td>Quantity per Week</td></tr>',
-						'<tr><td><input id="optionalDiureticsName" name="Diuretics:Quantity" size="3"></td></tr>',
-						'</table>'
-					].join("")
 				].join("<br/>"),
 				symptom:[
-					'Does the individual use inappropriate behaviors?',
+					'Does the individual use inappropriate (purging) behaviors?',
 					'<br/>',
 					'Indicators of misuse include taking laxatives, diuretics, or other medications (e.g., diet pills) for weight control without a prescription, using more pills than suggested, or at a higher frequency.'
 				].join("<br/>"),
 				rules:[
 					{
+						target: 7.0501,
+						expression: 'global.purging'
+					},
+					{
 						target: 7.06,
-						expression: 'true'
+						expression: '!global.purging'
 					}
 				]
 			},
 			{
+				id:7.0501,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					[
+						'7e.1. In the last week, how many times have you engaged in this type of behavior?',
+						'<br/>',
+						'Is this typical of the last 3 months?',
+						'<br/>'
+					].join("<br/>"),
+				].join("<br/>"),
+				symptom:[
+					'Does  the individual engage in inappropriate (purging) behaviors, on average, at least once a WEEK over the last 3 months?',
+					'<br/>',
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0505,						// document frequency
+						expression: 'global.purging1xWK'
+					},
+					{
+						target: 7.0502,
+						expression: '!global.purging1xWK'
+					}
+				]
+			},
+			{
+				id:7.0502,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					[
+						'7e.2. In the last month, how many times have you engaged in this type of behavior?',
+						'<br/>',
+						'Is this typical of the last 3 months?',
+						'<br/>'
+					].join("<br/>"),
+				].join("<br/>"),
+				symptom:[
+					'Has  the individual engaged in inappropriate (purging) behaviors, on average, at least once a MONTH over the last 3 months?',
+					'<br/>',
+				].join("<br/>"),
+				rules:[	
+					{
+						target: 7.0505,						// document frequency
+						expression: 'global.purging1xMON'
+					},
+					{
+						target: 7.06,
+						expression: '!global.purging1xMON'	// to exercise
+					}
+				]
+			},
+			{
+				id:7.0505,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					[
+						'7e.5. In the past week, how many times have you [made yourself vomit, or misused laxatives, diuretics or other medications',
+						'<br/>',
+						'Is this consistent with how frequently the behaviors have occurred for the past 3 months? If no, how was frequency of episodes different?',
+						'<br/>'
+					].join("<br/>"),
+					[
+						'<table>',
+						'<tr><td colspan="2">Average weekly frequency over past 3 months</td></tr>',
+						'<tr><td>Vomiting:</td><td><input id="saveVomitFrequency" name="Vomitting:Average_number_per_week" size="3"></td></tr>',
+						'<tr><td>Laxatives:</td><td><input id="saveLaxativesFrequency" name="Laxatives:Average_number_per_week" size="3"></td></tr>',
+						'<tr><td>Diuretics:</td><td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_week" size="3"></td></tr>',
+						'<tr> <td>If other method used, describe below and enter frequency per week</td> </tr>',
+						'<tr><td><input id="optionalOtherMethodName"</td><td><input id="optionalOtherMethodFrequency" name="OtherMethod:Average_number_per_week" size="3"></td></tr>',
+						'</table>',
+					].join(" ")
+				].join("<br/>"),
+				symptom:[
+					'Average number of episodes per WEEK over last 3 months. Has inappropriate behavior occurred at least once a week, on average, for the last 3 months?',
+					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 episodes/month = 0.5 episodes/week.)'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.06,	// to exercise
+						expression: 'true'
+					}
+				]	
+			},	
+// 
+// Next section evaluates exercise
+//
+			{
 				id:7.06,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					[
+						'7f. Do you exercise? What type of exercise do you do and for how long?',
+						'<br/>',
+						'Does the amount of exercise interfere with health or with fulfilling daily responsibilities?'
+					].join("<br/>"),
+				].join("<br/>"),
+				symptom:[
+					'Does the individual use exercise inappropriately (ie, exercise excessively)?',
+					'<br/>',
+					'Indicators of excessive exercise include exercising despite illness or injury, exercising to an extent that it interferes with daily responsibilities (e.g., being late for work or school), or feeling highly distressed when unable to exercise.'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0601,	//  assess frequency of exercise
+						expression: 'global.in_exercise'
+					},
+					{
+						target: 7.07,	// not exercising, but purging; determine reasons why
+						expression: 'global.purging'
+					},
+					// next branches needed to deal with NO purging, +/-AN
+					// should never get to these if purging, but included !purging below for clarity
+					{
+						diagnosis: true,
+						expression: 'global.an && !global.purging && !global.OBE_1perMON && !global.OBE_1perWK',
+						trigger: 'an-rs',
+						diagnosisname: 'Restricting Subtype',
+						target: 18
+					},	
+					{
+						diagnosis: true,
+						expression: 'global.an && !global.purging && (global.OBE_1perMON || global.OBE_1perWK)',
+						trigger: 'an-bps',
+						diagnosisname: 'Binge-Purge Subtype',
+						target: 18
+					}	
+				]
+			},
+			{
+				id:7.0601,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					[
+						'7f.1. In the last week, how many times have you engaged in this type of exercise?',
+						'<br/>',
+						'Is this typical of the last 3 months?',
+						'<br/>'
+					].join("<br/>"),
+				].join("<br/>"),
+				symptom:[
+					'Has the individual exercised inappropriately (ie, exercise excessively) at least once a week over the last 3 months?'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0605,						// document frequency
+						expression: 'global.in_exercise1xWK'
+					},
+					{
+						target: 7.0602,
+						expression: '!global.in_exercise1xWK'
+					}
+				]
+			},
+			{
+				id:7.0602,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					[
+						'7f.2. In the last month, how many times have you engaged in this type of behavior?',
+						'<br/>',
+						'Is this typical of the last 3 months?',
+						'<br/>'
+					].join("<br/>"),
+				].join("<br/>"),
+				symptom:[
+					'Has the individual exercised inappropriately, on average, at least once a MONTH over the last 3 months?',
+					'<br/>',
+				].join("<br/>"),
+				rules:[	
+					{
+						target: 7.0605,						// document frequency
+						expression: 'global.in_exercise1xMON'
+					},
+					{
+						target: 7.07,						// reasons why
+						expression: '!global.in_exercise1xMON'
+					}
+				]
+			},
+			{
+				id:7.0605,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					[
+						'7f.5. In the past week, how many times have you exercised inappropriately?',
+						'<br/>',
+						'Is this consistent with how frequently the behaviors have occurred for the past 3 months? If no, how was frequency of episodes different?',
+						'<br/>'
+					].join("<br/>"),
+					[
+						'<table>',
+						'<tr><td>Type of Exercise</td></tr>',
+						'<tr><td><input id="optionalExerciseType" name="Exercise:Type"></td></tr>',
+						'<tr><td>Duration (hours per week)</td></tr>',
+						'<tr><td><input id="optionalExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
+						'</table>'
+					].join(" ")
+				].join("<br/>"),
+				symptom:[
+					'Average number of episodes per WEEK over last 3 months.',
+					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.07,	// reasons why
+						expression: 'true'
+					}
+				]	
+			},	
+// 
+// End of exercise assessment
+
+
+
+// old exercise section follows
+			{
+				id:7.9999,
 				initial:false,
 				instrument_id:1,
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
@@ -763,6 +982,7 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+// 8/10: I am moving this to other questions. Hopefully can be eliminated.
 			{
 				id:7.09,
 				initial:false,
@@ -825,6 +1045,10 @@ Ext.define('ceda.store.QuestionStore', {
 						].join(''),
 						trigger: 'binge',
 						target: 9.1	// changed from 9 
+					},
+					{
+						expression: 'true',		// This is logically the last if-else; go to ARFID
+						target: 11
 					},
 					{
 						expression: [
@@ -1081,7 +1305,9 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				symptom:[
 					'Has severe food restriction or avoidance resulted in serious nutritional problems?',
-					'<br/>',
+					'<b>Notes:</b>',
+					'Sufficient information may already be available to answer this without additional questions. ',
+					' ',
 					'Restriction that occurs only in the context of a binge eating episode does not satisfy this criterion.' 
 				].join("<br/>"),
 				rules:[
