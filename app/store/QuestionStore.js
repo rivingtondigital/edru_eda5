@@ -22,16 +22,16 @@ Ext.define('ceda.store.QuestionStore', {
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
 								'<td><span>Date of interview: <span></td>',
-								'<td><input id="saveInterviewDate" name="Interview:Date" type="text"></input></td>',
+								'<td><input id="saveInterviewDate" name="Interview:Date:date" type="text"></input></td>',
 								'</tr><tr>',
 								'<td><span>ID of person interviewed: <span></td>',
-								'<td><input id="saveSubjectID" name="Interview:SubjectID" type="text"></input></td>',
+								'<td><input id="saveSubjectID" name="Interview:SubjectID:number" type="text"></input></td>',
 								'</tr><tr>',
 								'<td><span>Subject&#39s Age: <span></td>',
-								'<td><input id="saveSubjectAge" name="Interview:SubjectAge" type="text"></input></td>',
+								'<td><input id="saveSubjectAge" name="Interview:SubjectAge:number" type="text"></input></td>',
 								'</tr><tr>',
 								'<td><span>ID of interviewer:</span></td>',
-								'<td><input id="saveInterviewerID" name="Interview:InterviewerID" type="text"></input></td>',
+								'<td><input id="saveInterviewerID" name="Interview:InterviewerID:number" type="text"></input></td>',
 								'</tr>',
 								'</table>',
 								'<br/>'
@@ -176,7 +176,7 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><input type="text" size=2 id="saveRecentWeight" name="BMI:RecentWeight" onChange="calculateRecentLowBMI()"></input></td>',
 								'</tr><tr>',
 								'<td><span>Height in inches: <span></td>',
-								'<td><input type="text" size=2 id="saveRecentHeight" name="BMI:RecentHeight" onChange="calculateRecentLowBMI()"></input></td>',
+								'<td><input type="text" size=2 id="saveHeight" name="BMI:RecentHeight" onChange="calculateRecentLowBMI()"></input></td>',
 								'</tr><tr>',
 								'<td><span>Lowest BMI (kg/m2): </span></td>',
 								'<td><input type="text" size=2 disabled="true" name="BMI:RecentLowBMI" id="saveRecentLowBMI"></input></td>',
@@ -563,18 +563,16 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-						[
-						'7b.34. Enter average number of subjective binge episodes per week over the last 3 months.',
-						'<br/>',
-						'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
-							'<br/><br/>',
-							'<table border=1 spacing=1 padding=2>',
-							'<tr>',
-							'<td><span># of SBEs per week: <span></td>',
-							'<td><input id="saveSBEfreq" name="BingeEating:SBEs" type="text"></input></td>',
-							'</tr>',
-							'</table>'
-					]		
+					'7b.34. Enter average number of subjective binge episodes per week over the last 3 months.',
+					'<br/>',
+					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
+					'<br/><br/>',
+					'<table border=1 spacing=1 padding=2>',
+					'<tr>',
+					'<td><span># of SBEs per week: <span></td>',
+					'<td><input id="saveSBEfreq" name="BingeEating:SBEs" type="text"></input></td>',
+					'</tr>',
+					'</table>'
 				].join("<br/>"),
 				symptom:[
 					'Enter weekly frequency of subjective binge episodes (SBEs).'
@@ -691,11 +689,15 @@ Ext.define('ceda.store.QuestionStore', {
 					[
 						'<table>',
 						'<tr><td colspan="2">Average weekly frequency over past 3 months</td></tr>',
-						'<tr><td>Vomiting:</td><td><input id="saveVomitFrequency" name="Vomitting:Average_number_per_week" size="3"></td></tr>',
-						'<tr><td>Laxatives:</td><td><input id="saveLaxativesFrequency" name="Laxatives:Average_number_per_week" size="3"></td></tr>',
-						'<tr><td>Diuretics:</td><td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_week" size="3"></td></tr>',
-						'<tr> <td>If other method used, describe below and enter frequency per week</td> </tr>',
-						'<tr><td><input id="optionalOtherMethodName" name="OtherMethod:Name" size="3"</td><td><input id="optionalOtherMethodFrequency" name="OtherMethod:Average_number_per_week" size="3"></td></tr>',
+						'<tr><td>Vomiting:</td> <td><input id="saveVomitFrequency" name="Vomitting:Average_number_per_week" size="3"></td></tr>',
+						'<tr><td>Laxatives:</td> <td><input id="saveLaxativesFrequency" name="Laxatives:Average_number_per_week" size="3"></td></tr>',
+						'<tr><td>Diuretics:</td> <td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_week" size="3"></td></tr>',
+						'<tr>',
+						'<td>If other method used, describe below and enter frequency per week</td><td>&nbsp;</td>',
+						'<tr>',
+						'<td><input id="optionalOtherMethodName" name="OtherMethod:Name" size="35" placeholder="Description"></input></td>',
+						'<td><input id="optionalOtherMethodFrequency" name="OtherMethod:Average_number_per_week" size="3"></input></td>',
+						'</tr>',
 //						'<tr><td><input id="optionalExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
 						'</table>',
 					].join(" ")
@@ -1811,16 +1813,13 @@ Ext.define('ceda.store.QuestionStore', {
 					target: 'finish'
 				}
 				]
-			},			
-			
+			},				
 		]
 	}
 });
 
 
 //Utility stuff
-
-
 var calculateBmi  = new Function(
 				['var weight = parseFloat(document.getElementById("saveWeight").value);',
 				'var height = parseFloat(document.getElementById("saveHeight").value); ',
@@ -1830,7 +1829,7 @@ var calculateBmi  = new Function(
 
 var calculateRecentLowBMI  = new Function(
 				['var weight = parseFloat(document.getElementById("saveRecentWeight").value);',
-				'var height = parseFloat(document.getElementById("saveRecentHeight").value); ',
+				'var height = parseFloat(document.getElementById("saveHeight").value); ',
 				'console.debug("this is called");',
 				'document.getElementById("saveRecentLowBMI").value = (weight/(height*height)) * 703; '].join("\n")
 			);
