@@ -46,7 +46,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:4,
 				question_id: 2,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					eatingdisturbance: true
 				}
@@ -54,7 +54,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:5,
 				question_id: 2,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					eatingdisturbance: false
 				}
@@ -78,7 +78,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:8,
 				question_id: 4,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					lowweight: true
 				}
@@ -86,7 +86,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:9,
 				question_id: 4,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					lowweight: false
 				}
@@ -117,7 +117,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:11,
 				question_id: 5.1,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					fearofgain: true
 				}
@@ -125,7 +125,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:12,
 				question_id: 5.1,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					fearofgain: false
 				}
@@ -133,7 +133,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:13,
 				question_id: 5.2,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					interfering: true
 				}
@@ -141,7 +141,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:14,
 				question_id: 5.2,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					interfering: false
 				}
@@ -149,7 +149,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:15,
 				question_id: 6.1,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					distorted_body_image: true
 				}
@@ -157,7 +157,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:16,
 				question_id: 6.1,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					distorted_body_image: false
 				}
@@ -165,7 +165,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:17,
 				question_id: 6.2,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					distorted_bi_influence: true
 				}
@@ -173,7 +173,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:18,
 				question_id: 6.2,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					distorted_bi_influence: false
 				}
@@ -181,7 +181,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:19,
 				question_id: 6.3,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					understands_seriousness: true
 				}
@@ -189,7 +189,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:20,
 				question_id: 6.3,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					understands_seriousness: false
 				}
@@ -197,7 +197,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:21,
 				question_id: 7.01,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					lacks_control: true
 				}
@@ -205,7 +205,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:22,
 				question_id: 7.01,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					lacks_control: false
 				}
@@ -321,7 +321,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:266,
 				question_id: 7.0213,
-				description: 'Done',
+				description: 'Proceed',
 				triggers:{
 
 				}
@@ -340,7 +340,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:28,
 				question_id: 7.03,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					binge_frequency_weeks: false
 				}
@@ -356,7 +356,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:31,
 				question_id: 7.04,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					OBE_1perMON: false
 				}
@@ -366,7 +366,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:32,
 				question_id: 7.05,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					purging: true
 				}
@@ -374,7 +374,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:33,
 				question_id: 7.05,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					purging: false
 				}
@@ -416,12 +416,13 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.0505,
 				description: 'Proceed',
 				triggers:{
+						
 				}
 			},
 			{
 				id:34,
 				question_id: 7.06,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					in_exercise: true
 				}
@@ -429,7 +430,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35,
 				question_id: 7.06,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					in_exercise: false
 				}
@@ -476,7 +477,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:36,
 				question_id: 7.07,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					in_compensate: true
 				}
@@ -484,7 +485,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:37,
 				question_id: 7.07,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					in_compensate: false
 				}
@@ -492,7 +493,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:38,
 				question_id: 7.08,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					in_weightloss: true
 				}
@@ -500,7 +501,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:39,
 				question_id: 7.08,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					in_weightloss: false
 				}
@@ -525,7 +526,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:92,
 				question_id:7.10,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					in_frequency_months: true
 				}
@@ -533,7 +534,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:93,
 				question_id:7.10,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					in_frequency_months: false
 				}
@@ -541,7 +542,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:40,
 				question_id: 8,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					bodyweight_selfworth: true
 				}
@@ -549,7 +550,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:41,
 				question_id: 8,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					bodyweight_selfworth: false
 				}
@@ -565,7 +566,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:43,
 				question_id: 9.1,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					binge_rapid: true
 				}
@@ -573,7 +574,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:44,
 				question_id: 9.1,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					binge_rapid: false
 				}
@@ -581,7 +582,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:45,
 				question_id: 9.2,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					binge_full: true
 				}
@@ -589,7 +590,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:46,
 				question_id: 9.2,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					binge_full: false
 				}
@@ -597,7 +598,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:47,
 				question_id: 9.3,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					binge_no_hunger: true
 				}
@@ -605,7 +606,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:48,
 				question_id: 9.3,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					binge_no_hunger: false
 				}
@@ -613,7 +614,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:49,
 				question_id: 9.4,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					binge_shame: true
 				}
@@ -621,7 +622,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:50,
 				question_id: 9.4,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					binge_shame: false
 				}
@@ -629,7 +630,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:51,
 				question_id: 9.5,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					binge_sad: true
 				}
@@ -637,7 +638,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:52,
 				question_id: 9.5,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					binge_sad: false
 				}
@@ -645,7 +646,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:53,
 				question_id: 10,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					binge_distress: true
 				}
@@ -653,7 +654,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:54,
 				question_id: 10,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					binge_distress: false
 				}
@@ -661,7 +662,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:55,
 				question_id: 11,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					avoidant_nutritional_problems: true
 				}
@@ -669,7 +670,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:56,
 				question_id: 11,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					avoidant_nutritional_problems: false
 				}
@@ -677,7 +678,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:57,
 				question_id: 11.1,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					avoidant_weightloss: true
 				}
@@ -685,7 +686,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:58,
 				question_id: 11.1,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					avoidant_weightloss: false
 				}
@@ -693,7 +694,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:59,
 				question_id: 11.2,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					avoidant_nutri_def: true
 				}
@@ -701,7 +702,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:60,
 				question_id: 11.2,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					avoidant_nutri_def: false
 				}
@@ -709,7 +710,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:61,
 				question_id: 11.3,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					avoidant_nutri_suppliment: true
 				}
@@ -717,7 +718,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:62,
 				question_id: 11.3,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					avoidant_nutri_suppliment: false
 				}
@@ -725,7 +726,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:63,
 				question_id: 11.4,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					avoidant_psychosocial_interference: true
 				}
@@ -733,7 +734,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:64,
 				question_id: 11.4,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					avoidant_psychosocial_interference: false
 				}
@@ -741,7 +742,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:65,
 				question_id: 12,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					avoidant_alt_explanation: true
 				}
@@ -749,7 +750,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:66,
 				question_id: 12,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					avoidant_alt_explanation: false
 				}
@@ -757,7 +758,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:67,
 				question_id: 13,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					avoidant_alt_condition: true
 				}
@@ -765,7 +766,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:68,
 				question_id: 13,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					avoidant_alt_condition: false
 				}
@@ -773,7 +774,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:69,
 				question_id: 14,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					avoidant_independent_clinical: true
 				}
@@ -781,7 +782,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:70,
 				question_id: 14,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					avoidant_independent_clinical: false
 				}
@@ -789,7 +790,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:71,
 				question_id: 15,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					regurge_repeated: true
 				}
@@ -797,7 +798,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:72,
 				question_id: 15,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					regurge_repeated: false
 				}
@@ -805,7 +806,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:73,
 				question_id: 16,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					regurge_alt_explanation: true
 				}
@@ -813,7 +814,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:74,
 				question_id: 16,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					regurge_alt_explanation: false
 				}
@@ -821,7 +822,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:75,
 				question_id: 17,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					regurge_independent_clinical: true
 				}
@@ -829,7 +830,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:76,
 				question_id: 17,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					regurge_independent_clinical: false
 				}
@@ -837,7 +838,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:77,
 				question_id: 18,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					nonfood_age_appropriate: true
 				}
@@ -845,7 +846,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:78,
 				question_id: 18,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					nonfood_age_appropriate: false
 				}
@@ -853,7 +854,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:79,
 				question_id: 19,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					nonfood_persistent: true
 				}
@@ -861,7 +862,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:80,
 				question_id: 19,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					nonfood_persistent: false
 				}
@@ -869,7 +870,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:81,
 				question_id: 20,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					nonfood_culturally_sanctioned: true
 				}
@@ -877,7 +878,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:82,
 				question_id: 20,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					nonfood_culturally_sanctioned: false
 				}
@@ -950,7 +951,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:83,
 				question_id: 21,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					nonfood_needs_clinical: true
 				}
@@ -958,7 +959,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:84,
 				question_id: 21,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					nonfood_needs_clinical: false
 				}

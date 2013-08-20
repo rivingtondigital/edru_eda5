@@ -7,6 +7,9 @@ Ext.define('ceda.store.QuestionStore', {
 		storeId: 'questionStore',
 		model: 'ceda.model.Question',
 		data: [
+//	*************************************
+//	First section acquires date, ID, Age
+//	*************************************
 			{	id: 1,
 				initial: true,
 				instrument_id: 1,
@@ -43,6 +46,9 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+//	****************************************************************************
+//	Section to assess whether there is an eating disturbance
+//	****************************************************************************
 			{	id: 2,
 				initial: false,
 				instrument_id: 1,
@@ -79,9 +85,9 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
-//
-// Calculation of BMI. Was originally question 1
-//
+//	****************************************************************************
+//	Calculation of BMI, and assessment of current weight status.
+//	****************************************************************************
 			{	id: 3.01,
 				initial: false,
 				instrument_id: 1,
@@ -119,44 +125,18 @@ Ext.define('ceda.store.QuestionStore', {
 				].join('<br>'),
 				rules: [
 					{
-						target: 5.1,
+						target: 5.1,	// check for other sx of AN
 						expression: 'global.underweight'
 					},
 					{
-						target: 4.06,
+						target: 4.06,	// if normal or over now, check last 3m
 						expression: 'global.normalweight || global.overweight'
 					}
 				]
 			},
-//
-// This question is now skipped
-//
-			{
-				id:4,
-				initial: false,
-				instrument_id: 1,
-				sectionlabel: 'Anorexia Nervosa',
-				shortname: 'low weight',
-				interviewprobe: [
-						'4. Are you or others been concerned that your current weight is significantly low?'
-						].join("<br>"),
-
-				symptom: 'Is individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)? For adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
-				rules: [
-					{
-						target: 5.1,
-						expression: 'global.lowweight'
-					},
-					{
-						target: 4.06,
-						expression: 'global.lowweight'
-					}
-					
-				]
-			},
-// 
-// Next 2 questions deal with recent low weight
-// 
+//	****************************************************************************	 
+// Next 2 questions deal with RECENT low weight
+//	****************************************************************************
 			{
 				id:4.06,
 				initial: false,
@@ -170,11 +150,11 @@ Ext.define('ceda.store.QuestionStore', {
 				symptom: 'In the last 3 months, was individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)? For adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
 				rules: [
 					{
-						target: 4.07,
+						target: 4.07,	// get low weight
 						expression: 'global.recentlowweight'
 					},
 					{
-						target: 7.01,
+						target: 7.01,	// not low now or recently: not AN
 						expression: '!global.recentlowweight'
 					}
 					
@@ -209,14 +189,18 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 5.1,
+						target: 5.1,	// assess other sx of AN
 						expression: true
 					}
 				]
 			},
-// 
+// ****************************************************************************
 // End of 2 questions dealing with recent low weight
-// 
+// ****************************************************************************
+//
+//	****************************************************************************
+//	Assess fear of weight gain
+//	****************************************************************************
 			{
 				id:5.1,
 				initial: false,
@@ -267,11 +251,15 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: 'global.fearofgain || global.interfering'
 					},
 					{
-						target: 7.01,
+						target: 7.01,	//	If no fear of weight gain, skip out of AN section
 						expression: 'true'
 					}
 				]
 			},
+//	****************************************************************************
+//	Assess body image disturbance and concern about being low in weight
+//	At end of this section, assess criteria for AN
+//	****************************************************************************
 			{
 				id:6.1,
 				initial:false,
@@ -331,7 +319,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br>"),
 				rules:[
 					{
-						diagnosis: true,
+						diagnosis: true,	// Has AN. Note that only got here after determining weight is or has been recently low
 						expression: 'global.distorted_body_image || global.distorted_bi_influence || !global.understands_seriousness',
 						trigger: 'an',	// Definition of an: low weight + distortedImage + bodyImageInfluence + noUnderstandingOfSeriousness
 						diagnosisname: 'Anorexia Nervosa',
@@ -343,6 +331,14 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+//	****************************************************************************
+//	Assessment of Binge Eating
+//	****************************************************************************
+//
+//
+//	****************************************************************************
+//	Assessment of loss of control
+//	****************************************************************************
 			{
 				id:7.01,
 				initial:false,
@@ -368,6 +364,9 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+//	****************************************************************************
+//	OBE assessment
+//	****************************************************************************
 			{
 				id:7.02,
 				initial:false,
@@ -475,7 +474,9 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
-// Next section evaluates frequency of SBEs
+//	****************************************************************************
+//	SBE assessment
+//	****************************************************************************
 			{
 				id:7.0210,
 				initial:false,
@@ -537,6 +538,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'7b.33. How many times in the last month have you had an eating episode when you ate a small or normal amount of food but felt a lack of control?',
+					'<br/>',
 					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
 					'<br/>',
 				].join("<br/>"),
@@ -563,6 +565,7 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 						[
 						'7b.34. Enter average number of subjective binge episodes per week over the last 3 months.',
+						'<br/>',
 						'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
 							'<br/><br/>',
 							'<table border=1 spacing=1 padding=2>',
@@ -584,27 +587,10 @@ Ext.define('ceda.store.QuestionStore', {
 				]
 			},
 // End of section evaluating SBEs
-// Some old stuff follows	
-			{
-				id:7.04,
-				initial:false,
-				instrument_id:1,
-				sectionlabel:'Binge Eating & Compensatory Behaviors',
-				shortname:'none',
-				interviewprobe:[
-					'7d. [Use information from 7c. Ask additional questions to assess frequency as needed.]'
-				].join("<br/>"),
-				symptom:[
-					'Has binge eating recurred, at least once a month, on average, for the last 3 months?'
-				].join("<br/>"),
-				rules:[
-					{
-						target: 7.05,
-						expression: 'true'
-					}
-				]
-			},
-// Next section evaulates purging
+//
+//	****************************************************************************
+//	Next section evaulates purging
+//	****************************************************************************
 			{
 				id:7.05,
 				initial:false,
@@ -629,7 +615,7 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						target: 7.06,
-						expression: '!global.purging'
+						expression: '!global.purging'	// to exercise
 					}
 				]
 			},
@@ -699,10 +685,8 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7e.5. In the past week, how many times have you [made yourself vomit, or misused laxatives, diuretics or other medications',
+						'7e.5. Can you estimate how many times per week over the last 3 months, on average, you have made yourself vomit, or misused laxatives, diuretics or other medications?',
 						'<br/>',
-						'Is this consistent with how frequently the behaviors have occurred for the past 3 months? If no, how was frequency of episodes different?',
-						'<br/>'
 					].join("<br/>"),
 					[
 						'<table>',
@@ -711,7 +695,8 @@ Ext.define('ceda.store.QuestionStore', {
 						'<tr><td>Laxatives:</td><td><input id="saveLaxativesFrequency" name="Laxatives:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Diuretics:</td><td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_week" size="3"></td></tr>',
 						'<tr> <td>If other method used, describe below and enter frequency per week</td> </tr>',
-						'<tr><td><input id="optionalOtherMethodName"</td><td><input id="optionalOtherMethodFrequency" name="OtherMethod:Average_number_per_week" size="3"></td></tr>',
+						'<tr><td><input id="optionalOtherMethodName" name="OtherMethod:Name" size="3"</td><td><input id="optionalOtherMethodFrequency" name="OtherMethod:Average_number_per_week" size="3"></td></tr>',
+//						'<tr><td><input id="optionalExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
 						'</table>',
 					].join(" ")
 				].join("<br/>"),
@@ -722,13 +707,13 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 7.06,	// to exercise
-						expression: 'true'
+						expression: true
 					}
 				]	
 			},	
-// 
-// Next section evaluates exercise
-//
+//	****************************************************************************
+//	Next section evaluates exercise
+//	****************************************************************************
 			{
 				id:7.06,
 				initial:false,
@@ -771,7 +756,8 @@ Ext.define('ceda.store.QuestionStore', {
 						trigger: 'an-bps',
 						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
-					}	
+					},
+					// 8/13: Cannot make other dx assessments until assess reasons for purging or exercise
 				]
 			},
 			{
@@ -866,84 +852,10 @@ Ext.define('ceda.store.QuestionStore', {
 			},	
 // 
 // End of exercise assessment
-
-
-
-// old exercise section follows
-			{
-				id:7.9999,
-				initial:false,
-				instrument_id:1,
-				sectionlabel:'Binge Eating & Compensatory Behaviors',
-				shortname:'none',
-				interviewprobe:[
-					[
-						'7f. Do you exercise? What type of exercise do you do and for how long?',
-						'<br/>',
-						'Does the amount of exercise interfere with health or with fulfilling daily responsibilities?'
-					].join("<br/>"),
-					[
-						'<table>',
-						'<tr><td>Type of Exercise</td></tr>',
-						'<tr><td><input id="optionalExerciseType" name="Exercise:Type"></td></tr>',
-						'<tr><td>Duration (hours per week)</td></tr>',
-						'<tr><td><input id="optionalExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
-						'</table>'
-					].join(" ")
-				].join("<br/>"),
-				symptom:[
-					'Does the individual use exercise inappropriately (ie, exercise excessively)?',
-					'<br/>',
-					'Indicators of excessive exercise include exercising despite illness or injury, exercising to an extent that it interferes with daily responsibilities (e.g., being late for work or school), or feeling highly distressed when unable to exercise.',
-					'<br/>'
-				].join("<br/>"),
-				rules:[
-					{
-						target: 7.07,
-						expression: 'global.in_behaviors || global.in_exercise'
-					},
-					{
-						diagnosis: true,
-						expression: '(global.an) && (!global.OBE_1perMON && !global.in_frequency_months)',
-						trigger: 'an-rs',
-						diagnosisname: 'Restricting Subtype',
-						target: 18
-					},
-					{
-						diagnosis: true,
-						expression: '(global.an) && (global.OBE_1perMON || global.in_frequency_months)',
-						trigger: 'an-bps',
-						diagnosisname: 'Binge-Purge Subtype',
-						target: 18
-					},
-					{
-						expression: [
-							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
-							'(global.in_behavior || global.in_excercise) && ',
-							'(global.in_compensate && in_frequency_weeks)'
-						].join(''),
-						target: 8,
-						trigger: 'bn'
-					},
-					{
-						expression: [
-							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
-							'(! global.in_behavior && !global.in_exercise)'	
-						].join(''),
-						trigger: 'binge',
-						target: 9.1 // changed from 9
-					},
-					{
-						expression: [
-							'(!global.an) && (!global.lacks_control) && ',
-							'(!global.OBE_1perMON && !global.obe)' // !s added by BTW 6/28/13
-							].join(''),
-						target: 11, 
-						trigger: 'arfid'
-					}
-
-				]
-			},
+//	****************************************************************************
+//	Assessment of reasons for purging or exercise: required for BN
+//	After next 2 questions, make a lot of decisions
+//	****************************************************************************
 			{
 				id:7.07,
 				initial:false,
@@ -976,13 +888,44 @@ Ext.define('ceda.store.QuestionStore', {
 					'Is the motivation for inappropriate behaviors to control weight or prevent weight gain?'
 				].join("<br/>"),
 				rules:[
+					{	// I do not think this will ever be hit, 
+						diagnosis: true,
+						expression: '(global.an) && (!global.OBE_1perMON && !global.in_frequency_months)',
+						trigger: 'an-rs',
+						diagnosisname: 'Restricting Subtype',
+						target: 18
+					},
+					{	// or this--but don't think it will hurt!
+						diagnosis: true,
+						expression: '(global.an) && (global.OBE_1perMON || global.purging1XMON)',
+						trigger: 'an-bps',
+						diagnosisname: 'Binge-Purge Subtype',
+						target: 18
+					},
+					{	// Assess whether criteria for BN MIGHT be met
+						expression: [
+							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
+							'(global.in_behaviors || global.in_exercise) && ',
+							'(global.in_compensate || global.in_weightloss)'
+						].join(''),
+						target: 8,
+						trigger: 'bn'
+					},
+					{	//	Determine whether criteria for BED MIGHT be met
+						expression: [
+							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
+							'(!global.in_behaviors && !global.in_exercise)'	
+						].join(''),
+						trigger: 'binge',
+						target: 9.1	// changed from 9 
+					},
 					{
-						target: 7.09,
-						expression: 'true'
+						expression: 'true',		// This is logically the last if-else; go to ARFID
+						target: 11
 					}
 				]
 			},
-// 8/10: I am moving this to other questions. Hopefully can be eliminated.
+// 8/14: I have moved this to other questions, and logic is now in 7.08. Should never be hit. Hopefully can be eliminated.
 			{
 				id:7.09,
 				initial:false,
@@ -1114,6 +1057,10 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+//	****************************************************************************
+//	Assessment of reasons for purging or exercise: required for BN
+//	****************************************************************************
+			
 			{
 				id:8,
 				initial:false,
@@ -1171,7 +1118,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating Disorder',
 				shortname:'none',
 				interviewprobe:[
-					'Keeping in mind the type of episode you just described, when you ate a large amount of food and felt that loss of control…',
+					'Keeping in mind the type of episode you described just a moment ago, when you ate a large amount of food and felt that loss of control…',
 					'<br/>',
 					'9a. …did you eat faster than usual?'
 				].join("<br/>"),
