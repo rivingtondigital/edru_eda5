@@ -84,7 +84,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		
 		if(problems.invalids.length > 0){
 			input = problems.invalids[0].value;
-			message = input + ' is not a valid ' + problems.invalids[0].name.split(':')[2]
+			message = input + ' is not a valid ' + problems.invalids[0].name.split(':')[2];
 			alert(message);
 			return;
 		}

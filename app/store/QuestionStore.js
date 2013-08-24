@@ -25,13 +25,13 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><input id="saveInterviewDate" name="Interview:Date:date" type="text"></input></td>',
 								'</tr><tr>',
 								'<td><span>ID of person interviewed: <span></td>',
-								'<td><input id="saveSubjectID" name="Interview:SubjectID:number" type="text"></input></td>',
+								'<td><input id="saveSubjectID" name="Interview:SubjectID" type="text"></input></td>',
 								'</tr><tr>',
 								'<td><span>Subject&#39s Age: <span></td>',
 								'<td><input id="saveSubjectAge" name="Interview:SubjectAge:number" type="text"></input></td>',
 								'</tr><tr>',
 								'<td><span>ID of interviewer:</span></td>',
-								'<td><input id="saveInterviewerID" name="Interview:InterviewerID:number" type="text"></input></td>',
+								'<td><input id="saveInterviewerID" name="Interview:InterviewerID" type="text"></input></td>',
 								'</tr>',
 								'</table>',
 								'<br/>'
@@ -740,10 +740,18 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: 'global.in_exercise'
 					},
 					{
-						target: 7.07,	// not exercising, but purging; determine reasons why
-						expression: 'global.purging'
+						target: 9.1,	// not purging, not exercising, and not an, but OBE>1x/wk-->assess for BED
+						expression: '!global.purging && !global.in_exercise && !global.an && global.OBE_1perWK'
 					},
-					// next branches needed to deal with NO purging, +/-AN
+					{
+						target: 11,	// not purging, not exercising, and not an and not OBE>1x/wk-->assess for ARFID
+						expression: '!global.purging && !global.in_exercise && !global.an && !global.OBE_1perWK'
+					},
+					{
+						target: 7.07,	// not exercising, but purging; determine reasons why
+						expression: 'global.purging && !global.in_exercise'
+					},
+					// next branches needed to deal with NO purging, +AN
 					// should never get to these if purging, but included !purging below for clarity
 					{
 						diagnosis: true,
@@ -890,16 +898,24 @@ Ext.define('ceda.store.QuestionStore', {
 					'Is the motivation for inappropriate behaviors to control weight or prevent weight gain?'
 				].join("<br/>"),
 				rules:[
-					{	// I do not think this will ever be hit, 
+					{	
 						diagnosis: true,
-						expression: '(global.an) && (!global.OBE_1perMON && !global.in_frequency_months)',
+						expression: [
+							'(global.an) && ',
+							'( !(global.OBE_1perMON) && ',
+							'!(global.purging1xMON && (global.in_compensate || global.in_weightloss)) )'
+						].join(''),
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
 						target: 18
 					},
-					{	// or this--but don't think it will hurt!
+					{	
 						diagnosis: true,
-						expression: '(global.an) && (global.OBE_1perMON || global.purging1XMON)',
+						expression: [
+							'(global.an) && ',
+							'( (global.OBE_1perMON) || ',
+							'(global.purging1xMON && (global.in_compensate || global.in_weightloss)) )'
+						].join(''),
 						trigger: 'an-bps',
 						diagnosisname: 'Binge-Purge Subtype',
 						target: 18
@@ -1113,6 +1129,10 @@ Ext.define('ceda.store.QuestionStore', {
 				]
 			},
 // End of skipped over
+
+//	****************************************************************************
+//	Assessment of binge eating disoder
+//	****************************************************************************
 			{
 				id:9.1,
 				initial:false,
@@ -1243,6 +1263,10 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+//	****************************************************************************
+//	Assessment of ARFID
+//	****************************************************************************
+
 			{
 				id:11,
 				initial:false,

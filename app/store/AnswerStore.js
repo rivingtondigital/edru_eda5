@@ -291,7 +291,8 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.0211,
 				description: 'Yes: at least 1 SBE/week, on average',
 				triggers:{
-					sbe_frequency_weeks: true
+					sbe_frequency_weeks: true,
+					sbe_frequency_months: true
 				}
 			},	
 			{
@@ -384,7 +385,8 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.0501,
 				description: 'Yes: purging episodes at least 1x/WEEK',
 				triggers:{
-					purging1xWK: true
+					purging1xWK: true,
+					purging1xMON: true
 				}
 			},
 			{
@@ -440,7 +442,8 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.0601,
 				description: 'Yes: exercise episodes at least 1x/WEEK',
 				triggers:{
-					in_exercise1xWK: true
+					in_exercise1xWK: true,
+					in_exercise1xMON: true
 				}
 			},
 			{
