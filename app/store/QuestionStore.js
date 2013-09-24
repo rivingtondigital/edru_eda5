@@ -135,7 +135,7 @@ Ext.define('ceda.store.QuestionStore', {
 				]
 			},
 //	****************************************************************************	 
-// Next 2 questions deal with RECENT low weight
+// Next question deals with RECENT low weight
 //	****************************************************************************
 			{
 				id:4.06,
@@ -144,31 +144,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'recent low weight',
 				interviewprobe: [
-						'4.06 What was your lowest weight in the last three months?'
-					].join("<br>"),
-
-				symptom: 'In the last 3 months, was individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)? For adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
-				rules: [
-					{
-						target: 4.07,	// get low weight
-						expression: 'global.recentlowweight'
-					},
-					{
-						target: 7.01,	// not low now or recently: not AN
-						expression: '!global.recentlowweight'
-					}
-					
-				]
-			},
-			{
-				id:4.07,
-				initial:false,
-				instrument_id:1,
-				sectionlabel:'Recent Low Weight',
-				shortname:'none',
-				interviewprobe:[
-						[	
-							'4.07. Enter height and lowest weight in the last 3 months.',
+						'4.06 What was your lowest weight in the last three months? [Enter below.]',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
@@ -182,22 +158,24 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><input type="text" size=2 disabled="true" name="BMI:RecentLowBMI" id="saveRecentLowBMI"></input></td>',
 								'</tr>',
 								'</table>'
-					].join('')
-				],
-				symptom:[
-					'Enter height and lowest weight in the last 3 months.'
-				].join("<br/>"),
-				rules:[
+					].join(''),
+				symptom: [
+					'In the last 3 months, was individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)?',
+					' ',
+					'Recall that, for adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
+				].join("<br>"),
+				rules: [
 					{
-						target: 5.1,	// assess other sx of AN
-						expression: true
+						target: 5.1,	// need to assess other sx of AN
+						expression: 'global.recentlowweight'
+					},
+					{
+						target: 7.01,	// not low now or recently: not AN
+						expression: '!global.recentlowweight'
 					}
+					
 				]
 			},
-// ****************************************************************************
-// End of 2 questions dealing with recent low weight
-// ****************************************************************************
-//
 //	****************************************************************************
 //	Assess fear of weight gain
 //	****************************************************************************
@@ -257,8 +235,8 @@ Ext.define('ceda.store.QuestionStore', {
 				]
 			},
 //	****************************************************************************
-//	Assess body image disturbance and concern about being low in weight
-//	At end of this section, assess criteria for AN
+//	Assess body image disturbance and concern about being low in weight.
+//	At end of this section, assess criteria for AN.
 //	****************************************************************************
 			{
 				id:6.1,
@@ -698,7 +676,6 @@ Ext.define('ceda.store.QuestionStore', {
 						'<td><input id="optionalOtherMethodName" name="OtherMethod:Name" size="35" placeholder="Description"></input></td>',
 						'<td><input id="optionalOtherMethodFrequency" name="OtherMethod:Average_number_per_week" size="3"></input></td>',
 						'</tr>',
-//						'<tr><td><input id="optionalExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
 						'</table>',
 					].join(" ")
 				].join("<br/>"),
@@ -725,9 +702,10 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					[
 						'7f. Do you exercise? What type of exercise do you do and for how long?',
-						'<br/>',
-						'Does the amount of exercise interfere with health or with fulfilling daily responsibilities?'
 					].join("<br/>"),
+					[
+						'Does the amount of exercise interfere with health or with fulfilling daily responsibilities?'
+					].join(" ")
 				].join("<br/>"),
 				symptom:[
 					'Does the individual use exercise inappropriately (ie, exercise excessively)?',
@@ -785,7 +763,7 @@ Ext.define('ceda.store.QuestionStore', {
 					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
-					'Has the individual exercised inappropriately (ie, exercise excessively) at least once a week over the last 3 months?'
+					'Has the individual exercised inappropriately (ie, exercised excessively), on average, at least once a week over the last 3 months?'
 				].join("<br/>"),
 				rules:[
 					{
@@ -813,7 +791,7 @@ Ext.define('ceda.store.QuestionStore', {
 					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
-					'Has the individual exercised inappropriately, on average, at least once a MONTH over the last 3 months?',
+					'Has the individual exercised inappropriately (ie, exercised excessively), on average, at least once a MONTH over the last 3 months?',
 					'<br/>',
 				].join("<br/>"),
 				rules:[	
@@ -840,18 +818,19 @@ Ext.define('ceda.store.QuestionStore', {
 						'Is this consistent with how frequently the behaviors have occurred for the past 3 months? If no, how was frequency of episodes different?',
 						'<br/>'
 					].join("<br/>"),
-					[
-						'<table>',
-						'<tr><td>Type of Exercise</td></tr>',
-						'<tr><td><input id="optionalExerciseType" name="Exercise:Type"></td></tr>',
-						'<tr><td>Duration (hours per week)</td></tr>',
-						'<tr><td><input id="optionalExerciseDuration" name="Exercise:Duration" size="3"></td></tr>',
-						'</table>'
-					].join(" ")
 				].join("<br/>"),
 				symptom:[
+					[
 					'Average number of episodes per WEEK over last 3 months.',
-					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)'
+					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
+					'<br/>'
+					].join("<br/>"),
+					[
+						'<table>',
+						'<tr><td>Type of Exercise: </td> <td><input id="saveExerciseType" name="Exercise:Type"></td></tr>',
+						'<tr><td>Episode frequency per week: </td> <td><input id="saveExerciseFrequency" name="Exercise:Average_number_episodes_per_week" size="3"></td></tr>',
+						'</table>'
+					].join(" ")
 				].join("<br/>"),
 				rules:[
 					{
@@ -1253,9 +1232,9 @@ Ext.define('ceda.store.QuestionStore', {
 					{	
 						diagnosis: true,
 						expression: 'global.binge_distress',
-						trigger: 'bn',
+						trigger: 'bed',	// Sept 6: changed from bn. Hope that is correct!
 						diagnosisname: 'Binge Eating Disorder',
-						target: 11
+						target: 11	// Goes to ARFID; seems strange, but that's how DSM-5 is currently. BED and ARFID can co-exist.
 					},
 					{
 						target: 11,
@@ -1266,7 +1245,6 @@ Ext.define('ceda.store.QuestionStore', {
 //	****************************************************************************
 //	Assessment of ARFID
 //	****************************************************************************
-
 			{
 				id:11,
 				initial:false,
@@ -1278,6 +1256,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				symptom:[
 					'Has severe food restriction or avoidance resulted in serious nutritional problems?',
+					' ',
 					'<b>Notes:</b>',
 					'Sufficient information may already be available to answer this without additional questions. ',
 					' ',
@@ -1285,13 +1264,17 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 11.1,
+						target: 11.1,	// might have ARFID; assess further
 						expression: 'global.avoidant_nutritional_problems'
 					},
 					{
-						target: 15,
-						expression: '! global.avoidant_nutritional_problems'
-					}
+						target: 15,	// to Rumination Disorder (not BED and cannot be ARFID)
+						expression: '(!global.avoidant_nutritional_problems && !global.bed)'	
+					},
+					{
+						target: 18,	// to Pica--might have BED and Pica
+						expression: '(!global.avoidant_nutritional_problems && global.bed)'	
+					}	
 				]
 			},
 			{
@@ -1378,7 +1361,7 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: '(global.avoidant_weightloss || global.avoidant_nutri_def || global.avoidant_nutri_suppliment || global.avoidant_psychosocial_interference)'
 					},
 					{
-						target: 15,
+						target: 15,	// assess Rumination Disorder
 						expression: ' !(global.avoidant_weightloss || global.avoidant_nutri_def || global.avoidant_nutri_suppliment || global.avoidant_psychosocial_interference)'
 					}
 				]
@@ -1463,6 +1446,9 @@ Ext.define('ceda.store.QuestionStore', {
 
 				]
 			},
+//	****************************************************************************
+//	Assessment of Rumination Disorder
+//	****************************************************************************
 			{
 				id:15,
 				initial:false,
@@ -1537,6 +1523,9 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},					
+//	****************************************************************************
+//	Assessment of Pica
+//	****************************************************************************
 			{
 				id:18,
 				initial:false,
@@ -1650,10 +1639,11 @@ Ext.define('ceda.store.QuestionStore', {
 				]
 			},																	
 
-//	
-// Assessment of other eating disorders
-// Section starts with id = 30, to keep clearly separate from what has preceded.
 //
+//	****************************************************************************
+//  Assessment of other eating disorders
+//  Section starts with id = 30, to keep clearly separate from what has preceded.
+//	****************************************************************************//
 			{
 				id:30,
 				initial:false,
@@ -1661,17 +1651,12 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Other Eating Disorders',
 				shortname:'none',
 				interviewprobe:[
-					'30. The conditions very briefly described below are other eating disorders noted in DSM-5, but not formally recognized. ',
-					'<b>Atypical Anorexia Nervosa:</b> meets all criteria for Anorexia Nervosa, but, despite significant weight loss, weight is within or above normal range.',
-					'<b>Subthreshold Bulimia Nervosa:</b> meets all criteria for Bulimia Nervosa, but low in frequency or of limited duration.',
-					'<b>Subthreshold Binge Eating Disorder:</b> meets all criteria for Binge Eating Disorder, but low in frequency or of limited duration.',
-					'<b>Purging Disorder:</b> Recurrent purging to influence shape or weight, but no binge eating. ',
-					'<b>Night Eating Syndrome:</b> Recurrent episodes of night eating (after falling asleep or after evening meal.',
-					'<b>Other (unspecified) Eating Disorder</b>',
+					'30. In the section Other Specified Feeding or Eating Disorder, DSM-5 provides several very brief descriptions of several problems that should be assessed.',
+					'Before determining whether the problem may fit one of these descriptions, it may useful to inquire about the highest weight attained, weight loss, and eating at night.',
 					'<br/>',
 					].join("<br/>"),
 				symptom:[
-					'Brief descriptions are provided below. Proceed to the next page to indicate the most appropriate diagnosis. Choose the one that most closely matches the presenting problem.',
+					'The individual does not appear to meet the DSM-5 criteria for a formally defined eating disorder.',
 				].join("<br/>"),
 				rules:[
 				{
@@ -1688,7 +1673,34 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Other Eating Disorders',
 				shortname:'none',
 				interviewprobe:[
-					'31. The conditions below are other eating disorders noted in DSM-5, but not formally recognized. ',
+					'31. The conditions very briefly described below are other eating disorders noted in DSM-5, but not formally recognized. ',
+					'<b>Atypical Anorexia Nervosa:</b> meets all criteria for Anorexia Nervosa, but, despite significant weight loss, weight is within or above normal range.',
+					'<b>Subthreshold Bulimia Nervosa:</b> meets all criteria for Bulimia Nervosa, but low in frequency or of limited duration.',
+					'<b>Subthreshold Binge Eating Disorder:</b> meets all criteria for Binge Eating Disorder, but low in frequency or of limited duration.',
+					'<b>Purging Disorder:</b> Recurrent purging to influence shape or weight, but no binge eating. ',
+					'<b>Night Eating Syndrome:</b> Recurrent episodes of night eating (after falling asleep or after evening meal.',
+					'<b>Other (unspecified) Eating Disorder</b>',
+					'<br/>',
+					].join("<br/>"),
+				symptom:[
+					'Brief descriptions are provided below. Proceed to the next page to indicate the most appropriate diagnosis. Choose the one that most closely matches the presenting problem.',
+				].join("<br/>"),
+				rules:[
+				{
+					target: 32, 
+					expression: true,
+				}
+				
+				]
+			},
+			{
+				id:32,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Other Eating Disorders',
+				shortname:'none',
+				interviewprobe:[
+					'32. The conditions below are other eating disorders noted in DSM-5, but not formally recognized. ',
 					].join("<br/>"),
 				symptom:[
 					'Choose the disorder that most closely matches the presenting problem.',
@@ -1857,4 +1869,8 @@ var calculateRecentLowBMI  = new Function(
 				'console.debug("this is called");',
 				'document.getElementById("saveRecentLowBMI").value = (weight/(height*height)) * 703; '].join("\n")
 			);
+			
+var printout = new Function(
+		'window.print()'
+	);
 

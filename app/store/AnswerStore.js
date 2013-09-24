@@ -424,7 +424,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:34,
 				question_id: 7.06,
-				description: 'Yes',
+				description: 'Yes: exercises excessively',
 				triggers:{
 					in_exercise: true
 				}
@@ -432,7 +432,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35,
 				question_id: 7.06,
-				description: 'No',
+				description: 'No: does NOT exercise excessively',
 				triggers:{
 					in_exercise: false
 				}
@@ -440,7 +440,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35.1,
 				question_id: 7.0601,
-				description: 'Yes: exercise episodes at least 1x/WEEK',
+				description: 'Yes: excessive exercise at least 1x/WEEK',
 				triggers:{
 					in_exercise1xWK: true,
 					in_exercise1xMON: true
@@ -449,7 +449,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35.2,
 				question_id: 7.0601,
-				description: 'No: exercise episodes less than 1x/WEEK',
+				description: 'No: excessive exercise less than 1x/WEEK',
 				triggers:{
 					in_exercise1xWK: false
 				}
@@ -457,7 +457,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35.3,
 				question_id: 7.0602,
-				description: 'Yes: exercise episodes at least 1x/MON',
+				description: 'Yes: excessive exercise at least 1x/MON',
 				triggers:{
 					in_exercise1xMON: true
 				}
@@ -465,7 +465,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35.4,
 				question_id: 7.0602,
-				description: 'No: exercise episodes less than 1x/MON',
+				description: 'No: excessive exercise less than 1x/MON',
 				triggers:{
 					in_exercise1xMON: false
 				}
@@ -887,12 +887,18 @@ Ext.define('ceda.store.AnswerStore', {
 				}
 			},
 // 
-// The section below has the answers for the othe ED section
+// The section below has the answers for the other ED section
 //
-
+			{
+				id: 99,
+				question_id: 30,
+				description: 'Proceed to see brief descriptions.',
+				triggers: {
+				}
+			},
 			{
 				id: 100,
-				question_id: 30,
+				question_id: 31,
 				description: 'Proceed to choose most appropriate diagnosis.',
 				triggers: {
 				}
@@ -900,7 +906,7 @@ Ext.define('ceda.store.AnswerStore', {
 
 			{
 				id: 101,
-				question_id: 31,
+				question_id: 32,
 				description: 'Atypical Anorexia Nervosa',
 				triggers: {
 					atypicalAN: true
@@ -908,7 +914,7 @@ Ext.define('ceda.store.AnswerStore', {
 			},
 			{
 				id: 102,
-				question_id: 31,
+				question_id: 32,
 				description: 'Subthreshold Bulimia Nervosa',
 				triggers: {
 					subthresholdBN: true
@@ -916,7 +922,7 @@ Ext.define('ceda.store.AnswerStore', {
 			},
 			{
 				id: 103,
-				question_id: 31,
+				question_id: 32,
 				description: 'Subthreshold Binge Eating Disorder',
 				triggers: {
 					subthresholdBED: true
@@ -924,7 +930,7 @@ Ext.define('ceda.store.AnswerStore', {
 			},
 			{
 				id: 104,
-				question_id: 31,
+				question_id: 32,
 				description: 'Purging Disorder',
 				triggers: {
 					purgingdisorder: true
@@ -932,7 +938,7 @@ Ext.define('ceda.store.AnswerStore', {
 			},
 			{
 				id: 105,
-				question_id: 31,
+				question_id: 32,
 				description: 'Night Eating Syndrome',
 				triggers: {
 					NES: true
@@ -940,7 +946,7 @@ Ext.define('ceda.store.AnswerStore', {
 			},
 			{
 				id: 106,
-				question_id: 31,
+				question_id: 32,
 				description: 'Other (unspecified) Eating Disorder',
 				triggers: {
 					otherED: true
