@@ -1,7 +1,7 @@
 Ext.require('Ext.data.Store');
 
 Ext.define('ceda.store.QuestionStore', {
-	extend: 'Ext.data.Store', 
+	extend: 'Ext.data.Store',
 	require: ['ceda.model.Question'],
 	config:{
 		storeId: 'questionStore',
@@ -29,7 +29,7 @@ Ext.define('ceda.store.QuestionStore', {
 								'</tr>',
 								'</table>'
 							].join('')
-				
+
 				],
 				symptom: 'To begin, please enter information.',
 				rules: [
@@ -61,7 +61,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname: 'Typical Day',
 				interviewprobe: '3. Can you describe a typical day of eating? When and what do you eat?',
 				symptom: 'Is an aberrant eating pattern present (e.g., fasting, severely restricted intake, avoidance of certain foods, textures, binge eating episodes, purging)?',
-				rules: [ 
+				rules: [
 					{
 						target: 3.01,
 						expression: 'global.eatingdisturbance || global.aberranteating'
@@ -100,12 +100,12 @@ Ext.define('ceda.store.QuestionStore', {
 								'</tr>',
 								'</table>'
 							].join('')
-				
+
 				],
 				symptom: [
 							[
 							"BMI range (adults):",
-								"",                       
+								"",
 								"•	Underweight ≤ 18.5",
 								"•	Normal weight = 18.5–24.9",
 								"•	Overweight = 25–29.9",
@@ -140,12 +140,12 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 4.06,
 						expression: '!global.lowweight'
 					}
-					
+
 				]
 			},
-// 
+//
 // Next question deals with recent low weight
-// 
+//
 			{
 				id:4.06,
 				initial: false,
@@ -180,7 +180,7 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 7.01,
 						expression: '!global.recentlowweight'
 					}
-					
+
 				]
 			},
 
@@ -192,7 +192,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'fear of weight gain',
 				interviewprobe: [
-						'5a. Are you afraid of gaining weight?', 
+						'5a. Are you afraid of gaining weight?',
 						'',
 						'If no: Are you worried that if you start to gain weight, you will continue to gain weight and will become fat?'
 						].join("<br>"),
@@ -248,7 +248,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname: 'body image distortion',
 				interviewprobe:[
 					'6a. In terms of your body weight and shape, how do you think you look? Does what you see/feel/experience differ from how you think others might perceive you?',
-					'', 
+					'',
 					'If unable to describe distortion of body image: Have you recently thought that you are fat or that a part of your body is too big? Have you recently had a distorted view of your body? How so?'
 				].join("<br>"),
 				symptom:[
@@ -269,7 +269,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'body image influence',
 				interviewprobe:[
-					'6b. Does your weight or your body shape impact how you feel about yourself?', 
+					'6b. Does your weight or your body shape impact how you feel about yourself?',
 					'',
 					'For example, if you were to have a day when you did not like the number on the scale, or the way your clothes fit, or how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please tell me a little about this.'
 				].join("<br>"),
@@ -419,7 +419,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-						[	
+						[
 							'7b.21. Enter average number of objective binge episodes per week over the last 3 months.',
 							'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
 								'<br/><br/>',
@@ -542,7 +542,7 @@ Ext.define('ceda.store.QuestionStore', {
 				]
 			},
 // End of section evaluating SBEs
-// Some old stuff follows	
+// Some old stuff follows
 			{
 				id:7.04,
 				initial:false,
@@ -658,7 +658,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
-							'(! global.in_behavior && !global.in_exercise)'	
+							'(! global.in_behavior && !global.in_exercise)'
 						].join(''),
 						trigger: 'binge',
 						target: 9.1 // changed from 9
@@ -668,7 +668,7 @@ Ext.define('ceda.store.QuestionStore', {
 							'(!global.an) && (!global.lacks_control) && ',
 							'(!global.binge_frequency_months && !global.obe)' // !s added by BTW 6/28/13
 							].join(''),
-						target: 11, 
+						target: 11,
 						trigger: 'arfid'
 					}
 
@@ -733,7 +733,7 @@ Ext.define('ceda.store.QuestionStore', {
 						'<tr><td>Diuretics:</td><td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Exercise:</td><td><input id="saveExerciseFrequency" name="Exercise:Average_number_per_week" size="3"></td></tr>',
 						'</table>',
-	
+
 					].join(" ")
 				].join("<br/>"),
 				symptom:[
@@ -770,17 +770,17 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
-							'(! global.in_behaviors && !global.in_exercise)'	
+							'(! global.in_behaviors && !global.in_exercise)'
 						].join(''),
 						trigger: 'binge',
-						target: 9.1	// changed from 9 
+						target: 9.1	// changed from 9
 					},
 					{
 						expression: [
 							'(!global.an) && (!global.lacks_control) && ',
 							'(global.binge_frequency_months && global.obe) '
 							].join(''),
-						target: 11, 
+						target: 11,
 						trigger: 'arfid'
 					}
 				]
@@ -824,7 +824,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an && global.lacks_control && global.binge_frequency_weeks) && ',
-							'(! global.in_behavior && !global.in_exercise)'	
+							'(! global.in_behavior && !global.in_exercise)'
 						].join(''),
 						trigger: 'binge',
 						target: 9.1 //	Changed from 9, to skip question 9
@@ -834,7 +834,7 @@ Ext.define('ceda.store.QuestionStore', {
 							'(!global.an) && (!global.lacks_control) && ',
 							'(global.binge_frequency_months && global.obe)'
 							].join(''),
-						target: 11, 
+						target: 11,
 						trigger: 'arfid'
 					}
 				]
@@ -846,7 +846,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Bulimia Nervosa',
 				shortname:'none',
 				interviewprobe:[
-					'8. Does your weight or your body shape impact how you feel about yourself?', 
+					'8. Does your weight or your body shape impact how you feel about yourself?',
 					'',
 					'For example, if you were to have a day when you did not like the number on the scale, or the way your clothes fit, or how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please tell me a little about this.'
 				].join("<br/>"),
@@ -865,7 +865,7 @@ Ext.define('ceda.store.QuestionStore', {
 							expression: '! global.bodyweight_selfworth',
 							trigger:'pica'
 					}
-						
+
 				]
 			},
 			{	// This is now skipped over
@@ -906,7 +906,7 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 9.2,
 						expression: 'true'
 					}
-				
+
 				]
 			},
 			{
@@ -945,7 +945,7 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 9.4,
 						expression: 'true'
 					}
-				
+
 				]
 			},
 			{
@@ -965,7 +965,7 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 9.5,
 						expression: 'true'
 					}
-				
+
 				]
 			},
 			{
@@ -981,7 +981,7 @@ Ext.define('ceda.store.QuestionStore', {
 					'Negative affect associated with eating episode?'
 				].join("<br/>"),
 				rules:[
-					{	
+					{
 						target:10,
 						expression: '(global.binge_rapid + global.binge_full + global.binge_no_hunger + global.binge_shame + global.binge_sad) >= 3'
 					},
@@ -1004,7 +1004,7 @@ Ext.define('ceda.store.QuestionStore', {
 					'Marked distress regarding binge eating?'
 				].join("<br/>"),
 				rules:[
-					{	
+					{
 						diagnosis: true,
 						expression: 'global.binge_distress',
 						trigger: 'bn',
@@ -1029,7 +1029,7 @@ Ext.define('ceda.store.QuestionStore', {
 				symptom:[
 					'Has severe food restriction or avoidance resulted in serious nutritional problems?',
 					'<br/>',
-					'Restriction that occurs only in the context of a binge eating episode does not satisfy this criterion.' 
+					'Restriction that occurs only in the context of a binge eating episode does not satisfy this criterion.'
 				].join("<br/>"),
 				rules:[
 					{
@@ -1058,8 +1058,8 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						target: 11.2,
 						expression: true
-					}	
-				
+					}
+
 				]
 			},
 			{
@@ -1078,8 +1078,8 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						target: 11.3,
 						expression: true
-					}	
-				
+					}
+
 				]
 			},
 			{
@@ -1098,8 +1098,8 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						target: 11.4,
 						expression: true
-					}	
-				
+					}
+
 				]
 			},
 			{
@@ -1148,7 +1148,7 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 13,
-						expression: 'true'	
+						expression: 'true'
 					}
 				]
 			},
@@ -1167,7 +1167,7 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 15,	// changed from 14 to 15; BTW 6/28/13
-						expression: 'global.avoidant_alt_explanation || global.avoidant_alt_condition'	
+						expression: 'global.avoidant_alt_explanation || global.avoidant_alt_condition'
 					},
 					{
 						target: 14, // changed from 15 to 14; BTW 6/28/13
@@ -1233,7 +1233,7 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: '! global.regurge_repeated'
 					}
 				]
-			},				
+			},
 			{
 				id:16,
 				initial:false,
@@ -1284,7 +1284,7 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: 'true'
 					}
 				]
-			},					
+			},
 			{
 				id:18,
 				initial:false,
@@ -1323,7 +1323,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'PICA',
 				shortname:'none',
 				interviewprobe:[
-					'19. Have you eaten any non-food materials (e.g., dirt, paint) in the past few months? What have you eaten?' 
+					'19. Have you eaten any non-food materials (e.g., dirt, paint) in the past few months? What have you eaten?'
 				].join("<br/>"),
 				symptom:[
 					'Has there been persistent ingestion of non-nutritive, non-food substances?'
@@ -1340,7 +1340,7 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 
 				]
-			},														
+			},
 			{
 				id:20,
 				initial:false,
@@ -1363,9 +1363,9 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 21,
 						expression: '!global.nonfood_culturally_sanctioned'
 					}
-				
+
 				]
-			},														
+			},
 			{
 				id:21,
 				initial:false,
@@ -1375,7 +1375,7 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					'21. Have you been to see a specialist (e.g., nutritionist, psychotherapist) specifically for help with this eating  problem?',
 					'<br/>',
-					'If no: How severely does the problem affect you? In what ways?' 
+					'If no: How severely does the problem affect you? In what ways?'
 				].join("<br/>"),
 				symptom:[
 					'Is the disturbance in eating behavior sufficiently severe to warrant independent clinical attention?'
@@ -1391,9 +1391,9 @@ Ext.define('ceda.store.QuestionStore', {
 						target: 22,
 						expression: '! global.nonfood_needs_clinical'
 					}
-			
+
 				]
-			},																	
+			},
 			{
 				id:22,
 				initial:false,
@@ -1411,7 +1411,7 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 				{
 					target: 23,
-					expression: 'true'	
+					expression: 'true'
 				}
 				]
 			},
@@ -1430,10 +1430,10 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 				{
 					target: 24,
-					expression: 'true'	
+					expression: 'true'
 				}
 				]
-			},																				
+			},
 			{
 				id:24,
 				initial:false,
@@ -1449,10 +1449,10 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 				{
 					target: 25,
-					expression: 'true'	
+					expression: 'true'
 				}
 				]
-			},			
+			},
 			{
 				id:25,
 				initial:false,
@@ -1468,10 +1468,10 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 				{
 					target: 26,
-					expression: 'true'	
+					expression: 'true'
 				}
 				]
-			},			
+			},
 			{
 				id:26,
 				initial:false,
@@ -1479,7 +1479,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Night Eating Syndrome',
 				shortname:'none',
 				interviewprobe:[
-					'26. This condition may be assigned to an individual who exhibits a daily pattern of eating with significantly increased intake in the evening and/or nighttime. Eating episodes must not be better accounted for by existing social norms (e.g., college dorm) or occur solely in the context of disturbances in sleep necessitated by responsibilities (e.g., during night-shift work, nursing a baby).', 
+					'26. This condition may be assigned to an individual who exhibits a daily pattern of eating with significantly increased intake in the evening and/or nighttime. Eating episodes must not be better accounted for by existing social norms (e.g., college dorm) or occur solely in the context of disturbances in sleep necessitated by responsibilities (e.g., during night-shift work, nursing a baby).',
 					'<br/>',
 					'For more information, see criteria published in Int J Eat Disord 2010;43:241-7.'
 				].join("<br/>"),
@@ -1491,8 +1491,8 @@ Ext.define('ceda.store.QuestionStore', {
 					target: 'finish'
 				}
 				]
-			},			
-			
+			},
+
 		]
 	}
 });
