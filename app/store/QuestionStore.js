@@ -36,7 +36,6 @@ Ext.define('ceda.store.QuestionStore', {
 								'</table>',
 								'<br/>'
 							].join('')
-				
 				],
 				symptom: 'To begin, please enter information.',
 				rules: [
@@ -291,7 +290,7 @@ Ext.define('ceda.store.QuestionStore', {
 					'If yes, what efforts have you made in the past 3 months to deal with this problem? Have your feelings about the significance of the problem fluctuated? How so?'
 				].join("<br>"),
 				symptom:[
-						'Does the individual fail to recognize or refuse to acknowledge the seriousness of low body weight?',
+						'Does the individual recognize or acknowledge the seriousness of low body weight?',
 						'',
 						'If individual initially acknowledges seriousness of problem, are the efforts taken commensurate or consistent with this recognition?'
 				].join("<br>"),
@@ -355,7 +354,13 @@ Ext.define('ceda.store.QuestionStore', {
 					'7b. Were there times in the last three months when you felt out of control and consumed what was clearly a large amount of food?',
 					'<br/>',
 					'Can you give me an example of what you typically ate? And the context?',
-					'<br/>'
+					'<br/>',
+							[
+								'If Yes, enter typical binge below: ',
+								'<br/><br/>',
+								'<textarea id="optionalOBE" name="OBE:items" type="text" rows="5" columns="100"></textarea>', 
+								'<br/>'
+							].join('')
 				].join("<br/>"),
 				symptom:[
 					'Objective Binge Episode (OBE): Has the individual eaten an objectively large amount of food in a discrete period of time, while experiencing a loss of control?',
@@ -704,7 +709,14 @@ Ext.define('ceda.store.QuestionStore', {
 						'7f. Do you exercise? What type of exercise do you do and for how long?',
 					].join("<br/>"),
 					[
-						'Does the amount of exercise interfere with health or with fulfilling daily responsibilities?'
+						'Does the amount of exercise interfere with health or with fulfilling daily responsibilities?',
+						'<br/>'
+					].join(" "),
+					[
+						'<table>',
+						'<tr><td>Type of Exercise: </td> <td><input id="optionalExerciseType" name="Exercise:Type"></td></tr>',
+						'<tr><td>Average # minutes per episode: </td> <td><input id="optionalExerciseFrequency" name="Exercise:Average_number_mins_per_episode" size="3"></td></tr>',
+						'</table>'
 					].join(" ")
 				].join("<br/>"),
 				symptom:[
@@ -827,8 +839,7 @@ Ext.define('ceda.store.QuestionStore', {
 					].join("<br/>"),
 					[
 						'<table>',
-						'<tr><td>Type of Exercise: </td> <td><input id="saveExerciseType" name="Exercise:Type"></td></tr>',
-						'<tr><td>Episode frequency per week: </td> <td><input id="saveExerciseFrequency" name="Exercise:Average_number_episodes_per_week" size="3"></td></tr>',
+						'<tr><td>Average episodes per week: </td> <td><input id="saveExerciseFrequency" name="Exercise:Average_number_episodes_per_week" size="3"></td></tr>',
 						'</table>'
 					].join(" ")
 				].join("<br/>"),
@@ -1507,7 +1518,7 @@ Ext.define('ceda.store.QuestionStore', {
 					'If no: How severely does the problem affect you? In what ways?'
 				].join("<br/>"),
 				symptom:[
-					'Is the disturbance in eating behavior sufficiently severe to warrant clinical attention in addition to that for the psychiatric problem?'
+					'Is the disturbance in eating behavior sufficiently severe to warrant clinical attention in addition to any required for a related problem?'
 				].join("<br/>"),
 				rules:[
 					{
@@ -1526,6 +1537,7 @@ Ext.define('ceda.store.QuestionStore', {
 //	****************************************************************************
 //	Assessment of Pica
 //	****************************************************************************
+// #18 is now skipped over
 			{
 				id:18,
 				initial:false,
@@ -1560,6 +1572,7 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+// end of #18			
 			{
 				id:19,
 				initial:false,
