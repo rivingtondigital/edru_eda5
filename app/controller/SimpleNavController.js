@@ -123,7 +123,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	viewQuestion: function(question, back){
-		//var debug = true;
+//		var debug = true;
 		var debug = false;
 		if(this.questionstack.length === 0){
 			this.getBackbutton().hide();

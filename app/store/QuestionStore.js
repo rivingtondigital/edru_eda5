@@ -358,7 +358,7 @@ Ext.define('ceda.store.QuestionStore', {
 							[
 								'If Yes, enter typical binge below: ',
 								'<br/><br/>',
-								'<textarea id="optionalOBE" name="OBE:items" type="text" rows="5" columns="100"></textarea>', 
+								'<textarea id="optionalOBEitems" name="BingeEating:OBEitems" type="text" size="20" width="20"></textarea>', 
 								'<br/>'
 							].join('')
 				].join("<br/>"),
@@ -721,7 +721,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				symptom:[
 					'Does the individual use exercise inappropriately (ie, exercise excessively)?',
-					'<br/>',
+					' ',
 					'Indicators of excessive exercise include exercising despite illness or injury, exercising to an extent that it interferes with daily responsibilities (e.g., being late for work or school), or feeling highly distressed when unable to exercise.'
 				].join("<br/>"),
 				rules:[
@@ -770,7 +770,7 @@ Ext.define('ceda.store.QuestionStore', {
 					[
 						'7f.1. In the last week, how many times have you engaged in this type of exercise?',
 						'<br/>',
-						'Is this typical of the last 3 months?',
+						'Is this consistent with how frequently you have exercised over the past 3 months? If no, how was frequency of exercise different?',
 						'<br/>'
 					].join("<br/>"),
 				].join("<br/>"),
@@ -825,24 +825,19 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7f.5. In the past week, how many times have you exercised inappropriately?',
+						'7f.5. Enter average number of episodes of excessive exercise per WEEK over the last 3 months.',
+						'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 episodes/month = 0.5 episodes/week.)',
 						'<br/>',
-						'Is this consistent with how frequently the behaviors have occurred for the past 3 months? If no, how was frequency of episodes different?',
-						'<br/>'
+						[
+							'<table>',
+							'<tr><td>Average episodes of excessive exercise per week: </td> <td><input id="saveExerciseFrequency" name="Exercise:Average_number_episodes_per_week" size="3"></td></tr>',
+							'</table>'
+						].join(" "),
 					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
-					[
-					'Average number of episodes per WEEK over last 3 months.',
-					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
-					'<br/>'
+					'Enter weekly frequency of excessive exercise.',
 					].join("<br/>"),
-					[
-						'<table>',
-						'<tr><td>Average episodes per week: </td> <td><input id="saveExerciseFrequency" name="Exercise:Average_number_episodes_per_week" size="3"></td></tr>',
-						'</table>'
-					].join(" ")
-				].join("<br/>"),
 				rules:[
 					{
 						target: 7.07,	// reasons why
@@ -913,7 +908,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{	// Assess whether criteria for BN MIGHT be met
 						expression: [
 							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
-							'(global.in_behaviors || global.in_exercise) && ',
+							'(global.purging || global.in_exercise) && ',
 							'(global.in_compensate || global.in_weightloss)'
 						].join(''),
 						target: 8,
@@ -922,7 +917,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{	//	Determine whether criteria for BED MIGHT be met
 						expression: [
 							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
-							'(!global.in_behaviors && !global.in_exercise)'	
+							'(!global.purging && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
 						target: 9.1	// changed from 9 
@@ -1040,7 +1035,7 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						expression: [
-							'(!global.an && !global.lacks_control && global.OBE_1perWK) && ',
+							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
 							'(global.in_behavior || global.in_excercise) && ',
 							'(global.in_compensate && in_frequency_weeks)'
 						].join(''),
@@ -1050,7 +1045,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						expression: [
 							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
-							'(! global.in_behavior && !global.in_exercise)'	
+							'(!global.in_behavior && !global.in_exercise)'	
 						].join(''),
 						trigger: 'binge',
 						target: 9.1 //	Changed from 9, to skip question 9
