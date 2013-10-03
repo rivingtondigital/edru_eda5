@@ -11,7 +11,8 @@ Ext.define('ceda.view.OutputView', {
 	},
 	setCollectedInfo: function(info){
 		console.debug(info);
-		var ret = "<div> <input type='button' value='print' style='float:right' class='x-button' onclick='printer("+ JSON.stringify(info) +")'/><h1 class='questionheader'>Results</h1></div>";
+		var ret = "<div> <input type='button' value='print' style='float:right' class='x-button' onclick='printer()'/><h1 class='questionheader'>Results</h1></div>";
+		ret += "<input type='hidden' id='hddnInfo' value='"+ JSON.stringify(info) +"'/>"
 		for(key in info){
 			var header = key;
 			var content = info[key];

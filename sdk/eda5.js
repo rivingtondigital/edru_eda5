@@ -1,4 +1,5 @@
-function printer(info){
+function printer(){
+	var info = JSON.parse(document.getElementById('hddnInfo').value);
 	win = window.open();
 	body = win.document.getElementsByTagName('body')[0];
 	var ret = '<style>';
