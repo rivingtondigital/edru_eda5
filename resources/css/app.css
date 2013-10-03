@@ -85,6 +85,10 @@ ul li{
 
 }
 
+.outputtable td{
+	vertical-align: top;
+}
+
 @media print {
    body {
       color: #000;

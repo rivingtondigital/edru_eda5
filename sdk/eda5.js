@@ -7,7 +7,7 @@ function printer(){
 	ret += 'h1{text-align:center}';
 	ret += '.tabheader{width: 100%; font-size: larger; border-bottom: 1px solid gray;}';
 	ret += '.outputtable{width: 80%; margin: auto; border-collapse:collapse}';
-	ret += '.outputtable td{border-bottom: 1px dashed gray}';
+	ret += '.outputtable td{border-bottom: 1px dashed gray; vertical-align: top;padding-right: 10px;}';
 	ret += '.value{float:right}'
 	ret += '</style>';
 	ret += "<div><h1>EDA-5 Results</h1></div>";
