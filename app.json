@@ -35,6 +35,9 @@
         {
             "path": "sdk/sencha-touch-all.js"
         },
+				{
+					"path": "sdk/eda5.js"
+				},
         {
             "path": "app.js",
             "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */

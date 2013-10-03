@@ -1877,8 +1877,3 @@ var calculateRecentLowBMI  = new Function(
 				'console.debug("this is called");',
 				'document.getElementById("saveRecentLowBMI").value = (weight/(height*height)) * 703; '].join("\n")
 			);
-			
-var printout = new Function(
-		'window.print()'
-	);
-

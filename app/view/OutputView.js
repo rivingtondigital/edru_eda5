@@ -11,7 +11,7 @@ Ext.define('ceda.view.OutputView', {
 	},
 	setCollectedInfo: function(info){
 		console.debug(info);
-		var ret = "<div> <input type='button' value='print' style='float:right' class='x-button' onclick='printout()'/><h1 class='questionheader'>Results</h1></div>";
+		var ret = "<div> <input type='button' value='print' style='float:right' class='x-button' onclick='printer("+ JSON.stringify(info) +")'/><h1 class='questionheader'>Results</h1></div>";
 		for(key in info){
 			var header = key;
 			var content = info[key];
@@ -27,9 +27,5 @@ Ext.define('ceda.view.OutputView', {
 			ret += "</table><br/><br/>";
 		}
 		this.setHtml(ret);
-	},
-	printit: function(){
-		window.print();
-		alert("hi");
 	}
 });
