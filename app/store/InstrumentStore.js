@@ -18,7 +18,7 @@ Ext.define('ceda.store.InstrumentStore', {
 								'criteria. It is meant to be used by individuals with familiarity with and ', 
 								'training in assessment of eating disorders.</p>',
 								'<p>The questions in the checklist closely mirror the criteria, but are worded to ',
-								'aid the assesment process. In answering all questions, clinical judgement must be ',
+								'aid the assesment process. In answering all questions, clinical judgment must be ',
 								'exercised. It is appropriate to utilize whatever clinical information is available, ',
 								'including the individual\'s answers, the clinician\'s observations, ',
 								'and ancillary sources of information (e.g., treatment providers, ',

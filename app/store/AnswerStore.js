@@ -46,7 +46,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:4,
 				question_id: 2,
-				description: 'yes',
+				description: 'Yes: there is a disturbance in eating',
 				triggers:{
 					eatingdisturbance: true
 				}
@@ -54,7 +54,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:5,
 				question_id: 2,
-				description: 'no',
+				description: 'No: there is NO such disturbance',
 				triggers:{
 					eatingdisturbance: false
 				}
@@ -78,7 +78,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:8,
 				question_id: 4,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					lowweight: true
 				}
@@ -86,7 +86,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:9,
 				question_id: 4,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					lowweight: false
 				}
@@ -94,7 +94,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:10.01,
 				question_id: 4.06,
-				description: 'yes',
+				description: 'Was significantly underweight in last 3 mons',
 				triggers:{
 					recentlowweight: true
 				}
@@ -102,15 +102,22 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:10.02,
 				question_id: 4.06,
-				description: 'no',
+				description: 'Was NOT significantly underweight in last 3 mons',
 				triggers:{
 					recentlowweight: false
 				}
 			},
 			{
+				id:10.03,
+				question_id: 4.07,
+				description: 'Proceed',
+				triggers: {
+				}
+			},
+			{
 				id:11,
 				question_id: 5.1,
-				description: 'yes',
+				description: 'Yes: there is intense fear of weight gain',
 				triggers:{
 					fearofgain: true
 				}
@@ -118,7 +125,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:12,
 				question_id: 5.1,
-				description: 'no',
+				description: 'No; not afraid of gaining weight',
 				triggers:{
 					fearofgain: false
 				}
@@ -126,7 +133,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:13,
 				question_id: 5.2,
-				description: 'yes',
+				description: 'Yes: there is persistent behavior to avoid weight gain',
 				triggers:{
 					interfering: true
 				}
@@ -134,7 +141,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:14,
 				question_id: 5.2,
-				description: 'no',
+				description: 'No: no peristent behavior to avoid weight gain',
 				triggers:{
 					interfering: false
 				}
@@ -142,7 +149,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:15,
 				question_id: 6.1,
-				description: 'yes',
+				description: 'Yes: there is disortion of body image',
 				triggers:{
 					distorted_body_image: true
 				}
@@ -150,7 +157,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:16,
 				question_id: 6.1,
-				description: 'no',
+				description: 'No: body image is NOT distorted',
 				triggers:{
 					distorted_body_image: false
 				}
@@ -158,7 +165,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:17,
 				question_id: 6.2,
-				description: 'yes',
+				description: 'Yes: shape and weight exert undue influence',
 				triggers:{
 					distorted_bi_influence: true
 				}
@@ -166,7 +173,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:18,
 				question_id: 6.2,
-				description: 'no',
+				description: 'No: shape and weight do NOT exert undue influence',
 				triggers:{
 					distorted_bi_influence: false
 				}
@@ -174,7 +181,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:19,
 				question_id: 6.3,
-				description: 'yes',
+				description: 'Individual recognizes seriousness of current weight',
 				triggers:{
 					understands_seriousness: true
 				}
@@ -182,7 +189,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:20,
 				question_id: 6.3,
-				description: 'no',
+				description: 'Individual does NOT recognize seriousness of current weight',
 				triggers:{
 					understands_seriousness: false
 				}
@@ -190,7 +197,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:21,
 				question_id: 7.01,
-				description: 'yes',
+				description: 'Yes: experiences loss of control',
 				triggers:{
 					lacks_control: true
 				}
@@ -198,7 +205,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:22,
 				question_id: 7.01,
-				description: 'no',
+				description: 'No: does NOT experience loss of control',
 				triggers:{
 					lacks_control: false
 				}
@@ -206,7 +213,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:23,
 				question_id: 7.02,
-				description: 'Yes',
+				description: 'Yes: describes OBEs',
 				triggers:{
 					obe: true
 				}
@@ -214,7 +221,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:24,
 				question_id: 7.02,
-				description: 'No',
+				description: 'No: does NOT describe OBEs',
 				triggers:{
 					obe: false
 				}
@@ -222,33 +229,34 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:251,
 				question_id: 7.0201,
-				description: 'Yes',
+				description: 'Yes: at least 1 OBE/week, on average',
 				triggers:{
-					binge_frequency_weeks: true
+					OBE_1perWK: true,
+					OBE_1perMON: true
 				}
 			},	
 			{
 				id:252,
 				question_id: 7.0201,
-				description: 'No',
+				description: 'No: less than 1 OBE/week, on average',
 				triggers:{
-					binge_frequency_weeks: false
+					OBE_1perWK: false
 				}
 			},	
 			{
 				id:253,
 				question_id: 7.0202,
-				description: 'Yes',
+				description: 'Yes: at least 1 OBE/MONTH, on average',
 				triggers:{
-					binge_frequency_months: true
+					OBE_1perMON: true
 				}
 			},	
 			{
 				id:254,
 				question_id: 7.0202,
-				description: 'No',
+				description: 'No: less than 1 OBE/MONTH, on average',
 				triggers:{
-					binge_frequency_months: false
+					OBE_1perMON: false
 				}
 			},	
 			{
@@ -265,7 +273,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:260,
 				question_id: 7.0210,
-				description: 'Yes',
+				description: 'Yes: describes SBEs',
 				triggers:{
 					sbe: true
 				}
@@ -273,7 +281,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:261,
 				question_id: 7.0210,
-				description: 'No',
+				description: 'No: does not describe SBEs',
 				triggers:{
 					sbe: false
 				}
@@ -281,15 +289,16 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:262,
 				question_id: 7.0211,
-				description: 'Yes',
+				description: 'Yes: at least 1 SBE/week, on average',
 				triggers:{
-					sbe_frequency_weeks: true
+					sbe_frequency_weeks: true,
+					sbe_frequency_months: true
 				}
 			},	
 			{
 				id:263,
 				question_id: 7.0211,
-				description: 'No',
+				description: 'No: less than 1 SBE/week, on average',
 				triggers:{
 					sbe_frequency_weeks: false
 				}
@@ -297,7 +306,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:264,
 				question_id: 7.0212,
-				description: 'Yes',
+				description: 'Yes: at least 1 SBE/MONTH, on average',
 				triggers:{
 					sbe_frequency_months: true
 				}
@@ -305,7 +314,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:265,
 				question_id: 7.0212,
-				description: 'No',
+				description: 'No: less than 1 SBE/MONTH, on average',
 				triggers:{
 					sbe_frequency_months: false
 				}
@@ -313,7 +322,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:266,
 				question_id: 7.0213,
-				description: 'Done',
+				description: 'Proceed',
 				triggers:{
 
 				}
@@ -326,13 +335,13 @@ Ext.define('ceda.store.AnswerStore', {
 				description: '&#8805; 1 episode/week',
 				triggers:{
 					binge_frequency_weeks: true,
-					binge_frequency_months: true
+					OBE_1perMON: true
 				}
 			},			
 			{
 				id:28,
 				question_id: 7.03,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					binge_frequency_weeks: false
 				}
@@ -342,39 +351,80 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.04,
 				description: '&#8805; 1 episode/month',
 				triggers:{
-					binge_frequency_months: true
+					OBE_1perMON: true
 				}
 			},
 			{
 				id:31,
 				question_id: 7.04,
-				description: 'no',
+				description: 'No',
 				triggers:{
-					binge_frequency_months: false
+					OBE_1perMON: false
 				}
 			},
 // End of old binge eating section
 
-{
+			{
 				id:32,
 				question_id: 7.05,
-				description: 'yes',
+				description: 'Yes: the individual engages in purging behaviors',
 				triggers:{
-					in_behaviors: true
+					purging: true
 				}
 			},
 			{
 				id:33,
 				question_id: 7.05,
-				description: 'no',
+				description: 'No: the individual does NOT engage in purging behaviors',
 				triggers:{
-					in_behaviors: false
+					purging: false
+				}
+			},
+			{
+				id:33.1,
+				question_id: 7.0501,
+				description: 'Yes: purging episodes at least 1x/WEEK',
+				triggers:{
+					purging1xWK: true,
+					purging1xMON: true
+				}
+			},
+			{
+				id:33.2,
+				question_id: 7.0501,
+				description: 'No: purging episodes less than 1x/WEEK',
+				triggers:{
+					purging1xWK: false
+				}
+			},
+			{
+				id:33.3,
+				question_id: 7.0502,
+				description: 'Yes: purging episodes at least 1x/MON',
+				triggers:{
+					purging1xMON: true
+				}
+			},
+			{
+				id:33.4,
+				question_id: 7.0502,
+				description: 'No: purging episodes less than 1x/MON',
+				triggers:{
+					purging1xMON: false
+				}
+			},
+			{
+				id:33.5,
+				question_id: 7.0505,
+				description: 'Proceed',
+				triggers:{
+						
 				}
 			},
 			{
 				id:34,
 				question_id: 7.06,
-				description: 'yes',
+				description: 'Yes: exercises excessively',
 				triggers:{
 					in_exercise: true
 				}
@@ -382,15 +432,55 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35,
 				question_id: 7.06,
-				description: 'no',
+				description: 'No: does NOT exercise excessively',
 				triggers:{
 					in_exercise: false
 				}
 			},
 			{
+				id:35.1,
+				question_id: 7.0601,
+				description: 'Yes: excessive exercise at least 1x/week',
+				triggers:{
+					in_exercise1xWK: true,
+					in_exercise1xMON: true
+				}
+			},
+			{
+				id:35.2,
+				question_id: 7.0601,
+				description: 'No: excessive exercise less than 1x/week',
+				triggers:{
+					in_exercise1xWK: false
+				}
+			},
+			{
+				id:35.3,
+				question_id: 7.0602,
+				description: 'Yes: excessive exercise at least 1x/MON',
+				triggers:{
+					in_exercise1xMON: true
+				}
+			},
+			{
+				id:35.4,
+				question_id: 7.0602,
+				description: 'No: excessive exercise less than 1x/MON',
+				triggers:{
+					in_exercise1xMON: false
+				}
+			},
+			{
+				id:35.5,
+				question_id: 7.0605,
+				description: 'Proceed',
+				triggers:{
+				}
+			},
+			{
 				id:36,
 				question_id: 7.07,
-				description: 'yes',
+				description: 'Yes: to compensate for binge eating',
 				triggers:{
 					in_compensate: true
 				}
@@ -398,7 +488,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:37,
 				question_id: 7.07,
-				description: 'no',
+				description: 'No: NOT to compensate for binge eating',
 				triggers:{
 					in_compensate: false
 				}
@@ -406,7 +496,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:38,
 				question_id: 7.08,
-				description: 'yes',
+				description: 'Yes: to control weight',
 				triggers:{
 					in_weightloss: true
 				}
@@ -414,7 +504,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:39,
 				question_id: 7.08,
-				description: 'no',
+				description: 'No: NOT to control weight',
 				triggers:{
 					in_weightloss: false
 				}
@@ -422,7 +512,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:90,
 				question_id: 7.09,
-				description: 'yes',
+				description: 'Yes: at least once a week',
 				triggers:{
 					in_frequency_weeks: true,
 					in_frequency_months: true
@@ -431,7 +521,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:91,
 				question_id: 7.09,
-				description: 'no',
+				description: 'No: less than once a week',
 				triggers:{
 					in_frequency_weeks: false
 				}
@@ -439,7 +529,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:92,
 				question_id:7.10,
-				description: 'yes',
+				description: 'Yes: at least once a month',
 				triggers:{
 					in_frequency_months: true
 				}
@@ -447,7 +537,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:93,
 				question_id:7.10,
-				description: 'no',
+				description: 'No: less than once a month',
 				triggers:{
 					in_frequency_months: false
 				}
@@ -455,7 +545,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:40,
 				question_id: 8,
-				description: 'yes',
+				description: 'Yes: weight and shape exert undue influence',
 				triggers:{
 					bodyweight_selfworth: true
 				}
@@ -463,7 +553,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:41,
 				question_id: 8,
-				description: 'no',
+				description: 'No: weight and shape do NOT exert undue influence',
 				triggers:{
 					bodyweight_selfworth: false
 				}
@@ -479,7 +569,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:43,
 				question_id: 9.1,
-				description: 'yes',
+				description: 'Yes: ate faster than normal',
 				triggers:{
 					binge_rapid: true
 				}
@@ -487,7 +577,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:44,
 				question_id: 9.1,
-				description: 'no',
+				description: 'No: did NOT eat faster',
 				triggers:{
 					binge_rapid: false
 				}
@@ -495,7 +585,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:45,
 				question_id: 9.2,
-				description: 'yes',
+				description: 'Yes: until uncomfortably full',
 				triggers:{
 					binge_full: true
 				}
@@ -503,7 +593,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:46,
 				question_id: 9.2,
-				description: 'no',
+				description: 'No: NOT until uncomfortably full',
 				triggers:{
 					binge_full: false
 				}
@@ -511,7 +601,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:47,
 				question_id: 9.3,
-				description: 'yes',
+				description: 'Yes: ate large amounts when not hungry',
 				triggers:{
 					binge_no_hunger: true
 				}
@@ -519,7 +609,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:48,
 				question_id: 9.3,
-				description: 'no',
+				description: 'No: did NOT eat large amounts when not hungry',
 				triggers:{
 					binge_no_hunger: false
 				}
@@ -527,7 +617,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:49,
 				question_id: 9.4,
-				description: 'yes',
+				description: 'Yes: ate alone because ashamed',
 				triggers:{
 					binge_shame: true
 				}
@@ -535,7 +625,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:50,
 				question_id: 9.4,
-				description: 'no',
+				description: 'No: did NOT eat alone because ashamed',
 				triggers:{
 					binge_shame: false
 				}
@@ -543,7 +633,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:51,
 				question_id: 9.5,
-				description: 'yes',
+				description: 'Yes: felt badly',
 				triggers:{
 					binge_sad: true
 				}
@@ -551,7 +641,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:52,
 				question_id: 9.5,
-				description: 'no',
+				description: 'No: did NOT feel badly',
 				triggers:{
 					binge_sad: false
 				}
@@ -559,7 +649,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:53,
 				question_id: 10,
-				description: 'yes',
+				description: 'Yes: markedly distressed',
 				triggers:{
 					binge_distress: true
 				}
@@ -567,7 +657,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:54,
 				question_id: 10,
-				description: 'no',
+				description: 'No: NOT markedly distressed',
 				triggers:{
 					binge_distress: false
 				}
@@ -575,7 +665,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:55,
 				question_id: 11,
-				description: 'yes',
+				description: 'Yes: serious nutritional problems from restricted eating',
 				triggers:{
 					avoidant_nutritional_problems: true
 				}
@@ -583,7 +673,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:56,
 				question_id: 11,
-				description: 'no',
+				description: 'No: no serious nutritional problems',
 				triggers:{
 					avoidant_nutritional_problems: false
 				}
@@ -591,7 +681,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:57,
 				question_id: 11.1,
-				description: 'yes',
+				description: 'Yes: has lost significant weight',
 				triggers:{
 					avoidant_weightloss: true
 				}
@@ -599,7 +689,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:58,
 				question_id: 11.1,
-				description: 'no',
+				description: 'No: has NOT lost significant weight',
 				triggers:{
 					avoidant_weightloss: false
 				}
@@ -607,7 +697,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:59,
 				question_id: 11.2,
-				description: 'yes',
+				description: 'Yes: there have been significant nutritional deficiencies',
 				triggers:{
 					avoidant_nutri_def: true
 				}
@@ -615,7 +705,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:60,
 				question_id: 11.2,
-				description: 'no',
+				description: 'No: significant nutritional deficiencies have NOT occurred',
 				triggers:{
 					avoidant_nutri_def: false
 				}
@@ -623,7 +713,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:61,
 				question_id: 11.3,
-				description: 'yes',
+				description: 'Yes: has needed nutritional supplements',
 				triggers:{
 					avoidant_nutri_suppliment: true
 				}
@@ -631,7 +721,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:62,
 				question_id: 11.3,
-				description: 'no',
+				description: 'No: nutritional supplements NOT needed',
 				triggers:{
 					avoidant_nutri_suppliment: false
 				}
@@ -639,7 +729,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:63,
 				question_id: 11.4,
-				description: 'yes',
+				description: 'Yes: marked interence with psychosocial functioning',
 				triggers:{
 					avoidant_psychosocial_interference: true
 				}
@@ -647,7 +737,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:64,
 				question_id: 11.4,
-				description: 'no',
+				description: 'No: psychosocial functioning NOT impaired',
 				triggers:{
 					avoidant_psychosocial_interference: false
 				}
@@ -655,7 +745,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:65,
 				question_id: 12,
-				description: 'yes',
+				description: 'Yes: there is a good alternative explanation',
 				triggers:{
 					avoidant_alt_explanation: true
 				}
@@ -663,7 +753,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:66,
 				question_id: 12,
-				description: 'no',
+				description: 'No: NO alternative explanation',
 				triggers:{
 					avoidant_alt_explanation: false
 				}
@@ -671,7 +761,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:67,
 				question_id: 13,
-				description: 'yes',
+				description: 'Yes: there is an associated problem that accounts for eating',
 				triggers:{
 					avoidant_alt_condition: true
 				}
@@ -679,7 +769,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:68,
 				question_id: 13,
-				description: 'no',
+				description: 'No: there is NO associated problem',
 				triggers:{
 					avoidant_alt_condition: false
 				}
@@ -687,7 +777,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:69,
 				question_id: 14,
-				description: 'yes',
+				description: 'Yes: independent attention needed',
 				triggers:{
 					avoidant_independent_clinical: true
 				}
@@ -695,7 +785,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:70,
 				question_id: 14,
-				description: 'no',
+				description: 'No: independent attention NOT needed',
 				triggers:{
 					avoidant_independent_clinical: false
 				}
@@ -703,7 +793,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:71,
 				question_id: 15,
-				description: 'yes',
+				description: 'Yes: repeatedly regurgitated food',
 				triggers:{
 					regurge_repeated: true
 				}
@@ -711,7 +801,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:72,
 				question_id: 15,
-				description: 'no',
+				description: 'No: does NOT repeatedly regurgitate food',
 				triggers:{
 					regurge_repeated: false
 				}
@@ -719,7 +809,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:73,
 				question_id: 16,
-				description: 'yes',
+				description: 'Yes: there is an associated problem that accounts for regurgitation',
 				triggers:{
 					regurge_alt_explanation: true
 				}
@@ -727,7 +817,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:74,
 				question_id: 16,
-				description: 'no',
+				description: 'No: there is NO associated problem',
 				triggers:{
 					regurge_alt_explanation: false
 				}
@@ -735,7 +825,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:75,
 				question_id: 17,
-				description: 'yes',
+				description: 'Yes: additional attention required',
 				triggers:{
 					regurge_independent_clinical: true
 				}
@@ -743,7 +833,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:76,
 				question_id: 17,
-				description: 'no',
+				description: 'No: additional attention NOT required',
 				triggers:{
 					regurge_independent_clinical: false
 				}
@@ -751,7 +841,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:77,
 				question_id: 18,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					nonfood_age_appropriate: true
 				}
@@ -759,7 +849,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:78,
 				question_id: 18,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					nonfood_age_appropriate: false
 				}
@@ -767,7 +857,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:79,
 				question_id: 19,
-				description: 'yes',
+				description: 'Yes: eats non-food substances',
 				triggers:{
 					nonfood_persistent: true
 				}
@@ -775,7 +865,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:80,
 				question_id: 19,
-				description: 'no',
+				description: 'No: does NOT eat non-foods',
 				triggers:{
 					nonfood_persistent: false
 				}
@@ -783,7 +873,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:81,
 				question_id: 20,
-				description: 'yes',
+				description: 'Yes: behavior is culturally sanctioned',
 				triggers:{
 					nonfood_culturally_sanctioned: true
 				}
@@ -791,15 +881,86 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:82,
 				question_id: 20,
-				description: 'no',
+				description: 'No: behavior is NOT culturally sanctioned',
 				triggers:{
 					nonfood_culturally_sanctioned: false
 				}
 			},
+// 
+// The section below has the answers for the other ED section
+//
+			{
+				id: 99,
+				question_id: 30,
+				description: 'Proceed to see brief descriptions.',
+				triggers: {
+				}
+			},
+			{
+				id: 100,
+				question_id: 31,
+				description: 'Proceed to choose most appropriate diagnosis.',
+				triggers: {
+				}
+			},
+
+			{
+				id: 101,
+				question_id: 32,
+				description: 'Atypical Anorexia Nervosa',
+				triggers: {
+					atypicalAN: true
+				}
+			},
+			{
+				id: 102,
+				question_id: 32,
+				description: 'Subthreshold Bulimia Nervosa',
+				triggers: {
+					subthresholdBN: true
+				}
+			},
+			{
+				id: 103,
+				question_id: 32,
+				description: 'Subthreshold Binge Eating Disorder',
+				triggers: {
+					subthresholdBED: true
+				}
+			},
+			{
+				id: 104,
+				question_id: 32,
+				description: 'Purging Disorder',
+				triggers: {
+					purgingdisorder: true
+				}
+			},
+			{
+				id: 105,
+				question_id: 32,
+				description: 'Night Eating Syndrome',
+				triggers: {
+					NES: true
+				}
+			},
+			{
+				id: 106,
+				question_id: 32,
+				description: 'Other (unspecified) Eating Disorder',
+				triggers: {
+					otherED: true
+				}
+			},
+
+//
+// The section below contains the answers for the original other ED section
+// No longer used as of 8/5/13
+// 
 			{
 				id:83,
 				question_id: 21,
-				description: 'yes',
+				description: 'Yes',
 				triggers:{
 					nonfood_needs_clinical: true
 				}
@@ -807,7 +968,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:84,
 				question_id: 21,
-				description: 'no',
+				description: 'No',
 				triggers:{
 					nonfood_needs_clinical: false
 				}

@@ -80,10 +80,19 @@ Ext.define('ceda.controller.SimpleNavController', {
 			}
 		}
 		*/
-		if(! this.captureCapturables()){
+		problems = this.captureCapturables();
+		
+		if(problems.invalids.length > 0){
+			input = problems.invalids[0].value;
+			message = input + ' is not a valid ' + problems.invalids[0].name.split(':')[2];
+			alert(message);
+			return;
+		}
+		if(problems.empties.length > 0){
 			alert("Complete all inputs on this page.");
 			return;
 		}
+		
 		var global_triggers = this.assessment.get('triggers');
 		var answer_triggers = record.get('triggers');
 
@@ -114,7 +123,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	viewQuestion: function(question, back){
-		var debug = true;
+//		var debug = true;
+		var debug = false;
 		if(this.questionstack.length === 0){
 			this.getBackbutton().hide();
 		}
@@ -128,7 +138,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.qview = Ext.widget('qview');
 		this.qview.setRecord(question);
 		var inputs = Ext.query('input[id^="save"]');
-		for (key in inputs){
+		for (var key in inputs){
 			input = inputs[key];
 			if (this.backedvalues.hasOwnProperty(input.id)){
 				input.value = this.backedvalues[input.id];
@@ -177,7 +187,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 				}
 				var target = rule.target;
 				var qstore = Ext.getStore('questionStore');
-				//var question = qstore.findRecord('id', target);
 				return qstore.findRecord('id', target);
 			}
 		}
@@ -186,12 +195,20 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 	captureCapturables: function(){
 		var inputs = Ext.query('input[id^="save"]');
-		var ret = true;
-		for(key in inputs){
+		var problems = {
+			empties: [],
+			invalids: []
+		};
+		
+		for(var key in inputs){
 			var input = inputs[key];
 			if(input.value){
 				this.backedvalues[input.id] = input.value;
 				var section_name = input.name.split(':');
+				if (! this.validateInput(input) ){
+					problems.invalids.push(input);
+				}
+
 				var section = section_name[0];
 				section = section.replace(/_/g, " ");
 				var name = section_name[1];
@@ -203,7 +220,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 				this.savedvalues[section][name] = value;
 			}
 			else{
-				ret = false;
+				problems.empties.push(input);
 			}
 		}
 		var optionals = Ext.query('input[id^="optional"]');
@@ -223,6 +240,20 @@ Ext.define('ceda.controller.SimpleNavController', {
 				this.savedvalues[section][name] = value;
 			}
 		}
-		return ret;
+		return problems;
+	},
+	validateInput: function(input){
+		var value = input.value;
+		var tType = input.name.split(':')[2];
+		if(tType == undefined){
+			return true;
+		}
+		if(tType == 'date'){
+			return /^\d{1,2}[\/-]\d{1,2}[\/-](\d{2}){1,2}$/.test(value);	
+		}
+		if(tType == 'number'){
+			return /^\d+$/.test(value);
+		}
+		return true;
 	}
 });
