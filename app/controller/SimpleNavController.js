@@ -81,7 +81,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 		*/
 		problems = this.captureCapturables();
-		
+
 		if(problems.invalids.length > 0){
 			input = problems.invalids[0].value;
 			message = input + ' is not a valid ' + problems.invalids[0].name.split(':')[2];
@@ -92,7 +92,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			alert("Complete all inputs on this page.");
 			return;
 		}
-		
+
 		var global_triggers = this.assessment.get('triggers');
 		var answer_triggers = record.get('triggers');
 
@@ -137,13 +137,22 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.getMainpanel().remove(this.qview);
 		this.qview = Ext.widget('qview');
 		this.qview.setRecord(question);
-		var inputs = Ext.query('input[id^="save"]');
+
+		var inputs = Ext.query('*[id^="save"]');
 		for (var key in inputs){
 			input = inputs[key];
 			if (this.backedvalues.hasOwnProperty(input.id)){
 				input.value = this.backedvalues[input.id];
 			}
 		}
+		var optionals = Ext.query('*[id^="optional"]');
+		for (var key in optionals){
+			input = optionals[key];
+			if (this.backedvalues.hasOwnProperty(input.id)){
+				input.value = this.backedvalues[input.id];
+			}
+		}
+
 		console.info(this.debug);
 		if(debug){
 			var triggers = this.assessment.get('triggers');
@@ -194,12 +203,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	captureCapturables: function(){
-		var inputs = Ext.query('input[id^="save"]');
 		var problems = {
 			empties: [],
 			invalids: []
 		};
-		
+
+		var inputs = Ext.query('*[id^="save"]');
 		for(var key in inputs){
 			var input = inputs[key];
 			if(input.value){
@@ -223,7 +232,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 				problems.empties.push(input);
 			}
 		}
-		var optionals = Ext.query('input[id^="optional"]');
+
+		var optionals = Ext.query('*[id^="optional"]');
 		for(key in optionals){
 			var input = optionals[key];
 			if(input.value){
@@ -249,7 +259,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			return true;
 		}
 		if(tType == 'date'){
-			return /^\d{1,2}[\/-]\d{1,2}[\/-](\d{2}){1,2}$/.test(value);	
+			return /^\d{1,2}[\/-]\d{1,2}[\/-](\d{2}){1,2}$/.test(value);
 		}
 		if(tType == 'number'){
 			return /^\d+$/.test(value);
