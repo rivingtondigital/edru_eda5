@@ -9,8 +9,15 @@ Ext.define('ceda.model.PersistedAssessment', {
 		fields: [
 			'id',
 			'user',
-			'savedon',
-			'lastupdated',
+			{
+				name:'savedon',
+				sortType: 'asDate'
+			},
+			{
+				name: 'lastupdated',
+				sortType: 'asDate'
+			},
+
 			'data'
 		]
 	}
