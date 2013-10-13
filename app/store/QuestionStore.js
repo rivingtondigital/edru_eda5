@@ -442,7 +442,7 @@ Ext.define('ceda.store.QuestionStore', {
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
 								'<td><span># of OBEs per week: <span></td>',
-								'<td><input id="saveOBEfreq" name="BingeEating:OBEs" type="text"></input></td>',
+								'<td><input id="saveOBEfreq" name="BingeEating:OBEs per week" type="text"></input></td>',
 								'</tr>',
 								'</table>'
 					].join('')
@@ -471,6 +471,12 @@ Ext.define('ceda.store.QuestionStore', {
 					'<br/>',
 					'Can you give me an example of what you typically ate? And the context?',
 					'<br/>',
+							[
+								'If Yes, enter typical binge below: ',
+								'<br/><br/>',
+								'<textarea id="optionalSBEitems" name="BingeEating:SBEitems" type="text" size="20" width="20"></textarea>',
+								'<br/>'
+							].join('')
 				].join("<br/>"),
 				symptom:[
 					'Subjective Binge Episode (SBE): Has the individual eaten a subjectively large amount of food in a discrete period of time, while experiencing a loss of control?',
@@ -553,7 +559,7 @@ Ext.define('ceda.store.QuestionStore', {
 					'<table border=1 spacing=1 padding=2>',
 					'<tr>',
 					'<td><span># of SBEs per week: <span></td>',
-					'<td><input id="saveSBEfreq" name="BingeEating:SBEs" type="text"></input></td>',
+					'<td><input id="saveSBEfreq" name="BingeEating:SBEs per week" type="text"></input></td>',
 					'</tr>',
 					'</table>'
 				].join("<br/>"),
