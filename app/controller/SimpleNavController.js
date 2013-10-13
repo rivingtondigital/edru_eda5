@@ -155,6 +155,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 	register_user:function(){
 		this.getSave_bttn().hide();
+		this.getBack_bttn().show();
 		var user = this.getReg_user().getValue();
 		var pass = this.getReg_pass().getValue();
 		var confirm = this.getReg_confirm().getValue();
