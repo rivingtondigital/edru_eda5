@@ -2,6 +2,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	extend:'Ext.app.Controller',
 	config: {
 		assessment: true,
+		instrument: true,
 		savedvalues: {},
 		backedvalues: {},
 		user: false,
@@ -73,9 +74,16 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 	},
 	restore_session: function(button){
-			if (button.hasOwnProperty('sess_id')){
-				console.debug(button['sess_id']);
-				var astore = Ext.getStore('assessmentStore');
+		if (button.hasOwnProperty('sess_id')){
+			var astore = Ext.getStore('assessmentStore');
+
+			if (button['action'] == 'delete'){
+				var del = astore.findRecord('id', button['sess_id']);
+				del.erase();
+				del.destroy();
+				this.getSaved_list().refresh();
+			}
+			else{
 				this.saved_session = astore.findRecord('id', button['sess_id']);
 				var dec = JSON.parse(sjcl.decrypt(this.password, this.saved_session.data.data));
 
@@ -89,13 +97,15 @@ Ext.define('ceda.controller.SimpleNavController', {
 				this.savedvalues = this.assessment.get('savedvalues');
 				this.backedvalues = this.assessment.get('backedvalues');
 				this.questionstack = this.assessment.get('questionstack');
+
+				this.questionstack.pop(); //get 'save' off of stack
 				var pg = this.questionstack.pop();
 				if (pg == 'output'){
 					this.viewOutput();
 				}
 				else{
 					qstore = Ext.getStore('questionStore');
-					var q = qstore.findRecord(pg);
+					var q = qstore.findRecord('id', pg);
 					if (q != null){
 						this.viewQuestion(q, false);
 					}
@@ -106,6 +116,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 				}
 
 			}
+		}
 	},
 
 	view_saved: function(){
@@ -198,6 +209,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	save_session: function(){
+
 		if (this.password == null){
 			this.post_login_callback = this.save_session;
 			this.login();
@@ -211,12 +223,15 @@ Ext.define('ceda.controller.SimpleNavController', {
 			var assessments = Ext.getStore('assessmentStore')
 			assessments.load();
 
+			var d = new Date();
 			if (this.saved_session == null){
 				var assessment = {
-					'savedon': Date(),
-					'lastupdated': Date(),
+					'savedon': d.toJSON(),
+					'lastupdated': d.toJSON(),
 					'user': this.user,
-					'data': sjcl.encrypt(this.password, JSON.stringify(this.assessment))
+					'data': sjcl.encrypt(this.password, JSON.stringify(this.assessment)),
+					'instrument': this.instrument.get('id'),
+					'text': this.instrument.get('name') + ' - ' + this.questionstack.slice(-1) + ' [' + d.toLocaleDateString() +' '+ d.toLocaleTimeString() + ']'
 				}
 				assessment = assessments.add(assessment)[0];
 				this.saved_session = assessment;
@@ -224,15 +239,18 @@ Ext.define('ceda.controller.SimpleNavController', {
 			else{
 				this.saved_session.set('data', sjcl.encrypt(this.password, JSON.stringify(this.assessment)));
 				this.saved_session.set('lastupdated', Date());
+				this.saved_session.set('text', this.instrument.get('name') + ' - ' + this.questionstack.slice(-1) + ' [' + d.toLocaleDateString() +' '+ d.toLocaleTimeString() + ']');
 			}
 			assessments.sync();
 			alert('Assessment Saved');
-			var page = this.questionstack.pop();
+			var page = this.questionstack.slice(-1);
 			if (page == 'output'){
 				this.viewOutput();
 			}
 			else{
-				this.backup();
+				var qstore = Ext.getStore('questionStore');
+				q = qstore.findRecord('id', this.questionstack.pop());
+				this.viewQuestion(q, false);
 			}
 			return true;
 		}
@@ -256,7 +274,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 	login: function(){
 		login = confirm('You need to login in order to perform that action. Would you like to log in now?');
 		if (login){
-			this.questionstack.push('output');
 			var lview = Ext.widget('loginview');
 			this.getMainpanel().animateActiveItem(lview, {type:'slide', direction: 'left'});
 		}
@@ -264,7 +281,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 	initView: function(){
 		var istore = Ext.getStore('instrumentStore');
-		var instrument = istore.findRecord('id', 1);
+		this.instrument = istore.findRecord('id', 1);
 		var details = Ext.widget('idetail');
 		if (this.saved_session == null){
 			this.assessment = Ext.create('ceda.model.Assessment', {
@@ -281,10 +298,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.savedvalues = this.assessment.get('savedvalues');
 		this.backedvalues = this.assessment.get('backedvalues');
 		this.questionstack = this.assessment.get('questionstack');
-
 		this.qview = Ext.widget('qview');
-		details.setRecord(instrument);
-		this.getBar().setTitle(instrument.get("name"));
+		details.setRecord(this.instrument);
+		this.getBar().setTitle(this.instrument.get("name"));
 		this.getMainpanel().add(details);
 	},
 
@@ -331,6 +347,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	viewOutput: function(){
+		this.getBack_bttn().show();
+		this.getRestart_bttn().show();
+		this.getSave_bttn().show();
+
 		//this.captureCapturables();
 		var oview = Ext.widget('oview');
 		oview.setCollectedInfo(this.savedvalues);
@@ -343,13 +363,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var debug = false;
 		if(this.questionstack.length === 0){
 			this.getBack_bttn().hide();
-			this.getSave_bttn().hide();
 		}
 		else{
 			this.getBack_bttn().show();
-			this.getSave_bttn().show();
 		}
 		this.getRestart_bttn().show();
+		this.getSave_bttn().show();
 
 
 		this.questionstack.push(question.get('id'));

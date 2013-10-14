@@ -18,7 +18,9 @@ Ext.define('ceda.model.PersistedAssessment', {
 				sortType: 'asDate'
 			},
 
-			'data'
+			'data',
+			'instrument',
+			'text'
 		]
 	}
 })
