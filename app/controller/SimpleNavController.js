@@ -98,7 +98,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 				this.backedvalues = this.assessment.get('backedvalues');
 				this.questionstack = this.assessment.get('questionstack');
 
-				this.questionstack.pop(); //get 'save' off of stack
 				var pg = this.questionstack.pop();
 				if (pg == 'output'){
 					this.viewOutput();
@@ -114,7 +113,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 						this.viewQuestion(q, false);
 					}
 				}
-
 			}
 		}
 	},
