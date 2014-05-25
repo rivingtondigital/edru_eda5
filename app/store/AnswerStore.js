@@ -54,7 +54,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:5,
 				question_id: 2,
-				description: 'No: there is NO such disturbance',
+				description: 'No: there is no disturbance in eating',
 				triggers:{
 					eatingdisturbance: false
 				}
@@ -62,7 +62,7 @@ Ext.define('ceda.store.AnswerStore', {
 						{
 				id:6,
 				question_id: 3,
-				description: 'Eating is aberrant',
+				description: 'Eating is abnormal',
 				triggers:{
 					aberranteating: true
 				}
@@ -125,7 +125,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:12,
 				question_id: 5.1,
-				description: 'No; not afraid of gaining weight',
+				description: 'No: not afraid of gaining weight',
 				triggers:{
 					fearofgain: false
 				}
@@ -141,7 +141,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:14,
 				question_id: 5.2,
-				description: 'No: no peristent behavior to avoid weight gain',
+				description: 'No: no persistent behavior to avoid weight gain',
 				triggers:{
 					interfering: false
 				}
@@ -149,7 +149,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:15,
 				question_id: 6.1,
-				description: 'Yes: there is disortion of body image',
+				description: 'Yes: there is distortion of body image',
 				triggers:{
 					distorted_body_image: true
 				}
