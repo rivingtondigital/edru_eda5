@@ -37,6 +37,9 @@ Ext.define('ceda.view.QuestionView', {
 						'<div class="probearea">',
 							'<ul><li>{interviewprobe}</li></ul>',
 						'</div>',
+						'<div>',
+							'<span class="span_id">{id}</span>',
+						'</div>',
 					'</div>']
 			},
 			{
