@@ -17,21 +17,21 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname: 'ID',
 				interviewprobe: [
 							[
-								'1. Enter date and codes for interviewee and interviewer. ',
+								'1. Enter date and codes for interviewer and subject. ',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
 								'<td><span>Date of interview: <span></td>',
 								'<td><input id="saveInterviewDate" name="Interview:Date:date" type="text"></input></td>',
 								'</tr><tr>',
-								'<td><span>ID of person interviewed: <span></td>',
-								'<td><input id="saveSubjectID" name="Interview:SubjectID" type="text"></input></td>',
-								'</tr><tr>',
-								'<td><span>Subject&#39s Age: <span></td>',
-								'<td><input id="saveSubjectAge" name="Interview:SubjectAge:number" type="text"></input></td>',
-								'</tr><tr>',
 								'<td><span>ID of interviewer:</span></td>',
 								'<td><input id="saveInterviewerID" name="Interview:InterviewerID" type="text"></input></td>',
+								'</tr><tr>',
+								'<td><span>ID of subject: <span></td>',
+								'<td><input id="saveSubjectID" name="Interview:SubjectID" type="text"></input></td>',
+								'</tr><tr>',
+								'<td><span>Subject&#39s age: <span></td>',
+								'<td><input id="saveSubjectAge" name="Interview:SubjectAge:number" type="text"></input></td>',
 								'</tr>',
 								'</table>',
 								'<br/>'
@@ -54,7 +54,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Introduction',
 				shortname: 'Eating Disturbance',
 				interviewprobe: '2. Are you having any problems with your eating? For example, is it hard for you to maintain your weight or alter your diet (e.g., eat certain types of food, eat at particular times of day)?<br><br>Do other people feel you have a problem in these areas?',
-				symptom: 'Is there a disturbance in eating or eating related behavior?',
+				symptom: 'Is there a disturbance in eating or eating-related behavior?',
 				rules: [
 					{
 						target: 3,
@@ -68,8 +68,8 @@ Ext.define('ceda.store.QuestionStore', {
 				instrument_id: 1,
 				sectionlabel: 'Introduction',
 				shortname: 'Typical Day',
-				interviewprobe: '3. Can you describe a typical day of eating? When and what do you eat?',
-				symptom: 'Is an aberrant eating pattern present (e.g., fasting, severely restricted intake, avoidance of certain foods, textures, binge eating episodes, purging)?',
+				interviewprobe: '3. Can you describe a typical day of eating? When and what do you eat?<br/><br/><i>As indicated, ask about symptoms such as the examples above.</i>',
+				symptom: 'Is an abnormal eating pattern present (for example, fasting, severely restricting intake, binge eating, purging, or avoiding certain foods or food textures)?',
 				rules: [
 					{
 						target: 3.01,
@@ -94,7 +94,8 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname: 'BMI',
 				interviewprobe: [
 							[
-								'3.01 What are your current height and weight? (Measure if possible)',
+								'3.01 What are your current height and weight?',
+								'<i>Measure if possible.</i>',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
@@ -104,7 +105,7 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><span>Height in inches: <span></td>',
 								'<td><input type="text" size=2 id="saveHeight" name="BMI:Height" onChange="calcBMI(\'saveWeight\',\'saveHeight\',\'saveBmi\')"></input></td>',
 								'</tr><tr>',
-								'<td><span>BMI (kg/m2)</span></td>',
+								'<td><span>BMI (kg/m<sup>2</sup>)</span></td>',
 								'<td><input type="text" size=2 disabled="true" name="BMI:BMI" id="saveBmi"></input></td>',
 								'</tr>',
 								'</table>'
@@ -143,7 +144,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'recent low weight',
 				interviewprobe: [
-						'4.06 What was your lowest weight in the last three months? [Enter below.]',
+						'4.06 What was your lowest weight in the last three months? <i>Enter below.</i>',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
@@ -153,15 +154,15 @@ Ext.define('ceda.store.QuestionStore', {
 								'<td><span>Height in inches: <span></td>',
 								'<td><input type="text" size=2 id="saveHeight" name="BMI:RecentHeight" onChange="calcBMI(\'saveRecentWeight\',\'saveHeight\',\'saveRecentLowBMI\')"></input></td>',
 								'</tr><tr>',
-								'<td><span>Lowest BMI (kg/m2): </span></td>',
+								'<td><span>Lowest BMI (kg/m<sup>2</sup>): </span></td>',
 								'<td><input type="text" size=2 disabled="true" name="BMI:RecentLowBMI" id="saveRecentLowBMI"></input></td>',
 								'</tr>',
 								'</table>'
 					].join(''),
 				symptom: [
-					'In the last 3 months, was individual at a significantly low body weight (ie, individual’s weight is significantly less than that of otherwise comparable normal individuals)?',
+					'In the last 3 months, was individual at a significantly low body weight (i.e., individual’s weight was significantly less than that of otherwise comparable normal individuals)?',
 					' ',
-					'Recall that, for adults, a BMI of 18.5 kg/m2 has been employed by the CDC as the lower limit of normal body weight.',
+					'For adults, a BMI of 18.5 kg/m<sup>2</sup> has been employed by the CDC as the lower limit of normal body weight.',
 				].join("<br>"),
 				rules: [
 					{
@@ -205,20 +206,19 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'interfering with weight gain',
 				interviewprobe: [
-					'5b. [Once any of the interfering behaviors below is endorsed, press YES and proceed.]',
+					'5b. <i>Once any of the interfering behaviors below is endorsed, press YES and proceed.</i>',
 					'',
 					'Do you try to cut back on calories or amounts or types of food? What do you try to do?',
 					'',
 					'Do you exercise? What do you do and how often?',
 					'',
-					'Do you vomit or use any types of pills (diet pills, diuretics, laxatives)?',
+					'Do you vomit or use any types of pills (such as diet pills, diuretics, or laxatives)?',
 					'',
 					'Do you do anything else that might make it hard for you to gain or maintain weight?',
 					'',
 				].join("<br>"),
 				symptom:[
-					'Are persistent behaviors [e.g., dietary restriction, excessive exercise, purging, fasting] interfering with weight gain?',
-					'',
+					'Are persistent behaviors (e.g., dietary restriction, excessive exercise, purging, fasting) interfering with weight gain?',
 					'',
 					'Other clinically significant behavior that interferes with weight gain might include spitting out food or inappropriate stimulant use.'
 				].join("<br>"),
@@ -246,11 +246,11 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					'6a. In terms of your body weight and shape, how do you think you look? Does what you see/feel/experience differ from how you think others might perceive you?',
 					'',
-					'If unable to describe distortion of body image: Have you recently thought that you are fat or that a part of your body is too big? Have you recently had a distorted view of your body? How so?'
+					'If unable to describe distortion of body image: Have you recently thought that you are fat or that a part of your body is too big? Have you recently had a distorted view of your body? Can you describe it?'
 				].join("<br>"),
 				symptom:[
 					'Is the individual’s body image distorted ',
-					'[e.g., description of feeling he/she appears fat despite being at a low weight]?'
+					'(e.g., feeling fat despite being at a low weight)?'
 				].join("<br>"),
 				rules:[
 					{
@@ -287,12 +287,12 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					'6c. Do you think that your current or recent low weight presents a significant problem for you and your overall health? Why or why not?',
 					'',
-					'If yes, what efforts have you made in the past 3 months to deal with this problem? Have your feelings about the significance of the problem fluctuated? How so?'
+					'If yes: What efforts have you made in the past 3 months to deal with this problem? Have your feelings about the significance of the problem fluctuated? How so?'
 				].join("<br>"),
 				symptom:[
-						'Does the individual recognize or acknowledge the seriousness of low body weight?',
+						'Does the individual recognize or acknowledge the seriousness of his or her low body weight?',
 						'',
-						'If individual initially acknowledges seriousness of problem, are the efforts taken commensurate or consistent with this recognition?'
+						'If individual initially acknowledges seriousness of the problem, are the efforts taken consistent with this recognition?'
 				].join("<br>"),
 				rules:[
 					{
@@ -358,7 +358,7 @@ Ext.define('ceda.store.QuestionStore', {
 							[
 								'If Yes, enter typical binge below: ',
 								'<br/><br/>',
-								'<textarea id="optionalOBEitems" name="BingeEating:OBEitems" type="text" size="20" width="20"></textarea>',
+								'<textarea id="optionalOBEitems" name="BingeEating:typical OBE items" type="text" size="20" width="20"></textarea>',
 								'<br/>'
 							].join('')
 				].join("<br/>"),
@@ -474,7 +474,7 @@ Ext.define('ceda.store.QuestionStore', {
 							[
 								'If Yes, enter typical binge below: ',
 								'<br/><br/>',
-								'<textarea id="optionalSBEitems" name="BingeEating:SBEitems" type="text" size="20" width="20"></textarea>',
+								'<textarea id="optionalSBEitems" name="BingeEating:typical SBE items" type="text" size="20" width="20"></textarea>',
 								'<br/>'
 							].join('')
 				].join("<br/>"),
@@ -678,7 +678,7 @@ Ext.define('ceda.store.QuestionStore', {
 					[
 						'<table>',
 						'<tr><td colspan="2">Average weekly frequency over past 3 months</td></tr>',
-						'<tr><td>Vomiting:</td> <td><input id="saveVomitFrequency" name="Vomitting:Average_number_per_week" size="3"></td></tr>',
+						'<tr><td>Vomiting:</td> <td><input id="saveVomitFrequency" name="Vomiting:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Laxatives:</td> <td><input id="saveLaxativesFrequency" name="Laxatives:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Diuretics:</td> <td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_week" size="3"></td></tr>',
 						'<tr>',
@@ -951,7 +951,7 @@ Ext.define('ceda.store.QuestionStore', {
 					[
 						'<table>',
 						'<tr><td colspan="2">Average weekly frequency over past 3 months</td></tr>',
-						'<tr><td>Vomiting:</td><td><input id="saveVomitFrequency" name="Vomitting:Average_number_per_week" size="3"></td></tr>',
+						'<tr><td>Vomiting:</td><td><input id="saveVomitFrequency" name="Vomiting:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Laxatives:</td><td><input id="saveLaxativesFrequency" name="Laxatives:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Diuretics:</td><td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Exercise:</td><td><input id="saveExerciseFrequency" name="Exercise:Average_number_per_week" size="3"></td></tr>',
