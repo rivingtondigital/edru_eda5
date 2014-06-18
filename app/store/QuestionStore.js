@@ -565,17 +565,13 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					'7b.34. Enter average number of subjective binge episodes per WEEK over the last 3 months.<br/>',
-					'<table>',
-					'<tr>',
-					'<td><span># of SBEs per week: <span></td>',
-					'<td><input id="saveSBEfreq" name="BingeEating:SBEs per week" type="text"></input></td>',
-					'</tr>',
-					'</table>'
+					'<span># of SBEs per week: <span>',
+					'<input id="saveSBEfreq" name="BingeEating:SBEs per week" type="text"></input>',
 				].join("<br/>"),
 				symptom:[
 					'Enter weekly frequency of subjective binge episodes (SBEs).<br/>',
 					'<i>If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.</i>',
-					'<br/>',	
+					'<br/>',
 				].join("<br/>"),
 				rules:[
 					{

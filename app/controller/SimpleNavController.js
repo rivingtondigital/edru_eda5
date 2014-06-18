@@ -207,7 +207,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	save_session: function(){
-
 		if (this.password == null){
 			this.post_login_callback = this.save_session;
 			this.login();
