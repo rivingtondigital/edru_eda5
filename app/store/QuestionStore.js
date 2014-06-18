@@ -90,11 +90,13 @@ Ext.define('ceda.store.QuestionStore', {
 			{	id: 3.01,
 				initial: false,
 				instrument_id: 1,
-				sectionlabel: 'BMI calculation',
+				sectionlabel: 'Introduction',
 				shortname: 'BMI',
 				interviewprobe: [
 							[
-								'3.01 What are your current height and weight?',
+								'3.01 BMI Calculation <br/><br/>',
+								'What are your current height and weight?',
+								'<br/>',
 								'<i>Measure if possible.</i>',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
@@ -141,10 +143,10 @@ Ext.define('ceda.store.QuestionStore', {
 				id:4.06,
 				initial: false,
 				instrument_id: 1,
-				sectionlabel: 'Anorexia Nervosa',
+				sectionlabel: 'Introduction',
 				shortname: 'recent low weight',
 				interviewprobe: [
-						'4.06 What was your lowest weight in the last three months? <i>Enter below.</i>',
+						'4.06 What was your lowest weight in the last 3 months? <i>Enter below.</i>',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
@@ -266,7 +268,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Anorexia Nervosa',
 				shortname: 'body image influence',
 				interviewprobe:[
-					'6b. Does your weight or your body shape impact how you feel about yourself?',
+					'6b. Does your body shape or your weight impact how you feel about yourself?',
 					'',
 					'For example, if you were to have a day when you did not like the number on the scale, or the way your clothes fit, or how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please tell me a little about this.'
 				].join("<br>"),
@@ -323,8 +325,11 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Binge Eating & Compensatory Behaviors',
 				shortname: 'lack of control',
 				interviewprobe:[
-					'7a. In the past few months, were there times when you felt a sense of loss of control over eating…or times when you felt that you could not stop eating or control what or how much you were eating?',
-					'<br/>',
+					'7a. In the past 3 months, were there times when you',
+					'felt a sense of loss of control over eating?',
+					'Or times when you felt that you could not stop eating?',
+					'Or times when you felt unable to control what or',
+					'how much you were eating?<br/>',
 					'If no: Have there been times when you felt you could not prevent yourself from eating? '
 				].join("<br>"),
 				symptom:[
@@ -351,10 +356,11 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Binge Eating & Compensatory Behaviors',
 				shortname: 'Example of loss of control',
 				interviewprobe:[
-					'7b. Were there times in the last three months when you felt out of control and consumed what was clearly a large amount of food?',
-					'<br/>',
-					'Can you give me an example of what you typically ate? And the context?',
-					'<br/>',
+					'7b. Were there times in the last 3 months when you',
+					'felt out of control and consumed what was clearly a large',
+					'amount of food?<br/>',
+					'Can you give me an example of what you typically ate?',
+					'And the context?<br/>',
 							[
 								'If Yes, enter typical binge below: ',
 								'<br/><br/>',
@@ -384,10 +390,12 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'7b.11. How many times in the last WEEK have you had an eating episode like what you have just described, when you ate a large amount of food and felt a lack of control?',
-					'<br/>',
-					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
-					'<br/>',
+					'7b.11. How many times in the last WEEK have you had an',
+					'eating episode like what you have just described, when',
+					'you ate a large amount of food and felt a lack of control?<br/>',
+					'Is this consistent with how frequently this behavior has',
+					'occurred for the past 3 months?<br/>',
+					'If no, how was frequency of episodes different?<br/>',
 				].join("<br/>"),
 				symptom:[
 					'Has objective binge eating occurred at least once a week, on average, for the last 3 months?'
@@ -410,8 +418,12 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'7b.12. How many times in the last MONTH have you had an eating episode when you ate a large amount of food and felt a lack of control?',
-					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
+					'7b.12. How many times in the last MONTH have you had ',
+					'an eating episode when you ate a large amount of food ',
+					'and felt a lack of control?<br/>',
+					'Is this consistent with how frequently this behavior has ',
+					'occurred for the past 3 months? If no, how was the ',
+					'frequency of episodes different?',
 					'<br/>',
 				].join("<br/>"),
 				symptom:[
@@ -436,8 +448,11 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 						[
-							'7b.21. Enter average number of objective binge episodes per WEEK over the last 3 months.',
-							'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
+							'7b.21. Enter average number of objective binge ',
+							'episodes per WEEK over the last 3 months.<br/>',
+							'<i>If frequency is less than once a week, divide ',
+							'monthly frequency by 4. For example, ',
+							'2 binge episodes/month = 0.5 episodes/week.<i/>',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
@@ -467,10 +482,8 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel: 'Binge Eating & Compensatory Behaviors',
 				shortname: 'Example of loss of control: SBE',
 				interviewprobe:[
-					'7b.31 Were there times in the last three months when you felt out of control but consumed no more than what others would judge to be a small or normal amount of food?',
-					'<br/>',
-					'Can you give me an example of what you typically ate? And the context?',
-					'<br/>',
+					'7b.31 Were there times in the last 3 months when you felt out of control but consumed no more than what others would judge to be a small or normal amount of food?<br/>',
+					'Can you give me an example of what you typically ate? And the context?<br/>',
 							[
 								'If Yes, enter typical binge below: ',
 								'<br/><br/>',
@@ -500,8 +513,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'7b.32. How many times in the last WEEK have you had an eating episode like what you have just described, when you ate a small or normal amount of food and felt a lack of control?',
-					'<br/>',
+					'7b.32. How many times in the last WEEK have you had an eating episode like what you have just described, when you ate a small or normal amount of food and felt a lack of control?<br/>',
 					'Is this consistent with how frequently this behavior have occurred for the past 3 months? If no, how was frequency of episodes different?',
 					'<br/>',
 				].join("<br/>"),
@@ -526,7 +538,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'7b.33. How many times in the last month have you had an eating episode when you ate a small or normal amount of food but felt a lack of control?',
+					'7b.33. How many times in the last MONTH have you had an eating episode when you ate a small or normal amount of food but felt a lack of control?',
 					'<br/>',
 					'Is this consistent with how frequently this behavior has occurred for the past 3 months? If no, how was frequency of episodes different?',
 					'<br/>',
@@ -552,11 +564,8 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'7b.34. Enter average number of subjective binge episodes per week over the last 3 months.',
-					'<br/>',
-					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.)',
-					'<br/><br/>',
-					'<table border=1 spacing=1 padding=2>',
+					'7b.34. Enter average number of subjective binge episodes per WEEK over the last 3 months.<br/>',
+					'<table>',
 					'<tr>',
 					'<td><span># of SBEs per week: <span></td>',
 					'<td><input id="saveSBEfreq" name="BingeEating:SBEs per week" type="text"></input></td>',
@@ -564,7 +573,9 @@ Ext.define('ceda.store.QuestionStore', {
 					'</table>'
 				].join("<br/>"),
 				symptom:[
-					'Enter weekly frequency of subjective binge episodes (SBEs).'
+					'Enter weekly frequency of subjective binge episodes (SBEs).<br/>',
+					'<i>If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.</i>',
+					'<br/>',	
 				].join("<br/>"),
 				rules:[
 					{
@@ -591,8 +602,7 @@ Ext.define('ceda.store.QuestionStore', {
 					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
-					'Does the individual use inappropriate (purging) behaviors?',
-					'<br/>',
+					'Does the individual use inappropriate (purging) behaviors?<br/>',
 					'Indicators of misuse include taking laxatives, diuretics, or other medications (e.g., diet pills) for weight control without a prescription, using more pills than suggested, or at a higher frequency.'
 				].join("<br/>"),
 				rules:[
@@ -614,14 +624,13 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7e.1. In the last week, how many times have you engaged in this type of behavior?',
-						'<br/>',
+						'7e.1. In the last WEEK, how many times have you engaged in this type of behavior?<br/>',
 						'Is this typical of the last 3 months?',
 						'<br/>'
 					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
-					'Does  the individual engage in inappropriate (purging) behaviors, on average, at least once a WEEK over the last 3 months?',
+					'Does  the individual engage in inappropriate (purging) behaviors, on average, at least once a week over the last 3 months?',
 					'<br/>',
 				].join("<br/>"),
 				rules:[
@@ -643,14 +652,13 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7e.2. In the last month, how many times have you engaged in this type of behavior?',
-						'<br/>',
+						'7e.2. In the last MONTH, how many times have you engaged in this type of behavior?<br/>',
 						'Is this typical of the last 3 months?',
 						'<br/>'
 					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
-					'Has  the individual engaged in inappropriate (purging) behaviors, on average, at least once a MONTH over the last 3 months?',
+					'Has  the individual engaged in inappropriate (purging) behaviors, on average, at least once a month over the last 3 months?',
 					'<br/>',
 				].join("<br/>"),
 				rules:[
@@ -672,12 +680,11 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7e.5. Can you estimate how many times per week over the last 3 months, on average, you have made yourself vomit, or misused laxatives, diuretics or other medications?',
-						'<br/>',
+						'7e.5. Can you estimate how many times per WEEK over the last 3 months, on average, you have made yourself vomit, or misused laxatives, diuretics or other medications?<br/>',
 					].join("<br/>"),
 					[
 						'<table>',
-						'<tr><td colspan="2">Average weekly frequency over past 3 months</td></tr>',
+						'<tr><td colspan="2">Average weekly frequency over past 3 months:<br/></td></tr>',
 						'<tr><td>Vomiting:</td> <td><input id="saveVomitFrequency" name="Vomiting:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Laxatives:</td> <td><input id="saveLaxativesFrequency" name="Laxatives:Average_number_per_week" size="3"></td></tr>',
 						'<tr><td>Diuretics:</td> <td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_week" size="3"></td></tr>',
@@ -691,8 +698,8 @@ Ext.define('ceda.store.QuestionStore', {
 					].join(" ")
 				].join("<br/>"),
 				symptom:[
-					'Average number of episodes per WEEK over last 3 months. Has inappropriate behavior occurred at least once a week, on average, for the last 3 months?',
-					'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 episodes/month = 0.5 episodes/week.)'
+					'Average number of episodes per week over last 3 months. Has inappropriate behavior occurred at least once a week, on average, for the last 3 months?<br/>',
+					'<i>If frequency is less than once a week, divide monthly frequency by 4. For example, 2 episodes/month = 0.5 episodes/week.</i>'
 				].join("<br/>"),
 				rules:[
 					{
@@ -712,23 +719,24 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7f. Do you exercise? What type of exercise do you do and for how long?',
+						'7f. Do you exercise? What type of exercise do you do and for how long?<br/>',
 					].join("<br/>"),
-					[
-						'Does the amount of exercise interfere with health or with fulfilling daily responsibilities?',
-						'<br/>'
-					].join(" "),
 					[
 						'<table>',
 						'<tr><td>Type of Exercise: </td> <td><input id="optionalExerciseType" name="Exercise:Type"></td></tr>',
 						'<tr><td>Average # minutes per episode: </td> <td><input id="optionalExerciseFrequency" name="Exercise:Average_number_mins_per_episode" size="3"></td></tr>',
 						'</table>'
-					].join(" ")
+					].join(" "),
+					[
+						'Does the amount of exercise you do interfere with your health',
+						'or get in the way of meeting your daily responsibilities?',
+						'<br/>'
+					].join(" "),
 				].join("<br/>"),
 				symptom:[
-					'Does the individual use exercise inappropriately (ie, exercise excessively)?',
+					'Does the individual use exercise inappropriately (i.e., excessively)?',
 					' ',
-					'Indicators of excessive exercise include exercising despite illness or injury, exercising to an extent that it interferes with daily responsibilities (e.g., being late for work or school), or feeling highly distressed when unable to exercise.'
+					'<i>Indicators of excessive exercise include exercising despite illness or injury, exercising to an extent that it interferes with daily responsibilities (e.g., being late for work or school), or feeling highly distressed when unable to exercise.</i>'
 				].join("<br/>"),
 				rules:[
 					{
@@ -774,14 +782,13 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7f.1. In the last week, how many times have you engaged in this type of exercise?',
-						'<br/>',
+						'7f.1. In the last WEEK, how many times have you engaged in this type of exercise?<br/>',
 						'Is this consistent with how frequently you have exercised over the past 3 months? If no, how was frequency of exercise different?',
 						'<br/>'
 					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
-					'Has the individual exercised inappropriately (ie, exercised excessively), on average, at least once a week over the last 3 months?'
+					'Has the individual exercised inappropriately (i.e., exercised excessively), on average, at least once a week over the last 3 months?'
 				].join("<br/>"),
 				rules:[
 					{
@@ -802,14 +809,13 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7f.2. In the last month, how many times have you engaged in this type of behavior?',
-						'<br/>',
+						'7f.2. In the last MONTH, how many times have you engaged in this type of exercise?<br/>',
 						'Is this typical of the last 3 months?',
 						'<br/>'
 					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
-					'Has the individual exercised inappropriately (ie, exercised excessively), on average, at least once a MONTH over the last 3 months?',
+					'Has the individual exercised inappropriately (i.e., exercised excessively), on average, at least once a month over the last 3 months?',
 					'<br/>',
 				].join("<br/>"),
 				rules:[
@@ -831,9 +837,7 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 					[
-						'7f.5. Enter average number of episodes of excessive exercise per WEEK over the last 3 months.',
-						'(If frequency is less than once a week, divide monthly frequency by 4. For example, 2 episodes/month = 0.5 episodes/week.)',
-						'<br/>',
+						'7f.5. Enter average number of episodes of excessive exercise per WEEK over the last 3 months.<br/>',
 						[
 							'<table>',
 							'<tr><td>Average episodes of excessive exercise per week: </td> <td><input id="saveExerciseFrequency" name="Exercise:Average_number_episodes_per_week" size="3"></td></tr>',
@@ -842,7 +846,8 @@ Ext.define('ceda.store.QuestionStore', {
 					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
-					'Enter weekly frequency of excessive exercise.',
+					'Enter weekly frequency of excessive exercise.<br/>',
+					'<i>If frequency is less than once a week, divide monthly frequency by 4. For example, 2 episodes/month = 0.5 episodes/week.</i>',
 					].join("<br/>"),
 				rules:[
 					{
@@ -1069,7 +1074,6 @@ Ext.define('ceda.store.QuestionStore', {
 //	****************************************************************************
 //	Assessment of reasons for purging or exercise: required for BN
 //	****************************************************************************
-
 			{
 				id:8,
 				initial:false,
@@ -1077,7 +1081,7 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Bulimia Nervosa',
 				shortname:'none',
 				interviewprobe:[
-					'8. Does your weight or your body shape impact how you feel about yourself?',
+					'8. Does your body shape or your weight impact how you feel about yourself?',
 					'',
 					'For example, if you were to have a day when you did not like the number on the scale, or the way your clothes fit, or how your body shape felt in general, how much would that impact you? Would it make you feel very badly about yourself? Please tell me a little about this.'
 				].join("<br/>"),

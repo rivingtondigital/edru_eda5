@@ -94,7 +94,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:10.01,
 				question_id: 4.06,
-				description: 'Was significantly underweight in last 3 mons',
+				description: 'Was significantly underweight in last 3 months',
 				triggers:{
 					recentlowweight: true
 				}
@@ -102,7 +102,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:10.02,
 				question_id: 4.06,
-				description: 'Was NOT significantly underweight in last 3 mons',
+				description: 'Was NOT significantly underweight in last 3 months',
 				triggers:{
 					recentlowweight: false
 				}
@@ -229,7 +229,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:251,
 				question_id: 7.0201,
-				description: 'Yes: at least 1 OBE/week, on average',
+				description: 'Yes: at least 1 OBE/WEEK, on average',
 				triggers:{
 					OBE_1perWK: true,
 					OBE_1perMON: true
@@ -238,7 +238,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:252,
 				question_id: 7.0201,
-				description: 'No: less than 1 OBE/week, on average',
+				description: 'No: less than 1 OBE/WEEK, on average',
 				triggers:{
 					OBE_1perWK: false
 				}
@@ -289,7 +289,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:262,
 				question_id: 7.0211,
-				description: 'Yes: at least 1 SBE/week, on average',
+				description: 'Yes: at least 1 SBE/WEEK, on average',
 				triggers:{
 					sbe_frequency_weeks: true,
 					sbe_frequency_months: true
@@ -298,7 +298,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:263,
 				question_id: 7.0211,
-				description: 'No: less than 1 SBE/week, on average',
+				description: 'No: less than 1 SBE/WEEK, on average',
 				triggers:{
 					sbe_frequency_weeks: false
 				}
@@ -332,7 +332,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:26,
 				question_id: 7.03,
-				description: '&#8805; 1 episode/week',
+				description: '&#8805; 1 episode/WEEK',
 				triggers:{
 					binge_frequency_weeks: true,
 					OBE_1perMON: true
@@ -349,7 +349,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:29,
 				question_id: 7.04,
-				description: '&#8805; 1 episode/month',
+				description: '&#8805; 1 episode/MONTH',
 				triggers:{
 					OBE_1perMON: true
 				}
@@ -400,7 +400,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:33.3,
 				question_id: 7.0502,
-				description: 'Yes: purging episodes at least 1x/MON',
+				description: 'Yes: purging episodes at least 1x/MONTH',
 				triggers:{
 					purging1xMON: true
 				}
@@ -408,7 +408,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:33.4,
 				question_id: 7.0502,
-				description: 'No: purging episodes less than 1x/MON',
+				description: 'No: purging episodes less than 1x/MONTH',
 				triggers:{
 					purging1xMON: false
 				}
@@ -440,7 +440,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35.1,
 				question_id: 7.0601,
-				description: 'Yes: excessive exercise at least 1x/week',
+				description: 'Yes: excessive exercise at least 1x/WEEK',
 				triggers:{
 					in_exercise1xWK: true,
 					in_exercise1xMON: true
@@ -449,7 +449,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35.2,
 				question_id: 7.0601,
-				description: 'No: excessive exercise less than 1x/week',
+				description: 'No: excessive exercise less than 1x/WEEK',
 				triggers:{
 					in_exercise1xWK: false
 				}
@@ -457,7 +457,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35.3,
 				question_id: 7.0602,
-				description: 'Yes: excessive exercise at least 1x/MON',
+				description: 'Yes: excessive exercise at least 1x/MONTH',
 				triggers:{
 					in_exercise1xMON: true
 				}
@@ -465,7 +465,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:35.4,
 				question_id: 7.0602,
-				description: 'No: excessive exercise less than 1x/MON',
+				description: 'No: excessive exercise less than 1x/MONTH',
 				triggers:{
 					in_exercise1xMON: false
 				}
@@ -512,7 +512,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:90,
 				question_id: 7.09,
-				description: 'Yes: at least once a week',
+				description: 'Yes: at least once a WEEK',
 				triggers:{
 					in_frequency_weeks: true,
 					in_frequency_months: true
@@ -521,7 +521,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:91,
 				question_id: 7.09,
-				description: 'No: less than once a week',
+				description: 'No: less than once a WEEK',
 				triggers:{
 					in_frequency_weeks: false
 				}
@@ -529,7 +529,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:92,
 				question_id:7.10,
-				description: 'Yes: at least once a month',
+				description: 'Yes: at least once a MONTH',
 				triggers:{
 					in_frequency_months: true
 				}
@@ -537,7 +537,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:93,
 				question_id:7.10,
-				description: 'No: less than once a month',
+				description: 'No: less than once a MONTH',
 				triggers:{
 					in_frequency_months: false
 				}
@@ -545,7 +545,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:40,
 				question_id: 8,
-				description: 'Yes: weight and shape exert undue influence',
+				description: 'Yes: shape and weight exert undue influence',
 				triggers:{
 					bodyweight_selfworth: true
 				}
@@ -553,7 +553,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:41,
 				question_id: 8,
-				description: 'No: weight and shape do NOT exert undue influence',
+				description: 'No: shape and weight do NOT exert undue influence',
 				triggers:{
 					bodyweight_selfworth: false
 				}
