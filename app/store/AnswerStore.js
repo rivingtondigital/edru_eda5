@@ -54,12 +54,12 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:5,
 				question_id: 2,
-				description: 'No: there is no disturbance in eating',
+				description: 'No: there is NO disturbance in eating',
 				triggers:{
 					eatingdisturbance: false
 				}
 			},
-						{
+			{
 				id:6,
 				question_id: 3,
 				description: 'Eating is abnormal',
@@ -67,7 +67,7 @@ Ext.define('ceda.store.AnswerStore', {
 					aberranteating: true
 				}
 			},
-						{
+			{
 				id:7,
 				question_id: 3,
 				description: 'Eating is normal',
@@ -75,6 +75,23 @@ Ext.define('ceda.store.AnswerStore', {
 					aberranteating: false
 				}
 			},
+			{
+				id:7.1,
+				question_id: 3.001,
+				description: 'Yes: significant impairment or distress',
+				triggers:{
+					impairmentdistress: true
+				}
+			},
+			{
+				id:7.2,
+				question_id: 3.001,
+				description: 'No: NO significant impairment or distress',
+				triggers:{
+					impairmentdistress: false
+				}
+			},
+
 			{
 				id:8,
 				question_id: 4,
@@ -125,7 +142,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:12,
 				question_id: 5.1,
-				description: 'No: not afraid of gaining weight',
+				description: 'No: NOT afraid of gaining weight',
 				triggers:{
 					fearofgain: false
 				}
@@ -141,7 +158,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:14,
 				question_id: 5.2,
-				description: 'No: no persistent behavior to avoid weight gain',
+				description: 'No: NO persistent behavior to avoid weight gain',
 				triggers:{
 					interfering: false
 				}
@@ -281,7 +298,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:261,
 				question_id: 7.0210,
-				description: 'No: does not describe SBEs',
+				description: 'No: does NOT describe SBEs',
 				triggers:{
 					sbe: false
 				}
@@ -569,7 +586,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:43,
 				question_id: 9.1,
-				description: 'Yes: ate faster than normal',
+				description: 'Yes: ate faster than usual',
 				triggers:{
 					binge_rapid: true
 				}
@@ -577,7 +594,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:44,
 				question_id: 9.1,
-				description: 'No: did NOT eat faster',
+				description: 'No: did NOT eat faster than usual',
 				triggers:{
 					binge_rapid: false
 				}
@@ -585,7 +602,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:45,
 				question_id: 9.2,
-				description: 'Yes: until uncomfortably full',
+				description: 'Yes: ate until uncomfortably full',
 				triggers:{
 					binge_full: true
 				}
@@ -593,7 +610,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:46,
 				question_id: 9.2,
-				description: 'No: NOT until uncomfortably full',
+				description: 'No: did NOT eat until uncomfortably full',
 				triggers:{
 					binge_full: false
 				}
@@ -673,7 +690,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:56,
 				question_id: 11,
-				description: 'No: no serious nutritional problems',
+				description: 'No: NO serious nutritional problems',
 				triggers:{
 					avoidant_nutritional_problems: false
 				}
@@ -697,7 +714,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:59,
 				question_id: 11.2,
-				description: 'Yes: there have been significant nutritional deficiencies',
+				description: 'Yes: medical problems',
 				triggers:{
 					avoidant_nutri_def: true
 				}
@@ -705,7 +722,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:60,
 				question_id: 11.2,
-				description: 'No: significant nutritional deficiencies have NOT occurred',
+				description: 'No: NO medical problems',
 				triggers:{
 					avoidant_nutri_def: false
 				}
@@ -713,7 +730,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:61,
 				question_id: 11.3,
-				description: 'Yes: has needed nutritional supplements',
+				description: 'Yes: nutritional supplements needed',
 				triggers:{
 					avoidant_nutri_suppliment: true
 				}
@@ -729,7 +746,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:63,
 				question_id: 11.4,
-				description: 'Yes: marked interence with psychosocial functioning',
+				description: 'Yes: marked interference with psychosocial functioning',
 				triggers:{
 					avoidant_psychosocial_interference: true
 				}
@@ -737,7 +754,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:64,
 				question_id: 11.4,
-				description: 'No: psychosocial functioning NOT impaired',
+				description: 'No: NO interference with psychosocial functioning',
 				triggers:{
 					avoidant_psychosocial_interference: false
 				}
@@ -745,7 +762,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:65,
 				question_id: 12,
-				description: 'Yes: there is a good alternative explanation',
+				description: 'Yes: good alternative explanation',
 				triggers:{
 					avoidant_alt_explanation: true
 				}
@@ -761,7 +778,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:67,
 				question_id: 13,
-				description: 'Yes: there is an associated problem that accounts for eating',
+				description: 'Yes: an associated problem accounts for eating disturbance',
 				triggers:{
 					avoidant_alt_condition: true
 				}
@@ -769,7 +786,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:68,
 				question_id: 13,
-				description: 'No: there is NO associated problem',
+				description: 'No: NO associated problem',
 				triggers:{
 					avoidant_alt_condition: false
 				}
@@ -785,7 +802,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:70,
 				question_id: 14,
-				description: 'No: independent attention NOT needed',
+				description: 'No: NO independent attention needed',
 				triggers:{
 					avoidant_independent_clinical: false
 				}
@@ -793,7 +810,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:71,
 				question_id: 15,
-				description: 'Yes: repeatedly regurgitated food',
+				description: 'Yes: repeatedly regurgitates food',
 				triggers:{
 					regurge_repeated: true
 				}
@@ -809,7 +826,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:73,
 				question_id: 16,
-				description: 'Yes: there is an associated problem that accounts for regurgitation',
+				description: 'Yes: an associated problem accounts for regurgitation',
 				triggers:{
 					regurge_alt_explanation: true
 				}
@@ -817,7 +834,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:74,
 				question_id: 16,
-				description: 'No: there is NO associated problem',
+				description: 'No: NO associated problem',
 				triggers:{
 					regurge_alt_explanation: false
 				}
@@ -825,7 +842,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:75,
 				question_id: 17,
-				description: 'Yes: additional attention required',
+				description: 'Yes: independent attention needed',
 				triggers:{
 					regurge_independent_clinical: true
 				}
@@ -833,7 +850,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:76,
 				question_id: 17,
-				description: 'No: additional attention NOT required',
+				description: 'No: NO independent attention needed',
 				triggers:{
 					regurge_independent_clinical: false
 				}
@@ -841,7 +858,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:77,
 				question_id: 18,
-				description: 'Yes',
+				description: 'Yes: regularly eats non-food items',
 				triggers:{
 					nonfood_age_appropriate: true
 				}
@@ -849,7 +866,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:78,
 				question_id: 18,
-				description: 'No',
+				description: 'No: does NOT regulary eat non-food items',
 				triggers:{
 					nonfood_age_appropriate: false
 				}
@@ -865,7 +882,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:80,
 				question_id: 19,
-				description: 'No: does NOT eat non-foods',
+				description: 'No: does NOT eat non-food substances',
 				triggers:{
 					nonfood_persistent: false
 				}
@@ -947,7 +964,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id: 106,
 				question_id: 32,
-				description: 'Other (unspecified) Eating Disorder',
+				description: 'Other (unspecified) Feeding or Eating Disorder',
 				triggers: {
 					otherED: true
 				}
@@ -956,11 +973,12 @@ Ext.define('ceda.store.AnswerStore', {
 //
 // The section below contains the answers for the original other ED section
 // No longer used as of 8/5/13
+// 7/7/14: BUT, question 21 is still active....???
 // 
 			{
 				id:83,
 				question_id: 21,
-				description: 'Yes',
+				description: 'Yes: independent attention needed',
 				triggers:{
 					nonfood_needs_clinical: true
 				}
@@ -968,7 +986,7 @@ Ext.define('ceda.store.AnswerStore', {
 			{
 				id:84,
 				question_id: 21,
-				description: 'No',
+				description: 'No: NO independent attention needed',
 				triggers:{
 					nonfood_needs_clinical: false
 				}
