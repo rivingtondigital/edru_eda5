@@ -1,9 +1,39 @@
+Ext.Loader.setConfig({
+	enabled : true,
+	disableCaching : false
+});
+
 Ext.application({
     name: 'ceda',
 
     requires: [
         'Ext.MessageBox'
     ],
+
+		models:[
+    	'Question',
+    	'Answer',
+    	'Assessment',
+    	'Diagnosis',
+    	'Rule',
+    	'Trigger',
+			'PersistedAssessment',
+			'User',
+    	'Instrument',
+			'BasicKeyValue'
+    ],
+
+    stores:[
+//   	'InstrumentStore',
+//   	'QuestionStore',
+//  	'AnswerStore',
+			'AssessmentStore',
+			'UserStore',
+			'OfflineInstrumentStore',
+			'OnlineInstrumentStore'
+    ],
+
+
 
     views: [
     	'Main',
@@ -15,33 +45,14 @@ Ext.application({
 			'DebugView',
 			'LoginView',
 			'RegisterView',
-			'SavedView'
+			'SavedView',
+			'VersionView'
     ],
 
     controllers:[
     	'SimpleNavController'
     ],
 
-    stores:[
-    	'InstrumentStore',
-    	'QuestionStore',
-    	'RuleStore',
-    	'AnswerStore',
-			'AssessmentStore',
-			'UserStore'
-    ],
-
-    models:[
-    	'Instrument',
-    	'Question',
-    	'Answer',
-    	'Assessment',
-    	'Diagnosis',
-    	'Rule',
-    	'Trigger',
-			'PersistedAssessment',
-			'User'
-    ],
 
     icon: {
         '57': 'resources/icons/Icon.png',

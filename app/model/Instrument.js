@@ -1,18 +1,21 @@
 Ext.define('ceda.model.Instrument',{
 	extend: 'Ext.data.Model',
-
 	config: {
-		proxy: {
-            type: 'localstorage',
-            id  : 'instrument-proxy'
-        },
-		
 		fields: [
-			{name: 'id', type: 'int'},
+			{name: '_id', type: 'int'},
+			{name: 'instrument_id', type: 'int'},
+			{name: 'version', type: 'int'},
 			{name: 'name', type: 'string'},
 			{name: 'description', type: 'string'}
 		],
-		hasMany: 'Question'
+		hasMany:[
+		{
+			model: 						'ceda.model.Question',
+			name:							'questions',
+			associationKey: 	'questions',
+			autoload: 				true
+		}],
+		idProperty: '_id',
 	}
-	
+
 });

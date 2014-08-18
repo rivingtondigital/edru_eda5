@@ -31,7 +31,7 @@ Ext.define('ceda.store.AnswerStore', {
 					overweight: false,
 					normalweight: true
 				}
-				
+
 			},
 			{
 				id: 3.013,
@@ -234,7 +234,7 @@ Ext.define('ceda.store.AnswerStore', {
 					OBE_1perWK: true,
 					OBE_1perMON: true
 				}
-			},	
+			},
 			{
 				id:252,
 				question_id: 7.0201,
@@ -242,7 +242,7 @@ Ext.define('ceda.store.AnswerStore', {
 				triggers:{
 					OBE_1perWK: false
 				}
-			},	
+			},
 			{
 				id:253,
 				question_id: 7.0202,
@@ -250,7 +250,7 @@ Ext.define('ceda.store.AnswerStore', {
 				triggers:{
 					OBE_1perMON: true
 				}
-			},	
+			},
 			{
 				id:254,
 				question_id: 7.0202,
@@ -258,7 +258,7 @@ Ext.define('ceda.store.AnswerStore', {
 				triggers:{
 					OBE_1perMON: false
 				}
-			},	
+			},
 			{
 				id:255,
 				question_id: 7.0203,
@@ -266,7 +266,7 @@ Ext.define('ceda.store.AnswerStore', {
 				triggers:{
 
 				}
-			},	
+			},
 //
 // Next section contains answers to questions re SBEs
 //
@@ -294,7 +294,7 @@ Ext.define('ceda.store.AnswerStore', {
 					sbe_frequency_weeks: true,
 					sbe_frequency_months: true
 				}
-			},	
+			},
 			{
 				id:263,
 				question_id: 7.0211,
@@ -302,7 +302,7 @@ Ext.define('ceda.store.AnswerStore', {
 				triggers:{
 					sbe_frequency_weeks: false
 				}
-			},	
+			},
 			{
 				id:264,
 				question_id: 7.0212,
@@ -310,7 +310,7 @@ Ext.define('ceda.store.AnswerStore', {
 				triggers:{
 					sbe_frequency_months: true
 				}
-			},	
+			},
 			{
 				id:265,
 				question_id: 7.0212,
@@ -318,7 +318,7 @@ Ext.define('ceda.store.AnswerStore', {
 				triggers:{
 					sbe_frequency_months: false
 				}
-			},	
+			},
 			{
 				id:266,
 				question_id: 7.0213,
@@ -326,7 +326,7 @@ Ext.define('ceda.store.AnswerStore', {
 				triggers:{
 
 				}
-			},	
+			},
 
 // old section follows
 			{
@@ -337,7 +337,7 @@ Ext.define('ceda.store.AnswerStore', {
 					binge_frequency_weeks: true,
 					OBE_1perMON: true
 				}
-			},			
+			},
 			{
 				id:28,
 				question_id: 7.03,
@@ -418,7 +418,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.0505,
 				description: 'Proceed',
 				triggers:{
-						
+
 				}
 			},
 			{
@@ -886,7 +886,7 @@ Ext.define('ceda.store.AnswerStore', {
 					nonfood_culturally_sanctioned: false
 				}
 			},
-// 
+//
 // The section below has the answers for the other ED section
 //
 			{
@@ -956,7 +956,7 @@ Ext.define('ceda.store.AnswerStore', {
 //
 // The section below contains the answers for the original other ED section
 // No longer used as of 8/5/13
-// 
+//
 			{
 				id:83,
 				question_id: 21,
@@ -1000,5 +1000,5 @@ Ext.define('ceda.store.AnswerStore', {
 			}
 		]
 	}
-	
-})
+
+});

@@ -17,6 +17,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			mainpanel: '#mainpanel',
 			start_bttn: 'idetail #start',
 			answer_bttn: 'qview #answerarea #aview',
+			probe: '#probe',
 			back_bttn: '#topbar #backbutton',
 			restart_bttn: '#topbar #restartbutton',
 			save_bttn: '#topbar #sbutton',
@@ -31,11 +32,19 @@ Ext.define('ceda.controller.SimpleNavController', {
 			register_bttn: 'registerview #bttn_register',
 			reg_output: 'registerview #reg_output',
 			goto_previous_bttn: 'idetail #previous',
-			saved_list: 'savedview'
+			saved_list: 'savedview',
+			version_list: 'versionview',
+			version_button: '#versionbutton'
 		},
 		control:{
+			version_button:{
+				tap: 'view_versions'
+			},
 			view:{
 				initialize: 'initView'
+			},
+			probe:{
+				update_triggers: 'update_triggers'
 			},
 			mainpanel:{
 				activate: 'showmain'
@@ -72,6 +81,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 				'tap': 'restore_session'
 			}
 		}
+	},
+	update_triggers: function(a,b,c){
+		console.info(a + b + c);
 	},
 	restore_session: function(button){
 		if (button.hasOwnProperty('sess_id')){
@@ -115,6 +127,17 @@ Ext.define('ceda.controller.SimpleNavController', {
 				}
 			}
 		}
+	},
+
+	view_versions: function(){
+		var version = Ext.widget('versionview');
+		var vstore = Ext.getStore('offlineInstrumentStore');
+		vstore.load();
+		version.setStore(vstore);
+		this.getMainpanel().animateActiveItem(version, {type:'slide', direction: 'right'});
+
+		//this.getVersion_list().setStore(vstore);
+		//this.getRestart_bttn().show();
 	},
 
 	view_saved: function(){
@@ -207,6 +230,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	save_session: function(){
+		console.info(this.getProbe());
 		if (this.password == null){
 			this.post_login_callback = this.save_session;
 			this.login();
@@ -262,9 +286,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	backup: function(){
-		qstore = Ext.getStore('questionStore');
+//		qstore = Ext.getStore('questionStore');
+		qstore = this.instrument.questionsStore;
 		this.questionstack.pop();
-		var question = qstore.findRecord('id', this.questionstack.pop());
+		var question = qstore.findRecord('question_id', this.questionstack.pop());
 		this.viewQuestion(question, true);
 	},
 
@@ -276,9 +301,123 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 	},
 
+	onStoreSync: function(a,b,c){
+		var update = function(new_eda5, offstore){
+			var recs = offstore.queryBy(function(rec, store){
+				if (rec.get('version') == new_eda5.get('version')
+						&& rec.get('keyname') == new_eda5.get('instrument_id'))
+					return true;
+			});
+			offstore.removeAll(recs);
+			json_value = JSON.stringify(new_eda5.raw);
+			keyvalue = Ext.create('ceda.model.BasicKeyValue');
+			keyvalue.set('keyname', new_eda5.get('instrument_id'));
+			keyvalue.set('version', new_eda5.get('version'));
+			keyvalue.set('json_value', json_value);
+			offstore.add(keyvalue);
+			offstore.sync();
+			Ext.Msg.alert('Update Success', 'You have successfully \
+										updated the questionnaire.', Ext.emptyFn);
+		};
+		var offstore = Ext.getStore('offlineInstrumentStore');
+		offstore.load();
+		if (offstore.getAllCount() > 0){
+			new_eda5 = b.first()
+			current_eda5 = offstore.findRecord('keyname', new_eda5.get('instrument_id') );
+			if (current_eda5.get('version') >= new_eda5.get('version')){
+				Ext.Msg.confirm("Confirmation", "You're version is up to date. Would \
+																				you still like to re-install it?", function(a,b, c){
+					if (a == 'yes'){
+						update(new_eda5, offstore);
+					}
+				});
+			}
+		}
+		else{
+			update(b.first(), offstore);
+		}
+		this.initView();
+	},
+
+
+
+	onStoreUpdate: function(){
+		if(navigator.onLine){
+			var istore = Ext.getStore('onlineInstrumentStore');
+			istore.on({
+					refresh: 'onStoreSync',
+					scope: this
+			});
+			istore.load();
+		}
+		else{
+			Ext.Msg.alert('Update Unavailable',
+										'You are not connected to the internet.<br/>Please \
+											connect before updating the questionnaire.',
+										Ext.emptyFn
+			);
+		}
+	},
+
+	blankStore: function(){
+		blank = Ext.create('ceda.model.Instrument');
+		blank.set('name', 'No Questionnaire!');
+		blank.set('description', 'No Questionnaire is currently available.')
+		return blank;
+	},
+
+
 	initView: function(){
-		var istore = Ext.getStore('instrumentStore');
-		this.instrument = istore.findRecord('id', 1);
+		var offStore = Ext.getStore('offlineInstrumentStore').load();
+
+		var details = Ext.widget('idetail');
+
+		if (this.saved_session == null){
+			this.instrument = offStore.queryBy(function(rec){
+				if (rec.get('keyname') == '1' && rec.get('version') == this.max('version')) return true;
+				return false;
+			});
+
+			this.assessment = Ext.create('ceda.model.Assessment', {
+				triggers: {},
+				savedvalues: {},
+				backedvalues: {},
+				questionstack: []
+			});
+
+		}
+		else{
+			var data = this.saved_session.get('data');
+			this.assessment = JSON.parse(sjcl.decrypt(this.password, data));
+			this.instrument = offStore.queryBy(function(rec){
+				if (rec.get('key_name') == '1' && rec.get('version') == this.assessment.version) return true;
+				return false;
+			});
+		}
+		if (this.instrument.getCount() == 0){
+			this.instrument = this.blankStore();
+			this.onStoreUpdate();
+		}
+		else{
+			this.instrument = Ext.create('ceda.model.Instrument',
+												JSON.parse(this.instrument.first().get('json_value'))
+										);
+		}
+		this.savedvalues = this.assessment.get('savedvalues');
+		this.backedvalues = this.assessment.get('backedvalues');
+		this.questionstack = this.assessment.get('questionstack');
+		this.qview = Ext.widget('qview');
+		details.setRecord(this.instrument);
+		this.getBar().setTitle(this.instrument.get("name"));
+		this.getMainpanel().add(details);
+
+
+// 		var istore = Ext.getStore('instrumentStore');
+// 		this.instrument = istore.findRecord('id', 1);
+// 		var details = Ext.widget('idetail');
+
+/*
+		this.instrument = istore.findRecord('instrument_id', 1);
 		var details = Ext.widget('idetail');
 		if (this.saved_session == null){
 			this.assessment = Ext.create('ceda.model.Assessment', {
@@ -299,11 +438,13 @@ Ext.define('ceda.controller.SimpleNavController', {
 		details.setRecord(this.instrument);
 		this.getBar().setTitle(this.instrument.get("name"));
 		this.getMainpanel().add(details);
+	*/
 	},
 
 	startTest: function(one, two){
-		var instrument = one.getRecord();
-		var qstore = Ext.getStore('questionStore');
+		//var instrument = one.getRecord();
+		//var qstore = Ext.getStore('questionStore');
+		var qstore = this.instrument.questionsStore;
 		var question = qstore.findRecord('initial', true);
 		this.viewQuestion(question);
 	},
@@ -368,7 +509,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.getSave_bttn().show();
 
 
-		this.questionstack.push(question.get('id'));
+		this.questionstack.push(question.get('question_id'));
 
 		//var qview = Ext.widget('qview');
 		this.getMainpanel().remove(this.qview);
@@ -429,8 +570,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 					}
 				}
 				var target = rule.target;
-				var qstore = Ext.getStore('questionStore');
-				return qstore.findRecord('id', target);
+				//var qstore = Ext.getStore('questionStore');
+				var qstore = this.instrument.questionsStore;
+				return qstore.findRecord('question_id', target);
 			}
 		}
 		return undefined;

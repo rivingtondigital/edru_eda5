@@ -1,12 +1,16 @@
 Ext.define('ceda.model.Trigger', {
 	extend: 'Ext.data.Model',
 	config:{
-		proxy: {
-            type: 'localstorage',
-            id  : 'trigger-proxy'
-        },
-		
-		fields: [ 'id', 'answer_id', 'name', 'value' ],
-		belongsTo: 'Answer'
+		fields: [
+			'_id',
+			'answer_id',
+			'identifier',
+			'value'
+		],
+		belongsTo:{
+			name: 'answer',
+			model: 'ceda.models.Answer',
+			associationKey: 'answer'
+		}
 	}
 });

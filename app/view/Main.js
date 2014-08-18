@@ -36,6 +36,15 @@ Ext.define("ceda.view.Main", {
 									text: 'Save',
 									pack: 'center',
 									align: 'center'
+								},
+								{
+									id: 'versionbutton',
+									iconMask: true,
+									ui: 'home',
+									pack: 'right',
+									align: 'center',
+									xtype: 'button',
+									text: 'Versions'
 								}
 	          	]
         	},

@@ -10,12 +10,12 @@ Ext.define('ceda.store.InstrumentStore', {
 		model: 'ceda.model.Instrument',
 		data: [
 			{
-				id: 1, 
+				id: 1,
 				name: 'EDA 5',
 				description: [
 								'<p>This interview is designed to assist in the assessment of a feeding ',
-								'or eating disorder, or a related condition, in an adult according to the DSM-5 ', 
-								'criteria. It is meant to be used by clinicians who are familiar with the ', 
+								'or eating disorder, or a related condition, in an adult according to the DSM-5 ',
+								'criteria. It is meant to be used by clinicians who are familiar with the ',
 								'diagnostic assessment of feeding and eating disorders.</p>',
 								'<p>In each of the following screens, the Symptom captures a part of a DSM-5 criterion, ',
 								'and the Probe provides questions for the clinician to employ to assess the ',

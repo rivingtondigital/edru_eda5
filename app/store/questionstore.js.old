@@ -642,9 +642,11 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
+					[
 						'7e.2. In the last MONTH, how many times have you engaged in this type of behavior?<br/>',
 						'Is this typical of the last 3 months?',
 						'<br/>'
+					].join("<br/>"),
 				].join("<br/>"),
 				symptom:[
 					'Has  the individual engaged in inappropriate (purging) behaviors, on average, at least once a month over the last 3 months?',
