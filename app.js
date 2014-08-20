@@ -20,7 +20,8 @@ Ext.application({
 			'PersistedAssessment',
 			'User',
     	'Instrument',
-			'BasicKeyValue'
+			'BasicKeyValue',
+			'Version'
     ],
 
     stores:[

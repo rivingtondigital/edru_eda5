@@ -4,10 +4,16 @@ Ext.define('ceda.model.Instrument',{
 		fields: [
 			{name: '_id', type: 'int'},
 			{name: 'instrument_id', type: 'int'},
-			{name: 'version', type: 'int'},
+//			{name: 'version' type: 'ceda.model.Version'},
 			{name: 'name', type: 'string'},
 			{name: 'description', type: 'string'}
 		],
+		hasOne:{
+			model: 					'ceda.model.Version',
+			name: 					'version',
+			associationKey: 'version',
+			autoload: 			true
+		},
 		hasMany:[
 		{
 			model: 						'ceda.model.Question',
@@ -15,7 +21,7 @@ Ext.define('ceda.model.Instrument',{
 			associationKey: 	'questions',
 			autoload: 				true
 		}],
-		idProperty: '_id',
+		idProperty: '_id'
 	}
 
 });

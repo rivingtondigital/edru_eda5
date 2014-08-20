@@ -15,6 +15,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			view: 'view',
 			bar: '#topbar',
 			mainpanel: '#mainpanel',
+			home_page: 'idetail',
 			start_bttn: 'idetail #start',
 			answer_bttn: 'qview #answerarea #aview',
 			probe: '#probe',
@@ -34,9 +35,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 			goto_previous_bttn: 'idetail #previous',
 			saved_list: 'savedview',
 			version_list: 'versionview',
-			version_button: '#versionbutton'
+			update_button: '#updatebutton'
 		},
 		control:{
+			update_button:{
+				tap: 'update_store'
+			},
 			version_button:{
 				tap: 'view_versions'
 			},
@@ -115,8 +119,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 					this.viewOutput();
 				}
 				else{
-					qstore = Ext.getStore('questionStore');
-					var q = qstore.findRecord('id', pg);
+					//qstore = Ext.getStore('questionStore');
+					qstore = this.instrument.questionsStore;
+					var q = qstore.findRecord('question_id', pg);
 					if (q != null){
 						this.viewQuestion(q, false);
 					}
@@ -152,6 +157,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		sstore.load();
 		this.getSaved_list().setStore(sstore);
 		this.getRestart_bttn().show();
+		this.getUpdate_button().hide();
 	},
 
 	check_user: function(){
@@ -240,6 +246,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 			this.assessment.set('backedvalues', this.backedvalues);
 			this.assessment.set('savedvalues', this.savedvalues);
 			this.assessment.set('questionstack', this.questionstack);
+			this.assessment.set('version_major', this.instrument.getVersion().get('major'));
+			this.assessment.set('version_minor', this.instrument.getVersion().get('minor'));
+
 
 			var assessments = Ext.getStore('assessmentStore')
 			assessments.load();
@@ -252,6 +261,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 					'user': this.user,
 					'data': sjcl.encrypt(this.password, JSON.stringify(this.assessment)),
 					'instrument': this.instrument.get('id'),
+					'version_major': this.instrument.getVersion().get('major'),
+					'version_minor': this.instrument.getVersion().get('minor'),
 					'text': this.instrument.get('name') + ' - ' + this.questionstack.slice(-1) + ' [' + d.toLocaleDateString() +' '+ d.toLocaleTimeString() + ']'
 				}
 				assessment = assessments.add(assessment)[0];
@@ -269,8 +280,13 @@ Ext.define('ceda.controller.SimpleNavController', {
 				this.viewOutput();
 			}
 			else{
-				var qstore = Ext.getStore('questionStore');
-				q = qstore.findRecord('id', this.questionstack.pop());
+				//var qstore = Ext.getStore('questionStore');
+				var qstore = this.instrument.questionsStore;
+				var lastq = 0;
+				if (this.questionstack.length > 0){
+					lastq = this.questionstack.pop();
+				}
+				q = qstore.findRecord('question_id', lastq);
 				this.viewQuestion(q, false);
 			}
 			return true;
@@ -297,6 +313,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		login = confirm('You need to login in order to perform that action. Would you like to log in now?');
 		if (login){
 			var lview = Ext.widget('loginview');
+			this.getUpdate_button().hide();
 			this.getMainpanel().animateActiveItem(lview, {type:'slide', direction: 'left'});
 		}
 	},
@@ -304,15 +321,17 @@ Ext.define('ceda.controller.SimpleNavController', {
 	onStoreSync: function(a,b,c){
 		var update = function(new_eda5, offstore){
 			var recs = offstore.queryBy(function(rec, store){
-				if (rec.get('version') == new_eda5.get('version')
+				if (rec.get('version_minor') == new_eda5.getVersion().get('minor')
 						&& rec.get('keyname') == new_eda5.get('instrument_id'))
 					return true;
 			});
 			offstore.removeAll(recs);
 			json_value = JSON.stringify(new_eda5.raw);
+			new_version = new_eda5.getVersion();
 			keyvalue = Ext.create('ceda.model.BasicKeyValue');
 			keyvalue.set('keyname', new_eda5.get('instrument_id'));
-			keyvalue.set('version', new_eda5.get('version'));
+			keyvalue.set('version_major', new_version.get('major'));
+			keyvalue.set('version_minor', new_version.get('minor'));
 			keyvalue.set('json_value', json_value);
 			offstore.add(keyvalue);
 			offstore.sync();
@@ -324,13 +343,19 @@ Ext.define('ceda.controller.SimpleNavController', {
 		if (offstore.getAllCount() > 0){
 			new_eda5 = b.first()
 			current_eda5 = offstore.findRecord('keyname', new_eda5.get('instrument_id') );
-			if (current_eda5.get('version') >= new_eda5.get('version')){
+			var current_version = current_eda5.get('version_minor');
+			var new_version = new_eda5.getVersion().get('minor');
+
+			if (current_version >= new_version){
 				Ext.Msg.confirm("Confirmation", "You're version is up to date. Would \
 																				you still like to re-install it?", function(a,b, c){
 					if (a == 'yes'){
 						update(new_eda5, offstore);
 					}
 				});
+			}
+			else{
+				update(new_eda5, offstore);
 			}
 		}
 		else{
@@ -359,6 +384,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 	},
 
+	update_store: function(){
+		this.onStoreUpdate();
+	},
+
 	blankStore: function(){
 		blank = Ext.create('ceda.model.Instrument');
 		blank.set('name', 'No Questionnaire!');
@@ -370,7 +399,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 	initView: function(){
 		var offStore = Ext.getStore('offlineInstrumentStore').load();
 
-		var details = Ext.widget('idetail');
+		var details = this.getHome_page();
+		if (details == undefined){
+			details = Ext.widget('idetail');
+		}
 
 		if (this.saved_session == null){
 			this.instrument = offStore.queryBy(function(rec){
@@ -390,8 +422,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 			var data = this.saved_session.get('data');
 			this.assessment = JSON.parse(sjcl.decrypt(this.password, data));
 			this.instrument = offStore.queryBy(function(rec){
-				if (rec.get('key_name') == '1' && rec.get('version') == this.assessment.version) return true;
+				if (rec.get('key_name') == '1'
+					&& rec.get('version_minor') == this.assessment.version_major
+					&& rec.get('version_major') == this.assessment.version_minor) return true;
 				return false;
+//				if (rec.get('key_name') == '1' && rec.get('version') == this.assessment.version) return true;
+//				return false;
 			});
 		}
 		if (this.instrument.getCount() == 0){
@@ -444,6 +480,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	startTest: function(one, two){
 		//var instrument = one.getRecord();
 		//var qstore = Ext.getStore('questionStore');
+		this.getUpdate_button().hide();
 		var qstore = this.instrument.questionsStore;
 		var question = qstore.findRecord('initial', true);
 		this.viewQuestion(question);

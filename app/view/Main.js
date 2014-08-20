@@ -38,13 +38,13 @@ Ext.define("ceda.view.Main", {
 									align: 'center'
 								},
 								{
-									id: 'versionbutton',
+									id: 'updatebutton',
 									iconMask: true,
 									ui: 'home',
 									pack: 'right',
 									align: 'center',
 									xtype: 'button',
-									text: 'Versions'
+									text: 'Update'
 								}
 	          	]
         	},
