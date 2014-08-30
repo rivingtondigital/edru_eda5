@@ -18,8 +18,9 @@ function printer(){
 		ret += "<div class='tabheader'>"+header+"</div><br/>";
 		ret += "<table class='outputtable'>";
 		for(subkey in content){
+			subkey_disp = subkey.replace(/([A-Z][a-z]+)([A-Z]+[a-z]*)/g, '$1 $2')
 			ret += "<tr>";
-			ret += "<td>"+subkey+"</td>";
+			ret += "<td>"+subkey_disp+"</td>";
 			ret += "<td><span class='value'>"+content[subkey]+"</span></td>";
 			ret += "</tr>";
 		}
