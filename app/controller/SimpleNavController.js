@@ -187,7 +187,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 					this.savedvalues['Diagnosis'][rule.diagnosisname] = " ";
 					var global_triggers = this.assessment.get('triggers');
 					global_triggers[rule.trigger] = true;
-					alert("Critera for " + rule.diagnosisname + " met");
+					alert("Criteria for " + rule.diagnosisname + " met");
 				}
 				if(rule.endifdiagnosis){
 					if(this.savedvalues.hasOwnProperty('Diagnosis')){
