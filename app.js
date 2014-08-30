@@ -12,7 +12,10 @@ Ext.application({
     	'AnswersView',
     	'AnswerItem',
     	'OutputView',
-			'DebugView'
+			'DebugView',
+			'LoginView',
+			'RegisterView',
+			'SavedView'
     ],
 
     controllers:[
@@ -23,7 +26,9 @@ Ext.application({
     	'InstrumentStore',
     	'QuestionStore',
     	'RuleStore',
-    	'AnswerStore'
+    	'AnswerStore',
+			'AssessmentStore',
+			'UserStore'
     ],
 
     models:[
@@ -33,7 +38,9 @@ Ext.application({
     	'Assessment',
     	'Diagnosis',
     	'Rule',
-    	'Trigger'
+    	'Trigger',
+			'PersistedAssessment',
+			'User'
     ],
 
     icon: {

@@ -1,4 +1,5 @@
-function printer(info){
+function printer(){
+	var info = JSON.parse(document.getElementById('hddnInfo').value);
 	win = window.open();
 	body = win.document.getElementsByTagName('body')[0];
 	var ret = '<style>';
@@ -6,7 +7,7 @@ function printer(info){
 	ret += 'h1{text-align:center}';
 	ret += '.tabheader{width: 100%; font-size: larger; border-bottom: 1px solid gray;}';
 	ret += '.outputtable{width: 80%; margin: auto; border-collapse:collapse}';
-	ret += '.outputtable td{border-bottom: 1px dashed gray}';
+	ret += '.outputtable td{border-bottom: 1px dashed gray; vertical-align: top;padding-right: 10px;}';
 	ret += '.value{float:right}'
 	ret += '</style>';
 	ret += "<div><h1>EDA-5 Results</h1></div>";

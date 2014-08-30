@@ -38,6 +38,9 @@
 				{
 					"path": "sdk/eda5.js"
 				},
+				{
+					"path": "sdk/sjcl.js"
+				},
         {
             "path": "app.js",
             "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */

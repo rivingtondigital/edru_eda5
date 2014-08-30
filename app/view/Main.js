@@ -19,7 +19,7 @@ Ext.define("ceda.view.Main", {
 			            text: 'Back',
 			            pack: 'center',
 			            align: 'center'
-	          			
+
 	          		},
 								{
 									id: 'restartbutton',
@@ -28,14 +28,22 @@ Ext.define("ceda.view.Main", {
 									text: 'Restart',
 									pack: 'center',
 									align: 'center'
+								},
+								{
+									id: 'sbutton',
+									iconMask: true,
+									ui: 'home',
+									text: 'Save',
+									pack: 'center',
+									align: 'center'
 								}
 	          	]
         	},
-            {
-            	id:"mainpanel",
-            	xtype: 'container',
-            	layout:'card'
-            }
+					{
+						id:"mainpanel",
+						xtype: 'container',
+						layout:'card'
+					}
         ]
     }
 });

@@ -9,7 +9,7 @@ Ext.define('ceda.view.InstrumentDetailView', {
 		},
 
 		styleHtmlContent: true,
-		
+
 		style: {
 			'margin': '10'
 		},
@@ -22,9 +22,19 @@ Ext.define('ceda.view.InstrumentDetailView', {
 				]
 			},
 			{
+				id: 'previous',
+				xtype: 'button',
+				text: 'view previous sessions',
+				align: 'end',
+				ui: 'action',
+				margin: 20,
+				padding: "5 20",
+				docked: 'bottom'
+			},
+			{
 				id: 'start',
 				xtype: 'button',
-				text:'begin',
+				text:'begin new',
 				align: 'end',
 				ui: 'action',
 				margin: 20,
@@ -34,10 +44,10 @@ Ext.define('ceda.view.InstrumentDetailView', {
 			}
 		]
 	},
-	
+
 	setRecord: function(instrument){
 		this.getComponent('description').setRecord(instrument);
 		this.getComponent('start').setRecord(instrument);
 	}
-	
+
 });

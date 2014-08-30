@@ -6,9 +6,12 @@ Ext.define('ceda.model.Assessment', {
             id  : 'assessment-proxy'
         },
 
-		fields:[ 
+		fields:[
 				'id',
-				'triggers'
+				'triggers',
+				'backedvalues',
+				'savedvalues',
+				'questionstack'
 		],
 		hasOne: [
 			'Instrument'
