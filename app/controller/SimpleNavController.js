@@ -501,14 +501,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 
 		var global_triggers = this.assessment.get('triggers');
-		var answer_triggers = record.get('triggers');
-
-		for(var trig in answer_triggers){
-			global_triggers[trig] = answer_triggers[trig];
-		}
+		record.triggersStore.each(function(rec){
+			global_triggers[rec.get('identifier')] = rec.get('value');
+		});
 		this.assessment.set('triggers', global_triggers);
-		var next = this.findNextQuestion(record);
 
+		var next = this.findNextQuestion(record);
 		if(next == 'finish'){
 			this.viewOutput();
 		}
@@ -517,7 +515,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 		else{
 			alert('No rules matched. No next question.');
-			//this.viewQuestion();
 		}
 	},
 
@@ -609,6 +606,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 				var target = rule.target;
 				//var qstore = Ext.getStore('questionStore');
 				var qstore = this.instrument.questionsStore;
+				if (target == 'finish'){
+					return target;
+				}
 				return qstore.findRecord('question_id', target);
 			}
 		}
