@@ -19,9 +19,9 @@ Ext.define('ceda.view.OutputView', {
 			ret += "<div class='tabheader'>"+header+"</div><br/>";
 			ret += "<table class='outputtable'>";
 			for(subkey in content){
-				subkey = subkey.replace(/([A-Z][a-z]+)([A-Z]+[a-z]*)/g, '$1 $2')
+				subkey_disp = subkey.replace(/([A-Z][a-z]+)([A-Z]+[a-z]*)/g, '$1 $2')
 				ret += "<tr>";
-				ret += "<td>"+subkey+"</td>";
+				ret += "<td>"+subkey_disp+"</td>";
 				ret += "<td>"+content[subkey]+"</td>";
 				ret += "</tr>";
 			}
