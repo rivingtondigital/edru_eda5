@@ -675,7 +675,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.0505,						// document frequency
+						target: 7.0505,						// document frequency per WEEK
 						expression: 'global.purging1xWK'
 					},
 					{
@@ -703,15 +703,18 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.0505,						// document frequency
+						target: 7.0506,						// document frequency per MONTH
 						expression: 'global.purging1xMON'
 					},
 					{
 						target: 7.06,
-						expression: '!global.purging1xMON'	// to exercise
+						expression: '!global.purging1xMON'	// if not at least 1x/month, ignore; go to exercise
 					}
 				]
 			},
+//	****************************************************************************
+//	Next question assesses frequency of purging if >= 1/WEEK
+//	****************************************************************************
 			{
 				id:7.0505,
 				initial:false,
@@ -721,7 +724,7 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					[
 						'Can you estimate how many times per WEEK over the last 3 months, on average, you have made yourself vomit, or misused laxatives, diuretics or other medications?<br/>',
-						'<i>If frequency is less than once a week, divide monthly frequency by 4. For example, 2 episodes/month = 0.5 episodes/week.</i>',
+//						'<i>If frequency is less than once a week, divide monthly frequency by 4. For example, 2 episodes/month = 0.5 episodes/week.</i>',
 						'<br/>'
 					].join("<br/>"),
 					[
@@ -740,7 +743,46 @@ Ext.define('ceda.store.QuestionStore', {
 					].join(" ")
 				].join("<br/>"),
 				symptom:[
-					'Average number of episodes per week over last 3 months. Has inappropriate behavior occurred at least once a week, on average, for the last 3 months?<br/>',
+					'Average number of episodes per WEEK over last 3 months. Has inappropriate behavior occurred at least once a week, on average, for the last 3 months?<br/>',
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.06,	// to exercise
+						expression: true
+					}
+				]
+			},
+//	****************************************************************************
+//	Next question assesses frequency of purging if >= 1/MONTH
+//	****************************************************************************
+			{
+				id:7.0506,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					[
+						'Can you estimate how many times per MONTH over the last 3 months, on average, you have made yourself vomit, or misused laxatives, diuretics or other medications?<br/>',
+						'<br/>'
+					].join("<br/>"),
+					[
+						'<table>',
+						'<tr><td colspan="2">Average monthly frequency over past 3 months:<br/></td></tr>',
+						'<tr><td>Vomiting:</td> <td><input id="saveVomitFrequency" name="Vomiting:Average_number_per_month" size="3"></td></tr>',
+						'<tr><td>Laxatives:</td> <td><input id="saveLaxativesFrequency" name="Laxatives:Average_number_per_month" size="3"></td></tr>',
+						'<tr><td>Diuretics:</td> <td><input id="saveDiureticsFrequency" name="Diuretics:Average_number_per_month" size="3"></td></tr>',
+						'<tr>',
+						'<td>If other method used, describe below and enter frequency per week</td><td>&nbsp;</td>',
+						'<tr>',
+						'<td><input id="optionalOtherMethodName" name="OtherMethod:Name" size="35" placeholder="Description"></input></td>',
+						'<td><input id="optionalOtherMethodFrequency" name="OtherMethod:Average_number_per_month" size="3"></input></td>',
+						'</tr>',
+						'</table>',
+					].join(" ")
+				].join("<br/>"),
+				symptom:[
+					'Average number of episodes per MONTH over last 3 months. Has inappropriate behavior occurred at least once a week, on average, for the last 3 months?<br/>',
 				].join("<br/>"),
 				rules:[
 					{

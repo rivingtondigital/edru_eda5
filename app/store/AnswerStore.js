@@ -439,6 +439,14 @@ Ext.define('ceda.store.AnswerStore', {
 				}
 			},
 			{
+				id:33.6,
+				question_id: 7.0506,
+				description: 'Proceed',
+				triggers:{
+						
+				}
+			},
+			{
 				id:34,
 				question_id: 7.06,
 				description: 'Yes: exercises excessively',
