@@ -302,7 +302,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	backup: function(){
-//		qstore = Ext.getStore('questionStore');
 		qstore = this.instrument.questionsStore;
 		this.questionstack.pop();
 		var question = qstore.findRecord('question_id', this.questionstack.pop());
@@ -416,7 +415,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 				backedvalues: {},
 				questionstack: []
 			});
-
 		}
 		else{
 			var data = this.saved_session.get('data');
@@ -426,8 +424,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 					&& rec.get('version_minor') == this.assessment.version_major
 					&& rec.get('version_major') == this.assessment.version_minor) return true;
 				return false;
-//				if (rec.get('key_name') == '1' && rec.get('version') == this.assessment.version) return true;
-//				return false;
 			});
 		}
 		if (this.instrument.getCount() == 0){
@@ -446,40 +442,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 		details.setRecord(this.instrument);
 		this.getBar().setTitle(this.instrument.get("name"));
 		this.getMainpanel().add(details);
-
-
-// 		var istore = Ext.getStore('instrumentStore');
-// 		this.instrument = istore.findRecord('id', 1);
-// 		var details = Ext.widget('idetail');
-
-/*
-		this.instrument = istore.findRecord('instrument_id', 1);
-		var details = Ext.widget('idetail');
-		if (this.saved_session == null){
-			this.assessment = Ext.create('ceda.model.Assessment', {
-				triggers: {},
-				savedvalues: {},
-				backedvalues: {},
-				questionstack: []
-			});
-		}
-		else{
-			var data = this.saved_session.get('data');
-			this.assessment = JSON.parse(sjcl.decrypt(this.password, data));
-		}
-		this.savedvalues = this.assessment.get('savedvalues');
-		this.backedvalues = this.assessment.get('backedvalues');
-		this.questionstack = this.assessment.get('questionstack');
-		this.qview = Ext.widget('qview');
-		details.setRecord(this.instrument);
-		this.getBar().setTitle(this.instrument.get("name"));
-		this.getMainpanel().add(details);
-	*/
 	},
 
 	startTest: function(one, two){
-		//var instrument = one.getRecord();
-		//var qstore = Ext.getStore('questionStore');
 		this.getUpdate_button().hide();
 		var qstore = this.instrument.questionsStore;
 		var question = qstore.findRecord('initial', true);

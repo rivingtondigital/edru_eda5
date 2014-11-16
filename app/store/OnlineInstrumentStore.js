@@ -5,7 +5,7 @@ Ext.define('ceda.store.OnlineInstrumentStore', {
         model: 'ceda.model.Instrument',
         proxy: {
             type: 'jsonp',
-						url: 'http://eda5.org/api/ajax/v/fetch/current/eda5.json',
+						url: 'http://eda5.org/api/ajax/v/fetch/1/eda5.json',
 						noCache: false,
 						//callbackKey: 'ceda.data.iproxy',
             reader:{
