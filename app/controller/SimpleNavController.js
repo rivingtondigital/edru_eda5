@@ -20,6 +20,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 			back_bttn: '#topbar #backbutton',
 			restart_bttn: '#topbar #restartbutton',
 			save_bttn: '#topbar #sbutton',
+			notes_bttn: '#topbar #notesbutton',
+			save_notes_bttn: '#topbar #xnotesbutton',
 			login_user: 'loginview #txt_login_username',
 			login_pass: 'loginview #pass_login_pass',
 			login_bttn: 'loginview #bttn_login',
@@ -54,6 +56,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 			},
 			save_bttn:{
 				tap: 'save_session'
+			},
+			notes_bttn:{
+				tap: 'show_notes'
+			},
+			save_notes_bttn: {
+				tap: 'save_notes'
 			},
 			login_bttn:{
 				tap: 'check_user'
@@ -255,10 +263,13 @@ Ext.define('ceda.controller.SimpleNavController', {
 	restart: function(){
 		location.reload();
 	},
+
 	showmain: function(){
 		this.getBack_bttn().hide();
 		this.getRestart_bttn().hide();
 		this.getSave_bttn().hide();
+		this.getNotes_bttn().hide();
+		this.getSave_notes_bttn().hide();
 	},
 
 	backup: function(){
@@ -274,6 +285,33 @@ Ext.define('ceda.controller.SimpleNavController', {
 			var lview = Ext.widget('loginview');
 			this.getMainpanel().animateActiveItem(lview, {type:'slide', direction: 'left'});
 		}
+	},
+
+	show_notes: function(){
+		this.getBack_bttn().hide();
+		this.getNotes_bttn().hide();
+		this.getRestart_bttn().hide();
+		this.getSave_bttn().hide();
+		this.getSave_notes_bttn().show();
+
+		notesView = Ext.widget('notes_view');
+		this.getMainpanel().animateActiveItem(notesView, {type: 'slide', direction: 'right'});
+	},
+
+	save_notes: function(){
+		this.getNotes_bttn().show();
+		this.getRestart_bttn().show();
+		this.getSave_bttn().show();
+		this.getSave_notes_bttn().hide();
+
+		if (this.questionstack.length > 1){
+			this.getBack_bttn().show();
+		}
+
+		notes = this.getMainpanel().innerItems.pop();
+		lastq = this.getMainpanel().innerItems.pop();
+
+		this.getMainpanel().animateActiveItem(lastq, {type: 'slide', direction: 'right'});
 	},
 
 	initView: function(){
@@ -366,6 +404,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 		this.getRestart_bttn().show();
 		this.getSave_bttn().show();
+		this.getNotes_bttn().show();
 
 
 		this.questionstack.push(question.get('id'));
@@ -406,6 +445,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			this.getMainpanel().animateActiveItem(this.qview, {type: 'slide', direction: 'left'});
 		}
 	},
+
 
 	findNextQuestion: function(answer){
 		var question = answer.getQuestion();
