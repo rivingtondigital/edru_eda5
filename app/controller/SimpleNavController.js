@@ -99,7 +99,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 					triggers: dec.data.triggers,
 					savedvalues: dec.data.savedvalues,
 					backedvalues: dec.data.backedvalues,
-					questionstack: dec.data.questionstack
+					questionstack: dec.data.questionstack,
+					notes: dec.data.notes
 				});
 
 				this.savedvalues = this.assessment.get('savedvalues');
@@ -295,10 +296,16 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.getSave_notes_bttn().show();
 
 		notesView = Ext.widget('notes_view');
+		notes = this.assessment.get('notes');
+		if (notes != undefined){
+			notesView.setNotes(notes);
+		}
+
 		this.getMainpanel().animateActiveItem(notesView, {type: 'slide', direction: 'right'});
 	},
 
 	save_notes: function(){
+		this.assessment.set('notes', Ext.query('*[id^="notes_area"]')[0].value);
 		this.getNotes_bttn().show();
 		this.getRestart_bttn().show();
 		this.getSave_bttn().show();
@@ -308,10 +315,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 			this.getBack_bttn().show();
 		}
 
-		notes = this.getMainpanel().innerItems.pop();
-		lastq = this.getMainpanel().innerItems.pop();
-
-		this.getMainpanel().animateActiveItem(lastq, {type: 'slide', direction: 'right'});
+		qstore = Ext.getStore('questionStore');
+		var question = qstore.findRecord('id', this.questionstack.pop());
+		this.viewQuestion(question, true);		
 	},
 
 	initView: function(){
@@ -388,7 +394,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		//this.captureCapturables();
 		var oview = Ext.widget('oview');
-		oview.setCollectedInfo(this.savedvalues);
+		oview.setCollectedInfo(this.savedvalues, this.assessment.get('notes'));
 		this.questionstack.push('output');
 		this.getMainpanel().animateActiveItem(oview, {type:'slide', direction: 'left'});
 	},

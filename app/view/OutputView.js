@@ -9,7 +9,7 @@ Ext.define('ceda.view.OutputView', {
 		},
 
 	},
-	setCollectedInfo: function(info){
+	setCollectedInfo: function(info, notes){
 		var ret = "<div> <input type='button' value='print' style='float:right' class='x-button' onclick='printer()'/><h1 class='questionheader'>Results</h1></div>";
 		ret += "<input type='hidden' id='hddnInfo' value='"+ JSON.stringify(info) +"'/>"
 		for(key in info){
@@ -26,6 +26,10 @@ Ext.define('ceda.view.OutputView', {
 			}
 			ret += "</table><br/><br/>";
 		}
+		ret += "<div class='sectiondiv'>";
+		ret += "<div class='tabheader'>Notes</div>";
+		ret += "<div style='float: left;clear: both;margin: 10px;'>"+notes+"</div>"
+
 		this.setHtml(ret);
 	}
 });
