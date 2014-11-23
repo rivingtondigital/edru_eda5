@@ -281,7 +281,13 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.0203,
 				description: 'Proceed',
 				triggers:{
-
+				}
+			},	
+			{
+				id:256,
+				question_id: 7.0204,
+				description: 'Proceed',
+				triggers:{
 				}
 			},	
 //
@@ -341,7 +347,13 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 7.0213,
 				description: 'Proceed',
 				triggers:{
-
+				}
+			},	
+			{
+				id:267,
+				question_id: 7.0214,
+				description: 'Proceed',
+				triggers:{
 				}
 			},	
 

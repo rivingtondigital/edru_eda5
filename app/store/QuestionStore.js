@@ -99,11 +99,19 @@ Ext.define('ceda.store.QuestionStore', {
 					'school, or in your relationships?<br>',
 					'Is the problem interfering with your health?',
 					'Is it very distressing or upsetting to you?',
+					'<br/> ',
 				].join("<br>"),
 				symptom: [ 
 							'Is the eating problem clinically significant? ',
 							'Does it impair functioning and/or is it significantly ',
-							'distressing to the individual?'
+							'distressing to the individual?',
+							'<br/><br/>',
+							'<i>As some individuals have difficulty acknowledging ',
+							'the problems resulting from their eating disorder,  ',
+							'the clinician should use all available information, ',
+							'including from ancillary sources such as family members ',
+							'and his or her own observations, ',
+							'in making this judgment.</i>'
 				].join(''),
 				rules: [
 					{
@@ -467,15 +475,18 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.0203,
+						target: 7.0204,
 						expression: 'global.OBE_1perMON'
 					},
 					{
 						target: 7.0210,
-						expression: '!global.OBE_1perMON'
+						expression: '!global.OBE_1perMON'	// Ignore if <1/Mon; to SBE assessment
 					}
 				]
 			},
+// *****************************************************************************
+// Next question assesses frequency if OBE's are >= 1/WEEK
+// *****************************************************************************
 			{
 				id:7.0203,
 				initial:false,
@@ -484,12 +495,15 @@ Ext.define('ceda.store.QuestionStore', {
 				shortname:'none',
 				interviewprobe:[
 						[
-							'<i>Enter average number of objective binge ',
-							'episodes per WEEK over the last 3 months.</i><br/>',
-							'<br/>',
-							'<i>If frequency is less than once a week, divide ',
-							'monthly frequency by 4. For example, ',
-							'2 binge episodes/month = 0.5 episodes/week.<i/>',
+							'Can you estimate how many times per WEEK, on average, ',
+							'over the last 3 months, you have had episodes like ',
+							'this?<br/>',
+//							'<i>Enter average number of objective binge ',
+//							'episodes per WEEK over the last 3 months.</i><br/>',
+//							'<br/>',
+//							'<i>If frequency is less than once a week, divide ',
+//							'monthly frequency by 4. For example, ',
+//							'2 binge episodes/month = 0.5 episodes/week.<i/>',
 								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
 								'<tr>',
@@ -500,15 +514,51 @@ Ext.define('ceda.store.QuestionStore', {
 					].join('')
 				],
 				symptom:[
-					'Enter weekly frequency of objective binge episodes (OBEs).'
+					'Average number of OBEs per WEEK over the last 3 months?'
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.0210,
+						target: 7.0210,	// to SBE assessment
 						expression: true
 					}
 				]
 			},
+// *****************************************************************************
+// Next question assesses frequency if OBE's are >= 1/MONTH
+// *****************************************************************************
+			{
+				id:7.0204,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+						[
+							'Can you estimate how many times per MONTH, on average, ',
+							'over the last 3 months, you have had episodes like ',
+							'this?<br/>',
+								'<br/><br/>',
+								'<table border=1 spacing=1 padding=2>',
+								'<tr>',
+								'<td><span># of OBEs per month: <span></td>',
+								'<td><input id="saveOBEfreq" name="BingeEating:OBEs per month" type="text"></input></td>',
+								'</tr>',
+								'</table>'
+					].join('')
+				],
+				symptom:[
+					'Average number of OBEs per MONTH over the last 3 months?'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.0210,	// to SBE assessment
+						expression: true
+					}
+				]
+			},
+
+
+
 //	****************************************************************************
 //	SBE assessment
 //	****************************************************************************
@@ -587,7 +637,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.0213,
+						target: 7.0214,
 						expression: 'global.sbe_frequency_months'
 					},
 					{
@@ -596,6 +646,9 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+// *****************************************************************************
+// Next question assesses frequency if SBE's are >= 1/WEEK
+// *****************************************************************************
 			{
 				id:7.0213,
 				initial:false,
@@ -603,27 +656,63 @@ Ext.define('ceda.store.QuestionStore', {
 				sectionlabel:'Binge Eating & Compensatory Behaviors',
 				shortname:'none',
 				interviewprobe:[
-					'<i>Enter average number of subjective binge episodes per WEEK over the last 3 months.</i><br/>',
-					'<i>If frequency is less than once a week, divide monthly frequency by 4. For example, 2 binge episodes/month = 0.5 episodes/week.</i>',
-//								'<br/><br/>',
+						[
+							'Can you estimate how many times per WEEK, on average, ',
+							'over the last 3 months, you have had episodes like ',
+							'this?<br/>',
+								'<br/><br/>',
 								'<table border=1 spacing=1 padding=2>',
-//								'<tr>',
+								'<tr>',
 								'<td><span># of SBEs per week: <span></td>',
 								'<td><input id="saveSBEfreq" name="BingeEating:SBEs per week" type="text"></input></td>',
-//								'</tr>',
-								'</table>',
-				].join("<br/>"),
+								'</tr>',
+								'</table>'
+					].join('')
+				],
 				symptom:[
-					'Enter weekly frequency of subjective binge episodes (SBEs).',
-					'<br/>',
+					'Average number of SBEs per WEEK over the last 3 months?'
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.05,
+						target: 7.05,	// to purging assessment
 						expression: true
 					}
 				]
 			},
+// *****************************************************************************
+// Next question assesses frequency if OBE's are >= 1/MONTH
+// *****************************************************************************
+			{
+				id:7.0214,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+						[
+							'Can you estimate how many times per MONTH, on average, ',
+							'over the last 3 months, you have had episodes like ',
+							'this?<br/>',
+								'<br/><br/>',
+								'<table border=1 spacing=1 padding=2>',
+								'<tr>',
+								'<td><span># of SBEs per month: <span></td>',
+								'<td><input id="saveSBEfreq" name="BingeEating:SBEs per month" type="text"></input></td>',
+								'</tr>',
+								'</table>'
+					].join('')
+				],
+				symptom:[
+					'Average number of SBEs per MONTH over the last 3 months?'
+				].join("<br/>"),
+				rules:[
+					{
+						target: 7.05,	// to purging assessment
+						expression: true
+					}
+				]
+			},
+
 // End of section evaluating SBEs
 //
 //	****************************************************************************
