@@ -989,6 +989,14 @@ Ext.define('ceda.store.AnswerStore', {
 					otherED: true
 				}
 			},
+			{
+				id: 200,
+				question_id: 50,
+				description: 'Proceed',
+				triggers:{
+//					Entered: true
+				}
+			},
 
 //
 // The section below contains the answers for the original other ED section

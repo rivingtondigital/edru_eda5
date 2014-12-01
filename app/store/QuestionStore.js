@@ -79,8 +79,9 @@ Ext.define('ceda.store.QuestionStore', {
 						diagnosis: true,
 						expression: '!global.eatingdisturbance && !global.aberranteating',
 						diagnosisname: 'None',
-						endifdiagnosis: true,
-						target: 'finish'
+						target: 50	// to last page for final notes
+//						endifdiagnosis: true,
+//						target: 'finish'
 					}
 				]
 			},
@@ -99,19 +100,18 @@ Ext.define('ceda.store.QuestionStore', {
 					'school, or in your relationships?<br>',
 					'Is the problem interfering with your health?',
 					'Is it very distressing or upsetting to you?',
-					'<br/> ',
+					'<p> ',
+					'<i>As some individuals have difficulty acknowledging ',
+					'the problems resulting from their eating disorder,  ',
+					'the clinician should use all available information, ',
+					'including from ancillary sources such as family members ',
+					'and his or her own observations, in making this judgment.</i>'
 				].join("<br>"),
 				symptom: [ 
 							'Is the eating problem clinically significant? ',
 							'Does it impair functioning and/or is it significantly ',
 							'distressing to the individual?',
 							'<br/><br/>',
-							'<i>As some individuals have difficulty acknowledging ',
-							'the problems resulting from their eating disorder,  ',
-							'the clinician should use all available information, ',
-							'including from ancillary sources such as family members ',
-							'and his or her own observations, ',
-							'in making this judgment.</i>'
 				].join(''),
 				rules: [
 					{
@@ -122,8 +122,9 @@ Ext.define('ceda.store.QuestionStore', {
 						diagnosis: true,
 						expression: '!global.impairmentdistress',
 						diagnosisname: 'None',
-						endifdiagnosis: true,
-						target: 'finish'
+						target: 50		// to last page
+//						endifdiagnosis: true,
+//						target: 'finish'
 					}
 				]
 			},
@@ -1781,7 +1782,7 @@ Ext.define('ceda.store.QuestionStore', {
 					},
 					{
 						target: 30,	// to section on other ED
-						expression: '! global.nonfood_persistent',
+						expression: '!global.nonfood_persistent',
 						endifdiagnosis: true
 					}
 
@@ -1832,11 +1833,12 @@ Ext.define('ceda.store.QuestionStore', {
 						diagnosis: true,
 						diagnosisname: 'PICA',
 						expression: 'global.nonfood_needs_clinical',
-						endifdiagnosis: true
+						target: 50
+//						endifdiagnosis: true
 					},
 					{
 						target: 30,	// to section on other ED
-						expression: '! global.nonfood_needs_clinical'
+						expression: '!global.nonfood_needs_clinical'
 					}
 
 				]
@@ -1915,42 +1917,82 @@ Ext.define('ceda.store.QuestionStore', {
 					diagnosis: true,
 					diagnosisname: 'Atypical Anorexia Nervosa',
 					expression: 'global.atypicalAN',
-					endifdiagnosis: true
+					target: 50
+//					endifdiagnosis: true
 				},
 				{
 					diagnosis: true,
 					diagnosisname: 'Subthreshold Bulimia Nervosa',
 					expression: 'global.subthresholdBN',
-					endifdiagnosis: true
+					target: 50
+//					endifdiagnosis: true
 				},
 				{
 					diagnosis: true,
 					diagnosisname: 'Subthreshold Binge Eating Disorder',
 					expression: 'global.subthresholdBED',
-					endifdiagnosis: true
+					target: 50
+//					endifdiagnosis: true
 				},
 				{
 					diagnosis: true,
 					diagnosisname: 'Purging Disorder',
 					expression: 'global.purgingdisorder',
-					endifdiagnosis: true
+					target: 50
+//					endifdiagnosis: true
 				},
 				{
 					diagnosis: true,
 					diagnosisname: 'Night Eating Syndrome',
 					expression: 'global.NES',
-					endifdiagnosis: true
+					target: 50
+//					endifdiagnosis: true
 				},
 				{
 					diagnosis: true,
 					diagnosisname: 'Other (unspecified) Eating Disorder',
 					expression: 'global.otherED',
-					endifdiagnosis: true
+					target: 50
+//					endifdiagnosis: true
 				}
 
 				]
 			},
-
+//	****************************************************************************
+//  Final Page
+//	****************************************************************************//
+			{
+				id:50,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Final Comments',
+				shortname:'none',
+				interviewprobe:[
+					'The interview is now complete.<br/> ',
+					'You may press the Notes button at the top right if you',
+					'wish to remark on any salient features of the particular',
+					'case (e.g., if the individual is pre- or post-bariatric',
+					'surgery) or interview process (e.g., if the individual ',
+					'had difficulty with comprehension of items or recall of ',
+					'symptoms).<br/>',
+					'If the diagnosis chosen is one of the Other Specified ',
+					'Feeding and Eating Disorders, you might clarify the ',
+					'rationale for the diagnostic decision.<br/>',
+					'If the diagnosis chosen is Unspecified Feeding or Eating ',
+					'Disorder, a brief description might be given.',
+					'<br/>',
+					].join("<br/>"),
+				symptom:[
+					'Enter additional Notes if desired.',
+				].join("<br/>"),
+				rules:[
+				{
+					endifdiagnosis: true,
+					target: 'finish',
+					expression: true
+				}
+				]
+			},
 
 
 
