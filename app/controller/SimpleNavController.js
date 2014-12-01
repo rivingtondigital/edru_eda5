@@ -295,13 +295,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.getSave_bttn().hide();
 		this.getSave_notes_bttn().show();
 
-		notesView = Ext.widget('notes_view');
 		notes = this.assessment.get('notes');
 		if (notes != undefined){
-			notesView.setNotes(notes);
+			this.notesView.setNotes(notes);
 		}
 
-		this.getMainpanel().animateActiveItem(notesView, {type: 'slide', direction: 'right'});
+		this.getMainpanel().animateActiveItem(this.notesView, {type: 'slide', direction: 'right'});
 	},
 
 	save_notes: function(){
@@ -317,7 +316,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		qstore = Ext.getStore('questionStore');
 		var question = qstore.findRecord('id', this.questionstack.pop());
-		this.viewQuestion(question, true);		
+		this.viewQuestion(question, true);
 	},
 
 	initView: function(){
@@ -339,7 +338,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.savedvalues = this.assessment.get('savedvalues');
 		this.backedvalues = this.assessment.get('backedvalues');
 		this.questionstack = this.assessment.get('questionstack');
+
 		this.qview = Ext.widget('qview');
+		this.notesView = Ext.widget('notes_view');
+
 		details.setRecord(this.instrument);
 		this.getBar().setTitle(this.instrument.get("name"));
 		this.getMainpanel().add(details);
