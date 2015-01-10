@@ -515,6 +515,13 @@ Ext.define('ceda.store.AnswerStore', {
 				}
 			},
 			{
+				id:35.6,
+				question_id: 7.0606,
+				description: 'Proceed',
+				triggers:{
+				}
+			},
+			{
 				id:36,
 				question_id: 7.07,
 				description: 'Yes: to compensate for binge eating',
@@ -880,7 +887,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 18,
 				description: 'Yes: regularly eats non-food items',
 				triggers:{
-					nonfood_age_appropriate: true
+					nonfood_age_inappropriate: true
 				}
 			},
 			{
@@ -888,7 +895,7 @@ Ext.define('ceda.store.AnswerStore', {
 				question_id: 18,
 				description: 'No: does NOT regulary eat non-food items',
 				triggers:{
-					nonfood_age_appropriate: false
+					nonfood_age_inappropriate: false
 				}
 			},
 			{

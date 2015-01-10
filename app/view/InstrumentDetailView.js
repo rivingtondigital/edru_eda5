@@ -18,7 +18,7 @@ Ext.define('ceda.view.InstrumentDetailView', {
 				id: 'description',
 				record: null,
 				tpl: [
-					'<h3>{description}</h3>'
+					'{description}'
 				]
 			},
 			{

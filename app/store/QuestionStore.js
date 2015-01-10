@@ -956,9 +956,9 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					[
 						'In the last WEEK, how many times have you engaged in this type of exercise?<br/>',
-						'Is this consistent with how frequently you have exercised over the past 3 months?',
+						'Is this typical of the last 3 months?',
 						' ',
-						'If No: How was frequency of exercise different?',
+//						'If No: How was frequency of exercise different?',
 						'<br/>'
 					].join("<br/>"),
 				].join("<br/>"),
@@ -995,7 +995,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 7.0605,						// document frequency
+						target: 7.0606,						// document frequency
 						expression: 'global.in_exercise1xMON'
 					},
 					{
@@ -1004,6 +1004,9 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+//	****************************************************************************
+//	Next question assesses frequency of exercise if >= 1/WEEK
+//	****************************************************************************
 			{
 				id:7.0605,
 				initial:false,
@@ -1013,7 +1016,6 @@ Ext.define('ceda.store.QuestionStore', {
 				interviewprobe:[
 					[
 						'<i>Enter average number of episodes of excessive exercise per WEEK over the last 3 months.</i><br/>',
-						'<i>If frequency is less than once a week, divide monthly frequency by 4. For example, 2 episodes/month = 0.5 episodes/week.</i><br/>',
 						[
 							'<table>',
 							'<tr><td>Average episodes of excessive exercise per week: </td> <td><input id="saveExerciseFrequency" name="Exercise:Average_number_episodes_per_week" size="3"></td></tr>',
@@ -1023,6 +1025,35 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				symptom:[
 					'Enter weekly frequency of excessive exercise.<br/>',
+					].join("<br/>"),
+				rules:[
+					{
+						target: 7.07,	// reasons why
+						expression: 'true'
+					}
+				]
+			},
+//	****************************************************************************
+//	Next question assesses frequency of exercise if >= 1/MONTH
+//	****************************************************************************
+			{
+				id:7.0606,
+				initial:false,
+				instrument_id:1,
+				sectionlabel:'Binge Eating & Compensatory Behaviors',
+				shortname:'none',
+				interviewprobe:[
+					[
+						'<i>Enter average number of episodes of excessive exercise per MONTH over the last 3 months.</i><br/>',
+						[
+							'<table>',
+							'<tr><td>Average episodes of excessive exercise per month: </td> <td><input id="saveExerciseFrequency" name="Exercise:Average_number_episodes_per_month" size="3"></td></tr>',
+							'</table>'
+						].join(" "),
+					].join("<br/>"),
+				].join("<br/>"),
+				symptom:[
+					'Enter monthly frequency of excessive exercise.<br/>',
 					].join("<br/>"),
 				rules:[
 					{
@@ -1271,7 +1302,7 @@ Ext.define('ceda.store.QuestionStore', {
 							expression: 'global.bodyweight_selfworth'
 					},
 					{
-							target: 11,		// to assessment of PICA
+							target: 11,		// to assessment of ARFID
 							expression: '!global.bodyweight_selfworth',
 //							trigger:'pica'	// 6/26: I commented this out; I don't think we should set a trigger here
 					}
@@ -1753,10 +1784,10 @@ Ext.define('ceda.store.QuestionStore', {
 				rules:[
 					{
 						target: 19,
-						expression: 'global.nonfood_age_appropriate'
+						expression: 'global.nonfood_age_inappropriate'
 					},
 					{
-						expression: '!global.nonfood_age_appropriate',
+						expression: '!global.nonfood_age_inappropriate',
 						endifdiagnosis: true,
 						target: 30	// to section on other ED
 					}
