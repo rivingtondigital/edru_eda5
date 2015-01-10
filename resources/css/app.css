@@ -27,6 +27,12 @@ textarea{
 	border: 2px solid sliver;
 }
 
+.span_id{
+	float: right;
+	color: cornflowerblue;
+	font-size: smaller;
+}
+
 .sectiondiv{
 	display: block;
 	float: left;

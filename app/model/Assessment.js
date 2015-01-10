@@ -11,7 +11,8 @@ Ext.define('ceda.model.Assessment', {
 				'triggers',
 				'backedvalues',
 				'savedvalues',
-				'questionstack'
+				'questionstack',
+				'notes'
 		],
 		hasOne: [
 			'Instrument'

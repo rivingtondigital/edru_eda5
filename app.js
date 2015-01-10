@@ -6,16 +6,17 @@ Ext.application({
     ],
 
     views: [
-    	'Main',
-    	'InstrumentDetailView',
-    	'QuestionView',
-    	'AnswersView',
-    	'AnswerItem',
-    	'OutputView',
-			'DebugView',
-			'LoginView',
-			'RegisterView',
-			'SavedView'
+        'Main',
+        'InstrumentDetailView',
+        'QuestionView',
+        'AnswersView',
+        'AnswerItem',
+        'OutputView',
+        'DebugView',
+        'LoginView',
+        'RegisterView',
+        'SavedView',
+        'NotesView'
     ],
 
     controllers:[
@@ -23,24 +24,24 @@ Ext.application({
     ],
 
     stores:[
-    	'InstrumentStore',
-    	'QuestionStore',
-    	'RuleStore',
-    	'AnswerStore',
-			'AssessmentStore',
-			'UserStore'
+        'InstrumentStore',
+        'QuestionStore',
+        'RuleStore',
+        'AnswerStore',
+        'AssessmentStore',
+        'UserStore'
     ],
 
     models:[
-    	'Instrument',
-    	'Question',
-    	'Answer',
-    	'Assessment',
-    	'Diagnosis',
-    	'Rule',
-    	'Trigger',
-			'PersistedAssessment',
-			'User'
+        'Instrument',
+        'Question',
+        'Answer',
+        'Assessment',
+        'Diagnosis',
+        'Rule',
+        'Trigger',
+        'PersistedAssessment',
+        'User'
     ],
 
     icon: {

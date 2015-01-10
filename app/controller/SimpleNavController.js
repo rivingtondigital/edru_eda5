@@ -20,6 +20,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 			back_bttn: '#topbar #backbutton',
 			restart_bttn: '#topbar #restartbutton',
 			save_bttn: '#topbar #sbutton',
+			notes_bttn: '#topbar #notesbutton',
+			save_notes_bttn: '#topbar #xnotesbutton',
 			login_user: 'loginview #txt_login_username',
 			login_pass: 'loginview #pass_login_pass',
 			login_bttn: 'loginview #bttn_login',
@@ -54,6 +56,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 			},
 			save_bttn:{
 				tap: 'save_session'
+			},
+			notes_bttn:{
+				tap: 'show_notes'
+			},
+			save_notes_bttn: {
+				tap: 'save_notes'
 			},
 			login_bttn:{
 				tap: 'check_user'
@@ -91,7 +99,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 					triggers: dec.data.triggers,
 					savedvalues: dec.data.savedvalues,
 					backedvalues: dec.data.backedvalues,
-					questionstack: dec.data.questionstack
+					questionstack: dec.data.questionstack,
+					notes: dec.data.notes
 				});
 
 				this.savedvalues = this.assessment.get('savedvalues');
@@ -207,7 +216,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	save_session: function(){
-
 		if (this.password == null){
 			this.post_login_callback = this.save_session;
 			this.login();
@@ -256,10 +264,13 @@ Ext.define('ceda.controller.SimpleNavController', {
 	restart: function(){
 		location.reload();
 	},
+
 	showmain: function(){
 		this.getBack_bttn().hide();
 		this.getRestart_bttn().hide();
 		this.getSave_bttn().hide();
+		this.getNotes_bttn().hide();
+		this.getSave_notes_bttn().hide();
 	},
 
 	backup: function(){
@@ -275,6 +286,37 @@ Ext.define('ceda.controller.SimpleNavController', {
 			var lview = Ext.widget('loginview');
 			this.getMainpanel().animateActiveItem(lview, {type:'slide', direction: 'left'});
 		}
+	},
+
+	show_notes: function(){
+		this.getBack_bttn().hide();
+		this.getNotes_bttn().hide();
+		this.getRestart_bttn().hide();
+		this.getSave_bttn().hide();
+		this.getSave_notes_bttn().show();
+
+		notes = this.assessment.get('notes');
+		if (notes != undefined){
+			this.notesView.setNotes(notes);
+		}
+
+		this.getMainpanel().animateActiveItem(this.notesView, {type: 'slide', direction: 'right'});
+	},
+
+	save_notes: function(){
+		this.assessment.set('notes', Ext.query('*[id^="notes_area"]')[0].value);
+		this.getNotes_bttn().show();
+		this.getRestart_bttn().show();
+		this.getSave_bttn().show();
+		this.getSave_notes_bttn().hide();
+
+		if (this.questionstack.length > 1){
+			this.getBack_bttn().show();
+		}
+
+		qstore = Ext.getStore('questionStore');
+		var question = qstore.findRecord('id', this.questionstack.pop());
+		this.viewQuestion(question, true);
 	},
 
 	initView: function(){
@@ -296,7 +338,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.savedvalues = this.assessment.get('savedvalues');
 		this.backedvalues = this.assessment.get('backedvalues');
 		this.questionstack = this.assessment.get('questionstack');
+
 		this.qview = Ext.widget('qview');
+		this.notesView = Ext.widget('notes_view');
+
 		details.setRecord(this.instrument);
 		this.getBar().setTitle(this.instrument.get("name"));
 		this.getMainpanel().add(details);
@@ -333,6 +378,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var next = this.findNextQuestion(record);
 
 		if(next == 'finish'){
+			this.displayComments();
+//			this.viewOutput();
+		}
+		else if(next == 'dump'){
 			this.viewOutput();
 		}
 		else if(next !== undefined){
@@ -344,6 +393,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 	},
 
+	displayComments: function(){
+		var qstore = Ext.getStore('questionStore');
+		comments = qstore.findRecord('shortname', 'comments');
+		this.viewQuestion(comments);
+	},
+
 	viewOutput: function(){
 		this.getBack_bttn().show();
 		this.getRestart_bttn().show();
@@ -351,7 +406,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		//this.captureCapturables();
 		var oview = Ext.widget('oview');
-		oview.setCollectedInfo(this.savedvalues);
+		oview.setCollectedInfo(this.savedvalues, this.assessment.get('notes'));
 		this.questionstack.push('output');
 		this.getMainpanel().animateActiveItem(oview, {type:'slide', direction: 'left'});
 	},
@@ -367,6 +422,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 		this.getRestart_bttn().show();
 		this.getSave_bttn().show();
+		this.getNotes_bttn().show();
 
 
 		this.questionstack.push(question.get('id'));
@@ -408,6 +464,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 	},
 
+
 	findNextQuestion: function(answer){
 		var question = answer.getQuestion();
 		var rules = question.get('rules');
@@ -428,6 +485,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 					if(this.savedvalues.hasOwnProperty('Diagnosis')){
 						return 'finish';
 					}
+				}
+				if(rule.comment){
+					return 'dump';
 				}
 				var target = rule.target;
 				var qstore = Ext.getStore('questionStore');
