@@ -1,5 +1,6 @@
 function printer(){
 	var info = JSON.parse(document.getElementById('hddnInfo').value);
+	var notes = JSON.parse(document.getElementById('hddnNotes').value);
 	win = window.open();
 	body = win.document.getElementsByTagName('body')[0];
 	var ret = '<style>';
@@ -26,6 +27,10 @@ function printer(){
 		ret += "</table><br/><br/>";
 		ret += "</div>";
 	}
+	ret += "<div class='sectiondiv'>";
+	ret += "<div class='tabheader'>Notes</div>";
+	ret += "<pre style='font-family:inherit;padding:15px'>"+notes+"</pre>";
+
 	body.innerHTML = ret;
 	console.info(ret);
 }
