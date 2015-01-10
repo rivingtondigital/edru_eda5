@@ -378,6 +378,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var next = this.findNextQuestion(record);
 
 		if(next == 'finish'){
+			this.displayComments();
+//			this.viewOutput();
+		}
+		else if(next == 'dump'){
 			this.viewOutput();
 		}
 		else if(next !== undefined){
@@ -387,6 +391,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 			alert('No rules matched. No next question.');
 			//this.viewQuestion();
 		}
+	},
+
+	displayComments: function(){
+		var qstore = Ext.getStore('questionStore');
+		comments = qstore.findRecord('shortname', 'comments');
+		this.viewQuestion(comments);
 	},
 
 	viewOutput: function(){
@@ -475,6 +485,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 					if(this.savedvalues.hasOwnProperty('Diagnosis')){
 						return 'finish';
 					}
+				}
+				if(rule.comment){
+					return 'dump';
 				}
 				var target = rule.target;
 				var qstore = Ext.getStore('questionStore');

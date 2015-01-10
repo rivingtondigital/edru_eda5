@@ -107,7 +107,7 @@ Ext.define('ceda.store.QuestionStore', {
 					'including from ancillary sources such as family members ',
 					'and his or her own observations, in making this judgment.</i>'
 				].join("<br>"),
-				symptom: [ 
+				symptom: [
 							'Is the eating problem clinically significant? ',
 							'Does it impair functioning and/or is it significantly ',
 							'distressing to the individual?',
@@ -1633,7 +1633,7 @@ Ext.define('ceda.store.QuestionStore', {
 					{
 						target: 14,
 						expression: '!global.avoidant_alt_condition'
-					}	
+					}
 				]
 			},
 			{
@@ -1997,7 +1997,7 @@ Ext.define('ceda.store.QuestionStore', {
 				initial:false,
 				instrument_id:1,
 				sectionlabel:'Final Comments',
-				shortname:'none',
+				shortname:'comments',
 				interviewprobe:[
 					'The interview is now complete.<br/> ',
 					'You may press the Notes button at the top right if you',
@@ -2018,8 +2018,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 				{
-					endifdiagnosis: true,
-					target: 'finish',
+					comment: true,
 					expression: true
 				}
 				]
