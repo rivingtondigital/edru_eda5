@@ -470,7 +470,17 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var rules = question.get('rules');
 		for(var index in rules){
 			var rule = rules[index];
+			if (rule.diagnosis){
+				if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
+					delete this.savedvalues['Diagnosis'][rule.diagnosisname];
+				}
+			}
+		}
+
+		for(var index in rules){
+			var rule = rules[index];
 			var global = this.assessment.get('triggers');
+
 			if( eval(rule.expression) ){
 				if(rule.diagnosis){
 					if(!this.savedvalues.hasOwnProperty('Diagnosis')){
