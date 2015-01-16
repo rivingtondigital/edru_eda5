@@ -935,14 +935,14 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: 'global.an && !global.purging && !global.OBE_1perMON && !global.OBE_1perWK',
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
-						target: 18
+						target: 19
 					},
 					{
 						diagnosis: true,
 						expression: 'global.an && !global.purging && (global.OBE_1perMON || global.OBE_1perWK)',
 						trigger: 'an-bps',
 						diagnosisname: 'Binge-Purge Subtype',
-						target: 18
+						target: 19
 					},
 					// 8/13: Cannot make other dx assessments until assess reasons for purging or exercise
 				]
@@ -1109,7 +1109,7 @@ Ext.define('ceda.store.QuestionStore', {
 						].join(''),
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
-						target: 18
+						target: 19
 					},
 					{
 						diagnosis: true,
@@ -1120,7 +1120,7 @@ Ext.define('ceda.store.QuestionStore', {
 						].join(''),
 						trigger: 'an-bps',
 						diagnosisname: 'Binge-Purge Subtype',
-						target: 18
+						target: 19
 					},
 					{	// Assess whether criteria for BN MIGHT be met
 						expression: [
@@ -1183,14 +1183,14 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: '(global.an) && (!global.OBE_1perMON && !global.in_frequency_months)',
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
-						target: 18
+						target: 19
 					},
 					{
 						diagnosis: true,
 						expression: '(global.an) && (global.OBE_1perMON || global.in_frequency_months)',
 						trigger: 'an-bs',
 						diagnosisname: 'Binge-Purge Subtype',
-						target: 18
+						target: 19
 					},
 					{
 						expression: [
@@ -1241,14 +1241,14 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: '(global.an) && (!global.OBE_1perMON && !global.in_frequency_months)',
 						trigger: 'an-rs',
 						diagnosisname: 'Restricting Subtype',
-						target: 18
+						target: 19
 					},
 					{
 						diagnosis: true,
 						expression: '(global.an) && (global.OBE_1perMON || global.in_frequency_months)',
 						trigger: 'an-bs',
 						diagnosisname: 'Binge-Purge Subtype',
-						target: 18
+						target: 19
 					},
 					{
 						expression: [
@@ -1296,7 +1296,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-							target: 18,
+							target: 19,
 							diagnosis: true,
 							diagnosisname: 'Bulimia Nervosa',
 							expression: 'global.bodyweight_selfworth'
@@ -1495,7 +1495,7 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: '(!global.avoidant_nutritional_problems && !global.bed)'
 					},
 					{
-						target: 18,	// to Pica--might have BED and Pica
+						target: 19,	// to Pica--might have BED and Pica
 						expression: '(!global.avoidant_nutritional_problems && global.bed)'
 					}
 				]
@@ -1652,7 +1652,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 18,
+						target: 19,
 						diagnosis: true,
 						diagnosisname: 'Avoidant/Restrictive Food Intake Disorder (ARFID)',
 						trigger: 'arfid',
@@ -1666,7 +1666,7 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: '!global.avoidant_independent_clinical'
 					},
 					{
-						target: 18,
+						target: 19,
 						expression: 'global.avoidant_independent_clinical'
 					}
 
@@ -1693,7 +1693,7 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: 'global.regurge_repeated'
 					},
 					{
-						target: 18,
+						target: 19,
 						expression: '! global.regurge_repeated'
 					}
 				]
@@ -1718,7 +1718,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 18,
+						target: 19,
 						expression: 'global.regurge_alt_explanation'
 					},
 					{
@@ -1759,6 +1759,10 @@ Ext.define('ceda.store.QuestionStore', {
 //	****************************************************************************
 //	Assessment of Pica
 //	****************************************************************************
+//	Jan 13, 2015: changed target above from 19 to 20. Therefore, this page should never be reached.
+//	Page 18 was originally the default entryway to Pica. 
+//	But, since this version is only for adults, questions seemed unnecessary.
+//	So, it is no longer a target, and this page could be eliminated.
 			{
 				id:18,
 				initial:false,
@@ -1783,7 +1787,7 @@ Ext.define('ceda.store.QuestionStore', {
 				].join("<br/>"),
 				rules:[
 					{
-						target: 19,
+						target: 20,
 						expression: 'global.nonfood_age_inappropriate'
 					},
 					{
@@ -1793,6 +1797,7 @@ Ext.define('ceda.store.QuestionStore', {
 					}
 				]
 			},
+//	Page 19 is now the entryway into assessment of Pica
 			{
 				id:19,
 				initial:false,
