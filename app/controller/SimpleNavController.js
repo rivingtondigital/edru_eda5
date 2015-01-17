@@ -275,7 +275,18 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 	backup: function(){
 		qstore = Ext.getStore('questionStore');
-		this.questionstack.pop();
+		var old_question = this.questionstack.pop();
+		rules = old_question.get('rules');
+		for (var index in rules){
+			var rule = rules[index];
+			global_triggers = this.assessment.triggers;
+			delete global_triggers[rule.trigger];		
+			if (rule.diagnosis){
+				if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
+					delete this.savedvalues['Diagnosis'][rule.diagnosisname];
+				}
+			}
+		}
 		var question = qstore.findRecord('id', this.questionstack.pop());
 		this.viewQuestion(question, true);
 	},
