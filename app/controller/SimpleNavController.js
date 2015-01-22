@@ -287,6 +287,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 				}
 			}
 		}
+		this.removeCapturables();
 		var question = qstore.findRecord('id', this.questionstack.pop());
 		this.viewQuestion(question, true);
 	},
@@ -516,6 +517,18 @@ Ext.define('ceda.controller.SimpleNavController', {
 			}
 		}
 		return undefined;
+	},
+	removeCapturables: function(){
+		var saves = Ext.query('*[id^="save"]');
+		var optionals = Ext.query('*[id^="optional"]');
+		for(var key in saves){
+			var input = saves[key];
+			delete this.backedvalues[input.id];
+		}
+		for(key in optionals){
+			var input = optionals[key];
+			delete this.backedvalues[input.id];
+		}
 	},
 
 	captureCapturables: function(){
