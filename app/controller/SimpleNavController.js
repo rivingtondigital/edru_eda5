@@ -424,7 +424,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	viewQuestion: function(question, back){
-//		var debug = true;
+		//		var debug = true;
 		var debug = false;
 		if(this.questionstack.length === 0){
 			this.getBack_bttn().hide();
@@ -523,11 +523,13 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var optionals = Ext.query('*[id^="optional"]');
 		for(var key in saves){
 			var input = saves[key];
-			delete this.backedvalues[input.id];
+			var section_name = input.name.split(':')[0];
+			delete this.savedvalues[section_name];
 		}
 		for(key in optionals){
 			var input = optionals[key];
-			delete this.backedvalues[input.id];
+			var section_name = input.name.split(':')[0];
+			delete this.savedvalues[section_name];
 		}
 	},
 
