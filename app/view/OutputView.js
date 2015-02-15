@@ -30,7 +30,7 @@ Ext.define('ceda.view.OutputView', {
 		}
 		ret += "<div class='sectiondiv'>";
 		ret += "<div class='tabheader'>Notes</div>";
-		ret += "<pre style='float: left;clear: both;margin: 10px; font-family: inherit'>"+notes+"</pre>";
+		ret += "<pre style='white-space: pre-line; float: left;clear: both;margin: 10px; font-family: inherit'>"+notes+"</pre>";
 
 		this.setHtml(ret);
 	}
