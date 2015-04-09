@@ -1870,11 +1870,11 @@ Ext.define('ceda.store.QuestionStore', {
 						diagnosisname: 'PICA',
 						expression: 'global.nonfood_needs_clinical',
 						target: 50
-//						endifdiagnosis: true
 					},
 					{
 						target: 30,	// to section on other ED
-						expression: '!global.nonfood_needs_clinical'
+						expression: '!global.nonfood_needs_clinical',
+						endifdiagnosis: true
 					}
 
 				]
