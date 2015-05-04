@@ -1940,7 +1940,7 @@ Ext.define('ceda.store.QuestionStore', {
 				id:32,
 				initial:false,
 				instrument_id:1,
-				sectionlabel:'Other and Eating Disorders',
+				sectionlabel:'Other Feeding and Eating Disorders',
 				shortname:'none',
 				interviewprobe:[
 					'The conditions below are other eating disorders noted in DSM-5, but not formally recognized. ',
