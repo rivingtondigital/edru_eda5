@@ -1922,7 +1922,7 @@ Ext.define('ceda.store.QuestionStore', {
 					'<b>Subthreshold Bulimia Nervosa:</b> meets all criteria for Bulimia Nervosa, but low in frequency or of limited duration.',
 					'<b>Subthreshold Binge Eating Disorder:</b> meets all criteria for Binge Eating Disorder, but low in frequency or of limited duration.',
 					'<b>Purging Disorder:</b> Recurrent purging to influence shape or weight, but no binge eating. ',
-					'<b>Night Eating Syndrome:</b> Recurrent episodes of night eating (after falling asleep or after evening meal.)',
+					'<b>Night Eating Syndrome:</b> Recurrent episodes of night eating (after falling asleep or after evening meal).',
 					'<b>Other (unspecified) Eating Disorder</b></i>',
 					'<br/>',
 					].join("<br/>"),
