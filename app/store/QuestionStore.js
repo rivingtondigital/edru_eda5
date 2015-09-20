@@ -1126,6 +1126,7 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: [
 							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
 							'(global.purging || global.in_exercise) && ',
+							'(global.purging1xWK || global.in_exercise1xWK) && ',
 							'(global.in_compensate || global.in_weightloss)'
 						].join(''),
 						target: 8,
@@ -1254,7 +1255,8 @@ Ext.define('ceda.store.QuestionStore', {
 						expression: [
 							'(!global.an && global.lacks_control && global.OBE_1perWK) && ',
 							'(global.in_behavior || global.in_excercise) && ',
-							'(global.in_compensate && in_frequency_weeks)'
+							'(global.purging1xWK || global.in_exercise1xWK) && ',
+							'(global.in_compensate)'
 						].join(''),
 						target: 8,
 						trigger: 'bn'

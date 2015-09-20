@@ -32,7 +32,7 @@ Ext.define('ceda.store.InstrumentStore', {
 								'height and weight) whenever possible.</p>',
 								'<p></p> ',
 								'<p></p> ',
-								'<p style="font-size:15px"><em>(v2.006. Copyright &#169 2013. American Psychiatric Association. ',
+								'<p style="font-size:15px"><em>(v2.007. Copyright &#169 2013. American Psychiatric Association. ',
 								'All rights reserved.)</em></p>'].join(" ")
 			}
 		]
