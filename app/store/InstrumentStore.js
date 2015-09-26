@@ -32,8 +32,15 @@ Ext.define('ceda.store.InstrumentStore', {
 								'height and weight) whenever possible.</p>',
 								'<p></p> ',
 								'<p></p> ',
-								'<p style="font-size:15px"><em>(v2.007. Copyright &#169 2013. American Psychiatric Association. ',
-								'All rights reserved.)</em></p>'].join(" ")
+								'<p style="font-size:18px"><em>(v2.008. Copyright &#169 2015. Research Foundation for Mental Hygiene, Inc.',
+								'All rights reserved.)</em></p>',
+								'<p style="font-size:12px">The Diagnostic and Statistical Manual of Mental Disorders, DSM, and DSM-5 are registered ',
+								'trademarks of the American Psychiatric Association. EDA-5 is not associated with the ',
+								'American Psychiatric Association or with any of its products or publications, nor does the ',
+								'medical advice or diagnosis expressed herein represent the policies and opinions of the ',
+								'American Psychiatric Association. The American Psychiatric Association shall not be liable ',
+								'to EDA-5 or any third party for any medical advice or diagnoses provided by the EDA-5.',
+							].join(" ")
 			}
 		]
 	}
