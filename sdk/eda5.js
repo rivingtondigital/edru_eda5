@@ -1,6 +1,13 @@
 function printer(){
 	var info = JSON.parse(document.getElementById('hddnInfo').value);
-	var notes = JSON.parse(document.getElementById('hddnNotes').value);
+	var notes = document.getElementById('hddnNotes').value;
+	if (notes != 'undefined'){
+    	notes = JSON.parse(notes);
+	}
+	else{
+	    notes = "No Notes"
+	}
+
 	win = window.open();
 	body = win.document.getElementsByTagName('body')[0];
 	var ret = '<style>';
