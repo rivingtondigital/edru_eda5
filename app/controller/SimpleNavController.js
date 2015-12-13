@@ -275,19 +275,22 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 	backup: function(){
 		qstore = Ext.getStore('questionStore');
-		var old_question = qstore.findRecord('id', this.questionstack.pop());
-		rules = old_question.get('rules');
-		for (var index in rules){
-			var rule = rules[index];
-			global_triggers = this.assessment.get('triggers');
-			delete global_triggers[rule.trigger];
-			if (rule.diagnosis){
-				if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
-					delete this.savedvalues['Diagnosis'][rule.diagnosisname];
-				}
-			}
-		}
-		this.removeCapturables();
+		var q_id = this.questionstack.pop()
+		if (q_id != 'output'){
+            var old_question = qstore.findRecord('id', q_id);
+            rules = old_question.get('rules');
+            for (var index in rules){
+                var rule = rules[index];
+                global_triggers = this.assessment.get('triggers');
+                delete global_triggers[rule.trigger];
+                if (rule.diagnosis){
+                    if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
+                        delete this.savedvalues['Diagnosis'][rule.diagnosisname];
+                    }
+                }
+            }
+            this.removeCapturables();
+        }
 		var question = qstore.findRecord('id', this.questionstack.pop());
 		this.viewQuestion(question, true);
 	},
@@ -327,8 +330,14 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 
 		qstore = Ext.getStore('questionStore');
-		var question = qstore.findRecord('id', this.questionstack.pop());
-		this.viewQuestion(question, true);
+		question_id = this.questionstack.pop();
+		if (question_id == 'output'){
+		    this.viewOutput()
+		}
+		else{
+            var question = qstore.findRecord('id', question_id);
+            this.viewQuestion(question, true);
+		}
 	},
 
 	initView: function(){
@@ -408,6 +417,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	displayComments: function(){
 		var qstore = Ext.getStore('questionStore');
 		comments = qstore.findRecord('shortname', 'comments');
+		this.questionstack.push('comments');
 		this.viewQuestion(comments);
 	},
 
@@ -435,7 +445,6 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.getRestart_bttn().show();
 		this.getSave_bttn().show();
 		this.getNotes_bttn().show();
-
 
 		this.questionstack.push(question.get('id'));
 
