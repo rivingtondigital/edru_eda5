@@ -5,13 +5,12 @@ Ext.define('ceda.store.OnlineInstrumentStore', {
         model: 'ceda.model.Instrument',
         proxy: {
             type: 'jsonp',
-						url: 'http://eda5.org/api/ajax/v/fetch/1/eda5.json',
-						noCache: false,
-						//callbackKey: 'ceda.data.iproxy',
+            url: 'https://interview.eda5.org/api/ajax/v/interview.json',
+            noCache: false,
             reader:{
-							type: 'json',
-							model: 'ceda.model.Instrument'
-						}
+                type: 'json',
+                model: 'ceda.model.Instrument'
+            }
         }
     }
 });

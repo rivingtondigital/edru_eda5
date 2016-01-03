@@ -334,24 +334,31 @@ Ext.define('ceda.controller.SimpleNavController', {
 			keyvalue.set('json_value', json_value);
 			offstore.add(keyvalue);
 			offstore.sync();
-			Ext.Msg.alert('Update Success', 'You have successfully \
-										updated the questionnaire.', Ext.emptyFn);
+			Ext.Msg.alert('Update Success', 'You have successfully updated the questionnaire.', Ext.emptyFn);
 		};
 		var offstore = Ext.getStore('offlineInstrumentStore');
 		offstore.load();
+
 		if (offstore.getAllCount() > 0){
 			new_eda5 = b.first()
 			current_eda5 = offstore.findRecord('keyname', new_eda5.get('instrument_id') );
 			var current_version = current_eda5.get('version_minor');
 			var new_version = new_eda5.getVersion().get('minor');
+			var call_update = function call_update(id, value, opt){
+			    update(opt.new_eda5, opt.offstore);
+			    this.initView();
+			}
 
 			if (current_version >= new_version){
-				Ext.Msg.confirm("Confirmation", "You're version is up to date. Would \
-																				you still like to re-install it?", function(a,b, c){
-					if (a == 'yes'){
-						update(new_eda5, offstore);
-					}
-				});
+			    (new Ext.MessageBox).show({
+			        title: 'Confirmation',
+			        message:  "You're version is up to date. Would you still like to re-install it?",
+			        buttons: Ext.MessageBox.YESNO,
+			        offstore: offstore,
+			        new_eda5: new_eda5,
+			        scope: this,
+			        fn: Ext.emptyFn
+			    });
 			}
 			else{
 				update(new_eda5, offstore);
@@ -360,19 +367,31 @@ Ext.define('ceda.controller.SimpleNavController', {
 		else{
 			update(b.first(), offstore);
 		}
-		this.initView();
+		return true;
+//		this.initView();
 	},
 
-
-
 	onStoreUpdate: function(){
+	    var client_params = Ext.urlDecode(location.search.substring(1))
 		if(navigator.onLine){
 			var istore = Ext.getStore('onlineInstrumentStore');
+
 			istore.on({
 					refresh: 'onStoreSync',
 					scope: this
 			});
-			istore.load();
+
+            var params = {
+                q: client_params.q,
+                major: client_params.major
+            };
+            if ('minor' in client_params){
+                params.minor = client_params.minor;
+            }
+
+			istore.load({
+			    params: params
+			});
 		}
 		else{
 			Ext.Msg.alert('Update Unavailable',
