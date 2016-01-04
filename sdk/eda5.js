@@ -1,5 +1,6 @@
 function printer(){
 	var info = JSON.parse(document.getElementById('hddnInfo').value);
+	var notes = JSON.parse(document.getElementById('hddnNotes').value);
 	win = window.open();
 	body = win.document.getElementsByTagName('body')[0];
 	var ret = '<style>';
@@ -18,14 +19,19 @@ function printer(){
 		ret += "<div class='tabheader'>"+header+"</div><br/>";
 		ret += "<table class='outputtable'>";
 		for(subkey in content){
+			subkey_disp = subkey.replace(/([A-Z][a-z]+)([A-Z]+[a-z]*)/g, '$1 $2')
 			ret += "<tr>";
-			ret += "<td>"+subkey+"</td>";
+			ret += "<td>"+subkey_disp+"</td>";
 			ret += "<td><span class='value'>"+content[subkey]+"</span></td>";
 			ret += "</tr>";
 		}
 		ret += "</table><br/><br/>";
 		ret += "</div>";
 	}
+	ret += "<div class='sectiondiv'>";
+	ret += "<div class='tabheader'>Notes</div>";
+	ret += "<pre style='font-family:inherit;padding:15px'>"+notes+"</pre>";
+
 	body.innerHTML = ret;
 	console.info(ret);
 }

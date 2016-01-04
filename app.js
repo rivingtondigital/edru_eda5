@@ -11,49 +11,66 @@ Ext.application({
     ],
 
 		models:[
-    	'Question',
-    	'Answer',
-    	'Assessment',
-    	'Diagnosis',
-    	'Rule',
-    	'Trigger',
-			'PersistedAssessment',
-			'User',
-    	'Instrument',
-			'BasicKeyValue',
-			'Version'
+            'Question',
+            'Answer',
+            'Assessment',
+            'Diagnosis',
+            'Rule',
+            'Trigger',
+            'PersistedAssessment',
+            'User',
+            'Instrument',
+            'BasicKeyValue',
+            'Version'
     ],
 
     stores:[
 //   	'InstrumentStore',
 //   	'QuestionStore',
 //  	'AnswerStore',
-			'AssessmentStore',
-			'UserStore',
-			'OfflineInstrumentStore',
-			'OnlineInstrumentStore'
+        'AssessmentStore',
+        'UserStore',
+        'OfflineInstrumentStore',
+        'OnlineInstrumentStore'
     ],
 
-
-
     views: [
-    	'Main',
-    	'InstrumentDetailView',
-    	'QuestionView',
-    	'AnswersView',
-    	'AnswerItem',
-    	'OutputView',
-			'DebugView',
-			'LoginView',
-			'RegisterView',
-			'SavedView',
-			'VersionView'
+        'Main',
+        'InstrumentDetailView',
+        'QuestionView',
+        'AnswersView',
+        'AnswerItem',
+        'OutputView',
+        'DebugView',
+        'LoginView',
+        'RegisterView',
+        'SavedView',
+        'NotesView'
     ],
 
     controllers:[
     	'SimpleNavController'
     ],
 
+//    stores:[
+//        'InstrumentStore',
+//        'QuestionStore',
+//        'AnswerStore',
+//        'AssessmentStore',
+//        'UserStore'
+//    ],
+//
+//    models:[
+//        'Instrument',
+//        'Question',
+//        'Answer',
+//        'Assessment',
+//        'Diagnosis',
+//        'Rule',
+//        'Trigger',
+//        'PersistedAssessment',
+//        'User'
+//    ],
 
     icon: {
         '57': 'resources/icons/Icon.png',

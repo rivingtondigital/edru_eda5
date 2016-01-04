@@ -22,6 +22,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 			back_bttn: '#topbar #backbutton',
 			restart_bttn: '#topbar #restartbutton',
 			save_bttn: '#topbar #sbutton',
+			notes_bttn: '#topbar #notesbutton',
+			save_notes_bttn: '#topbar #xnotesbutton',
 			login_user: 'loginview #txt_login_username',
 			login_pass: 'loginview #pass_login_pass',
 			login_bttn: 'loginview #bttn_login',
@@ -68,6 +70,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 			save_bttn:{
 				tap: 'save_session'
 			},
+			notes_bttn:{
+				tap: 'show_notes'
+			},
+			save_notes_bttn: {
+				tap: 'save_notes'
+			},
 			login_bttn:{
 				tap: 'check_user'
 			},
@@ -107,7 +115,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 					triggers: dec.data.triggers,
 					savedvalues: dec.data.savedvalues,
 					backedvalues: dec.data.backedvalues,
-					questionstack: dec.data.questionstack
+					questionstack: dec.data.questionstack,
+					notes: dec.data.notes
 				});
 
 				this.savedvalues = this.assessment.get('savedvalues');
@@ -295,16 +304,34 @@ Ext.define('ceda.controller.SimpleNavController', {
 	restart: function(){
 		location.reload();
 	},
+
 	showmain: function(){
 		this.getBack_bttn().hide();
 		this.getRestart_bttn().hide();
 		this.getSave_bttn().hide();
+		this.getNotes_bttn().hide();
+		this.getSave_notes_bttn().hide();
 	},
 
 	backup: function(){
+//		qstore = Ext.getStore('questionStore');
 		qstore = this.instrument.questionsStore;
-		this.questionstack.pop();
-		var question = qstore.findRecord('question_id', this.questionstack.pop());
+//		this.questionstack.pop();
+//		var question = qstore.findRecord('question_id', this.questionstack.pop());
+		var old_question = qstore.findRecord('id', this.questionstack.pop());
+		rules = old_question.get('rules');
+		for (var index in rules){
+			var rule = rules[index];
+			global_triggers = this.assessment.get('triggers');
+			delete global_triggers[rule.trigger];
+			if (rule.diagnosis){
+				if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
+					delete this.savedvalues['Diagnosis'][rule.diagnosisname];
+				}
+			}
+		}
+		this.removeCapturables();
+		var question = qstore.findRecord('id', this.questionstack.pop());
 		this.viewQuestion(question, true);
 	},
 
@@ -381,10 +408,20 @@ Ext.define('ceda.controller.SimpleNavController', {
 					scope: this
 			});
 
-            var params = {
-                q: client_params.q,
-                major: client_params.major
-            };
+			var params = {
+			    q: 'eda5',
+			    major: '1',
+			    minor: 'current'
+			}
+
+			if ('q' in client_params){
+			    params['q'] = client_params['q'];
+			}
+
+			if ('major' in client_params){
+			    params['major'] = client_params['major'];
+			}
+
             if ('minor' in client_params){
                 params.minor = client_params.minor;
             }
@@ -413,6 +450,36 @@ Ext.define('ceda.controller.SimpleNavController', {
 		return blank;
 	},
 
+	show_notes: function(){
+		this.getBack_bttn().hide();
+		this.getNotes_bttn().hide();
+		this.getRestart_bttn().hide();
+		this.getSave_bttn().hide();
+		this.getSave_notes_bttn().show();
+
+		notes = this.assessment.get('notes');
+		if (notes != undefined){
+			this.notesView.setNotes(notes);
+		}
+
+		this.getMainpanel().animateActiveItem(this.notesView, {type: 'slide', direction: 'right'});
+	},
+
+	save_notes: function(){
+		this.assessment.set('notes', Ext.query('*[id^="notes_area"]')[0].value);
+		this.getNotes_bttn().show();
+		this.getRestart_bttn().show();
+		this.getSave_bttn().show();
+		this.getSave_notes_bttn().hide();
+
+		if (this.questionstack.length > 1){
+			this.getBack_bttn().show();
+		}
+
+		qstore = Ext.getStore('questionStore');
+		var question = qstore.findRecord('id', this.questionstack.pop());
+		this.viewQuestion(question, true);
+	},
 
 	initView: function(){
 		var offStore = Ext.getStore('offlineInstrumentStore').load();
@@ -457,7 +524,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.savedvalues = this.assessment.get('savedvalues');
 		this.backedvalues = this.assessment.get('backedvalues');
 		this.questionstack = this.assessment.get('questionstack');
+
 		this.qview = Ext.widget('qview');
+		this.notesView = Ext.widget('notes_view');
+
 		details.setRecord(this.instrument);
 		this.getBar().setTitle(this.instrument.get("name"));
 		this.getMainpanel().add(details);
@@ -492,6 +562,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		var next = this.findNextQuestion(record);
 		if(next == 'finish'){
+			this.displayComments();
+//			this.viewOutput();
+		}
+		else if(next == 'dump'){
 			this.viewOutput();
 		}
 		else if(next !== undefined){
@@ -502,6 +576,12 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 	},
 
+	displayComments: function(){
+		var qstore = Ext.getStore('questionStore');
+		comments = qstore.findRecord('shortname', 'comments');
+		this.viewQuestion(comments);
+	},
+
 	viewOutput: function(){
 		this.getBack_bttn().show();
 		this.getRestart_bttn().show();
@@ -509,13 +589,13 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		//this.captureCapturables();
 		var oview = Ext.widget('oview');
-		oview.setCollectedInfo(this.savedvalues);
+		oview.setCollectedInfo(this.savedvalues, this.assessment.get('notes'));
 		this.questionstack.push('output');
 		this.getMainpanel().animateActiveItem(oview, {type:'slide', direction: 'left'});
 	},
 
 	viewQuestion: function(question, back){
-//		var debug = true;
+		//		var debug = true;
 		var debug = false;
 		if(this.questionstack.length === 0){
 			this.getBack_bttn().hide();
@@ -525,6 +605,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 		this.getRestart_bttn().show();
 		this.getSave_bttn().show();
+		this.getNotes_bttn().show();
 
 
 		this.questionstack.push(question.get('question_id'));
@@ -566,12 +647,23 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 	},
 
+
 	findNextQuestion: function(answer){
 		var question = answer.getQuestion();
 		var rules = question.get('rules');
 		for(var index in rules){
 			var rule = rules[index];
+			if (rule.diagnosis){
+				if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
+					delete this.savedvalues['Diagnosis'][rule.diagnosisname];
+				}
+			}
+		}
+
+		for(var index in rules){
+			var rule = rules[index];
 			var global = this.assessment.get('triggers');
+
 			if( eval(rule.expression) ){
 				if(rule.diagnosis){
 					if(!this.savedvalues.hasOwnProperty('Diagnosis')){
@@ -587,6 +679,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 						return 'finish';
 					}
 				}
+				if(rule.comment){
+					return 'dump';
+				}
 				var target = rule.target;
 				//var qstore = Ext.getStore('questionStore');
 				var qstore = this.instrument.questionsStore;
@@ -597,6 +692,20 @@ Ext.define('ceda.controller.SimpleNavController', {
 			}
 		}
 		return undefined;
+	},
+	removeCapturables: function(){
+		var saves = Ext.query('*[id^="save"]');
+		var optionals = Ext.query('*[id^="optional"]');
+		for(var key in saves){
+			var input = saves[key];
+			var section_name = input.name.split(':')[0];
+			delete this.savedvalues[section_name];
+		}
+		for(key in optionals){
+			var input = optionals[key];
+			var section_name = input.name.split(':')[0];
+			delete this.savedvalues[section_name];
+		}
 	},
 
 	captureCapturables: function(){
