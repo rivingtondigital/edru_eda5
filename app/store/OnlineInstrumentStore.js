@@ -5,7 +5,7 @@ Ext.define('ceda.store.OnlineInstrumentStore', {
         model: 'ceda.model.Instrument',
         proxy: {
             type: 'jsonp',
-            url: 'https://dashboard.eda5.dev/api/ajax/v/interview.json',
+            url: 'https://interview.eda5.org/api/ajax/v/interview.json',
             noCache: false,
             reader:{
                 type: 'json',
