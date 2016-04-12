@@ -336,7 +336,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	login: function(){
-		login = confirm('You need to login in order to perform that action. Would you like to log in now?');
+		login = confirm(lang.NEED_LOGIN);
 		if (login){
 			var lview = Ext.widget('loginview');
 			this.getUpdate_button().hide();
@@ -361,7 +361,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			keyvalue.set('json_value', json_value);
 			offstore.add(keyvalue);
 			offstore.sync();
-			Ext.Msg.alert('Update Success', 'You have successfully updated the questionnaire.', Ext.emptyFn);
+			Ext.Msg.alert('Update Success', lang.SUCCESS_UPDATE, Ext.emptyFn);
 		};
 		var offstore = Ext.getStore('offlineInstrumentStore');
 		offstore.load();
@@ -379,7 +379,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			if (current_version >= new_version){
 			    (new Ext.MessageBox).show({
 			        title: 'Confirmation',
-			        message:  "You're version is up to date. Would you still like to re-install it?",
+			        message:  lang.UPDATE_ANYWAY,
 			        buttons: Ext.MessageBox.YESNO,
 			        offstore: offstore,
 			        new_eda5: new_eda5,
@@ -431,11 +431,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 			});
 		}
 		else{
-			Ext.Msg.alert('Update Unavailable',
-										'You are not connected to the internet.<br/>Please \
-											connect before updating the questionnaire.',
-										Ext.emptyFn
-			);
+			Ext.Msg.alert(lang.UPDATE_UNAVAILABLE,
+                        lang.CONNECT_INTERNET,
+                        Ext.emptyFn
+        );
 		}
 	},
 
@@ -545,12 +544,15 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		if(problems.invalids.length > 0){
 			input = problems.invalids[0].value;
-			message = input + ' is not a valid ' + problems.invalids[0].name.split(':')[2];
+			message = lang.NOT_VALID.replace(/SUB1/, input)
+			                        .replace(/SUB2/, problems.invalids[0].name.split(':')[2]);
+
+//			message = input + ' ' + lang.NOT_VALID + ' ' + problems.invalids[0].name.split(':')[2];
 			alert(message);
 			return;
 		}
 		if(problems.empties.length > 0){
-			alert("Complete all inputs on this page.");
+			alert(lang.INCOMPLETE);
 			return;
 		}
 
@@ -672,7 +674,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 					this.savedvalues['Diagnosis'][rule.diagnosisname] = " ";
 					var global_triggers = this.assessment.get('triggers');
 					global_triggers[rule.trigger] = true;
-					alert("Criteria for " + rule.diagnosisname + " met");
+					var cr = lang.CRITERIA_MET;
+					cr = cr.replace(/SUB/, rule.diagnosis)
+					alert(cr);
 				}
 				if(rule.endifdiagnosis){
 					if(this.savedvalues.hasOwnProperty('Diagnosis')){

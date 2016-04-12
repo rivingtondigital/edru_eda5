@@ -24,7 +24,7 @@ Ext.define('ceda.view.InstrumentDetailView', {
 			{
 				id: 'previous',
 				xtype: 'button',
-				text: 'view previous sessions',
+				text: lang.VIEW_PREVIOUS,
 				align: 'end',
 				ui: 'action',
 				margin: 20,
@@ -34,7 +34,7 @@ Ext.define('ceda.view.InstrumentDetailView', {
 			{
 				id: 'start',
 				xtype: 'button',
-				text:'begin new',
+				text: lang.BEGIN_NEW,
 				align: 'end',
 				ui: 'action',
 				margin: 20,

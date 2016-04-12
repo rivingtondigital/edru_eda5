@@ -24,7 +24,7 @@ Ext.define('ceda.view.QuestionView', {
 			{
 				itemId: 'symptom',
 				tpl: ['<div class="sectiondiv">',
-						'<div class="tabheader">Symptom:</div><br>',
+						'<div class="tabheader"> ' + lang.SYMPTOMS + ':</div><br>',
 						'<div class="probearea">',
 							'<ul><li>{symptom_text}</li></ul>',
 						'</div>',
@@ -33,7 +33,7 @@ Ext.define('ceda.view.QuestionView', {
 			{
 				itemId:'probe',
 				tpl: ['<div class="sectiondiv">',
-						'<div class="tabheader">Probe:</div><br>',
+						'<div class="tabheader">' + lang.PROBE + ':</div><br>',
 						'<div class="probearea">',
 							'<ul><li>{probe_text}</li></ul>',
 						'</div>',
@@ -50,7 +50,7 @@ Ext.define('ceda.view.QuestionView', {
 				},
 				items:[
 					{
-						html: '<div class="sectiondiv"><div class="tabheader">Answers: </div><br><br>'
+						html: '<div class="sectiondiv"><div class="tabheader">' + lang.ANSWERS + ': </div><br><br>'
 					},
 					{
 						itemId: 'aview',

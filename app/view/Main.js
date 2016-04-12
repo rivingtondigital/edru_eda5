@@ -16,7 +16,7 @@ Ext.define("ceda.view.Main", {
 						id: 'backbutton',
 						iconMask: true,
 						ui: 'back',
-						text: 'Back',
+						text: lang.BACK,
 						pack: 'center',
 						align: 'center'
 					},
@@ -24,7 +24,7 @@ Ext.define("ceda.view.Main", {
 						id: 'restartbutton',
 						iconMask: true,
 						ui: 'home',
-						text: 'Restart',
+						text: lang.RESTART,
 						pack: 'center',
 						align: 'center'
 					},
@@ -32,7 +32,7 @@ Ext.define("ceda.view.Main", {
 						id: 'sbutton',
 						iconMask: true,
 						ui: 'home',
-						text: 'Save',
+						text: lang.SAVE,
 						pack: 'center',
 						align: 'center'
 					},
@@ -40,7 +40,7 @@ Ext.define("ceda.view.Main", {
 						id: 'xnotesbutton',
 						iconMask: true,
 						ui: 'back',
-						text: 'Save',
+						text: lang.SAVE,
 						pack: 'end',
 						align: 'center'
 					},
@@ -51,7 +51,7 @@ Ext.define("ceda.view.Main", {
 						id: 'notesbutton',
 						iconMask: true,
 						ui: 'home',
-						text: 'Notes',
+						text: lang.NOTES,
 						pack: 'end',
 						align: 'center'
 					},
@@ -62,7 +62,7 @@ Ext.define("ceda.view.Main", {
                         pack: 'right',
                         align: 'center',
                         xtype: 'button',
-                        text: 'Update'
+                        text: lang.UPDATE
                     }
 	          	]
         	},
