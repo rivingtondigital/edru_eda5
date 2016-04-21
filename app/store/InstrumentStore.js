@@ -10,7 +10,7 @@ Ext.define('ceda.store.InstrumentStore', {
 		model: 'ceda.model.Instrument',
 		data: [
 			{
-				id: 1, 
+				id: 1,
 				name: 'EDA-5',
 				description: [
 								'<p>This interview is designed to assist in the assessment of a feeding ',

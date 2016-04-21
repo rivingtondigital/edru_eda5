@@ -1,50 +1,53 @@
 Ext.define('ceda.model.Question', {
 	extend: 'Ext.data.Model',
 	config: {
-		proxy: {
-            type: 'localstorage',
-            id  : 'question-proxy'
-        },
-
-		fields: [ 
-			{name: 'id', type: 'float'}, 
-			'instrument_id', 
-			'initial', 
-			'sectionlabel', 
-			'shortname', 
-			'interviewprobe', 
+		fields: [
+			/*
+			{name: 'id', type: 'float'},
+			'instrument_id',
+			'initial',
+			'sectionlabel',
+			'short_name',
+			'interviewprobe',
 			'symptom',
 			'rules'
+			*/
+			'_id',
+			'question_id',
+			'initial',
+			'identity',
+			'section_label',
+			'short_name',
+			'probe_text',
+			'symptom_text',
+			'instrument_id'
 		],
-		
-		/*
-		associations:[ 
+		hasMany:[
 			{
-				type: 'hasMany',
-				model :'ceda.model.Answer',
-				name: 'answers'
+				name: 'answers',
+				model: 'ceda.model.Answer',
+				associationKey: 'answers',
+				autoload: true
 			},
 			{
-				type: 'belongsTo',
-				model: 'ceda.modelInstrument',
-				name: 'instrument'
+				name: 'rules',
+				model: 'ceda.model.Rule',
+				associationKey: 'rules',
+				autoload: true
 			}
-		
-		],
-		*/
-		//hasMany: {model: 'ceda.model.Rule', name: 'rules'},
-		//hasOne: {model : 'ceda.model.Instrument', name : 'instrument'}
-	},
-	getAnswers: function(){
-		var astore = Ext.getStore('answerStore');
-		astore.clearFilter();
-		astore.filterBy(
-			function(item){ 
-				return item.get('question_id') == this.data['id'];
-			},
-			this
-		);
-		return astore;
+		]
 	}
-	
+
 });
+
+/*
+		self._id = None
+		self.question_id = None
+		self.initial = False
+		self.identity = None
+		self.section_label = None
+		self.short_name = None
+		self.probe_text = None
+		self.symptom_text = None
+		self.instrument_id = None
+*/

@@ -24,23 +24,24 @@ Ext.define('ceda.view.QuestionView', {
 			{
 				itemId: 'symptom',
 				tpl: ['<div class="sectiondiv">',
-						'<div class="tabheader">Symptom:</div><br>',
+						'<div class="tabheader"> ' + lang.SYMPTOMS + ':</div><br>',
 						'<div class="probearea">',
-							'<ul><li>{symptom}</li></ul>',
+							'<ul><li>{symptom_text}</li></ul>',
 						'</div>',
 					'</div>']
 			},
 			{
 				itemId:'probe',
 				tpl: ['<div class="sectiondiv">',
-						'<div class="tabheader">Probe:</div><br>',
+						'<div class="tabheader">' + lang.PROBE + ':</div><br>',
 						'<div class="probearea">',
-							'<ul><li>{interviewprobe}</li></ul>',
+							'<ul><li>{probe_text}</li></ul>',
 						'</div>',
-						'<div>',
-							'<span class="span_id">{id}</span>',
-						'</div>',
-					'</div>']
+					'</div>',
+					'<div>',
+						'<span class="span_id">{question_id}</span>',
+					'</div>',
+				]
 			},
 			{
 				itemId: 'answerarea',
@@ -49,7 +50,7 @@ Ext.define('ceda.view.QuestionView', {
 				},
 				items:[
 					{
-						html: '<div class="sectiondiv"><div class="tabheader">Answers: </div><br><br>'
+						html: '<div class="sectiondiv"><div class="tabheader">' + lang.ANSWERS + ': </div><br><br>'
 					},
 					{
 						itemId: 'aview',
@@ -78,13 +79,15 @@ Ext.define('ceda.view.QuestionView', {
 		]
 	},
 
+
 	setRecord: function(question){
 		if(typeof this.getComponent('header') !== 'undefined'){
 			this.getComponent('header').setRecord(question);
 			this.getComponent('probe').setRecord(question);
 			this.getComponent('symptom').setRecord(question);
 			var area = this.getComponent('answerarea');
-			area.getComponent('aview').setStore(question.getAnswers());
+//			area.getComponent('aview').setStore(question.getAnswers());
+			area.getComponent('aview').setStore(question.answersStore);
 		}
 	}
 });

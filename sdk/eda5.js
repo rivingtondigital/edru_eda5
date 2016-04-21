@@ -40,8 +40,9 @@ function printer(){
 function calcBMI(w_ele, h_ele, bmi_ele){
 	var weight = parseFloat(document.getElementById(w_ele).value);
 	var height = parseFloat(document.getElementById(h_ele).value);
-	//console.debug("this is called");
 	var bmi = weight/(height*height) * 703;
 	bmi = bmi.toPrecision(3);
 	document.getElementById(bmi_ele).value = bmi;
+	//probe = Ext.ComponentQuery.query('#probe')[0];
+	//probe.fireEvent('update_triggers', probe, {''});
 }

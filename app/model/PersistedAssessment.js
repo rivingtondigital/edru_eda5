@@ -20,6 +20,8 @@ Ext.define('ceda.model.PersistedAssessment', {
 
 			'data',
 			'instrument',
+			'version_major',
+			'version_minor',
 			'text'
 		]
 	}

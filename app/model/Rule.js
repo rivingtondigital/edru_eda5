@@ -1,13 +1,19 @@
 Ext.define('ceda.model.Rule', {
 	extend: 'Ext.data.Model',
 	config:{
-		proxy: {
-            type: 'localstorage',
-            id  : 'rule-proxy'
-        },
-		
-		fields:[ 'id', 'name' ],
-		hasOne: 'Question',
-		hasMany: 'Triggers'
+		fields:[
+			'_id',
+			'name',
+			'expression',
+			'target',
+			'question_id',
+			'diagnosis',
+			'diagnosisname'
+		],
+		belongsTo:{
+			name: 'question',
+			model: 'ceda.model.Question',
+			associationKey: 'question'
+		}
 	}
 });

@@ -12,6 +12,8 @@ Ext.define('ceda.model.Assessment', {
 				'backedvalues',
 				'savedvalues',
 				'questionstack',
+				'version_major',
+				'version_minor',
 				'notes'
 		],
 		hasOne: [
