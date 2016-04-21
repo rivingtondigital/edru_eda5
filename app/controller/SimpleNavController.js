@@ -361,11 +361,17 @@ Ext.define('ceda.controller.SimpleNavController', {
 			keyvalue.set('json_value', json_value);
 			offstore.add(keyvalue);
 			offstore.sync();
-			Ext.Msg.alert('Update Success', lang.SUCCESS_UPDATE, Ext.emptyFn);
+		//	Ext.Msg.alert('Update Success', lang.SUCCESS_UPDATE, Ext.emptyFn);
+		//	Ext.Msg.alert('Update Success', 'You have successfully updated the questionnaire.');
 		};
 		var offstore = Ext.getStore('offlineInstrumentStore');
 		offstore.load();
+		new_eda5 = b.first()
+    update(new_eda5, offstore);
+    this.initView();
+    return false;
 
+/*
 		if (offstore.getAllCount() > 0){
 			new_eda5 = b.first()
 			current_eda5 = offstore.findRecord('keyname', new_eda5.get('instrument_id') );
@@ -396,6 +402,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 		return true;
 //		this.initView();
+*/
 	},
 
 	onStoreUpdate: function(){
@@ -511,7 +518,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 				return false;
 			});
 		}
-		if (this.instrument.getCount() == 0){
+
+	  if (this.instrument.getCount() == 0){
 			this.instrument = this.blankStore();
 			this.onStoreUpdate();
 		}
@@ -520,6 +528,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 												JSON.parse(this.instrument.first().get('json_value'))
 										);
 		}
+    
+    //If params update store
+
 		this.savedvalues = this.assessment.get('savedvalues');
 		this.backedvalues = this.assessment.get('backedvalues');
 		this.questionstack = this.assessment.get('questionstack');

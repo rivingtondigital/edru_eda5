@@ -3,6 +3,7 @@ Ext.Loader.setConfig({
 	disableCaching : false
 });
 
+
 Ext.application({
     name: 'ceda',
 
@@ -109,4 +110,5 @@ Ext.application({
             }
         );
     }
+
 });
