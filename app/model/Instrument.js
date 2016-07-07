@@ -6,6 +6,7 @@ Ext.define('ceda.model.Instrument',{
 			{name: 'instrument_id', type: 'int'},
 //			{name: 'version' type: 'ceda.model.Version'},
 			{name: 'name', type: 'string'},
+			{name: 'section_label', type: 'string'},
 			{name: 'description', type: 'string'}
 		],
 		hasOne:{

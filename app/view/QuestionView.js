@@ -17,7 +17,7 @@ Ext.define('ceda.view.QuestionView', {
 				record: true,
 				tpl: [
 					'<div>',
-						'<h1 class="questionheader">{sectionlabel}</h1>',
+						'<h1 class="questionheader">{section_label}</h1>',
 					'</div>'
 				]
 			},

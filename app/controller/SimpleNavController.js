@@ -318,7 +318,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		qstore = this.instrument.questionsStore;
 //		this.questionstack.pop();
 //		var question = qstore.findRecord('question_id', this.questionstack.pop());
-		var old_question = qstore.findRecord('id', this.questionstack.pop());
+		var old_question = qstore.findRecord('question_id', this.questionstack.pop());
 		rules = old_question.get('rules');
 		for (var index in rules){
 			var rule = rules[index];
@@ -331,7 +331,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			}
 		}
 		this.removeCapturables();
-		var question = qstore.findRecord('id', this.questionstack.pop());
+		var question = qstore.findRecord('question_id', this.questionstack.pop());
 		this.viewQuestion(question, true);
 	},
 
@@ -581,8 +581,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		var next = this.findNextQuestion(record);
 		if(next == 'finish'){
-			this.displayComments();
-//			this.viewOutput();
+//			this.displayComments();
+			this.viewOutput();
 		}
 		else if(next == 'dump'){
 			this.viewOutput();
@@ -596,7 +596,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	displayComments: function(){
-		var qstore = Ext.getStore('questionStore');
+    	var qstore = this.instrument.questionsStore;
+//		var qstore = Ext.getStore('questionStore');
 		comments = qstore.findRecord('shortname', 'comments');
 		this.questionstack.push('comments');
 		this.viewQuestion(comments);
@@ -694,7 +695,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 					var global_triggers = this.assessment.get('triggers');
 					global_triggers[rule.trigger] = true;
 					var cr = lang.CRITERIA_MET;
-					cr = cr.replace(/SUB/, rule.diagnosis)
+					cr = cr.replace(/SUB/, rule.diagnosisname)
 					alert(cr);
 				}
 				if(rule.endifdiagnosis){
