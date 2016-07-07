@@ -1,5 +1,6 @@
 int_strings = {
     en: {
+        ISO_CODE: 'en',
         BEGIN_NEW: "begin new",
         VIEW_PREVIOUS: "view previous sessions",
         UPDATE: "update",
@@ -20,6 +21,7 @@ int_strings = {
         CONNECT_INTERNET: 'Please connect to the internet before updating the questionnaire.'
     },
     no: {
+        ISO_CODE: 'no',
         BEGIN_NEW: "Start nytt intervju",
         VIEW_PREVIOUS: "Se tidligere intervjuer",
         UPDATE: "Oppdater",
@@ -43,7 +45,6 @@ int_strings = {
 
 
 function get_language(){
-    console.info("HI THERE" + params);
     var prefered = null;
 
     var languages = navigator.languages

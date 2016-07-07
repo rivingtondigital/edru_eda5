@@ -38,9 +38,16 @@ function printer(){
 }
 
 function calcBMI(w_ele, h_ele, bmi_ele){
+    var lang = get_language();
 	var weight = parseFloat(document.getElementById(w_ele).value);
 	var height = parseFloat(document.getElementById(h_ele).value);
-	var bmi = weight/(height*height) * 703;
+	var bmi = 0.0;
+	if (lang['ISO_CODE'] == 'en'){
+    	bmi = weight/(height*height) * 703;
+	}
+	else{
+	    bmi = (weight/height/height) * 10000;
+	}
 	bmi = bmi.toPrecision(3);
 	document.getElementById(bmi_ele).value = bmi;
 	//probe = Ext.ComponentQuery.query('#probe')[0];
