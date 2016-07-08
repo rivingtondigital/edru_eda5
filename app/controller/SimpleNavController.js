@@ -319,16 +319,18 @@ Ext.define('ceda.controller.SimpleNavController', {
 //		this.questionstack.pop();
 //		var question = qstore.findRecord('question_id', this.questionstack.pop());
 		var old_question = qstore.findRecord('question_id', this.questionstack.pop());
-		rules = old_question.get('rules');
-		for (var index in rules){
-			var rule = rules[index];
-			global_triggers = this.assessment.get('triggers');
-			delete global_triggers[rule.trigger];
-			if (rule.diagnosis){
-				if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
-					delete this.savedvalues['Diagnosis'][rule.diagnosisname];
-				}
-			}
+		if (old_question){
+            rules = old_question.get('rules');
+            for (var index in rules){
+                var rule = rules[index];
+                global_triggers = this.assessment.get('triggers');
+                delete global_triggers[rule.trigger];
+                if (rule.diagnosis){
+                    if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
+                        delete this.savedvalues['Diagnosis'][rule.diagnosisname];
+                    }
+                }
+            }
 		}
 		this.removeCapturables();
 		var question = qstore.findRecord('question_id', this.questionstack.pop());
@@ -723,13 +725,16 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var optionals = Ext.query('*[id^="optional"]');
 		for(var key in saves){
 			var input = saves[key];
+			input.attributes['passed'] = true;
 			var section_name = input.name.split(':')[0];
 			delete this.savedvalues[section_name];
+			input.parentElement.removeChild(input);
 		}
 		for(key in optionals){
 			var input = optionals[key];
 			var section_name = input.name.split(':')[0];
 			delete this.savedvalues[section_name];
+			input.parentElement.removeChild(input);
 		}
 	},
 
@@ -760,7 +765,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 				this.savedvalues[section][name] = value;
 			}
 			else{
-				problems.empties.push(input);
+			    if(! input.attributes['passed']){
+    				problems.empties.push(input);
+    			}
 			}
 		}
 
