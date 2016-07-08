@@ -482,13 +482,14 @@ Ext.define('ceda.controller.SimpleNavController', {
 			this.getBack_bttn().show();
 		}
 
-		qstore = Ext.getStore('questionStore');
+        qstore = this.instrument.questionsStore;
+//		qstore = Ext.getStore('questionStore');
 		question_id = this.questionstack.pop();
 		if (question_id == 'output'){
 		    this.viewOutput()
 		}
 		else{
-            var question = qstore.findRecord('id', question_id);
+            var question = qstore.findRecord('question_id', question_id);
             this.viewQuestion(question, true);
 		}
 	},
