@@ -8,7 +8,8 @@ Ext.define('ceda.model.Rule', {
 			'target',
 			'question_id',
 			'diagnosis',
-			'diagnosisname'
+			'diagnosisname',
+			'trigger'
 		],
 		belongsTo:{
 			name: 'question',

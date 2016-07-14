@@ -620,7 +620,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 	viewQuestion: function(question, back){
 		//		var debug = true;
-		var debug = false;
+		var debug = true;
 		if(this.questionstack.length === 0){
 			this.getBack_bttn().hide();
 		}
@@ -696,7 +696,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 					}
 					this.savedvalues['Diagnosis'][rule.diagnosisname] = " ";
 					var global_triggers = this.assessment.get('triggers');
-					global_triggers[rule.trigger] = true;
+					if (rule.trigger){
+						global_triggers[rule.trigger.identifier] = rule.trigger.value;
+					}
 					var cr = lang.CRITERIA_MET;
 					cr = cr.replace(/SUB/, rule.diagnosisname)
 					alert(cr);
