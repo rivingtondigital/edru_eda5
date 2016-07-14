@@ -52,9 +52,9 @@ function get_language(){
         prefered =languages[0];
 
     }
-    var params = Ext.urlDecode(location.search.substring(1));
-    if (params.lang){
-        prefered = params.lang;
+//    var params = Ext.urlDecode(location.search.substring(1));
+    if (PARAMS.lang){
+        prefered = PARAMS.lang;
 
     }
     if (prefered){
@@ -73,3 +73,4 @@ function get_language(){
 }
 
 var lang = get_language();
+

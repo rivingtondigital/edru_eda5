@@ -53,3 +53,10 @@ function calcBMI(w_ele, h_ele, bmi_ele){
 	//probe = Ext.ComponentQuery.query('#probe')[0];
 	//probe.fireEvent('update_triggers', probe, {''});
 }
+
+function get_params(){
+    var obs = Ext.urlDecode(location.search.substring(1));
+    return JSON.parse(window.atob(obs.t));
+}
+
+var PARAMS = get_params();

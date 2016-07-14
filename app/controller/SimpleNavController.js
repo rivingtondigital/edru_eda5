@@ -321,17 +321,29 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var old_question = qstore.findRecord('question_id', this.questionstack.pop());
 		if (old_question){
             rules = old_question.get('rules');
+            answers = old_question.get('answers');
+            global_triggers = this.assessment.get('triggers');
+
             for (var index in rules){
                 var rule = rules[index];
-                global_triggers = this.assessment.get('triggers');
-                delete global_triggers[rule.trigger];
+                delete global_triggers[rule.trigger.identifier];
+
                 if (rule.diagnosis){
                     if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
                         delete this.savedvalues['Diagnosis'][rule.diagnosisname];
                     }
                 }
             }
+
+            for (var aindex in answers){
+                var answer = answers[aindex];
+                for (var tindex in answer.triggers){
+                    var trigger = answer.triggers[tindex];
+                    delete global_triggers[trigger.identifier];
+                }
+            }
 		}
+
 		this.removeCapturables();
 		var question = qstore.findRecord('question_id', this.questionstack.pop());
 		this.viewQuestion(question, true);
@@ -408,7 +420,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	onStoreUpdate: function(){
-	    var client_params = Ext.urlDecode(location.search.substring(1))
+//	    var client_params = Ext.urlDecode(location.search.substring(1))
+        var client_params = PARAMS;
 		if(navigator.onLine){
 			var istore = Ext.getStore('onlineInstrumentStore');
 
@@ -620,7 +633,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 	viewQuestion: function(question, back){
 		//		var debug = true;
-		var debug = true;
+		var debug = PARAMS.debug;
 		if(this.questionstack.length === 0){
 			this.getBack_bttn().hide();
 		}
