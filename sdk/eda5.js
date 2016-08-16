@@ -55,8 +55,15 @@ function calcBMI(w_ele, h_ele, bmi_ele){
 }
 
 function get_params(){
-    var obs = Ext.urlDecode(location.search.substring(1));
-    return JSON.parse(window.atob(obs.t));
+    ret = {
+      'lang': 'en'
+    };
+    params = location.search.substring(1);
+    if (params){
+        var obs = Ext.urlDecode(params);
+        return JSON.parse(window.atob(obs.t));
+    }
+    return ret;
 }
 
 var PARAMS = get_params();

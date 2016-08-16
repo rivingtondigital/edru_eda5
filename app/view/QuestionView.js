@@ -26,7 +26,7 @@ Ext.define('ceda.view.QuestionView', {
 				tpl: ['<div class="sectiondiv">',
 						'<div class="tabheader"> ' + lang.SYMPTOMS + ':</div><br>',
 						'<div class="probearea">',
-							'<ul><li>{symptom_text}</li></ul>',
+							'<span>{symptom_text}</span>',
 						'</div>',
 					'</div>']
 			},
@@ -35,7 +35,7 @@ Ext.define('ceda.view.QuestionView', {
 				tpl: ['<div class="sectiondiv">',
 						'<div class="tabheader">' + lang.PROBE + ':</div><br>',
 						'<div class="probearea">',
-							'<ul><li>{probe_text}</li></ul>',
+							'<span>{probe_text}</span>',
 						'</div>',
 					'</div>',
 					'<div>',
