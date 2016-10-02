@@ -178,11 +178,11 @@ Ext.define('ceda.controller.SimpleNavController', {
 		users.load();
 		var rec = users.findRecord('username', user);
 		if (rec == null){
-			this.getLogin_output().setHtml('<span class="msg err">That user name does not exist.</span>');
+			this.getLogin_output().setHtml('<span class="msg err">'+ lang.LOGIN_FAIL +'</span>');
 			return false;
 		}
 		if (rec.get('password') != hash ){
-			this.getLogin_output().setHtml('<span class="msg err">password is incorrect.</span>');
+			this.getLogin_output().setHtml('<span class="msg err">'+ lang.LOGIN_FAIL +'</span>');
 			return false;
 		}
 		this.password = pass;
@@ -223,7 +223,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		}
 
 		if (pass != confirm){
-			this.getReg_output().setHtml('<span class="msg err">the passwords you entered do not match.</span>');
+			this.getReg_output().setHtml('<span class="msg err">'+ lang.PASSWORDS_NO_MATCH +'</span>');
 			return false;
 		}
 
@@ -240,7 +240,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			password: hash
 		});
 		users.sync();
-		this.getReg_output().setHtml('<span class="msg info">You are registered. Press the back button to return to the interview.</span>');
+		this.getReg_output().setHtml('<span class="msg info">'+ lang.REGISTER_SUCCESS +'</span>');
 		return true;
 	},
 
@@ -578,7 +578,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		if(problems.invalids.length > 0){
 			input = problems.invalids[0].value;
 			message = lang.NOT_VALID.replace(/SUB1/, input)
-			                        .replace(/SUB2/, problems.invalids[0].name.split(':')[2]);
+			                        .replace(/SUB2/, lang[problems.invalids[0].name.split(':')[1]]);
 
 //			message = input + ' ' + lang.NOT_VALID + ' ' + problems.invalids[0].name.split(':')[2];
 			alert(message);
