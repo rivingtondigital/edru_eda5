@@ -10,7 +10,7 @@ Ext.define('ceda.view.NotesView', {
 		},
 		items: [
 			{
-				html: '<div class="sectiondiv"><div class="tabheader">Notes: </div><br><br>'
+				html: '<div class="sectiondiv"><div class="tabheader">'+ lang.NOTES +'</div><br><br>'
 			},
 			{
 				itemId: 'nview',

@@ -1,4 +1,4 @@
-int_strings = {
+lang_lookup = {
     en: {
         ISO_CODE: 'en',
         BEGIN_NEW: "begin new",
@@ -11,35 +11,53 @@ int_strings = {
         SYMPTOMS: "symptoms",
         PROBE: "probe",
         ANSWERS: "answers",
+        RESULTS: "results",
+        PRINT: "print",
+        AUTHENTICATION: "login",
+        USER_NAME: "user name",
+        PASSWORD: "password",
+        LOGIN: "login",
+        LOGIN_FAIL: "That username/password is incorrect",
         NOT_VALID: "SUB1 is not a valid SUB2.",
         INCOMPLETE: "Complete all inputs on this page.",
         CRITERIA_MET: 'Criteria for SUB met.',
         NEED_LOGIN: 'You need to login in order to perform that action. Would you like to log in now?',
-        SUCCESS_UPDATE:'You have successfully updated the questionnaire.',
-        UPDATE_ANYWAY: "You're version is up to date. Would you still like to re-install it?",
-        UPDATE_UNAVAILABLE: 'Update Unavailable',
-        CONNECT_INTERNET: 'Please connect to the internet before updating the questionnaire.'
+//        SUCCESS_UPDATE:'You have successfully updated the questionnaire.',
+//        UPDATE_ANYWAY: "You're version is up to date. Would you still like to re-install it?",
+//        UPDATE_UNAVAILABLE: 'Update Unavailable',
+//        CONNECT_INTERNET: 'Please connect to the internet before updating the questionnaire.',
+        PASSWORDS_NO_MATCH: "the passwords you entered do not match",
+        REGISTER_SUCCESS: "You are registered. Press the back button to return to the interview"
     },
     no: {
         ISO_CODE: 'no',
         BEGIN_NEW: "Start nytt intervju",
         VIEW_PREVIOUS: "Se tidligere intervjuer",
-        UPDATE: "Oppdater",
-        BACK: "Tilbake",
-        RESTART: "Omstart",
-        SAVE: "Spare",
-        NOTES: "Noter",
-        SYMPTOMS: "Symptomer",
+        UPDATE: "oppdater",
+        BACK: "tilbake",
+        RESTART: "omstart",
+        SAVE: "lagre",
+        NOTES: "notater",
+        SYMPTOMS: "symptomer",
         PROBE: "spørsmål",
         ANSWERS: "svar",
+        RESULTS: "resultater",
+        PRINT: "skriv ut",
+        AUTHENTICATION: "innlogging",
+        USER_NAME: "brukernavn",
+        PASSWORD: "passord",
+        LOGIN: "logg på",
+        LOGIN_FAIL: "Brukernavnet eksisterer ikke",
         NOT_VALID: "SUB1 er ikke en gyldig SUB2",
-        INCOMPLETE: "Fyll ut all informasjon på denne siden.",
-        CRITERIA_MET: 'Oppfyller kriteriene for SUB.',
-        NEED_LOGIN: 'You need to login in order to perform that action. Would you like to log in now?',
-        SUCCESS_UPDATE:'You have successfully updated the questionnaire.',
-        UPDATE_ANYWAY: "You're version is up to date. Would you still like to re-install it?",
-        UPDATE_UNAVAILABLE: 'Update Unavailable',
-        CONNECT_INTERNET: 'Please connect to the internet before updating the questionnaire.'
+        INCOMPLETE: "fyll ut all informasjon på denne siden.",
+        CRITERIA_MET: 'oppfyller kriteriene for SUB.',
+        NEED_LOGIN: 'Du må logge in for å lagre. Ønsker du å logge in nå?',
+//        SUCCESS_UPDATE:'You have successfully updated the questionnaire.',
+//        UPDATE_ANYWAY: "You're version is up to date. Would you still like to re-install it?",
+//        UPDATE_UNAVAILABLE: 'Update Unavailable',
+//        CONNECT_INTERNET: 'Please connect to the internet before updating the questionnaire.',
+        PASSWORDS_NO_MATCH: "Du har oppgitt forskjellige passord",
+        REGISTER_SUCCESS: "Du er registrert. Klikk Tilbake for å gå tilbake til intervjuet"
     }
 }
 
@@ -60,16 +78,16 @@ function get_language(){
     if (prefered){
         switch(true){
             case /en/.test(prefered):
-                return int_strings['en'];
+                return lang_lookup['en'];
                 break;
             case /no/.test(prefered):
-                return int_strings['no'];
+                return lang_lookup['no'];
                 break;
             default:
-                return int_strings['en'];
+                return lang_lookup['en'];
         }
     }
-    return int_strings['en'];
+    return lang_lookup['en'];
 }
 
 var lang = get_language();

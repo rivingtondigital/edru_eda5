@@ -54,16 +54,16 @@ Ext.define("ceda.view.Main", {
 						text: lang.NOTES,
 						pack: 'end',
 						align: 'center'
-					},
-                    {
-                        id: 'updatebutton',
-                        iconMask: true,
-                        ui: 'home',
-                        pack: 'right',
-                        align: 'center',
-                        xtype: 'button',
-                        text: lang.UPDATE
-                    }
+					}
+//                    {
+//                        id: 'updatebutton',
+//                        iconMask: true,
+//                        ui: 'home',
+//                        pack: 'right',
+//                        align: 'center',
+//                        xtype: 'button',
+//                        text: lang.UPDATE
+//                    }
 	          	]
         	},
 			{
