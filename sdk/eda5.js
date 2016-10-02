@@ -1,7 +1,8 @@
 function printer(){
+	debugger;
+	var lang = get_language();	
 	var info = JSON.parse(document.getElementById('hddnInfo').value);
 	var notes = document.getElementById('hddnNotes').value;
-
 	win = window.open();
 	body = win.document.getElementsByTagName('body')[0];
 	var ret = '<style>';
@@ -15,12 +16,20 @@ function printer(){
 	ret += "<div><h1>EDA-5 Results</h1></div>";
 	for(key in info){
 		var header = key;
+		if (lang.hasOwnProperty(header)){
+			header = lang[header];
+		}
 		var content = info[key];
 		ret += "<div class='sectiondiv'>";
 		ret += "<div class='tabheader'>"+header+"</div><br/>";
 		ret += "<table class='outputtable'>";
 		for(subkey in content){
-			subkey_disp = subkey.replace(/([A-Z][a-z]+)([A-Z]+[a-z]*)/g, '$1 $2')
+			if (lang.hasOwnProperty(subkey)){
+				subkey_disp = lang[subkey];
+			}
+			else{
+				subkey_disp = subkey.replace(/([A-Z][a-z]+)([A-Z]+[a-z]*)/g, '$1 $2')
+			}
 			ret += "<tr>";
 			ret += "<td>"+subkey_disp+"</td>";
 			ret += "<td><span class='value'>"+content[subkey]+"</span></td>";
@@ -30,7 +39,7 @@ function printer(){
 		ret += "</div>";
 	}
 	ret += "<div class='sectiondiv'>";
-	ret += "<div class='tabheader'>Notes</div>";
+	ret += "<div class='tabheader'>"+ lang.NOTES +"</div>";
 	ret += "<pre style='font-family:inherit;padding:15px'>"+notes+"</pre>";
 
 	body.innerHTML = ret;

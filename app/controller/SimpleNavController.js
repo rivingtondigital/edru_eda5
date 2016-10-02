@@ -329,8 +329,8 @@ Ext.define('ceda.controller.SimpleNavController', {
                 delete global_triggers[rule.trigger.identifier];
 
                 if (rule.diagnosis){
-                    if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
-                        delete this.savedvalues['Diagnosis'][rule.diagnosisname];
+                    if (typeof this.savedvalues['DIAGNOSIS'] != 'undefined'){
+                        delete this.savedvalues['DIAGNOSIS'][rule.diagnosisname];
                     }
                 }
             }
@@ -692,8 +692,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 		for(var index in rules){
 			var rule = rules[index];
 			if (rule.diagnosis){
-				if (typeof this.savedvalues['Diagnosis'] != 'undefined'){
-					delete this.savedvalues['Diagnosis'][rule.diagnosisname];
+				if (typeof this.savedvalues['DIAGNOSIS'] != 'undefined'){
+					delete this.savedvalues['DIAGNOSIS'][rule.diagnosisname];
 				}
 			}
 		}
@@ -704,10 +704,10 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 			if( eval(rule.expression) ){
 				if(rule.diagnosis){
-					if(!this.savedvalues.hasOwnProperty('Diagnosis')){
-						this.savedvalues['Diagnosis'] = {};
+					if(!this.savedvalues.hasOwnProperty('DIAGNOSIS')){
+						this.savedvalues['DIAGNOSIS'] = {};
 					}
-					this.savedvalues['Diagnosis'][rule.diagnosisname] = " ";
+					this.savedvalues['DIAGNOSIS'][rule.diagnosisname] = " ";
 					var global_triggers = this.assessment.get('triggers');
 					if (rule.trigger){
 						global_triggers[rule.trigger.identifier] = rule.trigger.value;
@@ -717,7 +717,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 					alert(cr);
 				}
 				if(rule.endifdiagnosis){
-					if(this.savedvalues.hasOwnProperty('Diagnosis')){
+					if(this.savedvalues.hasOwnProperty('DIAGNOSIS')){
 						return 'finish';
 					}
 				}
@@ -770,9 +770,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 				}
 
 				var section = section_name[0];
-				section = section.replace(/_/g, " ");
+				//section = section.replace(/_/g, " ");
 				var name = section_name[1];
-				name = name.replace(/_/g, " ");
+				//name = name.replace(/_/g, " ");
 				var value = input.value;
 				if(! this.savedvalues.hasOwnProperty(section)){
 					this.savedvalues[section] = {};
@@ -793,9 +793,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 				this.backedvalues[input.id] = input.value;
 				var section_name = input.name.split(':');
 				var section = section_name[0];
-				section = section.replace(/_/g, " ");
+				//section = section.replace(/_/g, " ");
 				var name = section_name[1];
-				name = name.replace(/_/g, " ");
+				//name = name.replace(/_/g, " ");
 				var value = input.value;
 				if(! this.savedvalues.hasOwnProperty(section)){
 					this.savedvalues[section] = {};
