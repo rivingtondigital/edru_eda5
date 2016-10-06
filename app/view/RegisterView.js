@@ -16,25 +16,25 @@ Ext.define('ceda.view.RegisterView', {
 					{
 						id: 'txt_reg_username',
 						xtype: 'textfield',
-						label: 'User Name',
+						label: lang.USER_NAME,
 						name: 'user'
 					},
 					{
 						id: 'pass_reg_pass',
 						xtype: 'passwordfield',
-						label: 'Password',
+						label: lang.PASSWORD,
 						name: 'password'
 					},
 					{
 						id: 'pass_reg_confirm',
 						xtype: 'passwordfield',
-						label: 'Confirm',
+						label: lang.CONFIRM,
 						name: 'confirm'
 					},
 					{
 						id: 'bttn_register',
 						xtype: 'button',
-						text: 'register',
+						text: lang.REGISTER,
 						margin: 20,
 						padding: "5 20",
 						docked: 'bottom'
