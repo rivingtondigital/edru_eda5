@@ -11,25 +11,25 @@ Ext.define('ceda.view.LoginView', {
 		items:[
 			{
 				xtype: 'fieldset',
-				title: 'Login',
+				title: lang.AUTHENTICATION,
 				items: [
 					{
 						id: 'txt_login_username',
 						xtype: 'textfield',
-						label: 'User Name',
+						label: lang.USER_NAME,
 						name: 'user'
 					},
 					{
 						id: 'pass_login_pass',
 						xtype: 'passwordfield',
-						label: 'Password',
+						label: lang.PASSWORD,
 						name: 'password'
 					},
 
 					{
 						id: 'bttn_goto_register',
 						xtype: 'button',
-						text: 'register',
+						text: lang.REGISTER,
 						margin: 20,
 						padding: "5 20",
 						docked: 'bottom'
@@ -37,7 +37,7 @@ Ext.define('ceda.view.LoginView', {
 					{
 						id: 'bttn_login',
 						xtype: 'button',
-						text:'login',
+						text:lang.LOGIN,
 						//align: 'end',
 						//ui: 'action',
 						margin: 20,

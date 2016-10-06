@@ -58,6 +58,7 @@ lang_lookup = {
         OBES_PER_WEEK: 'OBEs per week',
         TYPICAL_SBE_ITEMS: 'Typical SBE items',
         SBES_PER_WEEK: 'SBEs per week',
+        SBES_PER_MONTH: 'SBEs per month',
         VOMITING: 'Vomiting',
         LAXATIVES: 'Laxitives',
         DIURETICS: 'Diuretics',
@@ -133,6 +134,8 @@ lang_lookup = {
         OBES_PER_WEEK: 'Antall UOO per uke',
         TYPICAL_SBE_ITEMS: 'Eksempel på typisk USO',
         SBES_PER_WEEK: 'Antall USO per uke',
+        SBES_PER_MONTH: 'Antall USO per måned',
+
         VOMITING: 'Oppkast',
         LAXATIVES: 'Avføringsmiddel',
         DIURETICS: 'Vanndrivende midler',
