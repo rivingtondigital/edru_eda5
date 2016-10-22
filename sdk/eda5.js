@@ -1,6 +1,5 @@
 function printer(){
-	debugger;
-	var lang = get_language();	
+	var lang = get_language();
 	var info = JSON.parse(document.getElementById('hddnInfo').value);
 	var notes = document.getElementById('hddnNotes').value;
 	win = window.open();
@@ -40,7 +39,7 @@ function printer(){
 	}
 	ret += "<div class='sectiondiv'>";
 	ret += "<div class='tabheader'>"+ lang.NOTES +"</div>";
-	ret += "<pre style='font-family:inherit;padding:15px'>"+notes+"</pre>";
+	ret += "<div style='font-family:inherit;padding:15px'><pre>"+notes+"</pre></div>";
 
 	body.innerHTML = ret;
 	console.info(ret);
