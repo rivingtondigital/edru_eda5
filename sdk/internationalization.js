@@ -24,6 +24,10 @@ lang_lookup = {
         INCOMPLETE: "Complete all inputs on this page.",
         CRITERIA_MET: 'Criteria for SUB met.',
         NEED_LOGIN: 'You need to login in order to perform that action. Would you like to log in now?',
+        LANG_NO_BLANK: 'The username can not be blank',
+        PASS_NO_BLANK: 'The password can not be blank',
+        CONFIRM_NO_BLANK: 'The confirm box can not be blank',
+        USER_NOT_AVAILABLE: 'That username is not available',
 
         SUCCESS_UPDATE:'You have successfully updated the questionnaire.',
         UPDATE_ANYWAY: "You're version is up to date. Would you still like to re-install it?",
@@ -100,6 +104,10 @@ lang_lookup = {
         INCOMPLETE: "fyll ut all informasjon på denne siden.",
         CRITERIA_MET: 'oppfyller kriteriene for SUB.',
         NEED_LOGIN: 'Du må logge in for å lagre. Ønsker du å logge in nå?',
+        LANG_NO_BLANK: 'The username can not be blank',
+        PASS_NO_BLANK: 'The password can not be blank',
+        CONFIRM_NO_BLANK: 'The confirm box can not be blank',
+        USER_NOT_AVAILABLE: 'That username is not available',
 
         SUCCESS_UPDATE:'You have successfully updated the questionnaire.',
         UPDATE_ANYWAY: "You're version is up to date. Would you still like to re-install it?",

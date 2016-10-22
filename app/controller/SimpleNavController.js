@@ -11,6 +11,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		questionstack: true,
 		post_login_callback: false,
 		qview: true,
+		loginview: true,
 		refs: {
 			view: 'view',
 			bar: '#topbar',
@@ -163,6 +164,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var saved = Ext.widget('savedview');
 		this.getMainpanel().animateActiveItem(saved, {type:'slide', direction: 'left'});
 		var sstore = Ext.getStore('assessmentStore');
+		sstore.filter('user', this.getLogin_user().getValue());
 		sstore.load();
 		this.getSaved_list().setStore(sstore);
 		this.getRestart_bttn().show();
@@ -208,17 +210,17 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var confirm = this.getReg_confirm().getValue();
 
 		if (/^\s*$/.test(user)){
-			this.getReg_output().setHtml('<span class="msg err">Username can not be blank</span>');
+			this.getReg_output().setHtml('<span class="msg err">' + lang.USER_NO_BLANK + '</span>');
 			return false;
 		}
 
 		if (/^\s*$/.test(pass)){
-			this.getReg_output().setHtml('<span class="msg err">Password can not be blank</span>');
+			this.getReg_output().setHtml('<span class="msg err">' + lang.PASS_NO_BLANK + '</span>');
 			return false;
 		}
 
 		if (/^\s*$/.test(confirm)){
-			this.getReg_output().setHtml('<span class="msg err">Confirm can not be blank</span>');
+			this.getReg_output().setHtml('<span class="msg err">' + lang.CONFIRM_NO_BLANK + '</span>');
 			return false;
 		}
 
@@ -229,7 +231,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		var users = Ext.getStore('userStore');
 		if (users.find('username', user) != -1){
-			this.getReg_output().setHtml('<span class="msg err">that username is not available</span>');
+			this.getReg_output().setHtml('<span class="msg err">' + lang.USER_NOT_AVAILABLE + '</span>');
 			return false;
 		}
 
@@ -352,9 +354,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 	login: function(){
 		login = confirm(lang.NEED_LOGIN);
 		if (login){
-			var lview = Ext.widget('loginview');
+			this.loginview= Ext.widget('loginview');
 //			this.getUpdate_button().hide();
-			this.getMainpanel().animateActiveItem(lview, {type:'slide', direction: 'left'});
+			this.getMainpanel().animateActiveItem(this.loginview, {type:'slide', direction: 'left'});
 		}
 	},
 
@@ -632,6 +634,14 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	viewQuestion: function(question, back){
+	    //Double login bug fix
+	    if (this.loginview){
+	        this.getMainpanel().remove(this.loginview);
+	    }
+	    if (!question){
+    	    question = qstore.findRecord('initial', true);
+	    }
+
 		//		var debug = true;
 		var debug = PARAMS.debug;
 		if(this.questionstack.length === 0){
@@ -645,8 +655,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.getNotes_bttn().show();
 
 //		this.questionstack.push(question.get('id'));
-
-		this.questionstack.push(question.get('question_id'));
+        this.questionstack.push(question.get('question_id'));
 
 		//var qview = Ext.widget('qview');
 		this.getMainpanel().remove(this.qview);
