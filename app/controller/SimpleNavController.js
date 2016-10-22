@@ -229,7 +229,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		var users = Ext.getStore('userStore');
 		if (users.find('username', user) != -1){
-			this.getReg_output().setHtml('<span class="msg err">that username is not available</span>');
+			this.getReg_output().setHtml('<span class="msg err">'+ lang.USERNAME_TAKEN +'</span>');
 			return false;
 		}
 

@@ -11,7 +11,7 @@ Ext.define('ceda.view.RegisterView', {
 		items:[
 			{
 				xtype: 'fieldset',
-				title: 'Register',
+				title: lang.REGISTRATION,
 				items: [
 					{
 						id: 'txt_reg_username',
