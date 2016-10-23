@@ -66,7 +66,7 @@ Ext.define('MyListItem', {
 
 		if(newbutton){
 			newbutton.setCls('right');
-			newbutton.setText('delete');
+			newbutton.setText(lang.DELETE);
 			newbutton.setUi('decline');
 			newbutton.enableBubble('itemtap');
 			newbutton.on('tap', function(){
