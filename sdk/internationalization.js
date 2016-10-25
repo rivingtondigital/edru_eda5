@@ -107,7 +107,7 @@ lang_lookup = {
         NOT_VALID: "SUB1 er ikke en gyldig SUB2",
         INCOMPLETE: "Fyll ut all informasjon på denne siden.",
         CRITERIA_MET: 'Oppfyller kriteriene for SUB.',
-        NEED_LOGIN: "Du må logge in for å se tidligere intervjuer. Ønsker du å logge in nå?",
+        NEED_LOGIN: "Du må logge in eller registrere deg for å lagre/se tidligere intervjuer. Ønsker du å logge in eller registrere deg nå?",
         USER_NO_BLANK: "Alle felt må fylles ut",
         PASS_NO_BLANK: 'The password can not be blank',
         CONFIRM_NO_BLANK: 'The confirm box can not be blank',
