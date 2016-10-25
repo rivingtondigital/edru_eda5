@@ -12,7 +12,7 @@ function printer(){
 	ret += '.outputtable td{border-bottom: 1px dashed gray; vertical-align: top;padding-right: 10px;}';
 	ret += '.value{float:right}'
 	ret += '</style>';
-	ret += "<div><h1>EDA-5 Results</h1></div>";
+	ret += "<div><h1>EDA-5 "+ lang.RESULTS +"</h1></div>";
 	for(key in info){
 		var header = key;
 		if (lang.hasOwnProperty(header)){

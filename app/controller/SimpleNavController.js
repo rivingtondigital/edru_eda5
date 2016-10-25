@@ -529,7 +529,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 				triggers: {},
 				savedvalues: {},
 				backedvalues: {},
-				questionstack: []
+				questionstack: [],
+				notes: ""
 			});
 		}
 		else{
@@ -628,6 +629,8 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		//this.captureCapturables();
 		var oview = Ext.widget('oview');
+		var notes = this.assessment.get('notes');
+
 		oview.setCollectedInfo(this.savedvalues, this.assessment.get('notes'));
 		this.questionstack.push('output');
 		this.getMainpanel().animateActiveItem(oview, {type:'slide', direction: 'left'});
