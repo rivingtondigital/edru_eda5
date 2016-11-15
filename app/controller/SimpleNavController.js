@@ -285,7 +285,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 				this.saved_session.set('text', this.instrument.get('name') + ' - ' + this.questionstack.slice(-1) + ' [' + d.toLocaleDateString() +' '+ d.toLocaleTimeString() + ']');
 			}
 			assessments.sync();
-			alert('Assessment Saved');
+			alert(lang.ASSESSMENT_SAVED);
 			var page = this.questionstack.slice(-1);
 			if (page == 'output'){
 				this.viewOutput();
