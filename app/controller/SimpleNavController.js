@@ -650,6 +650,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		//var qview = Ext.widget('qview');
 		this.getMainpanel().remove(this.qview);
+		old_qview = this.qview;
 		this.qview = Ext.widget('qview');
 		this.qview.setRecord(question);
 
@@ -683,6 +684,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		else{
 			this.getMainpanel().animateActiveItem(this.qview, {type: 'slide', direction: 'left'});
 		}
+		old_qview.destroy();
 	},
 
 
