@@ -754,16 +754,28 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var optionals = Ext.query('*[id^="optional"]');
 		for(var key in saves){
 			var input = saves[key];
+			//console.info("REMOVING VALUES: " + input.name +":"+ input.value );
 			input.attributes['passed'] = true;
-			var section_name = input.name.split(':')[0];
-			delete this.savedvalues[section_name];
-			input.parentElement.removeChild(input);
+			var section_name = input.name.split(':');
+			var section = section_name[0];
+			var name = section_name[1];
+			try{
+			  delete this.savedvalues[section][name];
+			  input.parentElement.removeChild(input);
+			}
+			catch(err){}
 		}
 		for(key in optionals){
 			var input = optionals[key];
-			var section_name = input.name.split(':')[0];
-			delete this.savedvalues[section_name];
-			input.parentElement.removeChild(input);
+			//console.info("REMOVING VALUES: " + input.name +":"+ input.value );
+			var section_name = input.name.split(':');
+			var section = section_name[0];
+			var name = section_name[1];
+			try{
+			  delete this.savedvalues[section][name];
+			  input.parentElement.removeChild(input);
+			}
+			catch(err){}
 		}
 	},
 
@@ -776,16 +788,17 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var inputs = Ext.query('*[id^="save"]');
 		for(var key in inputs){
 			var input = inputs[key];
+			//console.info("ADDING VALUES: " + input.name + ":" + input.value)
+			var section_name = input.name.split(':');
+			var section = section_name[0];
+			var name = section_name[1];
 			if(input.value){
 				this.backedvalues[input.id] = input.value;
-				var section_name = input.name.split(':');
 				if (! this.validateInput(input) ){
 					problems.invalids.push(input);
 				}
 
-				var section = section_name[0];
 				//section = section.replace(/_/g, " ");
-				var name = section_name[1];
 				//name = name.replace(/_/g, " ");
 				var value = input.value;
 				if(! this.savedvalues.hasOwnProperty(section)){
@@ -797,24 +810,41 @@ Ext.define('ceda.controller.SimpleNavController', {
 			    if(! input.attributes['passed']){
     				problems.empties.push(input);
     			}
+					else{
+						try{
+						  delete this.backedvalues[input.id];
+						  delete this.savedvalues[section][name];
+						}
+						catch(err){}
+					}
 			}
 		}
 
 		var optionals = Ext.query('*[id^="optional"]');
 		for(key in optionals){
 			var input = optionals[key];
+			//console.info("ADDING VALUES: " + input.name + ":" + input.value)
+			var section_name = input.name.split(':');
+			var section = section_name[0];
+			var name = section_name[1];
 			if(input.value){
 				this.backedvalues[input.id] = input.value;
-				var section_name = input.name.split(':');
-				var section = section_name[0];
 				//section = section.replace(/_/g, " ");
-				var name = section_name[1];
 				//name = name.replace(/_/g, " ");
 				var value = input.value;
 				if(! this.savedvalues.hasOwnProperty(section)){
 					this.savedvalues[section] = {};
 				}
 				this.savedvalues[section][name] = value;
+			}
+			else{
+				  try{
+					  delete this.backedvalues[input.id];
+					  delete this.savedvalues[section][name];
+					
+					}
+					catch(err){}
+			
 			}
 		}
 		return problems;
