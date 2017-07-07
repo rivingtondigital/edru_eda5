@@ -8,7 +8,7 @@ lang_lookup = {
         RESTART: "restart",
         DELETE: "delete",
         SAVE: "save",
-				ASSESSMENT_SAVED: 'Assessment Saved',
+	ASSESSMENT_SAVED: 'Assessment Saved',
         NOTES: "notes",
         SYMPTOMS: "symptoms",
         PROBE: "probe",
@@ -19,7 +19,7 @@ lang_lookup = {
         USER_NAME: "user name",
         PASSWORD: "password",
         LOGIN: "login",
-		REGISTRATION: 'registration',
+	REGISTRATION: 'registration',
         REGISTER: "register",
         CONFIRM: "confirm",
         LOGIN_FAIL: "That username/password is incorrect",
@@ -91,7 +91,7 @@ lang_lookup = {
         RESTART: "Omstart",
         DELETE: "Slett",
         SAVE: "Lagre",
-				ASSESSMENT_SAVED: 'Intervjuet er lagret',
+	ASSESSMENT_SAVED: 'Intervjuet er lagret',
         NOTES: "Notater",
         SYMPTOMS: "Symptomer",
         PROBE: "Spørsmål",
@@ -102,7 +102,7 @@ lang_lookup = {
         USER_NAME: "Brukernavn",
         PASSWORD: "Passord",
         LOGIN: "Logg på",
-		REGISTRATION: "Registrering",
+	REGISTRATION: "Registrering",
         REGISTER: "Registrer",
         CONFIRM: "Bekreft passord",
         LOGIN_FAIL: "Brukernavnet/passordet eksisterer ikke",
@@ -168,7 +168,7 @@ lang_lookup = {
         AVERAGE_PER_MONTH: 'Antall episoder, i gjennomsnitt, av overdreven trening per måned',
         NOTES: 'Notater'
     },
-	sp:	{
+    sp:	{
         BEGIN_NEW: "Comenzia nuevo",
         VIEW_PREVIOUS: "Ver anterior",
         UPDATE: "Actualizar",
@@ -187,7 +187,7 @@ lang_lookup = {
         USER_NAME: "Nombre de usuario",
         PASSWORD: "Contraseña",
         LOGIN: "Iniciar sesión",
-		REGISTRATION: "Matriculación",
+	REGISTRATION: "Matriculación",
         REGISTER: "Registrer",
         CONFIRM: "Confirmar",
         LOGIN_FAIL: "Carga fallida",
@@ -277,7 +277,7 @@ function get_language(){
             case /no/.test(prefered):
                 return lang_lookup['no'];
                 break;
-			case /sp/.test(prefered):
+	    case /sp/.test(prefered):
                 return lang_lookup['sp'];
                 break;
             default:
