@@ -8,7 +8,7 @@ lang_lookup = {
         RESTART: "restart",
         DELETE: "delete",
         SAVE: "save",
-				ASSESSMENT_SAVED: 'Assessment Saved',
+	ASSESSMENT_SAVED: 'Assessment Saved',
         NOTES: "notes",
         SYMPTOMS: "symptoms",
         PROBE: "probe",
@@ -91,7 +91,7 @@ lang_lookup = {
         RESTART: "Omstart",
         DELETE: "Slett",
         SAVE: "Lagre",
-				ASSESSMENT_SAVED: 'Intervjuet er lagret',
+	ASSESSMENT_SAVED: 'Intervjuet er lagret',
         NOTES: "Notater",
         SYMPTOMS: "Symptomer",
         PROBE: "Spørsmål",
@@ -167,7 +167,92 @@ lang_lookup = {
         AVERAGE_PER_WEEK: 'Antall episoder, i gjennomsnitt, av overdreven trening per uke',
         AVERAGE_PER_MONTH: 'Antall episoder, i gjennomsnitt, av overdreven trening per måned',
         NOTES: 'Notater'
-    }
+    },
+    sp:	{
+        BEGIN_NEW: "Comenzia nuevo",
+        VIEW_PREVIOUS: "Ver anterior",
+        UPDATE: "Actualizar",
+        BACK: "Atrás",
+        RESTART: "Reiniciar",
+        DELETE: "Borrar",
+        SAVE: "Salvar",
+		ASSESSMENT_SAVED: 'Evaluación guardada',
+        NOTES: "Notas",
+        SYMPTOMS: "Síntomas",
+        PROBE: "Exploración",
+        ANSWERS: "Respuestas",
+        RESULTS: "Resultados",
+        PRINT: "Impresión",
+        AUTHENTICATION: "Autenticación",
+        USER_NAME: "Nombre de usuario",
+        PASSWORD: "Contraseña",
+        LOGIN: "Iniciar sesión",
+	REGISTRATION: "Matriculación",
+        REGISTER: "Registrer",
+        CONFIRM: "Confirmar",
+        LOGIN_FAIL: "Carga fallida",
+        NOT_VALID: "No es válido",
+        INCOMPLETE: "Incompleto",
+        CRITERIA_MET: 'Criterios cumplidos',
+        NEED_LOGIN: "Necesidad de acceso",
+        USER_NO_BLANK: "Usuario no en  blanco",
+        PASS_NO_BLANK: 'No dejar en blanco',
+        CONFIRM_NO_BLANK: 'Confirmar sin espacio en blanco',
+        USER_NOT_AVAILABLE: 'Usuario no disponible',
+
+        SUCCESS_UPDATE:'You have successfully updated the questionnaire.',
+        UPDATE_ANYWAY: "You're version is up to date. Would you still like to re-install it?",
+        UPDATE_UNAVAILABLE: 'Update Unavailable',
+        SUCCESS_UPDATE:'You have successfully updated the questionnaire.',
+        UPDATE_ANYWAY: "You're version is up to date. Would you still like to re-install it?",
+        UPDATE_UNAVAILABLE: 'Update Unavailable',
+        CONNECT_INTERNET: 'Please connect to the internet before updating the questionnaire.',
+
+        CONNECT_INTERNET: 'Please connect to the internet before updating the questionnaire.',
+        PASSWORDS_NO_MATCH: "Contraseñas no coinciden",
+        REGISTER_SUCCESS: "Registrar el éxito",
+        INCOMPLETE: "Incompleto",
+        CRITERIA_MET: 'Criterios cumplidos',
+        INTERVIEW: 'Entrevista',
+        DATE: 'Fecha',
+        INTERVIEW_ID: 'ID de la entrevista',
+        SUBJECT_ID: 'ID de sujeto',
+        SUBJECT_AGE: 'Edad del sujeto',
+        BMI: 'IMC',
+        WEIGHT: 'Peso',
+        HEIGHT: 'Altura',
+        RECENT_WEIGHT: 'Peso reciente',
+        RECENT_HEIGHT: 'Altura reciente',
+        RECENT_LOW_BMI: 'IMC bajo reciente',
+        DIAGNOSIS: 'Diagnóstico',
+        ANOREXIA_NERVOSA: 'Anorexia nerviosa',
+        BINGE_PURGE_SUBTYPE: 'Los atracones y purgas subtipo',
+        RESTRICTING_SUBTYPE: 'Subtipo restrictivo',
+        BULIMIA_NERVOSA: 'Bulimia Nerviosa',
+        BINGE_EATING_DISORDER: 'Trastorno por atracón',
+        PICA: 'PICA',
+        RUMINATION_DISORDER: 'Trastorno de rumiación',
+        AVOIDANT_RESTRICTIVE: 'Evitando restrictivo',
+        TYPICAL_OBE_ITEMS: 'Artículos típicos de EAO',
+        OBES_PER_WEEK: 'EAOS por semana',
+        TYPICAL_SBE_ITEMS: 'Artículos típicos de EAS',
+        SBES_PER_WEEK: 'EASS por semana',
+        SBES_PER_MONTH: 'SBES por mes',
+
+        VOMITING: 'Vómitos',
+        LAXATIVES: 'Laxantes',
+        DIURETICS: 'Diuréticos',
+        AVERAGE_NO_WEEK: 'Promedio de semanas',
+        AVERAGE_NO_MONTH: 'Número medio de meses',
+        OTHER_METHOD: 'Otro método',
+        NAME: 'Nombre',
+        EXERCISE: 'Ejercicio',
+        TYPE: 'Tipo',
+        AVERAGE_MINUTES_PER: 'Minutos promedio por',
+        AVERAGE_PER_WEEK: 'Promedia por semana',
+        AVERAGE_PER_MONTH: 'Promedia por mes',
+        NOTES: 'Notas'
+	}
 }
 
 
@@ -191,6 +276,9 @@ function get_language(){
                 break;
             case /no/.test(prefered):
                 return lang_lookup['no'];
+                break;
+	    case /sp/.test(prefered):
+                return lang_lookup['sp'];
                 break;
             default:
                 return lang_lookup['en'];
