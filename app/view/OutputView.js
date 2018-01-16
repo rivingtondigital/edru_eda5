@@ -11,7 +11,7 @@ Ext.define('ceda.view.OutputView', {
 	},
 	setCollectedInfo: function(info, notes){
 
-        var ret = "<div> <input type='button' value='"+ lang.PRINT +"' style='float:right;margin-top:5px;margin-bottom:5px' class='x-button' onclick='printer()'/><h1 class='questionheader'>"+ lang.RESULTS +"</h1></div>";
+        var ret = "<div> <input type='button' value='"+ lang.PRINT +"' style='float:left;margin-top:5px;margin-bottom:5px' class='x-button' onclick='printer()'/><h1 class='questionheader'>"+ lang.RESULTS +"</h1></div>";
         for(key in info){
             var header = key;
 	    if (lang.hasOwnProperty(header)){

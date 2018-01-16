@@ -39,7 +39,7 @@ function printer(){
 	}
 	ret += "<div class='sectiondiv'>";
 	ret += "<div class='tabheader'>"+ lang.NOTES +"</div>";
-	ret += "<div style='font-family:inherit;padding:15px'><pre>"+notes+"</pre></div>";
+	ret += "<div style='font-family:inherit;padding:15px;'><pre style='white-space:pre-wrap'>"+notes+"</pre></div>";
 
 	body.innerHTML = ret;
 	console.info(ret);
