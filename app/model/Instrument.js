@@ -4,9 +4,9 @@ Ext.define('ceda.model.Instrument',{
 		fields: [
 			{name: '_id', type: 'int'},
 			{name: 'instrument_id', type: 'int'},
-//			{name: 'version' type: 'ceda.model.Version'},
+			{name: 'urlname', type: 'string'},
 			{name: 'name', type: 'string'},
-			{name: 'section_label', type: 'string'},
+//			{name: 'section_label', type: 'string'},
 			{name: 'description', type: 'string'}
 		],
 		hasOne:{
@@ -22,7 +22,7 @@ Ext.define('ceda.model.Instrument',{
 			associationKey: 	'questions',
 			autoload: 				true
 		}],
-		idProperty: '_id'
+		idProperty: 'urlname'
 	}
 
 });

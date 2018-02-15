@@ -364,14 +364,14 @@ Ext.define('ceda.controller.SimpleNavController', {
 		var update = function(new_eda5, offstore){
 			var recs = offstore.queryBy(function(rec, store){
 				if (rec.get('version_minor') == new_eda5.getVersion().get('minor')
-						&& rec.get('keyname') == new_eda5.get('instrument_id'))
+						&& rec.get('urlname') == new_eda5.get('urlname'))
 					return true;
 			});
 			offstore.removeAll(recs);
 			json_value = JSON.stringify(new_eda5.raw);
 			new_version = new_eda5.getVersion();
 			keyvalue = Ext.create('ceda.model.BasicKeyValue');
-			keyvalue.set('keyname', new_eda5.get('instrument_id'));
+			keyvalue.set('urlname', new_eda5.get('urlname'));
 			keyvalue.set('version_major', new_version.get('major'));
 			keyvalue.set('version_minor', new_version.get('minor'));
 			keyvalue.set('json_value', json_value);
@@ -521,7 +521,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 
 		if (this.saved_session == null){
 			this.instrument = offStore.queryBy(function(rec){
-				if (rec.get('keyname') == '1' && rec.get('version') == this.max('version')) return true;
+				if (rec.get('urlname') == PARAMS.q && rec.get('version') == this.max('version')) return true;
 				return false;
 			});
 
@@ -537,7 +537,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 			var data = this.saved_session.get('data');
 			this.assessment = JSON.parse(sjcl.decrypt(this.password, data));
 			this.instrument = offStore.queryBy(function(rec){
-				if (rec.get('key_name') == '1'
+				if (rec.get('urlname') == PARAMS.q
 					&& rec.get('version_minor') == this.assessment.version_major
 					&& rec.get('version_major') == this.assessment.version_minor) return true;
 				return false;
@@ -637,6 +637,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 	},
 
 	viewQuestion: function(question, back){
+      var qstore = this.instrument.questionsStore;
 	    //Double login bug fix
 	    if (this.loginview){
 	        this.getMainpanel().remove(this.loginview);
