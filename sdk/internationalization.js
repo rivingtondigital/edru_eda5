@@ -169,6 +169,7 @@ lang_lookup = {
         NOTES: 'Notater'
     },
 	sp:	{
+	ISO_CODE: "sp",
         BEGIN_NEW: "Comenzar nueva sesión",
         VIEW_PREVIOUS: "Ver sesiones anteriores",
         UPDATE: "Actualizar",
@@ -193,7 +194,6 @@ lang_lookup = {
         LOGIN_FAIL: "Carga fallida",
         NOT_VALID: "No es válido",
         INCOMPLETE: "Incompleto",
-        CRITERIA_MET: 'Criterios cumplidos',
         NEED_LOGIN: "Necesidad de acceso",
         USER_NO_BLANK: "Usuario no en  blanco",
         PASS_NO_BLANK: 'No dejar en blanco',
@@ -212,7 +212,7 @@ lang_lookup = {
         PASSWORDS_NO_MATCH: "Contraseñas no coinciden",
         REGISTER_SUCCESS: "Registrar el éxito",
         INCOMPLETE: "Incompleto",
-        CRITERIA_MET: 'Criterios cumplidos',
+        CRITERIA_MET: 'Criterios cumplidos para SUB',
         INTERVIEW: 'Entrevista',
         DATE: 'Fecha',
         INTERVIEW_ID: 'ID de la entrevista',
