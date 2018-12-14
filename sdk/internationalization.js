@@ -255,6 +255,8 @@ lang_lookup = {
 	}
 }
 
+lang_lookup['tr'] = lang_lookup['en'];
+lang_lookup['tr']['ISO_CODE'] = 'tr';
 
 function get_language(){
     var prefered = null;
@@ -277,8 +279,11 @@ function get_language(){
             case /no/.test(prefered):
                 return lang_lookup['no'];
                 break;
-			case /sp/.test(prefered):
+            case /sp/.test(prefered):
                 return lang_lookup['sp'];
+                break;
+            case /tr/.test(prefered):
+                return lang_lookup['tr'];
                 break;
             default:
                 return lang_lookup['en'];
