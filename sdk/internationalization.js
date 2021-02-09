@@ -336,11 +336,87 @@ lang_lookup = {
         AVERAGE_PER_WEEK: 'Haftalık ortalama atakların sayısı',
         AVERAGE_PER_MONTH: 'Aylık ortalama atakların sayısı',
         NOTES: 'Notlar'
+    },
+    ar: {
+      BEGIN_NEW: 'ابدأ من جديد',
+      VIEW_PREVIOUS: 'عرض الجلسات السابقة',
+      UPDATE: 'حدث',
+      BACK: 'تراجع',
+      RESTART: 'اعادة التشغيل',
+      DELETE: 'حذف',
+      SAVE: 'حفظ',
+      ASSESSMENT_SAVED: 'تم حفظ التقييم',
+      NOTES: 'ملاحظات',
+      SYMPTOMS: 'الأعراض',
+      PROBE: 'التحقيق',
+      ANSWERS: 'الإجابات',
+      RESULTS: 'النتائج',
+      PRINT: 'طباعة',
+      AUTHENTICATION: 'تسجيل الدخول',
+      USER_NAME: 'اسم المستخدم',
+      PASSWORD: 'كلمة السر',
+      LOGIN: 'تسجيل الدخول',
+      REGISTRATION: 'التسجيل',
+      REGISTER: 'سجل',
+      CONFIRM: 'أكد',
+      LOGIN_FAIL: 'اسم المستخدم غير صحيح',
+      NOT_VALID: '',
+      INCOMPLETE: 'أكمل كل المدخلات في هذه الصفحة',
+      CRITERIA_MET: '',
+      NEED_LOGIN: 'يجب عليك تسجيل الدخول لأداء هذا العمل. هل تريد تسجيل الدخول الآن؟',
+      USER_NO_BLANK: 'لا يمكن ترك اسم المستخدم خالي',
+      PASS_NO_BLANK: 'لا يمكن ترك كلمة السر خالية',
+      CONFIRM_NO_BLANK: 'لا يمكن ترك صندوق التأكيد خالي',
+      USER_NOT_AVAILABLE: 'اسم المستخدم غير متاح',
+      SUCCESS_UPDATE: 'لقد قمت بتحديث الاستبيان بنجاح',
+      UPDATE_ANYWAY: 'نسختك محدثة. هل مازلت تريد إعادة تنصيبها؟',
+      UPDATE_UNAVAILABLE: 'التحديث غير متوفر',
+      SUCCESS_UPDATE: 'لقد قمت بتحديث الاستبيان بنجاح',
+      UPDATE_ANYWAY: 'نسختك محدثة. هل مازلت تريد إعادة تنصيبها؟',
+      CONNECT_INTERNET: 'من فضلك اتصل بالإنترنت قبل تحديث الاستبيان',
+      CONNECT_INTERNET: 'من فضلك اتصل بالإنترنت قبل تحديث الاستبيان',
+      PASSWORDS_NO_MATCH: 'كلمات السر التي أدخلتها لا تتوافق',
+      REGISTER_SUCCESS: 'أنت مسجل. اضغط زر تراجع لكي تعود للمقابلة.',
+      INTERVIEW: 'المقابلة',
+      DATE: 'التاريخ',
+      INTERVIEW_ID: 'كود الفاحص',
+      SUBJECT_ID: 'كود المفحوص',
+      SUBJECT_AGE: 'عمر المفحوص',
+      BMI: 'مؤشر كتلة الجسم',
+      WEIGHT: 'الوزن',
+      HEIGHT: 'الطول',
+      RECENT_WEIGHT: 'الوزن الأخير',
+      RECENT_HEIGHT: 'الطول الأخير',
+      RECENT_LOW_BMI: 'مؤشر كتلة الجسم الأخير منخفض',
+      DIAGNOSIS: 'التشخيص',
+      ANOREXIA_NERVOSA: 'فقدان الشهية العصبي',
+      BINGE_PURGE_SUBTYPE: 'نمط الشراهة/ التطهير',
+      RESTRICTING_SUBTYPE: 'نمط التقييد',
+      BULIMIA_NERVOSA: 'الشره العصبي',
+      BINGE_EATING_DISORDER: 'اضطراب الشراهة للطعام',
+      PICA: 'شهوة غير الغذاء',
+      RUMINATION_DISORDER: 'اضطراب الاجترار',
+      AVOIDANT_RESTRICTIVE: 'اضطراب تناول الطعام التجنبي المقيد',
+      TYPICAL_OBE_ITEMS: 'البنود النموذجية للشراهة الفعلية للطعام',
+      OBES_PER_WEEK: 'الشراهة الفعلية للطعام أسبوعيا',
+      TYPICAL_SBE_ITEMS: 'البنود النموذجية للشراهة الذاتية للطعام',
+      SBES_PER_WEEK: 'الشراهة الذاتية للطعام أسبوعيا',
+      SBES_PER_MONTH: 'الشراهة الذاتية للطعام شهريا',
+      VOMITING: 'القئ',
+      LAXATIVES: 'الملينات',
+      DIURETICS: 'مدرات البول',
+      AVERAGE_NO_WEEK: 'المتوسط# في الأسبوع',
+      AVERAGE_NO_MONTH: 'المتوسط#الشهر',
+      OTHER_METHOD: 'طريقة أخرى',
+      NAME: 'الاسم',
+      EXERCISE: 'التمارين الرياضية',
+      TYPE: 'نوع التمارين الرياضية',
+      AVERAGE_MINUTES_PER: 'متوسط عدد الدقائق في النوبة',
+      AVERAGE_PER_WEEK: 'متوسط عدد النوبات في الأسبوع',
+      AVERAGE_PER_MONTH: 'متوسط عدد النوبات في الشهر',
+      NOTES: 'الملاحظات'
     }
-}
-
-//lang_lookup['tr'] = JSON.parse(JSON.stringify(lang_lookup['en']));
-//lang_lookup['tr']['ISO_CODE'] = 'tr';
+  }
 
 function get_language(){
     var prefered = null;
@@ -368,6 +444,9 @@ function get_language(){
                 break;
             case /tr/.test(prefered):
                 return lang_lookup['tr'];
+                break;
+            case /ar/.test(prefered):
+                return lang_lookup['ar'];
                 break;
             default:
                 return lang_lookup['en'];
