@@ -30,6 +30,7 @@ Ext.define('ceda.view.OutputView', {
 		}
                 ret += "<tr>";
                 ret += "<td>"+subkey_disp+"</td>";
+		ret += "<td width='20%'>&nbsp</td>";
                 ret += "<td>"+content[subkey]+"</td>";
                 ret += "</tr>";
             }
