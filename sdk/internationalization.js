@@ -563,6 +563,7 @@ lang_lookup = {
         AVOIDANT_RESTRICTIVE: '(BR) Transtorno alimentar restritivo/evitativo / (PT) Perturbação de ingestão alimentar evitante/restritiva',
         TYPICAL_OBE_ITEMS: 'Itens típicos dos ECAO',
         OBES_PER_WEEK: 'ECAOs por semana',
+	OBES_PER_MONTH: 'ECAOs por mês',
         TYPICAL_SBE_ITEMS: 'Itens típicos dos ECAS',
         SBES_PER_WEEK: 'ECASs por semana',
         SBES_PER_MONTH: 'ECASs por mês',
