@@ -15,6 +15,7 @@ Ext.define('ceda.controller.SimpleNavController', {
 		refs: {
 			view: 'view',
 			bar: '#topbar',
+			titlebar: '#titlebar',
 			mainpanel: '#mainpanel',
 			home_page: 'idetail',
 			start_bttn: 'idetail #start',
@@ -564,7 +565,9 @@ Ext.define('ceda.controller.SimpleNavController', {
 		this.notesView = Ext.widget('notes_view');
 
 		details.setRecord(this.instrument);
-		this.getBar().setTitle(this.instrument.get("name"));
+//		this.getBar().setTitle(this.instrument.get("name"));
+		tbar = this.getTitlebar();
+		tbar.setHtml(this.instrument.get("name"));
 		this.getMainpanel().add(details);
 	},
 
