@@ -104,10 +104,17 @@ ul li{
 }
 
 .desktop{
-	max-width: 600px;
+	max-width: 800px;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 10px;
+}
+
+.title_cls{
+    font-size: 2em;
+    color: rgb(20, 104, 162);
+    text-align: center;
+    font-weight: 800;
 }
 
 .outputtable{

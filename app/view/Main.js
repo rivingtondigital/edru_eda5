@@ -7,7 +7,13 @@ Ext.define("ceda.view.Main", {
     	fullscreen: true,
     	cls: 'desktop',
         items: [
-        	{
+            {
+                id: 'titlebar',
+                xtype: 'container',
+                docked: 'top',
+                cls: 'title_cls'
+            },
+            {
         		id: 'topbar',
         		xtype: 'toolbar',
           		docked: 'top',
@@ -45,7 +51,10 @@ Ext.define("ceda.view.Main", {
 						align: 'center'
 					},
 					{
-						xtype:'spacer'
+						xtype:'spacer',
+						ui: 'home',
+						pack: 'center',
+						align: 'bottom'
 					},
 					{
 						id: 'notesbutton',
