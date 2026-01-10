@@ -685,7 +685,7 @@ lang_lookup = {
         REGISTER: "註冊",
         CONFIRM: "確認",
         LOGIN_FAIL: "用戶名/密碼錯誤",
-        NOT_VALID: "SUB1不是有效的SUB2.",
+        NOT_VALID: "SUB1不是有效的SUB2",
         INCOMPLETE: "請完成此頁面上的所有輸入.",
         CRITERIA_MET: '已符合 SUB 的診斷標準.',
         NEED_LOGIN: '您需要登錄才能執行此操作。您想現在登錄嗎？?',
