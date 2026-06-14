@@ -662,7 +662,7 @@ lang_lookup = {
         NOTES: 'Notes'
     },
     tk: {
-        ISO_CODE: 'en',
+        ISO_CODE: 'tk',
         BEGIN_NEW: "開始新的訪談評估",
         VIEW_PREVIOUS: "查看過往的個案",
         UPDATE: "更新",
